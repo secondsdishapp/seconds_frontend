@@ -1,8 +1,10 @@
-export default function Home() {
+import NearByOptions from "../Components/NearbyOptions/NearbyOptions";
 
-    return (
-      <div>
-        <h2>Home</h2>
-      </div>
-    )
-  }
+export default function Home() {
+  return (
+    <div>
+   
+      <NearByOptions />
+    </div>
+  );
+}
