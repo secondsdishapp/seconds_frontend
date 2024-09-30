@@ -1,0 +1,41 @@
+.google-map {
+    margin-top: 20px;
+}
+
+.upper-container {
+    display: flex;
+    gap: 7%;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-icon {
+    width: 25px;
+}
+
+.filter-icon {
+    width: 25px;
+}
+.filter-icon:hover {
+    cursor: pointer;
+}
+
+.search-bar {
+    width: 40%;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.radius {
+    /* border: 1px solid black; */
+    display: flex;
+    width: 25%;
+    gap: 10px;
+    align-items: center;
+}
+
+.radius-input {
+    height: 35px;
+    width: 35%;
+}

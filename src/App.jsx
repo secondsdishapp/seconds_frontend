@@ -10,6 +10,7 @@ import Dishes from "./Pages/Dishes";
 import DishShow from "./Pages/DishShow";
 import FourOFour from "./Pages/FourOFour";
 import Login from "./Pages/Login";
+import Map from "./Pages/Map";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/dishes/:id" element={<DishShow />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<FourOFour />} />
+            <Route path="/map" element={<Map />} />
           </Routes>
       </main>
       <Footer />
