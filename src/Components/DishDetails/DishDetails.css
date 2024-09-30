@@ -1,0 +1,93 @@
+
+@media (max-width: 500px) {
+    .dish-details_dish-name  {
+        margin-top: 20vw;
+        
+        text-align: center;
+    }
+    .dish-details_restaurant-name {
+
+        
+        text-align: center;
+    }
+    .dish-details_dish-image{
+        /* margin-top: 10vw; */
+        width: 90vw;
+        height: 50vw;
+        margin-left: 3vw;
+        text-align: center;
+
+    }
+    .dish-details_restaurant-buttons{
+       
+        text-align: center;
+       
+
+    }
+    .dish-details_restaurant-buttons_call{
+        margin: 2vw;
+        width: 25vw;
+        height: 8vw;
+        border-radius: 3vw;
+
+    }
+    .dish-details_restaurant-buttons_directions{
+        margin: 2vw;
+        width: 25vw;
+        height: 8vw;
+        border-radius: 3vw;
+
+    }
+.dish-details_restaurant-info{
+    margin: 3vw;
+    margin-top: 10vw ;
+  
+    border: solid 0.2vw gray;
+    text-align: center;
+    justify-content: center;
+    padding: 1vw;
+}
+.dish-details_ingredients-title, .dish-details_rating-title{
+    margin-left: 5vw;
+}
+.dish-details_ingredients-content{
+    margin-left: 10vw;
+}
+.dish-details_rating-content{
+    margin-left: 5vw;
+   
+    font-size: 12vw;
+    color: black;
+  
+}
+.dish-details-rating-button{
+ text-align: center;
+ margin-left: 33vw;
+ width: 30vw;
+ height: 8vw;
+ margin-bottom: 3vw;
+ border-radius: 3vw;
+
+}
+.dish-details_plate-rating {
+    
+    display: flex;
+    gap: 5px;
+    margin-left: 10vw;
+
+  }
+  
+  .dish-details_plate-rating img {
+    width: 15vw;
+    height: 15vw;
+    cursor: pointer;
+  }
+  .plate-rating{
+    margin-top: 2vw;
+    margin-left: 15vw;
+  }
+  
+
+
+
+  }
