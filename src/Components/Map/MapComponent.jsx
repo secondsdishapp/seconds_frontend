@@ -1,7 +1,9 @@
+import "./MapComponent.css";
 import { useState, useEffect } from "react";
 import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps"; 
 
-import "./MapComponent.css";
+//COMPONENTS
+import SlidingCarousel from "../SlidingCarousel/SlidingCarousel";
 
 export default function MapComponent() {
 
@@ -111,6 +113,8 @@ export default function MapComponent() {
         const filtered = dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search));
         if (filtered.length > 0) {
             setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= radius))
+        } else {
+            setFilteredDishSearch([]);
         }
     },[search])
 
@@ -185,15 +189,10 @@ export default function MapComponent() {
             </div>
             : <p>Loading...</p>}
             {currentLocation.lat && currentLocation.lng && filteredDishSearch.length > 0 ? 
-                filteredDishSearch.map((dish, index) => {
-                    return (
-                        <div>
-                            <p>{dish.dish_name}</p>
-                            <p>{dish.restaurant_name}</p>
-                        </div>
-                    )
-                })
-            :  null}
-        </div>
-    )
-}
+                <div style={{width:"100%", display:"flex", flexDirection:"row"}}>
+                    <SlidingCarousel filteredDishSearch={filteredDishSearch}/>
+                </div>
+          :  <p style={{fontSize:"30px"}}>No Results</p>}
+          </div>
+      )
+  }
