@@ -1,8 +1,10 @@
+import DishDetails from "../Components/DishDetails/DishDetails";
+
 export default function DishShow() {
 
     return (
       <div>
-        <h2>DishShow</h2>
+        <DishDetails/>
       </div>
     )
   }
