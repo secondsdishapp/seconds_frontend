@@ -29,6 +29,7 @@
     height: 40px;
     border: none;
     border-bottom: 1px solid #ccc;
+    outline-color: #009688;
 }
 
 .radius {
@@ -42,4 +43,7 @@
 .radius-input {
     height: 35px;
     width: 35%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline-color: #009688;
 }

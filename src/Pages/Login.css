@@ -17,6 +17,7 @@ p {
   background-color: #f4f4f4;
   height: 80vh;
   gap: 2rem; /* Evenly space elements in the container */
+  margin-bottom: 100px;
 }
 
 .header {
@@ -28,9 +29,9 @@ p {
   padding: 0 1rem;
 }
 
-.logo {
-  width: 150px; /* Adjust logo size as needed */
-}
+/* .logo {
+  width: 150px;
+} */
 
 .menu-icon {
   font-size: 1rem; /* Adjust icon size */
