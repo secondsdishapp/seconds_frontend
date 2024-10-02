@@ -1,3 +1,7 @@
+.map-container {
+    height: 100vH;
+}
+
 .google-map {
     margin-top: 20px;
 }
