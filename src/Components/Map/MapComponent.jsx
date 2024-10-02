@@ -13,6 +13,7 @@ export default function MapComponent() {
 
     //RADIUS
     const [ radius, setRadius ] = useState(100);
+    
 
     //FILTERED DISH SEARCH
     const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
