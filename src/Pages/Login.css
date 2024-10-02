@@ -17,6 +17,7 @@ p {
   background-color: #f4f4f4;
   height: 80vh;
   gap: 2rem; /* Evenly space elements in the container */
+  margin-bottom: 100px;
 }
 
 .header {

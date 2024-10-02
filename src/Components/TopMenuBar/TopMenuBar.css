@@ -79,8 +79,7 @@
     border: 1px solid black;
 }
 
-/* .logo {
-    width: 1000px;
-
-} */
+.logo:hover {
+    cursor: pointer;
+}
 
