@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="main-container">
       <TopMenuBar menuToggle={menuToggle} setMenuToggle={setMenuToggle}/>
-      {menuToggle ? <SidebarMenu /> : 
+      {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> : 
       <main>
           <Routes>
             <Route path="/" element={<Home />} />

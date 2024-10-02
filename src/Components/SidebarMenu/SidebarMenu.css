@@ -19,5 +19,10 @@
 
 .links:hover {
     cursor: pointer;
-    background: aquamarine;
+    background: #FF5252;
+    color: white;
+}
+
+.link-text {
+    font-size: 30px;
 }

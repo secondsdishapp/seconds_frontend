@@ -1,15 +1,18 @@
 import "./SidebarMenu.css";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import anime from "animejs";
 
-export default function SidebarMenu () {
+export default function SidebarMenu ({ menuToggle, setMenuToggle }) {
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         anime({
             targets: ".sidebar-container",
             keyframes: [
-                {translateX: -430}
+                {translateX: '-100vw'}
             ],
             duration: 2000,
             easing: "easeOutExpo",
@@ -20,14 +23,18 @@ export default function SidebarMenu () {
 
     return (
         <div className={`sidebar-container`}>
-            <div className="links">
-                <p>Log In</p>
+            <div className="links" onClick={() => {
+                navigate("/login");
+                setMenuToggle(false);
+                }
+            }>
+                <p className="link-text">Log In</p>
             </div>
             <div className="links">
-                <p>About Us</p>
+                <p className="link-text">About Us</p>
             </div>
             <div className="links">
-                <p>Contact Us</p>
+                <p className="link-text">Contact Us</p>
             </div>
         </div>
     )
