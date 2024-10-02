@@ -15,7 +15,7 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      {/* <div className="header">
+      <div className="header">
         <img
           src="src/assets/images/seconds-small.png"
           alt="Seconds Logo"
@@ -26,7 +26,7 @@ export default function Login() {
           alt="Menu"
           className="menu-icon"
         />
-      </div> */}
+      </div>
       <div className="login-box">
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
