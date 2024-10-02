@@ -30,10 +30,18 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle }) {
             }>
                 <p className="link-text">Log In</p>
             </div>
-            <div className="links">
+            <div className="links" onClick={() => {
+                navigate("/about");
+                setMenuToggle(false);
+                }
+            }>
                 <p className="link-text">About Us</p>
             </div>
-            <div className="links">
+            <div className="links" onClick={() => {
+                navigate("/contact-us");
+                setMenuToggle(false);
+                }
+            }>
                 <p className="link-text">Contact Us</p>
             </div>
         </div>

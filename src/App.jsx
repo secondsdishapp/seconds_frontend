@@ -36,7 +36,7 @@ function App() {
           </Routes>
       </main>
       }
-      <Footer />
+      <Footer setMenuToggle={setMenuToggle}/>
     </div>
   );
 }

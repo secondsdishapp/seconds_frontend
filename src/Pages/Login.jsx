@@ -15,18 +15,6 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <div className="header">
-        <img
-          src="src/assets/images/seconds-small.png"
-          alt="Seconds Logo"
-          className="logo"
-        />
-        <img
-          src="src/assets/images/menu-icon.png" // Update with your hamburger icon path
-          alt="Menu"
-          className="menu-icon"
-        />
-      </div>
       <div className="login-box">
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
