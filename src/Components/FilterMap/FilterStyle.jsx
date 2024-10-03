@@ -15,7 +15,7 @@ const ratings = [
 ];
 
 
-export default function FilterStyle() {
+export default function FilterStyle({ filterPreferences, setFilterPreferences, filterRatings, setFilterRatings }) {
   const preferenceProps = {
     options: preferences,
     getOptionLabel: (option) => option.title,
@@ -30,11 +30,12 @@ export default function FilterStyle() {
   const [value, setValue] = React.useState(null);
 
   return (
-    <Stack spacing={8} sx={{ width: '50%' }}>
+    <Stack spacing={8} sx={{ width: '80%' }}>
         <Autocomplete
             {...preferenceProps}
             id="auto-complete"
             autoComplete
+            onChange={(event, value) => setFilterPreferences(value.title)}
             includeInputInList
             renderInput={(params) => (
             <TextField {...params} label="Preferences" variant="standard" />
@@ -44,6 +45,7 @@ export default function FilterStyle() {
             {...ratingProps}
             id="auto-complete"
             autoComplete
+            onChange={(event, value) => setFilterRatings(value.title)}
             includeInputInList
             renderInput={(params) => (
             <TextField {...params} label="Ratings" variant="standard" />

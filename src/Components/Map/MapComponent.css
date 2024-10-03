@@ -1,8 +1,8 @@
 .map-container {
     position: relative;
-    /* height: 100vH; */
+    height: 120vH;
     overflow: hidden;
-    margin-bottom: 100px;
+    margin-bottom: 0px;
 }
 
 .google-map {

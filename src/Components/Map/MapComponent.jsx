@@ -12,6 +12,12 @@ export default function MapComponent() {
     const API = import.meta.env.VITE_API_URL;
     const API_KEY = import.meta.env.VITE_API_KEY;
 
+    //FILTER PREFERENCES
+    const [ filterPreferences, setFilterPreferences ] = useState("");
+
+    //FILTER RATINGS
+    const [ filterRatings, setFilterRatings ] = useState(null);
+
     //FILTER MAP
     const [ filterMap, setFilterMap ] = useState(false);
 
@@ -21,7 +27,6 @@ export default function MapComponent() {
     //RADIUS
     const [ radius, setRadius ] = useState(100);
     
-
     //FILTERED DISH SEARCH
     const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
 
@@ -154,20 +159,25 @@ export default function MapComponent() {
 
     useEffect(() => {
         console.log(radius, "Radius");
-    }, [radius])
+    }, [radius]);
 
+    useEffect(() => {
+        console.log(filterPreferences, "Filter Preferences");
+    },[filterPreferences]);
+
+    useEffect(() => {
+        console.log(filterRatings, "Filter Ratings");
+    }, [filterRatings]);
+
+    //onClick={() => filterMap === true ? setFilterMap(false) : null} --> To close the filter when screen is clicked 
     return (
         <div className="map-container">
             <div className="upper-container">
                 <img className="map-icon" src="/map-location2.png" alt="Map Icon" />
                 <input className="search-bar" type="text" placeholder="Search dish or restaurant" value={search} onChange={handleSearch} onClick={() => setSelectedMarker(null)}/>
-                {/* <label className="radius">
-                    Radius:
-                    <input className="radius-input" type="number" onChange={(e) => setRadius(e.target.value)}/>
-                </label> */}
                 <div style={{overflow: "hidden"}}>
                     <img className="filter-icon" src="/filter.png" alt="Filter Icon" onClick={() => setFilterMap(!filterMap)}/>
-                    <FilterMap radius={radius} setRadius={setRadius} filterMap={filterMap}/>
+                    <FilterMap radius={radius} setRadius={setRadius} filterMap={filterMap} filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings}/>
                 </div>
             </div>
             {currentLocation.lat && currentLocation.lng ?

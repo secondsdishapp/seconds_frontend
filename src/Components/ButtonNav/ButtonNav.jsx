@@ -20,7 +20,7 @@ export default function FixedBottomNavigation({ menuToggle, setMenuToggle }) {
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
  
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: '100' }} elevation={3}>
+      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: '100' }} elevation={0}>
         <BottomNavigation
           showLabels
           value={value}

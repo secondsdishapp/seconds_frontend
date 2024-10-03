@@ -4,14 +4,14 @@ import anime from "animejs";
 
 import FilterStyle from "./FilterStyle.jsx";
 
-export default function FilterMap({ radius, setRadius, filterMap }) {
+export default function FilterMap({ radius, setRadius, filterMap, filterPreferences, setFilterPreferences, filterRatings, setFilterRatings }) {
 
     useEffect(() => {
         if(filterMap) {
             anime({
                 targets: ".filter-container",
                 keyframes: [
-                    {translateX: '-87vw'}
+                    {translateX: '-86.5vw'}
                 ],
                 duration: 2000,
                 easing: 'easeOutExpo',
@@ -39,7 +39,7 @@ export default function FilterMap({ radius, setRadius, filterMap }) {
                 Radius:
                 <input className="radius-input" type="number" onChange={(e) => setRadius(e.target.value)}/>
             </label>
-            <FilterStyle />  
+            <FilterStyle filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings}/>  
             <button type="button">Filter</button>
         </div>    
     )
