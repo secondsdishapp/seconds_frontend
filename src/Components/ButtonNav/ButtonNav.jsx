@@ -11,7 +11,7 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
-export default function FixedBottomNavigation({ setMenuToggle }) {
+export default function FixedBottomNavigation({ menuToggle, setMenuToggle }) {
   const [value, setValue] = React.useState(0);
   const ref = React.useRef(null);
 
@@ -20,7 +20,7 @@ export default function FixedBottomNavigation({ setMenuToggle }) {
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
  
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: '100' }} elevation={3}>
         <BottomNavigation
           showLabels
           value={value}

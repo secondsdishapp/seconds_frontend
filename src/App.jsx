@@ -10,11 +10,12 @@ import FourOFour from "./Pages/FourOFour";
 import Login from "./Pages/Login";
 import Map from "./Pages/Map";
 import About from "./Pages/About";
+import zIndex from "@mui/material/styles/zIndex.js";
 
 function App() {
   return (
     <div>
-      <Navigation /> {/* Render Navigation to handle layout */}
+      <Navigation/> {/* Render Navigation to handle layout */}
       <main>
         <Routes>
           <Route path="/" element={<Home />} />

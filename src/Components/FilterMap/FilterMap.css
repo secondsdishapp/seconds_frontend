@@ -12,25 +12,29 @@ input[type="number"] {
 
 .filter-container {
     position: absolute;
-    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
     height: 500px;
     z-index: 10;
-    border: none;
+    border: 1px solid black;
     /* border-left: 1px solid #FF5252; */
     /* border-bottom: 1px solid #FF5252; */
-    background-color: black;
+    background-color: white;
     margin-left:  60%;
+    gap: 50px;
 }
 
 .radius {
     /* border: 1px solid black; */
     display: flex;
-    width: 70%;
+    width: 50%;
     gap: 10px;
     align-items: center;
     font-size: 14px;
-    margin-left: 15%;
-    color: white;
+    /* margin-left: 15%; */
+    color: black;
 }
 
 .radius-input {
@@ -39,6 +43,6 @@ input[type="number"] {
     border: none;
     border-bottom: 1px solid #ccc;
     outline-color: #009688;
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
 }
