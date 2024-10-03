@@ -11,7 +11,7 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
-export default function FixedBottomNavigation() {
+export default function FixedBottomNavigation({ setMenuToggle }) {
   const [value, setValue] = React.useState(0);
   const ref = React.useRef(null);
 
@@ -28,9 +28,9 @@ export default function FixedBottomNavigation() {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Map" icon={<PlaceIcon />} component={Link} to="/map" />
-          <BottomNavigationAction label="Home" icon={<RestaurantIcon />} component={Link} to="/"/>
-          <BottomNavigationAction label="Dishes" icon={<FavoriteIcon />} component ={Link} to="/dishes"/>
+          <BottomNavigationAction label="Map" icon={<PlaceIcon />} component={Link} to="/map" onClick={() => setMenuToggle(false)}/>
+          <BottomNavigationAction label="Home" icon={<RestaurantIcon />} component={Link} to="/" onClick={() => setMenuToggle(false)}/>
+          <BottomNavigationAction label="Dishes" icon={<FavoriteIcon />} component ={Link} to="/dishes" onClick={() => setMenuToggle(false)}/>
         </BottomNavigation>
       </Paper>
     </Box>

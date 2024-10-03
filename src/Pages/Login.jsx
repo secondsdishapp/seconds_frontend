@@ -15,18 +15,6 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <div className="header">
-        <img
-          src="src/assets/images/seconds-small.png"
-          alt="Seconds Logo"
-          className="logo"
-        />
-        <img
-          src="src/assets/images/menu-icon.png" // Update with your hamburger icon path
-          alt="Menu"
-          className="menu-icon"
-        />
-      </div>
       <div className="login-box">
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
@@ -56,7 +44,7 @@ export default function Login() {
         </form>
       </div>
       <div>
-        <p>Take the guest work out of the equation...</p>
+        <p>Take the guess work out of the equation...</p>
       </div>
       <div className="food-images">
         <img src="src/assets/images/chicken-sandwich.webp" alt="Chicken Sandwich" className="food-image" />

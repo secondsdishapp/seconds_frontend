@@ -4,10 +4,10 @@ import ButtonNav from "../ButtonNav/ButtonNav.jsx";
 
 import React from 'react'
 
-export default function Footer() {
+export default function Footer({ setMenuToggle }) {
   return (
     <footer>
-      <ButtonNav />
+      <ButtonNav setMenuToggle={setMenuToggle}/>
       {/* <MobileNav /> */}
     </footer>
   )
