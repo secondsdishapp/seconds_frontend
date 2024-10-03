@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './About.css';
-import '../assets/images/Adeola.png';
+// import '../assets/images/Adeola.png';
 import '../assets/images/Anthony.png';
 import '../assets/images/Ayyoub.png';
 import '../assets/images/Jorge.png';
@@ -21,7 +21,7 @@ export default function About() {
                 <h2>Meet Our Team</h2>
                     <div className="team-list">
                     <div className="white-overlay">
-                        <img src="https://example.com/Adeola-team.jpg" 
+                        <img src="/Adeola.png" 
                         alt="Adeola's team picture" 
                         className="team-pic" />
                     </div>

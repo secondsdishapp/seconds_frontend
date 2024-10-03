@@ -2,10 +2,15 @@ import SearchBar from "../../Components/SearchBar/SearchBar";
 import Dish from "../Dish/dish";
 // import { useState, useEffect } from "react";
 import { useState,useEffect } from "react";
+
+
+
 export default function NearByOptions() {
+
   const [ dishesLocations, setDishesLocations ] = useState([]);
   const [ locationsInRadius, setLocationsInRadius ] = useState([]);
   const [ search, setSearch ] = useState("");
+  const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
 
   const API = import.meta.env.VITE_API_URL;
   const API_KEY = import.meta.env.VITE_API_KEY;
@@ -14,10 +19,13 @@ export default function NearByOptions() {
     lat: null,
     lng: null,
 });
+
+
 useEffect(() => {
   console.log(locationsInRadius, "Locations good");
-},[locationsInRadius])
-  function calculateDistance(point1, point2) {
+},[locationsInRadius]);
+
+function calculateDistance(point1, point2) {
     const earthRadiusMiles = 3959;
     const dLat = (point2.lat - point1.lat) * Math.PI / 180;
     const dLon = (point2.lng - point1.lng) * Math.PI / 180;
@@ -28,17 +36,20 @@ useEffect(() => {
 
 useEffect(() => {
     if (currentLocation) {
-        setLocationsInRadius(dishesLocations.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 110));
+        setLocationsInRadius(dishesLocations.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 4));
 
     }
-},[currentLocation])
+},[currentLocation]);
+
+
 useEffect(() => {
   const filtered = dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search));
   if (filtered.length > 0) {
-      setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 100))
+      setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 4))
   }
-  console.log(filtered, "Filtered");
+  // console.log(filtered, "Filtered");
 },[search])
+
 
 useEffect(() => {
     if (navigator.geolocation) {
@@ -55,6 +66,7 @@ useEffect(() => {
         setError("Geolocation is not supported by this browser.");
     }
 },[]);
+
 useEffect(() => {
   fetch(`${API}/dishes/locations`)
   .then((response) => response.json())
@@ -63,6 +75,15 @@ useEffect(() => {
       
   })
 },[]);
+
+useEffect(() => {
+  console.log(dishesLocations, "Dishes Locations");
+},[dishesLocations]);
+
+useEffect(() => {
+  console.log(filteredDishSearch, "Filtered Dish Search");
+},[filteredDishSearch]);
+
   let dummy=[
     {  id: 1,
       "address": "123 Main St, Springfield, IL",
@@ -91,7 +112,7 @@ useEffect(() => {
     <div className="home-main-container">
 
       {/* <h4>What are you going to eat today</h4> */}
-      <SearchBar/>
+      <SearchBar search={search} setSearch={setSearch}/>
       <h4 className="highly-rated-nearby-options">Highly rated nearby options</h4>
       {dummy.map((item,index)=>{
         return(

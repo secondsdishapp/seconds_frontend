@@ -44,7 +44,7 @@ export default function DishDetails() {
   //{dish_id: 1, dish_name: 'Margherita Pizza', dish_image: 'https://cookieandkate.com/images/2021/07/margherita-pizza-recipe-1-2.jpg', avg_rating: '4.50', restaurant_name: 'Joes Pizza', …}
   return (
     <div className='dish-details-container'>
-        <h3 className='dish-details_dish-name'>{dish.dish_name}</h3>
+        <h3 className='dish-details_dish-name'>{dish.name}</h3>
         <img className="dish-details_dish-image" src={dish.dish_image} alt="" />
         <h3 className='dish-details_rating-title'>Rating:</h3>
 
