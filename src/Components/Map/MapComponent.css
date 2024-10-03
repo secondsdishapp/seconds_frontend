@@ -1,5 +1,7 @@
 .map-container {
+    position: relative;
     height: 100vH;
+    overflow: hidden;
 }
 
 .google-map {
@@ -32,18 +34,18 @@
     outline-color: #009688;
 }
 
-.radius {
-    /* border: 1px solid black; */
+/* .radius {
+    border: 1px solid black;
     display: flex;
     width: 25%;
     gap: 10px;
     align-items: center;
-}
+} */
 
-.radius-input {
+/* .radius-input {
     height: 35px;
     width: 35%;
     border: none;
     border-bottom: 1px solid #ccc;
     outline-color: #009688;
-}
+} */

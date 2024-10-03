@@ -1,14 +1,19 @@
 import "./MapComponent.css";
 import { useState, useEffect } from "react";
 import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps"; 
+import anime from "animejs";
 
 //COMPONENTS
 import SlidingCarousel from "../SlidingCarousel/SlidingCarousel";
+import FilterMap from "../FilterMap/FilterMap";
 
 export default function MapComponent() {
 
     const API = import.meta.env.VITE_API_URL;
     const API_KEY = import.meta.env.VITE_API_KEY;
+
+    //FILTER MAP
+    const [ filterMap, setFilterMap ] = useState(false);
 
     //SEARCH BAR
     const [ search, setSearch ] = useState("");
@@ -108,7 +113,6 @@ export default function MapComponent() {
     }
 
     //Filtering the search
-
     useEffect(() => {
         const filtered = dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search));
         if (filtered.length > 0) {
@@ -120,6 +124,7 @@ export default function MapComponent() {
 
     //-------------------------------------------------------------------------------------------------
 
+  
 
     //JUST FOR TESTING PURPOSES - CAN DELETE AFTER EVERYTHING IS WORKING FINE
     useEffect(() => {
@@ -155,11 +160,14 @@ export default function MapComponent() {
             <div className="upper-container">
                 <img className="map-icon" src="/map-location2.png" alt="Map Icon" />
                 <input className="search-bar" type="text" placeholder="Search dish or restaurant" value={search} onChange={handleSearch} onClick={() => setSelectedMarker(null)}/>
-                <label className="radius">
+                {/* <label className="radius">
                     Radius:
                     <input className="radius-input" type="number" onChange={(e) => setRadius(e.target.value)}/>
-                </label>
-                <img className="filter-icon" src="/filter.png" alt="Filter Icon" />
+                </label> */}
+                <div style={{overflow: "hidden"}}>
+                    <img className="filter-icon" src="/filter.png" alt="Filter Icon" onClick={() => setFilterMap(!filterMap)}/>
+                    <FilterMap radius={radius} setRadius={setRadius} filterMap={filterMap}/>
+                </div>
             </div>
             {currentLocation.lat && currentLocation.lng ?
             <div className="google-map">

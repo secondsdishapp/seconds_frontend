@@ -1,0 +1,44 @@
+/* For Chrome, Safari, Edge and Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* For FireFox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.filter-container {
+    position: absolute;
+    width: 40%;
+    height: 500px;
+    z-index: 10;
+    border: none;
+    /* border-left: 1px solid #FF5252; */
+    /* border-bottom: 1px solid #FF5252; */
+    background-color: black;
+    margin-left:  60%;
+}
+
+.radius {
+    /* border: 1px solid black; */
+    display: flex;
+    width: 70%;
+    gap: 10px;
+    align-items: center;
+    font-size: 14px;
+    margin-left: 15%;
+    color: white;
+}
+
+.radius-input {
+    height: 35px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline-color: #009688;
+    color: white;
+    background-color: black;
+}

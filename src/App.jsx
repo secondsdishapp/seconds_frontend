@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Footer from "./Components/Footer/Footer";
 import TopMenuBar from "./Components/TopMenuBar/TopMenuBar";
 import SidebarMenu from "./Components/SidebarMenu/SidebarMenu";
+import FilterMap from "./Components/FilterMap/FilterMap";
 
 // PAGES
 import Home from "./Pages/Home";

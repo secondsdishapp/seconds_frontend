@@ -28,9 +28,9 @@ export default function FixedBottomNavigation({ setMenuToggle }) {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Map" icon={<PlaceIcon />} component={Link} to="/map" onClick={() => setMenuToggle(false)}/>
-          <BottomNavigationAction label="Home" icon={<RestaurantIcon />} component={Link} to="/" onClick={() => setMenuToggle(false)}/>
-          <BottomNavigationAction label="Dishes" icon={<FavoriteIcon />} component ={Link} to="/dishes" onClick={() => setMenuToggle(false)}/>
+          <BottomNavigationAction  style={{color:"#FF5252"}} label="Map" icon={<PlaceIcon htmlColor='inherit' />} component={Link} to="/map" onClick={() => setMenuToggle(false)}/>
+          <BottomNavigationAction style={{color:"#FF5252"}} label="Home" icon={<RestaurantIcon htmlColor='inherit'/>} component={Link} to="/" onClick={() => setMenuToggle(false)}/>
+          <BottomNavigationAction style={{color:"#FF5252"}} label="Dishes" icon={<FavoriteIcon htmlColor='inherit'/>} component ={Link} to="/dishes" onClick={() => setMenuToggle(false)}/>
         </BottomNavigation>
       </Paper>
     </Box>
