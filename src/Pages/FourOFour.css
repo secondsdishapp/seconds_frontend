@@ -1,0 +1,39 @@
+/* FourOFour.css */
+
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    padding: 20px;
+    color: #ffffff; /* white text for good contrast */
+    font-family: 'Arial', sans-serif;
+    background-color: #ff5252; /* sets the background color to #ff5252 */
+  }
+  
+  .error-page h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #ffffff; /* white color for good contrast */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* add a subtle shadow for better readability */
+  }
+  
+  .error-page p {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #ffffff; /* white color for good contrast */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* subtle shadow for readability */
+  }
+  
+  .error-page a {
+    color: #4DD0E1; /* link color to match the white text */
+    text-decoration: underline;
+    font-weight: bold;
+  }
+  
+  .error-page a:hover {
+    color: #ffcc00; /* change color on hover for a visual cue */
+  }
+ 
