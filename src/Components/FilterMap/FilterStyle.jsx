@@ -30,26 +30,30 @@ export default function FilterStyle({ filterPreferences, setFilterPreferences, f
   const [value, setValue] = React.useState(null);
 
   return (
-    <Stack spacing={8} sx={{ width: '80%' }}>
+    <Stack spacing={8} sx={{ width: '80%' }} tabIndex={"-1"}>
         <Autocomplete
             {...preferenceProps}
             id="auto-complete"
             autoComplete
-            onChange={(event, value) => setFilterPreferences(value.title)}
+            tabIndex={"-1"}
+            onChange={(event, value) => value ? setFilterPreferences(value.title) : setFilterPreferences("")}
             includeInputInList
             renderInput={(params) => (
-            <TextField {...params} label="Preferences" variant="standard" />
+            <TextField {...params} label="Preferences" variant="standard" inputProps={{ ...params.inputProps, tabIndex: -1 }}/>
             )}
+            // PaperComponent={(props) => <div {...props} tabIndex={-1} />}
         />
         <Autocomplete
             {...ratingProps}
             id="auto-complete"
             autoComplete
-            onChange={(event, value) => setFilterRatings(value.title)}
+            tabIndex={"-1"}
+            onChange={(event, value) => value ? setFilterRatings(value.title) : setFilterRatings("")}
             includeInputInList
             renderInput={(params) => (
-            <TextField {...params} label="Ratings" variant="standard" />
+            <TextField {...params} label="Ratings" variant="standard" inputProps={{ ...params.inputProps, tabIndex: -1 }}/>
             )}
+            // PaperComponent={(props) => <div {...props} tabIndex={-1} />}
         />
     </Stack>
   );
