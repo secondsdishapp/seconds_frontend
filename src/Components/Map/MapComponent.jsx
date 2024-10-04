@@ -26,11 +26,11 @@ export default function MapComponent() {
         radius: radius,
         preference: "",
         rating: ""
-    }) 
+    });
 
     useEffect(() => {
         setFilterResults({
-            radius: radius || 100,
+            radius: radius || String(100),
             preference: filterPreferences || "",
             rating: filterRatings || ""
         })
@@ -62,9 +62,6 @@ export default function MapComponent() {
     //RESTAURANTS ARRAY
     const [ restaurants, setRestaurants ] = useState([]);
 
-    //DISHES ARRAY
-    const [ dishes, setDishes ] = useState([]);
-
     //DISHES LOCATIONS ARRAY
     const [ dishesLocations, setDishesLocations ] = useState([]);
 
@@ -94,20 +91,20 @@ export default function MapComponent() {
     useEffect(() => {
         const filtered = dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search));
         if (filtered.length > 0) {
-            setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= radius))
+            setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius))
         } else {
             setFilteredDishSearch([])
         }
-    },[search, radius])
+    },[search, radius, filterResults])
 
     //-------------------------------------------------------------------------------------------------
 
 
     useEffect(() => {
         if (currentLocation) {
-            setLocationsInRadius(filteredDishSearch.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= radius));
+            setLocationsInRadius(filteredDishSearch.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius));
         }
-    },[currentLocation, radius, search, filteredDishSearch])
+    },[currentLocation, radius, search, filteredDishSearch, filterResults])
 
     useEffect(() => {
         if (navigator.geolocation) {

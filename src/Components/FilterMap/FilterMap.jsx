@@ -37,7 +37,7 @@ export default function FilterMap({ radius, setRadius, filterMap, filterPreferen
             <p style={{textAlign: "center", color: "black"}}>Filter & Sort</p>
              <label className="radius">
                 Radius:
-                <input className="radius-input" type="number" onChange={(e) => setRadius(e.target.value)} tabIndex={"-1"}/>
+                <input className="radius-input" type="number" onChange={(e) => setRadius(e.target.value)} tabIndex={"-1"} value={radius} defaultValue={100}/>
             </label>
             <FilterStyle filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings} tabIndex={"-1"}/>  
             <button type="button" tabIndex={"-1"}>Filter</button>
