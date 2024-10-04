@@ -18,12 +18,30 @@ input[type="number"] {
     width: 50%;
     height: 70vH;
     z-index: 10;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     /* border-left: 1px solid #FF5252; */
     /* border-bottom: 1px solid #FF5252; */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     background-color: white;
     margin-left:  60%;
     gap: 50px;
+    border-radius: 5px;
+}
+
+.filter-title {
+    /* style={{textAlign: "center", color: "black"}} */
+    display: flex;
+    text-align: center;
+    color: white;
+    width: 100%;
+    background-color: black;
+    margin-bottom: 0;
+    margin-top: 0;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .radius {
@@ -45,4 +63,20 @@ input[type="number"] {
     outline-color: #009688;
     color: black;
     background-color: white;
+}
+
+.filter-btn {
+    background-color: #FF5252;
+    border: none;
+    width: 50%;
+    height: 40px;
+    color: white;
+    font-family: "Nunito";
+    font-weight: bold;
+    border-radius: 20px;
+    margin-top: 100px
+}
+
+.filter-btn:hover {
+    cursor: pointer;
 }

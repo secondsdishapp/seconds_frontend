@@ -7,7 +7,7 @@ import anime from "animejs";
 import SlidingCarousel from "../SlidingCarousel/SlidingCarousel";
 import FilterMap from "../FilterMap/FilterMap";
 
-export default function MapComponent() {
+export default function MapComponent({ menuToggle }) {
 
     const API = import.meta.env.VITE_API_URL;
     const API_KEY = import.meta.env.VITE_API_KEY;
@@ -182,7 +182,7 @@ export default function MapComponent() {
 
     //onClick={() => filterMap === true ? setFilterMap(false) : null} --> To close the filter when screen is clicked 
     return (
-        <div className="map-container">
+        <div className={`map-container ${menuToggle ? "fixed" : ""}`}>
             <div className="upper-container">
                 <img className="map-icon" src="/map-location2.png" alt="Map Icon" />
                 <input className="search-bar" type="text" placeholder="Search dish or restaurant" value={search} onChange={(e) => setSearch(e.target.value) } onClick={() => setSelectedMarker(null)}/>
@@ -222,7 +222,7 @@ export default function MapComponent() {
                 <div style={{width:"100%", display:"flex", flexDirection:"row"}}>
                     <SlidingCarousel filteredDishSearch={filteredDishSearch} locationsInRadius={locationsInRadius}/>
                 </div>
-          :  <p style={{fontSize:"30px"}}>No Results</p>}
+          :  <p style={{fontSize:"30px", color:"#009688"}}>No Results</p>}
           </div>
       )
   }
