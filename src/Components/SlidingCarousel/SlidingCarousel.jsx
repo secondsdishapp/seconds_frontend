@@ -24,13 +24,13 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
 
     const swipeHandlers = useSwipeable({
         onSwipedLeft: (e) => {
-            e.event.preventDefault();
-            e.event.stopPropagation();
+            // e.event.preventDefault();
+            // e.event.stopPropagation();
             nextSlide();
         },
         onSwipedRight: (e) => {
-            e.event.preventDefault();
-            e.event.stopPropagation();
+            // e.event.preventDefault();
+            // e.event.stopPropagation();
             prevSlide();
         },
         preventDefaultTouchmoveEvent: true,

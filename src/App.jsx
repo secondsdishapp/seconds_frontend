@@ -21,7 +21,7 @@ function App() {
   return (
     <div>
       <Navigation menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> {/* Render Navigation to handle layout */}
-      <main>
+      <main style={{overflow:"hidden"}}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dishes" element={<Dishes />} />

@@ -6,12 +6,14 @@ import FilterStyle from "./FilterStyle.jsx";
 
 export default function FilterMap({ radius, setRadius, filterMap, filterPreferences, setFilterPreferences, filterRatings, setFilterRatings }) {
 
+    const filterContainer = document.querySelector(".filter-container");
+
     useEffect(() => {
         if(filterMap) {
             anime({
                 targets: ".filter-container",
                 keyframes: [
-                    {translateX: '-86.5vw'}
+                    {translateX: '-57vw'}
                 ],
                 duration: 2000,
                 easing: 'easeOutExpo',
@@ -22,18 +24,19 @@ export default function FilterMap({ radius, setRadius, filterMap, filterPreferen
             anime({
                 targets: ".filter-container",
                 keyframes: [
-                    {translateX: '0vw'}
+                    {translateX: '23.5vw'}//-37
                 ],
                 duration: 2000,
                 easing: 'easeOutExpo',
                 zindex: 10,
                 position: 'absolute',
+               
             });
         }
     },[filterMap]);
 
     return (
-        <div className={`filter-container`}>
+        <div className="filter-container">
             <p className="filter-title">Filter & Sort</p>
              <label className="radius">
                 Radius:
