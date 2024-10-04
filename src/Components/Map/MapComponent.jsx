@@ -30,7 +30,7 @@ export default function MapComponent() {
 
     useEffect(() => {
         setFilterResults({
-            radius: radius,
+            radius: radius || 100,
             preference: filterPreferences || "",
             rating: filterRatings || ""
         })
@@ -221,7 +221,7 @@ export default function MapComponent() {
             </APIProvider>
             </div>
             : <p>Loading...</p>}
-            {currentLocation.lat && currentLocation.lng && locationsInRadius.length > 0 ? 
+            {currentLocation.lat && currentLocation.lng && filteredDishSearch.length > 0 ? 
                 <div style={{width:"100%", display:"flex", flexDirection:"row"}}>
                     <SlidingCarousel filteredDishSearch={filteredDishSearch} locationsInRadius={locationsInRadius}/>
                 </div>

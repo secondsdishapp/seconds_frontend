@@ -1,6 +1,7 @@
 import "./SlidingCarousel.css";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSwipeable } from "react-swipeable";
 
 
 export default function SlidingCarousel({ filteredDishSearch, locationsInRadius }) {
@@ -8,17 +9,31 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
     const [ slide, setSlide ] = useState(0);
 
     const nextSlide = () => {
-        setSlide(slide === locationsInRadius.length-1 ? 0 : slide + 1);
+        // setSlide(slide === filteredDishSearch.length-1 ? 0 : slide + 1);
+        setSlide((prev) => (prev + 1) % filteredDishSearch.length);
     }
 
     const prevSlide = () => {
-        setSlide(slide === 0 ? locationsInRadius.length-1 : slide - 1);
+        // setSlide(slide === 0 ? filteredDishSearch.length-1 : slide - 1);
+        setSlide((prev) => (prev - 1 + filteredDishSearch.length) % filteredDishSearch.length);
     }
 
+    useEffect(() => {
+        console.log(filteredDishSearch, "Sliding Carousel Data");
+    }, [filteredDishSearch]);
+
+    const swipeHandlers = useSwipeable({
+        onSwipedLeft: nextSlide,
+        onSwipedRight: prevSlide,
+        preventDefaultTouchmoveEvent: true,
+        trackMouse: true,
+        trackTouch: true
+    });
+
     return (
-            <div className="carousel-container">
+            <div {...swipeHandlers} className="carousel-container">
                 <BsArrowLeftCircleFill className="arrow arrow-left" onClick={prevSlide}/>
-            {locationsInRadius.map((dish, index) => {
+            {filteredDishSearch.map((dish, index) => {
                 return (
                     <div key={index} className={slide === index ? "single-card" : "single-card hidden"}>
                         <img className="dish-image" src={dish.dish_image}/>
@@ -29,7 +44,7 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
             })}
                 <BsArrowRightCircleFill className="arrow arrow-right" onClick={nextSlide}/>
                 <span className="indicators">
-                    {locationsInRadius.map((_, index) => {
+                    {filteredDishSearch.map((_, index) => {
                         return (
                             <button key={index} className={slide === index ? "indicator" : "indicator inactive"} onClick={null}></button>
                         )
