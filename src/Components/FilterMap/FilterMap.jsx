@@ -4,9 +4,10 @@ import anime from "animejs";
 
 import FilterStyle from "./FilterStyle.jsx";
 
-export default function FilterMap({ radius, setRadius, filterMap, filterPreferences, setFilterPreferences, filterRatings, setFilterRatings }) {
+export default function FilterMap({ radius, setRadius, filterMap, filterPreferences, setFilterPreferences, filterRatings, setFilterRatings, filteredDishSearch }) {
 
     const filterContainer = document.querySelector(".filter-container");
+    
 
     useEffect(() => {
         if(filterMap) {
@@ -43,6 +44,7 @@ export default function FilterMap({ radius, setRadius, filterMap, filterPreferen
                 <input className="radius-input" type="number" onChange={(e) => setRadius(e.target.value)} tabIndex={"-1"} value={radius} defaultValue={100}/>
             </label>
             <FilterStyle filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings} tabIndex={"-1"}/>  
+            <p className="results-text">Results so far: {filteredDishSearch.length}</p>
             <button className="filter-btn" type="button" tabIndex={"-1"}>Filter</button>
         </div>    
     )

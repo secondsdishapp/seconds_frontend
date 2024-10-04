@@ -188,7 +188,7 @@ export default function MapComponent({ menuToggle }) {
                 <input className="search-bar" type="text" placeholder="Search dish or restaurant" value={search} onChange={(e) => setSearch(e.target.value) } onClick={() => setSelectedMarker(null)}/>
                 <div style={{overflow: "hidden"}}>
                     <img className="filter-icon" src="/filter.png" alt="Filter Icon" onClick={() => setFilterMap(!filterMap)}/>
-                    <FilterMap radius={radius} setRadius={setRadius} filterMap={filterMap} filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings}/>
+                    <FilterMap radius={radius} setRadius={setRadius} filterMap={filterMap} filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings} filteredDishSearch={filteredDishSearch}/>
                 </div>
             </div>
             {currentLocation.lat && currentLocation.lng ?
@@ -223,6 +223,9 @@ export default function MapComponent({ menuToggle }) {
                     <SlidingCarousel filteredDishSearch={filteredDishSearch} locationsInRadius={locationsInRadius}/>
                 </div>
           :  <p style={{fontSize:"30px", color:"#009688"}}>No Results</p>}
-          </div>
+           <div className="footer">
+                
+            </div>
+        </div>
       )
   }
