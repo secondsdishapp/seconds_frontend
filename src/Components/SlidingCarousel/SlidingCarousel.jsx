@@ -23,20 +23,29 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
     }, [filteredDishSearch]);
 
     const swipeHandlers = useSwipeable({
-        onSwipedLeft: nextSlide,
-        onSwipedRight: prevSlide,
+        onSwipedLeft: (e) => {
+            e.event.preventDefault();
+            e.event.stopPropagation();
+            nextSlide();
+        },
+        onSwipedRight: (e) => {
+            e.event.preventDefault();
+            e.event.stopPropagation();
+            prevSlide();
+        },
         preventDefaultTouchmoveEvent: true,
         trackMouse: true,
-        trackTouch: true
+        trackTouch: true,
+        delta: 10
     });
 
     return (
-            <div {...swipeHandlers} className="carousel-container">
+            <div {...swipeHandlers} className="carousel-container" onClick={(e) => e.preventDefault()}>
                 <BsArrowLeftCircleFill className="arrow arrow-left" onClick={prevSlide}/>
             {filteredDishSearch.map((dish, index) => {
                 return (
                     <div key={index} className={slide === index ? "single-card" : "single-card hidden"}>
-                        <img className="dish-image" src={dish.dish_image}/>
+                        <img className="dish-image" src={dish.dish_image} onClick={(e) => e.preventDefault()}/>
                         <p className="titles">{dish.dish_name}</p>
                         <p className="titles">{dish.restaurant_name}</p>  
                     </div>
