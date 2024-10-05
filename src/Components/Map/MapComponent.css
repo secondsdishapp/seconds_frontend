@@ -1,5 +1,17 @@
 .map-container {
-    height: 100vH;
+    position: absolute;
+    width: 100vW;
+    height: 120vH;
+    margin-bottom: 0px;
+    /* position: fixed; */
+    overflow: hidden;
+}
+
+.map-container .fixed {
+
+    width: 100vW;
+    position: fixed;
+    overflow: hidden;
 }
 
 .google-map {
@@ -30,20 +42,29 @@
     border: none;
     border-bottom: 1px solid #ccc;
     outline-color: #009688;
+    padding-left: 5px;
 }
 
-.radius {
-    /* border: 1px solid black; */
+/* .radius {
+    border: 1px solid black;
     display: flex;
     width: 25%;
     gap: 10px;
     align-items: center;
-}
+} */
 
-.radius-input {
+/* .radius-input {
     height: 35px;
     width: 35%;
     border: none;
     border-bottom: 1px solid #ccc;
     outline-color: #009688;
+} */
+
+.footer {
+    height: 1000px;
+    width: 100vW;
+    background-color: #FF5252;
+    margin-bottom: 100px;
+    margin-top: 100px;
 }

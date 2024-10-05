@@ -1,22 +1,55 @@
 import "./MapComponent.css";
 import { useState, useEffect } from "react";
 import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps"; 
+import anime from "animejs";
 
 //COMPONENTS
 import SlidingCarousel from "../SlidingCarousel/SlidingCarousel";
+import FilterMap from "../FilterMap/FilterMap";
 
-export default function MapComponent() {
+export default function MapComponent({ menuToggle }) {
 
     const API = import.meta.env.VITE_API_URL;
     const API_KEY = import.meta.env.VITE_API_KEY;
 
+    //FILTER PREFERENCES
+    const [ filterPreferences, setFilterPreferences ] = useState("");
+
+    //FILTER RATINGS
+    const [ filterRatings, setFilterRatings ] = useState(null);
+
+     //RADIUS
+     const [ radius, setRadius ] = useState(100);
+
+    //FILTER RESULTS--------------------------------------------------------------------------------------------------------
+    const [ filterResults, setFilterResults ] = useState({
+        radius: radius,
+        preference: "",
+        rating: ""
+    });
+
+    useEffect(() => {
+        setFilterResults({
+            radius: radius || String(100),
+            preference: filterPreferences || "",
+            rating: filterRatings || ""
+        })
+    }, [filterPreferences, filterRatings, radius])
+
+    useEffect(() => {
+        console.log(filterResults, "Filter Results");
+    }, [filterResults]);
+
+
+    //----------------------------------------------------------------------------------------------------------------------
+
+
+    //FILTER MAP
+    const [ filterMap, setFilterMap ] = useState(false);
+
     //SEARCH BAR
     const [ search, setSearch ] = useState("");
-
-    //RADIUS
-    const [ radius, setRadius ] = useState(100);
     
-
     //FILTERED DISH SEARCH
     const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
 
@@ -28,9 +61,6 @@ export default function MapComponent() {
 
     //RESTAURANTS ARRAY
     const [ restaurants, setRestaurants ] = useState([]);
-
-    //DISHES ARRAY
-    const [ dishes, setDishes ] = useState([]);
 
     //DISHES LOCATIONS ARRAY
     const [ dishesLocations, setDishesLocations ] = useState([]);
@@ -56,11 +86,25 @@ export default function MapComponent() {
         return earthRadiusMiles * c;
     }
 
+
+    //Filtering the search
+    useEffect(() => {
+        const filtered = dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search));
+        if (filtered.length > 0) {
+            setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius))
+        } else {
+            setFilteredDishSearch([])
+        }
+    },[search, radius, filterResults])
+
+    //-------------------------------------------------------------------------------------------------
+
+
     useEffect(() => {
         if (currentLocation) {
-            setLocationsInRadius(dishesLocations.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= radius));
+            setLocationsInRadius(filteredDishSearch.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius));
         }
-    },[currentLocation, radius])
+    },[currentLocation, radius, search, filteredDishSearch, filterResults])
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -78,16 +122,6 @@ export default function MapComponent() {
         }
     },[]);
 
-    const mapContainerStyle = {
-        width: '400px',
-        height: '400px',
-    };
-    
-    const center = {
-        lat: 37.7749,
-        lng: -122.4194,
-    }
-    
     useEffect(() => {
         fetch(`${API}/restaurants`)
         .then((response) => response.json())
@@ -107,19 +141,6 @@ export default function MapComponent() {
     function handleSearch (e) {
         setSearch(e.target.value)
     }
-
-    //Filtering the search
-
-    useEffect(() => {
-        const filtered = dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search));
-        if (filtered.length > 0) {
-            setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= radius))
-        } else {
-            setFilteredDishSearch([]);
-        }
-    },[search])
-
-    //-------------------------------------------------------------------------------------------------
 
 
     //JUST FOR TESTING PURPOSES - CAN DELETE AFTER EVERYTHING IS WORKING FINE
@@ -149,18 +170,26 @@ export default function MapComponent() {
 
     useEffect(() => {
         console.log(radius, "Radius");
-    }, [radius])
+    }, [radius]);
 
+    useEffect(() => {
+        console.log(filterPreferences, "Filter Preferences");
+    },[filterPreferences]);
+
+    useEffect(() => {
+        console.log(filterRatings, "Filter Ratings");
+    }, [filterRatings]);
+
+    //onClick={() => filterMap === true ? setFilterMap(false) : null} --> To close the filter when screen is clicked 
     return (
-        <div className="map-container">
+        <div className={`map-container ${menuToggle ? "fixed" : ""}`}>
             <div className="upper-container">
                 <img className="map-icon" src="/map-location2.png" alt="Map Icon" />
-                <input className="search-bar" type="text" placeholder="Search dish or restaurant" value={search} onChange={handleSearch} onClick={() => setSelectedMarker(null)}/>
-                <label className="radius">
-                    Radius:
-                    <input className="radius-input" type="number" onChange={(e) => setRadius(e.target.value)}/>
-                </label>
-                <img className="filter-icon" src="/filter.png" alt="Filter Icon" />
+                <input className="search-bar" type="text" placeholder="Search dish or restaurant" value={search} onChange={(e) => setSearch(e.target.value) } onClick={() => setSelectedMarker(null)}/>
+                <div style={{overflow: "hidden"}}>
+                    <img className="filter-icon" src="/filter.png" alt="Filter Icon" onClick={() => setFilterMap(!filterMap)}/>
+                    <FilterMap radius={radius} setRadius={setRadius} filterMap={filterMap} filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings} filteredDishSearch={filteredDishSearch}/>
+                </div>
             </div>
             {currentLocation.lat && currentLocation.lng ?
             <div className="google-map">
@@ -191,9 +220,12 @@ export default function MapComponent() {
             : <p>Loading...</p>}
             {currentLocation.lat && currentLocation.lng && filteredDishSearch.length > 0 ? 
                 <div style={{width:"100%", display:"flex", flexDirection:"row"}}>
-                    <SlidingCarousel filteredDishSearch={filteredDishSearch}/>
+                    <SlidingCarousel filteredDishSearch={filteredDishSearch} locationsInRadius={locationsInRadius}/>
                 </div>
-          :  <p style={{fontSize:"30px"}}>No Results</p>}
-          </div>
+          :  <p style={{fontSize:"30px", color:"#009688"}}>No Results</p>}
+           <div className="footer">
+                
+            </div>
+        </div>
       )
   }

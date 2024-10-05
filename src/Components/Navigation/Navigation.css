@@ -1,0 +1,4 @@
+.layout-container .fixed {
+    position: fixed;
+    overflow: hidden;
+}

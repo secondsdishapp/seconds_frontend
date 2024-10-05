@@ -7,7 +7,15 @@
     align-items: center;
     width: 100%;
     height: 100px;
+    z-index: 100;
+    background-color: white;
 }
+
+.top-menubar-container.fixed {
+    /*position: fixed; */
+}
+
+
 
 :root {
     --bar-width: 50px;

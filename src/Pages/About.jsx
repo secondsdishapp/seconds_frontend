@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './About.css';
-import '../assets/images/Adeola.png';
+// import '../assets/images/Adeola.png';
 import '../assets/images/Anthony.png';
 import '../assets/images/Ayyoub.png';
 import '../assets/images/Jorge.png';

@@ -1,24 +1,13 @@
 import { useState, useEffect } from "react";
 import MapComponent from "../Components/Map/MapComponent.jsx";
+import "./Map.css";
 
-export default function Map() {
-
-    // const API = import.meta.env.VITE_API_URL;
-
-
-    // const [ restaurants, setRestaurants ] = useState([]);
-
-    // useEffect(() => {
-    //     fetch(`${API}/restaurants`)
-    //     .then((response) => response.json())
-    //     .then(res => {
-    //         setRestaurants(res)
-    //     })
-    // },[])
+export default function Map({ menuToggle }) {
 
     return (
-        <div>
-            <MapComponent />
+        <div className={`map-page-container ${menuToggle ? "fixed" : ""}`} style={{overflow: "hidden"}}>
+            <MapComponent menuToggle={menuToggle}/>
         </div>
     )
 }
+

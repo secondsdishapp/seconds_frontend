@@ -6,7 +6,7 @@ export default function TopMenuBar({ menuToggle, setMenuToggle }) {
     const navigate = useNavigate();
 
     return (
-        <div className="top-menubar-container">
+        <div className={`top-menubar-container ${menuToggle ? "fixed" : ""}`}>
             <img src="/seconds-logo2.png" className="logo" onClick={() => {
                 navigate("/");
                 setMenuToggle(false);}

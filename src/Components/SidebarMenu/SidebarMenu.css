@@ -9,7 +9,8 @@
     overflow: hidden;
     text-align: center;
     background-color: white;
-    z-index: 100;
+    z-index: 99;
+    margin-top: 100px;
 }
 
 .links {
