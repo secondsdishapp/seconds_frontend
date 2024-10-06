@@ -1,6 +1,5 @@
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Dish from "../Dish/dish";
-// import { useState, useEffect } from "react";
 import { useState,useEffect } from "react";
 
 
@@ -36,7 +35,7 @@ function calculateDistance(point1, point2) {
 
 useEffect(() => {
     if (currentLocation) {
-        setLocationsInRadius(dishesLocations.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 4));
+        setLocationsInRadius(dishesLocations.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 100));
 
     }
 },[currentLocation]);
@@ -45,7 +44,7 @@ useEffect(() => {
 useEffect(() => {
   const filtered = dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search));
   if (filtered.length > 0) {
-      setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 4))
+      setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 100))
   }
   // console.log(filtered, "Filtered");
 },[search])
