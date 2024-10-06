@@ -22,4 +22,4 @@ const fbApp = initializeApp(firebaseConfig);
 const fbAuth = getAuth(app);
 const fbAnalytics = getAnalytics(app);
 
-export {}
+export {fbApp, fbAuth, fbAnalytics};
