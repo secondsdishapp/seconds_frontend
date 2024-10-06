@@ -24,13 +24,9 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
 
     const swipeHandlers = useSwipeable({
         onSwipedLeft: (e) => {
-            // e.event.preventDefault();
-            // e.event.stopPropagation();
             nextSlide();
         },
         onSwipedRight: (e) => {
-            // e.event.preventDefault();
-            // e.event.stopPropagation();
             prevSlide();
         },
         preventDefaultTouchmoveEvent: true,
@@ -46,7 +42,13 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
                 return (
                     <div key={index} className={slide === index ? "single-card" : "single-card hidden"}>
                         <img className="dish-image" src={dish.dish_image} onClick={(e) => e.preventDefault()}/>
-                        <p className="titles">{dish.avg_rating}</p>
+                        <div className="type-icon-rating-container" >
+                            <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                                {dish.vegetarian ? <img className="food-type-icon" src="/vegan.svg"/> : null} 
+                                {dish.gluten_free ? <img className="food-type-icon2" src="/gluten-free.svg"/> : null}
+                            </div>
+                            <p className="titles">{dish.avg_rating}</p>
+                        </div>
                         <p className="titles">{dish.dish_name}</p>
                         <p className="titles">{dish.restaurant_name}</p>  
                     </div>

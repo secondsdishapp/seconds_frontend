@@ -183,14 +183,6 @@ export default function MapComponent({ menuToggle }) {
         console.log(filterRatings, "Filter Ratings");
     }, [filterRatings]);
 
-    useEffect(() => {
-        console.log(filterMap, "FilterMap");
-    },[filterMap]);
-
-    useEffect(() => {
-        console.log(filterMapToggle, "FilterMapToggle");
-    }, [filterMapToggle]);
-
     return (
         <div className={`map-container ${menuToggle ? "fixed" : ""}`} onClick={() => filterMap ? setFilterMap(!filterMap) : null}>
             <div className="upper-container">
