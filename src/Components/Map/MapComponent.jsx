@@ -223,9 +223,6 @@ export default function MapComponent({ menuToggle }) {
                     <SlidingCarousel filteredDishSearch={filteredDishSearch} locationsInRadius={locationsInRadius}/>
                 </div>
           :  <p style={{fontSize:"30px", color:"#009688"}}>No Results</p>}
-           <div className="footer">
-                
-            </div>
         </div>
       )
   }
