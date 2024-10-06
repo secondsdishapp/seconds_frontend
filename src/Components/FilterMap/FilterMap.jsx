@@ -4,7 +4,7 @@ import anime from "animejs";
 
 import FilterStyle from "./FilterStyle.jsx";
 
-export default function FilterMap({ radius, setRadius, filterMap, filterPreferences, setFilterPreferences, filterRatings, setFilterRatings, filteredDishSearch }) {
+export default function FilterMap({ radius, setRadius, setFilterMap, filterMap, filterPreferences, setFilterPreferences, filterRatings, setFilterRatings, filteredDishSearch, filterMapToggle, setFilterMapToggle }) {
 
     const filterContainer = document.querySelector(".filter-container");
     
@@ -34,10 +34,10 @@ export default function FilterMap({ radius, setRadius, filterMap, filterPreferen
                
             });
         }
-    },[filterMap]);
+    }, [filterMap]);
 
     return (
-        <div className="filter-container">
+        <div className="filter-container" >
             <p className="filter-title">Filter & Sort</p>
              <label className="radius">
                 Radius:
