@@ -60,18 +60,21 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
             {filteredDishSearch.map((dish, index) => {
                 return (
                     <div key={index} className={slide === index ? "single-card" : "single-card hidden"}>
+                            <div style={{display: "flex", marginLeft: "60%", alignItems: "center", width: "100%"}}>
+                                {dishRating(dish.avg_rating).map((elem, index) => elem === "full" ? <img className="rate-icon" src="/eat.png"/> : <img className="rate-icon" src="/eat-half.png"/>)}
+                            </div>
                         <img className="dish-image" src={dish.dish_image} onClick={(e) => e.preventDefault()}/>
                         <div className="type-icon-rating-container" >
-                            <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                            <div style={{display: "flex", alignItems: "center", justifyContent: "center", height: "40px"}}>
                                 {dish.vegetarian ? <img className="food-type-icon" src="/vegan.svg"/> : null} 
                                 {dish.gluten_free ? <img className="food-type-icon2" src="/gluten-free.svg"/> : null}
                             </div>
-                            <div style={{display: "flex"}}>
-                                {dishRating(dish.avg_rating).map((elem, index) => elem === "full" ? <img className="rate-icon" src="/eat.png"/> : <img className="rate-icon" src="/eat-half.png"/>)}
-                            </div>
                         </div>
-                        <p className="titles">{dish.dish_name}</p>
-                        <p className="titles">{dish.restaurant_name}</p>  
+                        <p className="titles">"{dish.dish_name}"</p>
+                        <div className="rest-icon-name-container">
+                            <img className="rest-icon" src="/restaurant.svg" />
+                            <p className="title-restaurant">{dish.restaurant_name}</p>  
+                        </div>
                     </div>
                 )
             })}
