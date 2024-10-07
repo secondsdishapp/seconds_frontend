@@ -1,5 +1,5 @@
 import "./MapComponent.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps"; 
 import anime from "animejs";
 
@@ -43,6 +43,8 @@ export default function MapComponent({ menuToggle }) {
 
     //----------------------------------------------------------------------------------------------------------------------
 
+    //FILTER MAP 2
+    const [ filterMapToggle, setFilterMapToggle ] = useState(false);
 
     //FILTER MAP
     const [ filterMap, setFilterMap ] = useState(false);
@@ -142,7 +144,8 @@ export default function MapComponent({ menuToggle }) {
         setSearch(e.target.value)
     }
 
-
+    
+    //-----------------------------------------------------------------------------------------------------------------------
     //JUST FOR TESTING PURPOSES - CAN DELETE AFTER EVERYTHING IS WORKING FINE
     useEffect(() => {
         console.log(restaurants, "Restaurants");
@@ -180,15 +183,16 @@ export default function MapComponent({ menuToggle }) {
         console.log(filterRatings, "Filter Ratings");
     }, [filterRatings]);
 
-    //onClick={() => filterMap === true ? setFilterMap(false) : null} --> To close the filter when screen is clicked 
     return (
-        <div className={`map-container ${menuToggle ? "fixed" : ""}`}>
+        <div className={`map-container ${menuToggle ? "fixed" : ""}`} onClick={() => filterMap ? setFilterMap(!filterMap) : null}>
             <div className="upper-container">
                 <img className="map-icon" src="/map-location2.png" alt="Map Icon" />
                 <input className="search-bar" type="text" placeholder="Search dish or restaurant" value={search} onChange={(e) => setSearch(e.target.value) } onClick={() => setSelectedMarker(null)}/>
                 <div style={{overflow: "hidden"}}>
                     <img className="filter-icon" src="/filter.png" alt="Filter Icon" onClick={() => setFilterMap(!filterMap)}/>
-                    <FilterMap radius={radius} setRadius={setRadius} filterMap={filterMap} filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings} filteredDishSearch={filteredDishSearch}/>
+                    <div className="child" onClick={(e) => e.stopPropagation()}>
+                        <FilterMap radius={radius} setRadius={setRadius} setFilterMap={setFilterMap} filterMap={filterMap} filterMapToggle={filterMapToggle} setFilterMapToggle={setFilterMapToggle} filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings} filteredDishSearch={filteredDishSearch}/>
+                    </div>
                 </div>
             </div>
             {currentLocation.lat && currentLocation.lng ?

@@ -3,14 +3,11 @@
     position: relative;
     justify-content: center;
     align-items: center;
-    /* flex-direction: column; */
-    /* flex-wrap: wrap; */
     width: 100%;
-    height: 400px;
+    height: 450px;
     margin-top: 50px;
     transition: transform 0.3s ease;
     overflow-x: hidden;
-    /* margin-bottom: 100px; */
 }
 
 .single-card {
@@ -57,12 +54,13 @@
 .indicators {
     display: flex;
     position: absolute;
-    bottom: 1rem;
+    bottom: 0rem;
+    /* margin-top: 100px; */
 }
 
 .indicator {
-    width: 1rem;
-    height: 1rem;
+    width: 0.5rem;
+    height: 0.7rem;
     border-radius: 100%;
     border: none;
     outline: none;
@@ -78,9 +76,53 @@
 .dish-image {
     width: 80%;
     height: 200px;
+    margin-top: 10px;
     margin-left: 10%;
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .titles {
     text-align: center;
+}
+
+.title-restaurant {
+    margin-left: 5%;
+}
+
+.food-type-icon {
+    width: 8%;
+}
+
+.food-type-icon2 {
+    width: 10%;
+}
+
+.type-icon-rating-container {
+    display: flex;
+    /* grid-template-columns: 50% 50%; */
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.rate-icon {
+    width: 6%;
+    gap: 10%;
+    max-width: 35px;
+}
+
+.rest-icon-name-container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+}
+
+.rest-icon {
+    display: flex;
+    width: 25%;
+    max-width: 50px;
+    margin-left: 60%;
 }
