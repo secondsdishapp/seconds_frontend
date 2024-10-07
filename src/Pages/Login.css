@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito:wght@400;700&display=swap');
 
 body {
-  font-family: Nunito, sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 p {
-  font-family: Montserrat, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
 }
 
@@ -21,14 +21,18 @@ p {
   margin-bottom: 100px;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 400px; /* Align with login-box width */
-  padding: 0 1rem;
+
+.menu-icon {
+  font-size: 2rem; /* Adjust icon size for better visibility */
+  cursor: pointer;
+  color: #333; /* Set a color for visibility */
+  transition: transform 0.3s; /* Add a transition effect */
 }
+
+.menu-icon:hover {
+  transform: rotate(90deg); /* Rotate on hover for effect */
+}
+
 
 .logo {
   width: 200px;
@@ -90,17 +94,15 @@ p {
 
 .food-images {
   display: flex;
-  justify-content: space-evenly; /* Even spacing between images */
-  gap: 1rem; /* Space between images */
+  justify-content: center;
+  gap: 0rem; /* Space between images */
 }
 
 .food-image {
-  width: 30%; /* Reduce width to fit the screen better */
-  border-radius: 8px; /* Add a small border radius for better aesthetics */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  width: 45%;
 }
 
 .food-image:hover {
   transform: scale(1.05); /* Slight zoom effect on hover */
+
 }
