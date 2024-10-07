@@ -18,6 +18,7 @@ p {
   min-height: 100vh; /* Updated height to ensure it fills the viewport */
   gap: 2rem; /* Evenly space elements in the container */
   margin-bottom: 100px;
+  margin-bottom: 100px;
 }
 
 .header {

@@ -1,0 +1,82 @@
+/* For Chrome, Safari, Edge and Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* For FireFox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.filter-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 70vH;
+    z-index: 10;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: white;
+    margin-left:  30%;
+    gap: 50px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.filter-title {
+    display: flex;
+    text-align: center;
+    color: white;
+    width: 100%;
+    background-color: black;
+    margin-bottom: 0;
+    margin-top: 0;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.radius {
+    display: flex;
+    width: 50%;
+    gap: 10px;
+    align-items: center;
+    font-size: 16px;
+    color: rgb(94, 93, 93);
+}
+
+.radius-input {
+    height: 35px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgb(94, 93, 93);
+    outline-color: #009688;
+    color: black;
+    background-color: white;
+}
+
+.results-text {
+    font-size: 13px;
+    color: #969696;
+}
+
+.filter-btn {
+    background-color: #FF5252;
+    border: none;
+    width: 50%;
+    height: 40px;
+    color: white;
+    font-family: "Nunito";
+    font-weight: bold;
+    border-radius: 20px;
+    margin-top: 0px
+}
+
+.filter-btn:hover {
+    cursor: pointer;
+}

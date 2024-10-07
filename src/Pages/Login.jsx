@@ -74,7 +74,7 @@ export default function Login() {
         <RegistrationForm setCurrentForm={setCurrentForm} /> // Pass setCurrentForm to RegistrationForm
       )}
       <div>
-        <p>Take the guest work out of the equation...</p>
+        <p>Take the guess work out of the equation...</p>
       </div>
       <div className="food-images">
         <img src="src/assets/images/chicken-sandwich.webp" alt="Chicken Sandwich" className="food-image" />
