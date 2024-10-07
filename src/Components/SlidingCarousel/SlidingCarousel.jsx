@@ -35,6 +35,25 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
         delta: 10
     });
 
+    function dishRating(rating) {
+        let arrRating = rating.split(".");
+        let firstIndex = arrRating[0];
+        let ratingIcons = [];
+
+        for (let i = 1; i <= firstIndex; i++) {
+            ratingIcons.push("full");
+        }
+
+        if  (Number(arrRating[1]) !== 0) {
+            if (Number(arrRating[1]) <= 50) {
+                ratingIcons.push("half")
+            } else if (Number(arrRating[1]) > 50) {
+                ratingIcons.push("full")
+            }
+        }
+        return ratingIcons;
+    }
+
     return (
             <div {...swipeHandlers} className="carousel-container" onClick={(e) => e.preventDefault()}>
                 <BsArrowLeftCircleFill className="arrow arrow-left" onClick={prevSlide}/>
@@ -47,7 +66,9 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
                                 {dish.vegetarian ? <img className="food-type-icon" src="/vegan.svg"/> : null} 
                                 {dish.gluten_free ? <img className="food-type-icon2" src="/gluten-free.svg"/> : null}
                             </div>
-                            <p className="titles">{dish.avg_rating}</p>
+                            <div style={{display: "flex"}}>
+                            {dishRating(dish.avg_rating).map((elem, index) => elem === "full" ? <img className="rate-icon" src="/eat.png"/> : <img className="rate-icon" src="/eat-half.png"/>)}
+                            </div>
                         </div>
                         <p className="titles">{dish.dish_name}</p>
                         <p className="titles">{dish.restaurant_name}</p>  
