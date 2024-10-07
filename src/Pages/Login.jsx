@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './Login.css'; // Import the CSS file for styling
-import RegistrationForm from './RegistrationForm'; // Import the RegistrationForm component
+import RegistrationForm from '../Components/RegistrationForm/RegistrationForm'; // Import the RegistrationForm component
 import { useNavigate } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'; // Import hamburger icon
 
