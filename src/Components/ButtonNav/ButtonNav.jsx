@@ -11,7 +11,7 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
-export default function FixedBottomNavigation({ menuToggle, setMenuToggle }) {
+export default function FixedBottomNavigation({setCount,count, menuToggle, setMenuToggle }) {
   const [value, setValue] = React.useState(0);
   const ref = React.useRef(null);
 
@@ -28,9 +28,11 @@ export default function FixedBottomNavigation({ menuToggle, setMenuToggle }) {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction  style={{color:"#FF5252"}} label="Map" icon={<PlaceIcon htmlColor='inherit' />} component={Link} to="/map" onClick={() => setMenuToggle(false)}/>
-          <BottomNavigationAction style={{color:"#FF5252"}} label="Home" icon={<RestaurantIcon htmlColor='inherit'/>} component={Link} to="/" onClick={() => setMenuToggle(false)}/>
-          <BottomNavigationAction style={{color:"#FF5252"}} label="Dishes" icon={<FavoriteIcon htmlColor='inherit'/>} component ={Link} to="/dishes" onClick={() => setMenuToggle(false)}/>
+          <BottomNavigationAction  style={{color:"#FF5252"}} label="Map" icon={<PlaceIcon htmlColor='inherit' />} component={Link} to="/map" onClick={() => {setCount(count + 1);
+            setMenuToggle(false)}}/>
+          <BottomNavigationAction style={{color:"#FF5252"}} label="Home" icon={<RestaurantIcon htmlColor='inherit'/>} component={Link} to="/" onClick={() => {
+            setCount(count + 1);setMenuToggle(false)}}/>
+          <BottomNavigationAction style={{color:"#FF5252"}} label="Dishes" icon={<FavoriteIcon htmlColor='inherit'/>} component ={Link} to="/dishes" onClick={() => {setCount(count + 1);setMenuToggle(false)}}/>
         </BottomNavigation>
       </Paper>
     </Box>

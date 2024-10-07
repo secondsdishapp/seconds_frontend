@@ -6,7 +6,7 @@ import zIndex from "@mui/material/styles/zIndex";
 
 import "./Navigation.css";
 
-export default function Navigation({ menuToggle, setMenuToggle }) {
+export default function Navigation({count, menuToggle, setMenuToggle,setCount }) {
   
 
   return (
@@ -15,7 +15,7 @@ export default function Navigation({ menuToggle, setMenuToggle }) {
       {menuToggle ? (
         <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle} />
       ) : null}
-      <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />
+      <Footer count={count} setCount={setCount} style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />
     </div>
   );
 }
