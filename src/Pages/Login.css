@@ -15,8 +15,9 @@ p {
   align-items: center;
   padding: 50px;
   background-color: #f4f4f4;
-  height: 80vh;
+  min-height: 100vh; /* Updated height to ensure it fills the viewport */
   gap: 2rem; /* Evenly space elements in the container */
+  margin-bottom: 100px;
 }
 
 .header {
@@ -29,12 +30,18 @@ p {
 }
 
 .logo {
-  width: 150px; /* Adjust logo size as needed */
+  width: 200px;
 }
 
 .menu-icon {
-  font-size: 1rem; /* Adjust icon size */
+  font-size: 2rem; /* Adjust icon size for better visibility */
   cursor: pointer;
+  color: #333; /* Set a color for visibility */
+  transition: transform 0.3s; /* Add a transition effect */
+}
+
+.menu-icon:hover {
+  transform: rotate(90deg); /* Rotate on hover for effect */
 }
 
 .login-box {
@@ -69,6 +76,7 @@ p {
   border-radius: 4px;
   cursor: pointer;
   width: 40%;
+  transition: background-color 0.3s ease;
 }
 
 .login-button:hover {
@@ -81,10 +89,17 @@ p {
 
 .food-images {
   display: flex;
-  justify-content: center;
-  gap: 0rem; /* Space between images */
+  justify-content: space-evenly; /* Even spacing between images */
+  gap: 1rem; /* Space between images */
 }
 
 .food-image {
-  width: 45%;
+  width: 30%; /* Reduce width to fit the screen better */
+  border-radius: 8px; /* Add a small border radius for better aesthetics */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.food-image:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
 }
