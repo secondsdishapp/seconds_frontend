@@ -1,0 +1,67 @@
+/* Registration Form Styles */
+h2 {
+    text-align: center; /* Center the header */
+    margin-bottom: 20px; /* Space below the header */
+  }
+  
+  /* Form Container */
+  form {
+    background-color: white; /* White background for the form */
+    padding: 20px; /* Padding inside the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    max-width: 400px; /* Max width of the form */
+    margin: 0 auto; /* Center form horizontally */
+  }
+  
+  /* Input Styles */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"] {
+    width: 100%; /* Full width of input fields */
+    padding: 10px; /* Inner padding */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners for input */
+    box-sizing: border-box; /* Include padding in width */
+    margin-bottom: 15px; /* Space below each input */
+  }
+  
+  /* Label Styles */
+  label {
+    display: block; /* Labels take up full width */
+    margin-bottom: 5px; /* Space below the label */
+    font-weight: bold; /* Bold label text */
+  }
+  
+  /* Button Styles */
+  button {
+    padding: 10px;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text color */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Transition for hover effect */
+    width: 100%; /* Full width button */
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Sign In Prompt Styles */
+  h5 {
+    text-align: center; /* Center the sign-in prompt */
+    margin-top: 20px; /* Space above the sign-in prompt */
+  }
+  
+  /* Link Styles */
+  a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+  }
+  
+  a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  
