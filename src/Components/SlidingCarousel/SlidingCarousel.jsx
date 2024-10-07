@@ -67,7 +67,7 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
                                 {dish.gluten_free ? <img className="food-type-icon2" src="/gluten-free.svg"/> : null}
                             </div>
                             <div style={{display: "flex"}}>
-                            {dishRating(dish.avg_rating).map((elem, index) => elem === "full" ? <img className="rate-icon" src="/eat.png"/> : <img className="rate-icon" src="/eat-half.png"/>)}
+                                {dishRating(dish.avg_rating).map((elem, index) => elem === "full" ? <img className="rate-icon" src="/eat.png"/> : <img className="rate-icon" src="/eat-half.png"/>)}
                             </div>
                         </div>
                         <p className="titles">{dish.dish_name}</p>
