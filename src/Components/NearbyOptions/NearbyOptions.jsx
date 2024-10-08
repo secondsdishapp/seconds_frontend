@@ -8,6 +8,7 @@ export default function NearByOptions({count}) {
 
   const [ dishesLocations, setDishesLocations ] = useState([]);
   const [ nearByDishes, setNearByDishes ] = useState([]);
+  const [ allNearByDishes, setAllNearByDishes ] = useState([]);
   const [ locationsInRadius, setLocationsInRadius ] = useState([]);
   const [ search, setSearch ] = useState("");
   const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
@@ -88,9 +89,15 @@ useEffect(() => {
       setNearByDishes(res.sort((a,b)=>b.
       avg_rating-a.avg_rating
       ))
+      setAllNearByDishes(res.sort((a,b)=>b.
+      avg_rating-a.avg_rating
+      ))
       
   })
 },[count]);
+let entireList=allNearByDishes.filter(el=>el.dish_name.toLowerCase().includes(search.toLowerCase())||el.restaurant_name.toLowerCase().includes(search.toLowerCase()))
+
+let highlyRatedDishes=nearByDishes.filter(el=>el.avg_rating>=4.5);
 
 useEffect(() => {
   console.log(dishesLocations, "Dishes Locations");
@@ -101,13 +108,14 @@ useEffect(() => {
 },[filteredDishSearch]);
 
   
-  return (
+  return (search?
     <div className="home-main-container">
 
       {/* <h4>What are you going to eat today</h4> */}
       <SearchBar search={search} setSearch={setSearch}/>
-      <h4 className="highly-rated-nearby-options">Highly rated nearby options</h4>
-      {nearByDishes.map((item,index)=>{
+      <h4 style={{display:'none'}} className="highly-rated-nearby-options">Highly rated nearby options</h4>
+      <br />
+      {entireList.map((item,index)=>{
         return(
          <Dish item={item} index={index}/>
         )
@@ -116,6 +124,20 @@ useEffect(() => {
    
 
      
-    </div>
+    </div>: <div className="home-main-container">
+
+{/* <h4>What are you going to eat today</h4> */}
+<SearchBar search={search} setSearch={setSearch}/>
+<h4 className="highly-rated-nearby-options">Highly rated nearby options</h4>
+{highlyRatedDishes.map((item,index)=>{
+  return(
+   <Dish item={item} index={index}/>
+  )
+})}
+
+
+
+
+</div>
   );
 }
