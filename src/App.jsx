@@ -20,14 +20,14 @@ import { useState } from "react";
 function App() {
 
   const [menuToggle, setMenuToggle] = useState(false);
-  const [count, setCount] = useState(0);
+
 
   return (
     <div>
       <TopMenuBar menuToggle={menuToggle} setMenuToggle={setMenuToggle} />
       <main style={{overflow:"hidden"}}>
         <Routes>
-          <Route path="/" element={<Home count={count}/>} />
+          <Route path="/" element={<Home/>} />
           <Route path="/dishes" element={<Dishes />} />
           <Route path="/dishes/:id" element={<DishShow />} />
           <Route path="/login" element={<Login />} />
@@ -36,7 +36,7 @@ function App() {
           <Route path="/about" element={<About />} />
         </Routes>
       </main>
-      <Footer count={count} setCount={setCount} style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />
+      <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />
 
     </div>
   );
