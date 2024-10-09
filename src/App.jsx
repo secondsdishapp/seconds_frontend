@@ -10,6 +10,8 @@ import FourOFour from "./Pages/FourOFour";
 import Login from "./Pages/Login";
 import Map from "./Pages/Map";
 import About from "./Pages/About";
+import TopMenuBar from "./Components/TopMenuBar/TopMenuBar.jsx";
+import Footer from "./Components/Footer/Footer.jsx";
 import zIndex from "@mui/material/styles/zIndex.js";
 
 import { useState } from "react";
@@ -18,14 +20,14 @@ import { useState } from "react";
 function App() {
 
   const [menuToggle, setMenuToggle] = useState(false);
-  const [count, setCount] = useState(0);
+
 
   return (
     <div>
-      <Navigation count={count} menuToggle={menuToggle} setMenuToggle={setMenuToggle} setCount={setCount}/> {/* Render Navigation to handle layout */}
+      <TopMenuBar menuToggle={menuToggle} setMenuToggle={setMenuToggle} />
       <main style={{overflow:"hidden"}}>
         <Routes>
-          <Route path="/" element={<Home count={count}/>} />
+          <Route path="/" element={<Home/>} />
           <Route path="/dishes" element={<Dishes />} />
           <Route path="/dishes/:id" element={<DishShow />} />
           <Route path="/login" element={<Login />} />
@@ -34,6 +36,8 @@ function App() {
           <Route path="/about" element={<About />} />
         </Routes>
       </main>
+      <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />
+
     </div>
   );
 }
