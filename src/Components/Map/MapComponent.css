@@ -3,14 +3,6 @@
     width: 100vW;
     height: 150vH;
     margin-bottom: 0px;
-    /* position: fixed; */
-    overflow: hidden;
-}
-
-.map-container .fixed {
-
-    width: 100vW;
-    position: fixed;
     overflow: hidden;
 }
 
@@ -45,18 +37,9 @@
     padding-left: 5px;
 }
 
-/* .radius {
-    border: 1px solid black;
+.carousel-main-container {
     display: flex;
-    width: 25%;
-    gap: 10px;
-    align-items: center;
-} */
-
-/* .radius-input {
-    height: 35px;
-    width: 35%;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    outline-color: #009688;
-} */
+    margin-left: -100%;
+    width: 100%;
+    flex-direction: row;
+}
