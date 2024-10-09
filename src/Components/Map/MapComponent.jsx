@@ -93,11 +93,28 @@ export default function MapComponent({ menuToggle }) {
     useEffect(() => {
         const filtered = dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search));
         if (filtered.length > 0) {
-            setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius))
+            if (filterResults.preference === "Vegetarian") {
+                setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius));
+                setFilteredDishSearch(filteredDishSearch.filter((dish, index) => dish.vegetarian === true))
+            } else {
+                setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius));
+            }
         } else {
             setFilteredDishSearch([])
         }
     },[search, radius, filterResults])
+
+    // useEffect(() => {
+    //     if (filterResults.preference) {
+    //     if (filterResults.preference === "Vegetarian") {
+    //         setFilteredDishSearch(filteredDishSearch.filter((dish, index) => (dish.vegetarian === true && dish.dish_name.includes(search)) || (dish.vegetarian === true && dish.restaurant_name.includes(search))));
+    //     } else if (filterResults.preference === "Vegan") {
+    //         setFilteredDishSearch(filteredDishSearch.filter((dish, index) => dish.vegan === true));
+    //     } else if (filterResults.preference === "Gluten Free"){
+    //         setFilteredDishSearch(filteredDishSearch.filter((dish, index) => dish.gluten_free === true));
+    //     }
+    //     }
+    // }, [filterResults, radius, search]);
 
     //-------------------------------------------------------------------------------------------------
 
@@ -144,7 +161,22 @@ export default function MapComponent({ menuToggle }) {
         setSearch(e.target.value)
     }
 
-    
+    //SLIDING CAROUSEL ANIMATION
+
+    useEffect(() => {
+        anime({
+            targets: ".carousel-main-container",
+            keyframes: [
+                {translateX: "100%"}
+            ],
+            duration: 2500,
+            easing: "easeOutExpo",
+            zindex: 1,
+            // position: "relative",
+        });
+    }, [search, filteredDishSearch])
+
+
     //-----------------------------------------------------------------------------------------------------------------------
     //JUST FOR TESTING PURPOSES - CAN DELETE AFTER EVERYTHING IS WORKING FINE
     useEffect(() => {
@@ -184,7 +216,7 @@ export default function MapComponent({ menuToggle }) {
     }, [filterRatings]);
 
     return (
-        <div className={`map-container ${menuToggle ? "fixed" : ""}`} onClick={() => filterMap ? setFilterMap(!filterMap) : null}>
+        <div className="map-container" onClick={() => filterMap ? setFilterMap(!filterMap) : null}>
             <div className="upper-container">
                 <img className="map-icon" src="/map-location2.png" alt="Map Icon" />
                 <input className="search-bar" type="text" placeholder="Search dish or restaurant" value={search} onChange={(e) => setSearch(e.target.value) } onClick={() => setSelectedMarker(null)}/>
@@ -223,7 +255,7 @@ export default function MapComponent({ menuToggle }) {
             </div>
             : <p>Loading...</p>}
             {currentLocation.lat && currentLocation.lng && filteredDishSearch.length > 0 ? 
-                <div style={{width:"100%", display:"flex", flexDirection:"row"}}>
+                <div className="carousel-main-container">
                     <SlidingCarousel filteredDishSearch={filteredDishSearch} locationsInRadius={locationsInRadius}/>
                 </div>
           :  <p style={{fontSize:"30px", color:"#009688"}}>No Results</p>}

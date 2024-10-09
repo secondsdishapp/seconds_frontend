@@ -4,7 +4,7 @@ import { useState,useEffect } from "react";
 
 
 
-export default function NearByOptions({count}) {
+export default function NearByOptions({count, menuToggle}) {
 
   const [ dishesLocations, setDishesLocations ] = useState([]);
   const [ nearByDishes, setNearByDishes ] = useState([]);

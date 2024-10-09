@@ -13,6 +13,7 @@ import About from "./Pages/About";
 import TopMenuBar from "./Components/TopMenuBar/TopMenuBar.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
 import zIndex from "@mui/material/styles/zIndex.js";
+import SidebarMenu from "./Components/SidebarMenu/SidebarMenu.jsx";
 
 import { useState } from "react";
 // import { set } from "animejs";
@@ -25,14 +26,15 @@ function App() {
   return (
     <div>
       <TopMenuBar menuToggle={menuToggle} setMenuToggle={setMenuToggle} />
-      <main style={{overflow:"hidden"}}>
+      {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> : null}
+      <main className={`pages ${menuToggle ? "fixed" : ""}`}>
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/dishes" element={<Dishes />} />
           <Route path="/dishes/:id" element={<DishShow />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<FourOFour />} />
-          <Route path="/map" element={<Map menuToggle={menuToggle}/>} />
+          <Route path="/map" element={<Map />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </main>
