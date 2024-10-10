@@ -1,0 +1,79 @@
+/* styles for the sign-up form container */
+.signup-container {
+    max-width: 400px; /* limit the width of the form */
+    margin: auto; /* center the form horizontally */
+    padding: 20px; /* add padding for spacing */
+    border: 1px solid #ccc; /* add a light border */
+    border-radius: 8px; /* round the corners */
+    background-color: #f9f9f9; /* light background color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
+  }
+  
+  /* styles for the title of the form */
+  .signup-title {
+    text-align: center; /* center the title */
+    margin-bottom: 20px; /* space below the title */
+    font-size: 24px; /* increase font size for emphasis */
+    color: #333; /* dark color for the text */
+  }
+  
+  /* styles for the form elements */
+  .signup-form {
+    display: flex; /* use flexbox for layout */
+    flex-direction: column; /* stack elements vertically */
+  }
+  
+  /* styles for individual form groups */
+  .form-group {
+    margin-bottom: 15px; /* space between form groups */
+  }
+  
+  /* styles for form labels */
+  .form-label {
+    display: block; /* make labels block-level */
+    margin-bottom: 5px; /* space below the label */
+    font-weight: bold; /* make labels bold */
+    color: #555; /* slightly lighter color for labels */
+  }
+  
+  /* styles for input fields */
+  .input-field {
+    width: 100%; /* full width of the container */
+    padding: 10px; /* padding inside the input */
+    border: 1px solid #ccc; /* light border */
+    border-radius: 4px; /* rounded corners */
+    font-size: 16px; /* set font size */
+  }
+  
+  /* styles for the submit button */
+  .submit-button {
+    padding: 10px; /* padding for the button */
+    border: none; /* remove border */
+    border-radius: 4px; /* rounded corners */
+    background-color: #4CAF50; /* green background color */
+    color: white; /* white text color */
+    font-size: 16px; /* set font size */
+    cursor: pointer; /* pointer cursor on hover */
+  }
+  
+  /* hover effect for the submit button */
+  .submit-button:hover {
+    background-color: #45a049; /* darker green on hover */
+  }
+  
+  /* styles for the login prompt */
+  .login-prompt {
+    text-align: center; /* center the prompt */
+    margin-top: 15px; /* space above the prompt */
+  }
+  
+  /* styles for links */
+  .login-prompt a {
+    color: #007BFF; /* link color */
+    text-decoration: none; /* remove underline */
+  }
+  
+  .login-prompt a:hover {
+    text-decoration: underline; /* underline on hover */
+  }
+  
