@@ -10,201 +10,207 @@ body {
   width: auto; /* maintains aspect ratio for width */
   height: auto; /* maintains aspect ratio for height */
   transform: rotate(180deg); /* rotates the image 180 degrees */
+  margin-bottom: 5px;
 }
 
 .about_container {
-  padding: 20px;
-  background-color: #f8f8f8;
-  color: #333; /* Added the # to make it a valid hex color */
-  max-width: 1200px;
-  margin: 0 auto;
-  border-radius: 8px;
-  text-align: left;
+  padding: 20px; /* adds padding around the about container */
+  background-color: #f8f8f8; /* sets a light gray background color */
+  color: #333; /* sets text color to a dark gray */
+  max-width: 1200px; /* limits maximum width of the container */
+  margin: 0 auto; /* centers the container horizontally */
+  border-radius: 8px; /* rounds the corners of the container */
+  text-align: left; /* aligns text to the left */
 }
 
 .about_app {
-  text-align: left;
-  font-size: 1rem; /* Corrected to remove the space */
-  margin-bottom: 5px;
-  color: #333;
+  text-align: left; /* aligns text within the about app section to the left */
+  font-size: 2.0rem; /* sets font size to 1rem for consistency */
+  margin-bottom: 5px; /* adds space below the about app section */
+  color: #333; /* sets text color to a dark gray */
 }
 
 .about_mission {
-  font-size: 1rem; /* No need for .0, it's the same as 1rem */
-  line-height: 1.5;
-  margin: 10px 0 0;
-  font-weight: normal;
-  color: #333;
+  font-size: 1.1rem; /* sets font size to 1.1rem or 18px for consistency */
+  line-height: 1.5; /* sets line height to 1.5 for better readability */
+  margin: 10px 0 0; /* adds top margin and removes bottom margin */
+  font-weight: normal; /* sets font weight to normal */
+  color: #333; /* sets text color to a dark gray */
+  margin-bottom: 20px;
 }
 
 h1 {
-  font-size: 1.8rem;
-  color: #333;
-  margin: 20px 0 10px;
+  font-size: 2rem; /* sets font size for h1 elements */
+  color: #333; /* sets text color to a dark gray */
+  margin: 20px 0 20px; /* adds margin above and below the h1 element */
 }
 
 h2 {
-  font-size: 1.8rem;
-  color: #34495e;
-  margin: 20px 0 10px;
+  font-size: 1.8rem; /* sets font size for h2 elements */
+  color: #34495e; /* sets a different color for h2 elements */
+  margin: 20px 0 10px; /* adds margin above and below the h2 element */
 }
 
 .slogan {
-  font-size: 1.5rem;
-  color: #009688;
-  margin: 20px 0 10px;
+  font-size: 1.6rem; /* sets font size for the slogan */
+  color: #009688; /* sets a teal color for the slogan text */
+  margin: 20px 0px 20px; /* adds margin above and below the slogan */
 }
 
 .team-list-container {
-  margin-top: 40px;
-  margin-bottom: 5px;
+  margin-top: 5px; /* adds space above the team list container */
+  margin-bottom: 5px; /* adds space below the team list container */
 }
 
 .team-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  display: grid; /* sets the layout to grid */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* creates responsive grid columns */
+  gap: 5px; /* adds space between grid items */
+}
+
+.team-title {
+  text-align: left; /* aligns text within the about app section to the left */
+  font-size: 2.0rem; /* sets font size to 1rem for consistency */
+  margin-top: 5px;
+  margin-bottom: 5px; /* adds space below Team app section */
+  font-weight: bolder;/* sets font weight to bolder */
 }
 
 .team-container {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  text-align: left;
+  background-color: white; /* sets background color to white */
+  border: 1px solid #ddd; /* adds a light gray border */
+  border-radius: 8px; /* rounds the corners of the team container */
+  overflow: hidden; /* hides overflow content */
+  transition: transform 0.3s ease; /* adds a transition effect for transformations */
+  text-align: left; /* aligns text within the team container to the left */
 }
 
 .team-container:hover {
-  transform: scale(1.02);
+  transform: scale(1.02); /* scales up the container slightly on hover */
 }
 
 .white-overlay {
-  position: relative;
+  position: relative; /* sets position to relative for absolute positioning of child elements */
+  
 }
 
 .white-overlay:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
+  content: ''; /* creates a pseudo-element with no content */
+  position: absolute; /* positions the pseudo-element absolutely */
+  top: 0; /* aligns the top edge to the top of the parent */
+  left: 0; /* aligns the left edge to the left of the parent */
+  right: 0; /* aligns the right edge to the right of the parent */
+  bottom: 0; /* aligns the bottom edge to the bottom of the parent */
+  z-index: 1; /* places the pseudo-element above other elements */
 }
 
 .profile-pic {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    display: block;
-    margin-bottom: 10px; /* Adjust the spacing between the image and the icons */
-    border-radius: 20px;
-    
+  width: 100%; /* sets width of profile picture to 100% of the container */
+  height: 400px; /* sets a fixed height for profile picture */
+  object-fit: cover; /* ensures the image covers the container while maintaining aspect ratio */
+  display: block; /* ensures the image is treated as a block element */
+  margin-bottom: 10px; /* adds space below the profile picture */
+  border-radius: 20px; /* rounds the corners of the profile picture */
+  margin-top: 25px; /* space between  */
 }
 
 .dev-name {
-  text-align: left;
-  font-size: 1.5rem;
-  margin: 10px 0 0;
-  color: #009688;
-}
-
-.bio-container {
-  padding: 1px 0px;
+  text-align: left; /* aligns developer name to the left */
+  font-size: 1.5rem; /* sets font size for developer names */
+  margin: 10px 0 0; /* adds top margin and removes bottom margin */
+  color: #009688; /* sets text color to a teal shade */
 }
 
 .team-bio {
-  font-size: 1rem; /* Updated to match consistency */
-  line-height: 1.4;
-  color: #666;
-  text-align: left;
+  font-size: 1rem; /* sets font size for team bios */
+  line-height: 1.4; /* sets line height for better readability */
+  color: #666; /* sets a lighter gray color for bio text */
+  text-align: left; /* aligns bio text to the left */
 }
 
+.bio-content {
+  position: relative; /* Ensures that translation works correctly */
+  transition: all 1.2s ease-in-out; 
+}
+
+
 .links__container {
-  display: flex;
-  justify-content: flex-start;
-  padding: 10px 0;
-  margin: 0;
-  /* padding:20px; */
+  display: flex; /* enables flexbox layout for links */
+  justify-content: flex-start; /* aligns links to the start of the container */
+  padding: 10px 0; /* adds vertical padding to the links container */
+  margin: 0; /* resets margin for the links container */
+  transition: opacity 0.6s ease-in-out;
 }
 
 .links__container a {
-  margin: 0;
-  padding: 0;
-  font-size: 1.5rem;
-  color: #2980b9;
-  transition: color 0.3s ease;
-  line-height: 1;
-  margin-top: -5px;
-  vertical-align: middle;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 0; /* resets margin for links */
+  padding: 0; /* resets padding for links */
+  font-size: 1.5rem; /* sets font size for links */
+  color: #2980b9; /* sets link color to a shade of blue */
+  transition: color 0.3s ease; /* adds a transition effect for color changes */
+  line-height: 1; /* sets line height to 1 for links */
+  margin-top: -5px; /* adjusts top margin to fine-tune positioning */
+  vertical-align: middle; /* aligns the link vertically in the middle */
+  margin-right: 10px; /* adds space to the right of each link */
+  margin-bottom: 10px; /* adds space below each link */
+  
 }
 
 .links__container a:hover {
-  color: #3498db;
+  color: #3498db; /* changes link color on hover to a lighter blue */
 }
 
 .links__container i {
-  display: inline-flex;
-  align-items: center;
+  display: inline-flex; /* displays icon as inline-flex to align properly */
+  align-items: center; /* centers icon vertically within the flex container */
+  
 }
 
 .spacer {
-    height: 100px;
+  height: 100px; /* sets height for spacer element */
 }
-
-
-.links__container i {
-  display: inline-flex;
-  align-items: center;
-}
-
-.spacer {
-    height: 100px;
-}
-
 
 @media (max-width: 768px) {
   .about_container {
-    padding: 15px;
+    padding: 15px; /* reduces padding for smaller screens */
   }
 
   .about_app {
-    font-size: 2rem;
+    font-size: 2rem; /* increases font size for about app section on smaller screens */
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* reduces font size for h2 elements on smaller screens */
   }
 
   .dev-name {
-    font-size: 1.2rem;
+    font-size: 1.2rem; /* reduces font size for developer names on smaller screens */
   }
 }
 
-
 .profile-bio {
-  margin: 0 0 0; /* Adjust this value to move the bio closer to the name */
-  font-size: 1rem;
-  line-height: 1.4;
-  color: #333;
-  text-align: left;
-  font-weight: 500;
+  margin: 0; /* resets margin for profile bio to eliminate extra space */
+  font-size: 1rem; /* sets font size for profile bio */
+  line-height: 1.4; /* sets line height for better readability */
+  color: #333; /* sets text color to dark gray */
+  text-align: left; /* aligns profile bio text to the left */
+  font-weight: 500; /* sets font weight to medium */
+  flex-grow: 1; /* allows profile bio to grow and take available space */
+  cursor: pointer;
+  
 }
 
-.specific-profile-container {
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  display: flex;
-  justify-content: left;
-  align-items: left;
+.down-arrow-icon {
+  width: 20px; /* sets width of down arrow icon */
+  height: 20px; /* sets height of down arrow icon */
+  transition: transform 0.7s ease, left 0.7s ease; /* adds a transition effect for icon rotation and position */
+  cursor: pointer; /* changes cursor to pointer on hover to indicate it's clickable */
+  vertical-align: bottom; /* aligns the icon vertically to the bottom */
+  position: relative;
+  left: 0; /* Initial position */
 }
 
-.specific-profile-container img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
+.rotated {
+  transform: rotate(180deg); /* Rotate the icon when expanded */
 }
+
