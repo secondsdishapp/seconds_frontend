@@ -51,6 +51,12 @@ export default function MapComponent({ menuToggle }) {
 
     //SEARCH BAR
     const [ search, setSearch ] = useState("");
+
+    //SEARCH FILTER
+    const [ searchFilter, setSearchFilter ] = useState([]);
+
+    //RATING FILTER
+    const [ ratingFilter, setRatingFilter ] = useState([]);
     
     //FILTERED DISH SEARCH
     const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
@@ -88,33 +94,40 @@ export default function MapComponent({ menuToggle }) {
         return earthRadiusMiles * c;
     }
 
-
     //Filtering the search
     useEffect(() => {
-        const filtered = dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search));
-        if (filtered.length > 0) {
+        setSearchFilter( dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search)));
+    }, [search]);
+
+    useEffect(() => {
+        console.log(searchFilter, "Search Filter")
+    }, [searchFilter]);
+
+    useEffect(() => {
+        if (filterResults.rating === "Highest") {
+            setRatingFilter(searchFilter.sort((a, b) => b.avg_rating - a.avg_rating));
+        } else if (filterResults.rating === "Lowest") {
+            setRatingFilter(searchFilter.sort((a, b) => a.avg_rating - b.avg_rating));
+        } else {
+            setRatingFilter(searchFilter)
+        }
+    }, [searchFilter, filterResults]);
+
+    useEffect(() => {
+        console.log(ratingFilter, "Rating Filter")
+    }, [ratingFilter])
+
+    useEffect(() => {
+        if (searchFilter.length > 0) {
             if (filterResults.preference === "Vegetarian") {
-                setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius));
-                setFilteredDishSearch(filteredDishSearch.filter((dish, index) => dish.vegetarian === true))
+                setFilteredDishSearch(searchFilter.filter((dish, index) => ((calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius) && dish.vegetarian === true)));
             } else {
-                setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius));
+                setFilteredDishSearch(searchFilter.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius));
             }
         } else {
-            setFilteredDishSearch([])
+            setFilteredDishSearch([]);
         }
-    },[search, radius, filterResults])
-
-    // useEffect(() => {
-    //     if (filterResults.preference) {
-    //     if (filterResults.preference === "Vegetarian") {
-    //         setFilteredDishSearch(filteredDishSearch.filter((dish, index) => (dish.vegetarian === true && dish.dish_name.includes(search)) || (dish.vegetarian === true && dish.restaurant_name.includes(search))));
-    //     } else if (filterResults.preference === "Vegan") {
-    //         setFilteredDishSearch(filteredDishSearch.filter((dish, index) => dish.vegan === true));
-    //     } else if (filterResults.preference === "Gluten Free"){
-    //         setFilteredDishSearch(filteredDishSearch.filter((dish, index) => dish.gluten_free === true));
-    //     }
-    //     }
-    // }, [filterResults, radius, search]);
+    }, [radius, filterResults, searchFilter]);
 
     //-------------------------------------------------------------------------------------------------
 

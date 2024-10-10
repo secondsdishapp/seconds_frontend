@@ -8,6 +8,10 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
 
     const [ slide, setSlide ] = useState(0);
 
+    useEffect(() => {
+        setSlide(0);
+    }, [filteredDishSearch]);
+
     const nextSlide = () => {
         // setSlide(slide === filteredDishSearch.length-1 ? 0 : slide + 1);
         setSlide((prev) => (prev + 1) % filteredDishSearch.length);
