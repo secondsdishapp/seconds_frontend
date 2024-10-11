@@ -15,7 +15,7 @@ export default function FilterMap({ radius, setRadius, setFilterMap, filterMap, 
             anime({
                 targets: ".filter-container",
                 keyframes: [
-                    {translateX: '-72vw'}
+                    {translateX: '-63vw'}
                 ],
                 duration: 2000,
                 easing: 'easeOutExpo',

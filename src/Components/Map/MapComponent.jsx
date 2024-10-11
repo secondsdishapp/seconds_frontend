@@ -12,6 +12,9 @@ export default function MapComponent({ menuToggle }) {
     const API = import.meta.env.VITE_API_URL;
     const API_KEY = import.meta.env.VITE_API_KEY;
 
+    //DISH OR RESTAURANT STATE
+    const [ isSelected, setIsSelected ] = useState("");
+
     //FILTER PREFERENCES
     const [ filterPreferences, setFilterPreferences ] = useState("");
 
@@ -231,14 +234,26 @@ export default function MapComponent({ menuToggle }) {
     return (
         <div className="map-container" onClick={() => filterMap ? setFilterMap(!filterMap) : null}>
             <div className="upper-container">
-                <img className="map-icon" src="/map-location2.png" alt="Map Icon" />
+                <img className="map-icon" src="/map.svg" alt="Map Icon" />
                 <input className="search-bar" type="text" placeholder="Search dish or restaurant" value={search} onChange={(e) => setSearch(e.target.value) } onClick={() => setSelectedMarker(null)}/>
                 <div style={{overflow: "hidden"}}>
-                    <img className="filter-icon" src="/filter.png" alt="Filter Icon" onClick={() => setFilterMap(!filterMap)}/>
+                    <img className="filter-icon" src="/filter2.svg" alt="Filter Icon" onClick={() => setFilterMap(!filterMap)}/>
                     <div className="child" onClick={(e) => e.stopPropagation()}>
                         <FilterMap radius={radius} setRadius={setRadius} setFilterMap={setFilterMap} filterMap={filterMap} filterMapToggle={filterMapToggle} setFilterMapToggle={setFilterMapToggle} filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings} filteredDishSearch={filteredDishSearch}/>
                     </div>
                 </div>
+            </div>
+            <div style={{width: "100%", height: "50px", paddingLeft: "10%", paddingRight: "10%"}}>
+            <div className="dish-restaurant-filters">
+                <div className="dish-filter" onClick={() => setIsSelected("dish-underline")}>
+                    Dish
+                    <div className={`underline ${isSelected === "dish-underline" ? "dish-underline" : ""}`}></div>
+                </div>
+                <div className="restaurant-filter" onClick={() => setIsSelected("restaurant-underline")}>
+                    Restaurant
+                    <div className={`underline ${isSelected === "restaurant-underline" ? "restaurant-underline" : ""}`}></div>
+                </div>
+            </div>
             </div>
             {currentLocation.lat && currentLocation.lng ?
             <div className="google-map">
@@ -271,6 +286,7 @@ export default function MapComponent({ menuToggle }) {
                 <div className="carousel-main-container">
                     <p className="container-title">Dishes</p>
                     <SlidingCarousel filteredDishSearch={filteredDishSearch} locationsInRadius={locationsInRadius}/>
+                    <p className="important-text">*Always verify with the restaurant if you have any allergy conditions.</p>
                 </div>
           :  <p style={{fontSize:"30px", color:"#009688"}}>No Results</p>}
         </div>
