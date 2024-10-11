@@ -269,6 +269,7 @@ export default function MapComponent({ menuToggle }) {
             : <p>Loading...</p>}
             {currentLocation.lat && currentLocation.lng && filteredDishSearch.length > 0 ? 
                 <div className="carousel-main-container">
+                    <p className="container-title">Dishes</p>
                     <SlidingCarousel filteredDishSearch={filteredDishSearch} locationsInRadius={locationsInRadius}/>
                 </div>
           :  <p style={{fontSize:"30px", color:"#009688"}}>No Results</p>}

@@ -15,6 +15,7 @@
     gap: 7%;
     align-items: center;
     justify-content: center;
+    /* position: fixed; */
 }
 
 .map-icon {
@@ -29,17 +30,26 @@
 }
 
 .search-bar {
-    width: 40%;
+    width: 70%;
     height: 40px;
     border: none;
     border-bottom: 1px solid #ccc;
     outline-color: #009688;
     padding-left: 5px;
+    /* position: fixed; */
+}
+
+.container-title {
+    font-size: 30px;
+    color: #FF5252;
+    padding-left: 10%;
+    margin-bottom: 0%;
 }
 
 .carousel-main-container {
     display: flex;
     margin-left: -100%;
     width: 100%;
-    flex-direction: row;
+    flex-direction: column;
 }
+

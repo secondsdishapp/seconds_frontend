@@ -38,6 +38,7 @@ export default function DishDetails() {
         navigate("/notfound")
       })
 
+  
   }, [id, navigate])
   //{dish_id: 1, dish_name: 'Margherita Pizza', dish_image: 'https://cookieandkate.com/images/2021/07/margherita-pizza-recipe-1-2.jpg', avg_rating: '4.50', restaurant_name: 'Joes Pizza', …}
   return (
