@@ -10,7 +10,7 @@ export default function InputMUI({ radius, setRadius }) {
       noValidate
       autoComplete="off"
     >
-      <TextField id="standard-basic" label="Radius (mi)" variant="standard" onChange={(e) => setRadius(Number(e.target.value))}  />
+      <TextField id="standard-basic" label="Radius (mi)" variant="standard" onChange={(e) => setRadius(Number(e.target.value))}  InputProps={{ inputProps: { tabIndex: -1 }}}/>
     </Box>
   );
 }

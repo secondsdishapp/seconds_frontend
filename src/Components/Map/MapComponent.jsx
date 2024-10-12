@@ -259,7 +259,7 @@ export default function MapComponent({ menuToggle }) {
             <div className="google-map">
             <APIProvider apiKey={API_KEY} onLoad={() => console.log("Maps API loaded")}>
                 <Map
-                    style={{width: "100%", height: "400px"}}
+                    style={{width: "90%", height: "250px", marginLeft: "5%"}}
                     defaultZoom={10}
                     defaultCenter={ currentLocation }
                     mapId={"757334e0ef14872c"}
@@ -286,7 +286,7 @@ export default function MapComponent({ menuToggle }) {
                 <div className="carousel-main-container">
                     <p className="container-title">Dishes</p>
                     <SlidingCarousel filteredDishSearch={filteredDishSearch} locationsInRadius={locationsInRadius}/>
-                    <p className="important-text">*Always verify with the restaurant if you have any allergy conditions.</p>
+                    <p className="important-text">*Always verify with the restaurant the ingredients of the dish if you have any allergy conditions.</p>
                 </div>
           :  <p style={{fontSize:"30px", color:"#009688"}}>No Results</p>}
         </div>
