@@ -28,7 +28,7 @@ export default function FilterStyle({ filterPreferences, setFilterPreferences, f
   const [value, setValue] = React.useState(null);
 
   return (
-    <Stack spacing={8} sx={{ width: '80%' }} tabIndex={"-1"}>
+    <Stack spacing={4} sx={{ width: '80%' }} tabIndex={"-1"}>
         <Autocomplete
             {...preferenceProps}
             id="auto-complete"
