@@ -46,6 +46,7 @@
     color: #FF5252;
     padding-left: 10%;
     margin-bottom: 0%;
+    margin-top: 15px;
 }
 
 .dish-restaurant-filters {
@@ -100,6 +101,7 @@
     display: flex;
     margin-left: -100%;
     width: 100%;
+    /* margin-top: 0px; */
     flex-direction: column;
 }
 
