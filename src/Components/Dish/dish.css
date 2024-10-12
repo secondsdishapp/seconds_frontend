@@ -4,24 +4,42 @@
         margin-right: 4vw;
         display: grid;
         grid-template-columns: 1fr;
-    }
-    .nearbyoptions-item-image{
-        height: 20vw;
-        margin: 5vw;
-        width: 30vw;
         
     }
-    .nearbyoptions-item{
+    .nearbyoptions_item_image{
+        height: 35vw;
+        margin: 3vw;
+        width: 40vw;
+        border-radius: 3vw;
+        
+    }
+    .nearbyoptions_item{
         display: flex;
         border: solid 0.2vw gray;
         margin: 1vw;
         border-radius: 1vw;
+        line-height: 1.6vw;
+        
     }
-    .highly-rated-nearby-options{
+    /* .highly-rated-nearby-options{
         margin-top: 10vw;
+    } */
+   
+
+    .nearbyoptions_item_dish-name{
+        line-height: 3vw;
+        font-size: 3.5vw;
+      
     }
-    .neabyoptions-item-address{
+    .nearbyoptions_item_restaurant-name{
+    
+        font-size: 3.5vw;
+
+    }
+    .nearbyoptions_item_restaurant-name_title, .nearbyoptions_item_dish-name_title, .nearbyoptions_item_rating_title{
         font-size: 3vw;
+        color:gray ;
+        /* line-height: 1.6vw; */
     }
     
 

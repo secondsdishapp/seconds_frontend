@@ -20,11 +20,11 @@
     }
     .search-bar_input{
         margin-top: 10vw;
-        margin-left: 20vw;
+        margin-left: 10vw;
         justify-content: center;
         border-radius: 5vw;
-        width: 50vw;
-        height: 5vw;
+        width: 80vw;
+        height: 9vw;
         padding: 2vw;
     }
   

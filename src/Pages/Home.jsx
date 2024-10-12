@@ -1,10 +1,10 @@
 import NearByOptions from "../Components/NearbyOptions/NearbyOptions";
 
-export default function Home() {
+export default function Home({count, menuToggle}) {
   return (
     <div>
    
-      <NearByOptions />
+      <NearByOptions count={count} menuToggle={menuToggle}/>
     </div>
   );
 }

@@ -4,9 +4,11 @@ import { useState,useEffect } from "react";
 
 
 
-export default function NearByOptions() {
+export default function NearByOptions({count, menuToggle}) {
 
   const [ dishesLocations, setDishesLocations ] = useState([]);
+  const [ nearByDishes, setNearByDishes ] = useState([]);
+  const [ allNearByDishes, setAllNearByDishes ] = useState([]);
   const [ locationsInRadius, setLocationsInRadius ] = useState([]);
   const [ search, setSearch ] = useState("");
   const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
@@ -34,11 +36,16 @@ function calculateDistance(point1, point2) {
 }
 
 useEffect(() => {
+  console.log(count, "Count");
+ 
+  
     if (currentLocation) {
-        setLocationsInRadius(dishesLocations.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 100));
+        setLocationsInRadius(dishesLocations.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 4));
 
     }
-},[currentLocation]);
+    console.log(locationsInRadius, "Locations bad");
+   
+},[currentLocation,count]);
 
 
 useEffect(() => {
@@ -73,7 +80,24 @@ useEffect(() => {
       setDishesLocations(res)
       
   })
-},[]);
+},[count]);
+useEffect(() => {
+  fetch(`${API}/dishes/nearbyoptions`)
+  .then((response) => response.json())
+  .then(res => {
+    console.log(res, "nearbyoptions");
+      setNearByDishes(res.sort((a,b)=>b.
+      avg_rating-a.avg_rating
+      ))
+      setAllNearByDishes(res.sort((a,b)=>b.
+      avg_rating-a.avg_rating
+      ))
+      
+  })
+},[count]);
+let entireList=allNearByDishes.filter(el=>el.dish_name.toLowerCase().includes(search.toLowerCase())||el.restaurant_name.toLowerCase().includes(search.toLowerCase()))
+
+let highlyRatedDishes=nearByDishes.filter(el=>el.avg_rating>=4.5);
 
 useEffect(() => {
   console.log(dishesLocations, "Dishes Locations");
@@ -83,37 +107,15 @@ useEffect(() => {
   console.log(filteredDishSearch, "Filtered Dish Search");
 },[filteredDishSearch]);
 
-  let dummy=[
-    {  id: 1,
-      "address": "123 Main St, Springfield, IL",
-      "name": "Springfield Library",
-      "image": "https://www.unileverfoodsolutions.us/dam/global-ufs/mcos/NAM/calcmenu/recipes/US-recipes/sandwiches/spicy-mayo-fried-chicken-sandwich/crispychickensandwich_1206x709.jpg"
-    },
-    { id: 2,
-      "address": "456 Elm St, Oakwood, TX",
-      "name": "Oakwood Community Center",
-      "image": "https://www.unileverfoodsolutions.us/dam/global-ufs/mcos/NAM/calcmenu/recipes/US-recipes/sandwiches/spicy-mayo-fried-chicken-sandwich/crispychickensandwich_1206x709.jpg"
-    },
-    { id: 3,
-      "address": "789 Pine St, Maple City, CA",
-      "name": "Maple City Park",
-      "image": "https://www.unileverfoodsolutions.us/dam/global-ufs/mcos/NAM/calcmenu/recipes/US-recipes/sandwiches/spicy-mayo-fried-chicken-sandwich/crispychickensandwich_1206x709.jpg"
-    },
-    { id: 4,
-      "address": "101 Birch Ave, Greenfield, WI",
-      "name": "Greenfield Arts Center",
-      "image": "https://www.unileverfoodsolutions.us/dam/global-ufs/mcos/NAM/calcmenu/recipes/US-recipes/sandwiches/spicy-mayo-fried-chicken-sandwich/crispychickensandwich_1206x709.jpg"
-    },
-   
-  ]
   
-  return (
+  return (search?
     <div className="home-main-container">
 
       {/* <h4>What are you going to eat today</h4> */}
       <SearchBar search={search} setSearch={setSearch}/>
-      <h4 className="highly-rated-nearby-options">Highly rated nearby options</h4>
-      {dummy.map((item,index)=>{
+      <h4 style={{display:'none'}} className="highly-rated-nearby-options">Highly rated nearby options</h4>
+      <br />
+      {entireList.map((item,index)=>{
         return(
          <Dish item={item} index={index}/>
         )
@@ -122,6 +124,20 @@ useEffect(() => {
    
 
      
-    </div>
+    </div>: <div className="home-main-container">
+
+{/* <h4>What are you going to eat today</h4> */}
+<SearchBar search={search} setSearch={setSearch}/>
+<h4 className="highly-rated-nearby-options">Highly rated nearby options</h4>
+{highlyRatedDishes.map((item,index)=>{
+  return(
+   <Dish item={item} index={index}/>
+  )
+})}
+
+
+
+
+</div>
   );
 }

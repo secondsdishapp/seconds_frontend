@@ -1,5 +1,5 @@
 import "./MapComponent.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps"; 
 import anime from "animejs";
 
@@ -11,6 +11,9 @@ export default function MapComponent({ menuToggle }) {
 
     const API = import.meta.env.VITE_API_URL;
     const API_KEY = import.meta.env.VITE_API_KEY;
+
+    //DISH OR RESTAURANT STATE
+    const [ isSelected, setIsSelected ] = useState("");
 
     //FILTER PREFERENCES
     const [ filterPreferences, setFilterPreferences ] = useState("");
@@ -43,12 +46,20 @@ export default function MapComponent({ menuToggle }) {
 
     //----------------------------------------------------------------------------------------------------------------------
 
+    //FILTER MAP 2
+    const [ filterMapToggle, setFilterMapToggle ] = useState(false);
 
     //FILTER MAP
     const [ filterMap, setFilterMap ] = useState(false);
 
     //SEARCH BAR
     const [ search, setSearch ] = useState("");
+
+    //SEARCH FILTER
+    const [ searchFilter, setSearchFilter ] = useState([]);
+
+    //RATING FILTER
+    const [ ratingFilter, setRatingFilter ] = useState([]);
     
     //FILTERED DISH SEARCH
     const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
@@ -86,16 +97,40 @@ export default function MapComponent({ menuToggle }) {
         return earthRadiusMiles * c;
     }
 
-
     //Filtering the search
     useEffect(() => {
-        const filtered = dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search));
-        if (filtered.length > 0) {
-            setFilteredDishSearch(filtered.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius))
+        setSearchFilter( dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search)));
+    }, [search]);
+
+    useEffect(() => {
+        console.log(searchFilter, "Search Filter")
+    }, [searchFilter]);
+
+    useEffect(() => {
+        if (filterResults.rating === "Highest") {
+            setRatingFilter(searchFilter.sort((a, b) => b.avg_rating - a.avg_rating));
+        } else if (filterResults.rating === "Lowest") {
+            setRatingFilter(searchFilter.sort((a, b) => a.avg_rating - b.avg_rating));
         } else {
-            setFilteredDishSearch([])
+            setRatingFilter(searchFilter)
         }
-    },[search, radius, filterResults])
+    }, [searchFilter, filterResults]);
+
+    useEffect(() => {
+        console.log(ratingFilter, "Rating Filter")
+    }, [ratingFilter])
+
+    useEffect(() => {
+        if (searchFilter.length > 0) {
+            if (filterResults.preference === "Vegetarian") {
+                setFilteredDishSearch(searchFilter.filter((dish, index) => ((calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius) && dish.vegetarian === true)));
+            } else {
+                setFilteredDishSearch(searchFilter.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= filterResults.radius));
+            }
+        } else {
+            setFilteredDishSearch([]);
+        }
+    }, [radius, filterResults, searchFilter]);
 
     //-------------------------------------------------------------------------------------------------
 
@@ -142,7 +177,23 @@ export default function MapComponent({ menuToggle }) {
         setSearch(e.target.value)
     }
 
+    //SLIDING CAROUSEL ANIMATION
 
+    useEffect(() => {
+        anime({
+            targets: ".carousel-main-container",
+            keyframes: [
+                {translateX: "100%"}
+            ],
+            duration: 2500,
+            easing: "easeOutExpo",
+            zindex: 1,
+            // position: "relative",
+        });
+    }, [search, filteredDishSearch])
+
+
+    //-----------------------------------------------------------------------------------------------------------------------
     //JUST FOR TESTING PURPOSES - CAN DELETE AFTER EVERYTHING IS WORKING FINE
     useEffect(() => {
         console.log(restaurants, "Restaurants");
@@ -180,22 +231,35 @@ export default function MapComponent({ menuToggle }) {
         console.log(filterRatings, "Filter Ratings");
     }, [filterRatings]);
 
-    //onClick={() => filterMap === true ? setFilterMap(false) : null} --> To close the filter when screen is clicked 
     return (
-        <div className={`map-container ${menuToggle ? "fixed" : ""}`}>
+        <div className="map-container" onClick={() => filterMap ? setFilterMap(!filterMap) : null}>
             <div className="upper-container">
-                <img className="map-icon" src="/map-location2.png" alt="Map Icon" />
+                <img className="map-icon" src="/map.svg" alt="Map Icon" />
                 <input className="search-bar" type="text" placeholder="Search dish or restaurant" value={search} onChange={(e) => setSearch(e.target.value) } onClick={() => setSelectedMarker(null)}/>
                 <div style={{overflow: "hidden"}}>
-                    <img className="filter-icon" src="/filter.png" alt="Filter Icon" onClick={() => setFilterMap(!filterMap)}/>
-                    <FilterMap radius={radius} setRadius={setRadius} filterMap={filterMap} filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings} filteredDishSearch={filteredDishSearch}/>
+                    <img className="filter-icon" src="/filter2.svg" alt="Filter Icon" onClick={() => setFilterMap(!filterMap)}/>
+                    <div className="child" onClick={(e) => e.stopPropagation()}>
+                        <FilterMap radius={radius} setRadius={setRadius} setFilterMap={setFilterMap} filterMap={filterMap} filterMapToggle={filterMapToggle} setFilterMapToggle={setFilterMapToggle} filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings} filteredDishSearch={filteredDishSearch}/>
+                    </div>
                 </div>
+            </div>
+            <div style={{width: "100%", height: "50px", paddingLeft: "10%", paddingRight: "10%"}}>
+            <div className="dish-restaurant-filters">
+                <div className="dish-filter" onClick={() => setIsSelected("dish-underline")}>
+                    Dish
+                    <div className={`underline ${isSelected === "dish-underline" ? "dish-underline" : ""}`}></div>
+                </div>
+                <div className="restaurant-filter" onClick={() => setIsSelected("restaurant-underline")}>
+                    Restaurant
+                    <div className={`underline ${isSelected === "restaurant-underline" ? "restaurant-underline" : ""}`}></div>
+                </div>
+            </div>
             </div>
             {currentLocation.lat && currentLocation.lng ?
             <div className="google-map">
             <APIProvider apiKey={API_KEY} onLoad={() => console.log("Maps API loaded")}>
                 <Map
-                    style={{width: "100%", height: "400px"}}
+                    style={{width: "90%", height: "250px", marginLeft: "5%"}}
                     defaultZoom={10}
                     defaultCenter={ currentLocation }
                     mapId={"757334e0ef14872c"}
@@ -219,8 +283,10 @@ export default function MapComponent({ menuToggle }) {
             </div>
             : <p>Loading...</p>}
             {currentLocation.lat && currentLocation.lng && filteredDishSearch.length > 0 ? 
-                <div style={{width:"100%", display:"flex", flexDirection:"row"}}>
+                <div className="carousel-main-container">
+                    <p className="container-title">Dishes</p>
                     <SlidingCarousel filteredDishSearch={filteredDishSearch} locationsInRadius={locationsInRadius}/>
+                    <p className="important-text">*Always verify with the restaurant the ingredients of the dish if you have any allergy conditions.</p>
                 </div>
           :  <p style={{fontSize:"30px", color:"#009688"}}>No Results</p>}
         </div>
