@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./Components/Navigation/Navigation.jsx"
 
@@ -16,8 +17,10 @@ import Footer from "./Components/Footer/Footer.jsx";
 import zIndex from "@mui/material/styles/zIndex.js";
 import SidebarMenu from "./Components/SidebarMenu/SidebarMenu.jsx";
 
-import { useState } from "react";
 // import { set } from "animejs";
+
+// context
+import { LocalAuthProvider } from "./Context/LocalAuth/LocalAuthContext.jsx";
 
 function App() {
 
@@ -27,8 +30,9 @@ function App() {
 
   return (
     <div>
-      <TopMenuBar menuToggle={menuToggle} setMenuToggle={setMenuToggle} value={value} setValue={setValue}/>
-      {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle} value={value} setValue={setValue}/> : null}
+      <LocalAuthProvider>
+      <TopMenuBar menuToggle={menuToggle} setMenuToggle={setMenuToggle} />
+      {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> : null}
       <main className={`pages ${menuToggle ? "fixed" : ""}`}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -41,8 +45,8 @@ function App() {
           <Route path="/myaccount" element={<Account />} />
         </Routes>
       </main>
-      <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} value={value} setValue={setValue}/>
-
+      <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />
+      </LocalAuthProvider>
     </div>
   );
 }
