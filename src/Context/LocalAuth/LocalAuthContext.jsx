@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 const LocalAuthContext = React.createContext();
 
 function LocalAuthProvider({ children }) {
-  const [localAuthTest, setLocalAuthTest] = useState("Local Auth Test");
+  const [localAuthTest, setLocalAuthTest] = useState("Local Auth is working");
   const [isLocalLoggedIn, setIsLocalLoggedIn] = useState(false);
   const [localUser, setLocalUser] = useState({name: "Eater, Login or Signup"});
   
@@ -22,6 +22,7 @@ function LocalAuthProvider({ children }) {
     localUser,
     localLogin,
     localLogout,
+    localAuthTest
   };
 
   return (

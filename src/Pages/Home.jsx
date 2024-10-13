@@ -9,10 +9,11 @@ const user = {
 }
 
   export default function Home({count, menuToggle}) {
-  const { isLocalLoggedIn, localUser, localLogin, localLogout } = React.useContext(LocalAuthContext);
+  const { isLocalLoggedIn, localUser, localLogin, localLogout, localAuthTest } = React.useContext(LocalAuthContext);
 
   return (
     <div>
+      {localAuthTest}
       <h1>Hello, {localUser.name}!</h1>
       <button onClick={() => localLogin(user)}>Login</button>
       <button onClick={() => localLogout(user)}>Logout</button>
