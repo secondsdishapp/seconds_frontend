@@ -4,17 +4,11 @@ const SECONDS_API = import.meta.env.VITE_API_URL;
 export async function fetchDishRatingByUserId(dish_id, user_id) {
   console.log("fetch args", dish_id, user_id)
   try {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ user_id })
-    };
-    const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating`, options);
+    const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating?user_id=${user_id}`);
     const ratings = await res.json();
     return ratings;
   } catch (error) {
+    console.log(error)
     throw error;
   }
 }
