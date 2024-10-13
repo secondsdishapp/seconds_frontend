@@ -1,0 +1,37 @@
+.account-main-container {
+    width: 100vW;
+    padding: 10px;
+}
+
+.profile-pic2 {
+    position: absolute;
+    width: 30vW;
+    height: 14vH;
+    /* border: 1px solid black; */
+    border-radius: 100%;
+    margin-left: 35%;
+}
+
+.account-name {
+    font-family: "Montserrat";
+    text-align: center;
+    font-size: 25px;
+    color: #FF5252;
+}
+
+.profile-pic-container {
+    display: flex;
+    position: relative;
+}
+
+.change-image {
+    width: 10%;
+}
+
+.profile-pic-name {
+    margin-top: 10px;
+}
+
+.preference-title {
+    margin-top: 50px;
+}

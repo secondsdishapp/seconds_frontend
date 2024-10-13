@@ -1,7 +1,7 @@
 import "./TopMenuBar.css";
 import { useNavigate } from "react-router-dom";
 
-export default function TopMenuBar({ menuToggle, setMenuToggle }) {
+export default function TopMenuBar({ menuToggle, setMenuToggle, value, setValue }) {
 
     const navigate = useNavigate();
 
@@ -9,6 +9,7 @@ export default function TopMenuBar({ menuToggle, setMenuToggle }) {
         <div className={`top-menubar-container ${menuToggle ? "fixed" : ""}`}>
             <img src="/seconds-logo2.png" className="logo" onClick={() => {
                 navigate("/");
+                setValue(1); 
                 setMenuToggle(false);}
             }/>
             <div className="hamburger-menu-container" >

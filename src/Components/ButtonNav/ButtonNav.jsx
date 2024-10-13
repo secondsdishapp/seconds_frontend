@@ -10,11 +10,12 @@ import PlaceIcon from '@mui/icons-material/Place';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
+import { useState, useEffect } from 'react';
 
-export default function FixedBottomNavigation({setCount,count, menuToggle, setMenuToggle }) {
-  const [value, setValue] = React.useState(0);
+
+export default function FixedBottomNavigation({ setCount, count, menuToggle, setMenuToggle, value, setValue }) {
+ 
   const ref = React.useRef(null);
-
 
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
@@ -26,13 +27,12 @@ export default function FixedBottomNavigation({setCount,count, menuToggle, setMe
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
+            setMenuToggle(false);
           }}
         >
-          <BottomNavigationAction  style={{color:"#FF5252"}} label="Map" icon={<PlaceIcon htmlColor='inherit' />} component={Link} to="/map" onClick={() => {setCount(count + 1);
-            setMenuToggle(false)}}/>
-          <BottomNavigationAction style={{color:"#FF5252"}} label="Home" icon={<RestaurantIcon htmlColor='inherit'/>} component={Link} to="/" onClick={() => {
-            setCount(count + 1);setMenuToggle(false)}}/>
-          <BottomNavigationAction style={{color:"#FF5252"}} label="Dishes" icon={<FavoriteIcon htmlColor='inherit'/>} component ={Link} to="/dishes" onClick={() => {setCount(count + 1);setMenuToggle(false)}}/>
+          <BottomNavigationAction style={{color: value === 0 ? "#009688" : "#FF5252"}} label="Map" icon={<PlaceIcon htmlColor='inherit' />} component={Link} to="/map" />
+          <BottomNavigationAction style={{color: value === 1 ? "#009688" : "#FF5252"}} label="Home" icon={<RestaurantIcon htmlColor='inherit'/>} component={Link} to="/" />
+          <BottomNavigationAction style={{color: value === 2 ? "#009688" : "#FF5252"}} label="Dishes" icon={<FavoriteIcon htmlColor='inherit'/>} component ={Link} to="/dishes" />
         </BottomNavigation>
       </Paper>
     </Box>

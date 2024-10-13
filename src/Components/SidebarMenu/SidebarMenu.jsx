@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import anime from "animejs";
 
-export default function SidebarMenu ({ menuToggle, setMenuToggle }) {
+export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValue }) {
 
     const navigate = useNavigate();
 
@@ -26,6 +26,7 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle }) {
             <div className="links" onClick={() => {
                 navigate("/login");
                 setMenuToggle(false);
+                setValue(-1);
                 }
             }>
                 <p className="link-text">Log In</p>
@@ -33,6 +34,7 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle }) {
             <div className="links" onClick={() => {
                 navigate("/about");
                 setMenuToggle(false);
+                setValue(-1);
                 }
             }>
                 <p className="link-text">About Us</p>
@@ -40,6 +42,7 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle }) {
             <div className="links" onClick={() => {
                 navigate("/contact-us");
                 setMenuToggle(false);
+                setValue(-1);
                 }
             }>
                 <p className="link-text">Contact Us</p>

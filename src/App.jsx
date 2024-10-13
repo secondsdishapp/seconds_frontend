@@ -4,6 +4,7 @@ import Navigation from "./Components/Navigation/Navigation.jsx"
 
 // PAGES
 import Home from "./Pages/Home";
+import Account from "./Pages/Account.jsx";
 import Dishes from "./Pages/Dishes";
 import DishShow from "./Pages/DishShow";
 import FourOFour from "./Pages/FourOFour";
@@ -21,24 +22,26 @@ import { useState } from "react";
 function App() {
 
   const [menuToggle, setMenuToggle] = useState(false);
+  const [ value, setValue ] = useState(-1);
 
 
   return (
     <div>
-      <TopMenuBar menuToggle={menuToggle} setMenuToggle={setMenuToggle} />
-      {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> : null}
+      <TopMenuBar menuToggle={menuToggle} setMenuToggle={setMenuToggle} value={value} setValue={setValue}/>
+      {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle} value={value} setValue={setValue}/> : null}
       <main className={`pages ${menuToggle ? "fixed" : ""}`}>
         <Routes>
-          <Route path="/" element={<Home/>} />
+          <Route path="/" element={<Home />} />
           <Route path="/dishes" element={<Dishes />} />
           <Route path="/dishes/:id" element={<DishShow />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<FourOFour />} />
           <Route path="/map" element={<Map />} />
           <Route path="/about" element={<About />} />
+          <Route path="/myaccount" element={<Account />} />
         </Routes>
       </main>
-      <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />
+      <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} value={value} setValue={setValue}/>
 
     </div>
   );
