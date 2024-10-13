@@ -22,7 +22,7 @@ export default function Dish({ item, index }) {
           src={item.dish_image}
           alt=""
         />
-        <div className="nearbyoptions_item_name&restaurant">
+        <div className="nearbyoptions_item_infos">
           <div className="nearbyoptions_item_dish-restaurant-container">
           <img className="nearbyoptions_icon"  src="/restaurant.svg" />
           <p className="nearbyoptions_item_restaurant-name">

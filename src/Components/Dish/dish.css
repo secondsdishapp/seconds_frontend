@@ -1,20 +1,27 @@
 @media (max-width: 500px) {
+   
+
     .nearbyoptions-container{
         /* margin-left: 1.5vw; */
         margin-right: 4vw;
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         
     }
     .nearbyoptions_item_image{
+        grid-column: 1/2;
         height: 35vw;
         margin: 3vw;
         width: 40vw;
         border-radius: 3vw;
         
     }
+   .nearbyoptions_item_infos{
+    margin-right: 2vw;
+    grid-column: 2/2;
+   }
     .nearbyoptions_item{
-        display: flex;
+        display: grid;
         border: solid 0.2vw gray;
         margin: 1vw;
         border-radius: 1vw;
@@ -26,28 +33,13 @@
     } */
    
 
-    .nearbyoptions_item_dish-name{
-        margin-left: 3vw;
-        line-height: 6vw;
-        font-size: 3.5vw;
-      
-    }
-    .nearbyoptions_item_restaurant-name{
-    
-        font-size: 3.5vw;
-
-    }
-    .nearbyoptions_item_restaurant-name_title, .nearbyoptions_item_dish-name_title, .nearbyoptions_item_rating_title{
-        font-size: 3vw;
-        color:gray ;
-        /* line-height: 1.6vw; */
-    }
+  
+   
     
     .nearbyoptions_item_dish-name-container{
         width: 40vw;
         display: flex;
         justify-content: space-between;
-        line-: 10vw;
         text-align: start;
     }
     .nearbyoptions_item_dish-restaurant-container{
@@ -66,6 +58,7 @@
         /* justify-content: space-evenly; */
 
     }
+    
     .nearbyoptions_icon{
         margin: 1vw;
         height: 10vw;
