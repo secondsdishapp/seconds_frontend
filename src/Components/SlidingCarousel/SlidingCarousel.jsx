@@ -14,7 +14,6 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
     ,localLogout
     ,localAuthTest
   } = useContext(LocalAuthContext);
-  console.log(localAuthTest);
 
     const [ slide, setSlide ] = useState(0);
 

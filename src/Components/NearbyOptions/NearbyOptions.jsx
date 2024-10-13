@@ -15,7 +15,6 @@ export default function NearByOptions({count, menuToggle}) {
     ,localLogout
     ,localAuthTest
   } = useContext(LocalAuthContext);
-  console.log(localAuthTest);
 
   const [ dishesLocations, setDishesLocations ] = useState([]);
   const [ nearByDishes, setNearByDishes ] = useState([]);
@@ -30,7 +29,7 @@ export default function NearByOptions({count, menuToggle}) {
   });
 
   useEffect(() => {
-    console.log(locationsInRadius, "Locations good");
+    // console.log(locationsInRadius, "Locations good");
   },[locationsInRadius]);
 
   function calculateDistance(point1, point2) {
@@ -43,11 +42,11 @@ export default function NearByOptions({count, menuToggle}) {
   }
 
   useEffect(() => {
-    console.log(count, "Count");
+    // console.log(count, "Count");
     if (currentLocation) {
       setLocationsInRadius(dishesLocations.filter((dish, index) => calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 4));
     }
-    console.log(locationsInRadius, "Locations bad");
+    // console.log(locationsInRadius, "Locations bad");
   },[currentLocation,count]);
 
   useEffect(() => {
@@ -87,7 +86,7 @@ export default function NearByOptions({count, menuToggle}) {
     fetch(`${API}/dishes/nearbyoptions`)
     .then((response) => response.json())
     .then(res => {
-      console.log(res, "nearbyoptions");
+      // console.log(res, "nearbyoptions");
         setNearByDishes(res.sort((a,b)=>b.
         avg_rating-a.avg_rating
         ))
@@ -102,11 +101,11 @@ export default function NearByOptions({count, menuToggle}) {
   let highlyRatedDishes=nearByDishes.filter(el=>el.avg_rating>=4.5);
 
   useEffect(() => {
-    console.log(dishesLocations, "Dishes Locations");
+    // console.log(dishesLocations, "Dishes Locations");
   },[dishesLocations]);
 
   useEffect(() => {
-    console.log(filteredDishSearch, "Filtered Dish Search");
+    // console.log(filteredDishSearch, "Filtered Dish Search");
   },[filteredDishSearch]);
 
   return (
@@ -118,7 +117,7 @@ export default function NearByOptions({count, menuToggle}) {
         <br />
         {entireList.map((item,index)=>{
           return(
-          <Dish item={item} index={index}/>
+          <Dish item={item} index={index} key={item.dish_id}/>
           )})
         }
       </div> :
@@ -128,7 +127,7 @@ export default function NearByOptions({count, menuToggle}) {
         <h4 className="highly-rated-nearby-options">Highly rated nearby options</h4>
         {highlyRatedDishes.map((item,index)=>{
           return(
-          <Dish item={item} index={index}/>
+          <Dish item={item} index={index} key={item.dish_id}/>
           )})
         }
       </div>

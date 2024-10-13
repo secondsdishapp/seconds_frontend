@@ -12,7 +12,7 @@ export default function TopMenuBar({ menuToggle, setMenuToggle }) {
     ,localLogout
     ,localAuthTest
   } = useContext(LocalAuthContext);
-  console.log(localAuthTest);
+
   const navigate = useNavigate();
   return (
     <div className={`top-menubar-container ${menuToggle ? "fixed" : ""}`}>

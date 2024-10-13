@@ -12,7 +12,6 @@ export default function Map({ menuToggle }) {
     ,localLogout
     ,localAuthTest
   } = useContext(LocalAuthContext);
-  console.log(localAuthTest);
 
   return (
     <div className={`map-page-container ${menuToggle ? "fixed" : ""}`} style={{overflow: "hidden"}}>
