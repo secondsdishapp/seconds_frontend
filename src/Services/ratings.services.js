@@ -1,5 +1,6 @@
 const SECONDS_API = import.meta.env.VITE_API_URL;
 
+// fetch dish rating by user id
 export async function fetchDishRatingByUserId(dish_id, user_id) {
   console.log("fetch args", dish_id, user_id)
   try {
@@ -17,6 +18,26 @@ export async function fetchDishRatingByUserId(dish_id, user_id) {
     throw error;
   }
 }
+
+// update dish rating by user id
+export async function updateDishRatingByUserId(dish_id, user_id, rating, comment) {
+  console.log("update args", dish_id, user_id, rating, comment)
+  try {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user_id, rating, comment })
+    };
+    const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating`, options);
+    const ratings = await res.json();
+    return ratings;
+  } catch (error) {
+    throw error;
+  }
+}
+
 
 // export async function fetchAllShoes() {
 // 	try {

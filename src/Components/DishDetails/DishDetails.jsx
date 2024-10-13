@@ -1,7 +1,10 @@
 import { useState, useEffect, useContext } from 'react'
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { fetchDishRatingByUserId } from '../../Services/ratings.services.js'
+import {
+  fetchDishRatingByUserId
+  ,updateDishRatingByUserId
+} from '../../Services/ratings.services.js'
 
 const API = import.meta.env.VITE_API_URL;
 const plateImages = [
@@ -19,6 +22,7 @@ export default function DishDetails() {
     ,localAuthTest
   } = useContext(LocalAuthContext);
 
+  const [previousRating, setPreviousRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [dish, setDish] = useState({ 'dish_name': '', 'dish_image': '', 'avg_rating': 1, 'restaurant_name': '','latitude':'','longitude':''})
 
@@ -56,7 +60,8 @@ export default function DishDetails() {
   async function setDishUserRating(dish_id, user_id) {
     try {
       const dishUserRating = await fetchDishRatingByUserId(dish_id, user_id)
-      if (dishUserRating.rating_id > 0) {
+      if (dishUserRating.rating_id) {
+        setPreviousRating(dishUserRating.rating)
         setHoverRating(dishUserRating.rating)
       }
     } catch (error) {
@@ -67,6 +72,38 @@ export default function DishDetails() {
   useEffect(() => {
     setDishUserRating(id, user_id)
   }, [])
+
+  // update dish rating
+  const updatedRating = {
+    dish_id: id,
+    user_id,
+    rating: hoverRating,
+    comment: 'test comment'
+  }
+
+  async function updateDishRating({dish_id, user_id, rating, comment}) {
+    try {
+      const dishUserRating = await updateDishRatingByUserId(dish_id, user_id, rating, comment)
+      console.log(dishUserRating)
+      if (dishUserRating.rating_id) {
+        setHoverRating(dishUserRating.rating)
+        setPreviousRating(dishUserRating.rating)
+        setTimeout(() => {
+          alert('Your rating has been updated!')
+        }, 500)
+      }
+    } catch (error) {
+        throw error
+    }
+  }
+
+  function handleUpdateDishRating(id, user_id, hoverRating) {
+    if (previousRating === hoverRating) {
+      alert('Same rating, no update')
+    } else {
+      updateDishRating(id, user_id, hoverRating)
+    }
+  }
 
   return (
     <div className='dish-details-container'>
@@ -84,7 +121,13 @@ export default function DishDetails() {
       </div>
     
       <div className="rating-container">  
-        <h3 className='dish-details_ask-for-rating'>"Did you try this dish? Please rate it from 1 to 5 !"</h3>
+        <h3 className='dish-details_ask-for-rating'>
+          {previousRating ?
+            "Thank you for rating this dish!"
+            :
+            "Did you try this dish? Please rate it from 1 to 5 !"
+          }
+        </h3>
         <div className="dish-details_plate-rating">
           {[1, 2, 3, 4, 5].map((rating, index) => (
             <img
@@ -102,7 +145,15 @@ export default function DishDetails() {
           ))}
         </div>
       </div>
-      <button className='dish-details-rating-button'>Rate Dish</button>
+      {previousRating ?
+        <button className='dish-details-rating-button'
+          onClick={() => handleUpdateDishRating(updatedRating)}
+        > Update Rating </button>
+        :
+        <button className='dish-details-rating-button'
+          onClick={() => (null)}
+        > Rate Dish </button> 
+        }
     </div>
   )
 }
