@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import {
   fetchDishRatingByUserId
   ,updateDishRatingByUserId
+  ,createDishRating
 } from '../../Services/ratings.services.js'
 
 const API = import.meta.env.VITE_API_URL;
@@ -77,13 +78,14 @@ export default function DishDetails() {
   const updatedRating = {
     dish_id: id,
     user_id,
-    rating: hoverRating,
+    hoverRating,
     comment: 'test comment'
   }
 
-  async function updateDishRating({dish_id, user_id, rating, comment}) {
+  async function updateDishRating(updatedRating) {
+    const { dish_id, user_id, hoverRating, comment } = updatedRating
     try {
-      const dishUserRating = await updateDishRatingByUserId(dish_id, user_id, rating, comment)
+      const dishUserRating = await updateDishRatingByUserId(dish_id, user_id, hoverRating, comment)
       console.log(dishUserRating)
       if (dishUserRating.rating_id) {
         setHoverRating(dishUserRating.rating)
@@ -104,6 +106,44 @@ export default function DishDetails() {
       updateDishRating(id, user_id, hoverRating)
     }
   }
+
+  // create dish rating
+  // async function createDishRating(dish_id, user_id, rating, comment) {
+  //   console.log("createDishRating", dish_id, user_id, rating, comment)
+  //   console.log("compare rating", previousRating, hoverRating)
+  //   try {
+  //     const newDishUserRating = await createDishRating(dish_id, user_id, rating, comment)
+  //     console.log("newDishUserRating")
+  //       setPreviousRating(newDishUserRating.rating)
+  //       setHoverRating(newDishUserRating.rating)
+  //       setTimeout(() => {
+  //         alert('Your rating has been created!')
+  //       }, 500)
+  //     }
+  //   } catch (error) {
+  //       throw error
+  //   }
+  // }
+
+  async function handleCreateDishRating({dish_id, user_id, hoverRating, comment}) {
+    console.log("newRating", id, user_id, hoverRating, comment)
+    if (previousRating === hoverRating) {
+      alert('Dish already rated!')
+    } else {
+      try {
+        const newDishUserRating = await createDishRating(dish_id, user_id, hoverRating, comment)
+        console.log("newDishUserRating", newDishUserRating)
+          setPreviousRating(newDishUserRating.rating)
+          setHoverRating(newDishUserRating.rating)
+          setTimeout(() => {
+            alert('Your rating has been created!')
+          }, 500)
+      } catch (error) {
+          throw error
+      }
+    }
+  }
+
 
   return (
     <div className='dish-details-container'>
@@ -151,7 +191,7 @@ export default function DishDetails() {
         > Update Rating </button>
         :
         <button className='dish-details-rating-button'
-          onClick={() => (null)}
+          onClick={() => handleCreateDishRating({dish_id: id, user_id, hoverRating, comment: 'test comment'})}
         > Rate Dish </button> 
         }
     </div>

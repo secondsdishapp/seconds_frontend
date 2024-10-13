@@ -4,7 +4,7 @@ import NearByOptions from "../Components/NearbyOptions/NearbyOptions";
 
 // local user
 const user = {
-  user_id: 5,
+  user_id: 1,
   name: "Eater",
   email: "eater@gmail.com"
 }
