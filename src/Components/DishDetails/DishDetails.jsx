@@ -57,9 +57,11 @@ export default function DishDetails() {
     try {
       const dishUserRating = await fetchDishRatingByUserId(dish_id, user_id)
       console.log("fetched rating", dishUserRating)
+      if (dishUserRating.rating_id > 0) {
+        setHoverRating(dishUserRating.rating)
+      }
     } catch (error) {
-      // console.log(error)
-      throw error
+        throw error
     }
   }
 
@@ -67,7 +69,7 @@ export default function DishDetails() {
     setDishUserRating(id, user_id)
   }, [])
 
-  // console.log("hover rating", hoverRating)
+  console.log("hover rating", hoverRating)
 
   return (
     <div className='dish-details-container'>
