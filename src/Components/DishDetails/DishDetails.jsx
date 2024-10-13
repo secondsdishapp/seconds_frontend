@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import { useParams, useNavigate, Link } from 'react-router-dom'
+import { fetchDishRatingByUserId } from '../../Services/ratings.services.js'
+
 const API = import.meta.env.VITE_API_URL;
 const plateImages = [
   "https://t3.ftcdn.net/jpg/03/06/75/66/360_F_306756617_moZMl2JAPW5rwxj8TBggViHvKtX1QDK2.jpg",
@@ -7,11 +10,20 @@ const plateImages = [
 ];
 
 export default function DishDetails() {
+  // context
+  const {
+    isLocalLoggedIn
+    ,localUser
+    ,localLogin
+    ,localLogout
+    ,localAuthTest
+  } = useContext(LocalAuthContext);
+
   const [hoverRating, setHoverRating] = useState(0);
   const [dish, setDish] = useState({ 'dish_name': '', 'dish_image': '', 'avg_rating': 1, 'restaurant_name': '','latitude':'','longitude':''})
 
   // get user id
-  const [user, setUser] = useState({})
+  const user_id = localUser.user_id
   
   let navigate = useNavigate()
   let { id } = useParams()
@@ -23,24 +35,39 @@ export default function DishDetails() {
     }
     return string
   }
-      
+  
+  // get dish details
   useEffect(() => {
-    console.log(id)
     fetch(`${API}/dishes/${id}`)
       .then((res) => {
         return res.json()
       })
       .then(resJSON => {
         setDish(resJSON)
-        console.log(dish)
+        // console.log(dish)
       })
       .catch(() => {
         navigate("/notfound")
       })
-
-  
   }, [id, navigate])
   //{dish_id: 1, dish_name: 'Margherita Pizza', dish_image: 'https://cookieandkate.com/images/2021/07/margherita-pizza-recipe-1-2.jpg', avg_rating: '4.50', restaurant_name: 'Joes Pizza', …}
+
+  // get dish user rating
+  async function setDishUserRating(dish_id, user_id) {
+    try {
+      const dishUserRating = await fetchDishRatingByUserId(dish_id, user_id)
+      if (dishUserRating.rating_id > 0) {
+        setHoverRating(dishUserRating.rating)
+      }
+    } catch (error) {
+        throw error
+    }
+  }
+
+  useEffect(() => {
+    setDishUserRating(id, user_id)
+  }, [])
+
   return (
     <div className='dish-details-container'>
       <h3 className='dish-details_dish-name'>{dish.name}</h3>
@@ -59,7 +86,7 @@ export default function DishDetails() {
       <div className="rating-container">  
         <h3 className='dish-details_ask-for-rating'>"Did you try this dish? Please rate it from 1 to 5 !"</h3>
         <div className="dish-details_plate-rating">
-          {[1, 2, 3, 4, 5].map((rating) => (
+          {[1, 2, 3, 4, 5].map((rating, index) => (
             <img
               src={
                 rating <= (hoverRating || dish.rating)
@@ -70,6 +97,7 @@ export default function DishDetails() {
               onMouseEnter={() => setHoverRating(rating)}
               onMouseLeave={() => setHoverRating(0)}
               onClick={() => {}}
+              key={index}
             />
           ))}
         </div>

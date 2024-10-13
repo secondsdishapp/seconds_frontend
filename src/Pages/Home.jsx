@@ -4,7 +4,7 @@ import NearByOptions from "../Components/NearbyOptions/NearbyOptions";
 
 // local user
 const user = {
-  user_id: 6,
+  user_id: 5,
   name: "Eater",
   email: "eater@gmail.com"
 }
@@ -18,6 +18,7 @@ export default function Home({count, menuToggle}) {
     ,localLogout
     ,localAuthTest
   } = useContext(LocalAuthContext);
+  console.log("user_id", localUser?.user_id || 0);
 
   return (
     <div>
