@@ -56,7 +56,6 @@ export default function DishDetails() {
   async function setDishUserRating(dish_id, user_id) {
     try {
       const dishUserRating = await fetchDishRatingByUserId(dish_id, user_id)
-      console.log("fetched rating", dishUserRating)
       if (dishUserRating.rating_id > 0) {
         setHoverRating(dishUserRating.rating)
       }
@@ -68,8 +67,6 @@ export default function DishDetails() {
   useEffect(() => {
     setDishUserRating(id, user_id)
   }, [])
-
-  console.log("hover rating", hoverRating)
 
   return (
     <div className='dish-details-container'>
