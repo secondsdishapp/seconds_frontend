@@ -259,7 +259,7 @@ export default function MapComponent({ menuToggle }) {
             <div className="google-map">
             <APIProvider apiKey={API_KEY} onLoad={() => console.log("Maps API loaded")}>
                 <Map
-                    style={{width: "90%", height: "250px", marginLeft: "5%"}}
+                    style={{width: "90%", height: "250px", marginLeft: "5%", borderRadius: "5px"}}
                     defaultZoom={10}
                     defaultCenter={ currentLocation }
                     mapId={"757334e0ef14872c"}

@@ -5,6 +5,7 @@ import Navigation from "./Components/Navigation/Navigation.jsx"
 
 // PAGES
 import Home from "./Pages/Home";
+import Account from "./Pages/Account.jsx";
 import Dishes from "./Pages/Dishes";
 import DishShow from "./Pages/DishShow";
 import FourOFour from "./Pages/FourOFour";
@@ -24,6 +25,7 @@ import { LocalAuthProvider } from "./Context/LocalAuth/LocalAuthContext.jsx";
 function App() {
 
   const [menuToggle, setMenuToggle] = useState(false);
+  const [ value, setValue ] = useState(-1);
 
 
   return (
@@ -33,13 +35,14 @@ function App() {
       {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> : null}
       <main className={`pages ${menuToggle ? "fixed" : ""}`}>
         <Routes>
-          <Route path="/" element={<Home/>} />
+          <Route path="/" element={<Home />} />
           <Route path="/dishes" element={<Dishes />} />
           <Route path="/dishes/:id" element={<DishShow />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<FourOFour />} />
           <Route path="/map" element={<Map />} />
           <Route path="/about" element={<About />} />
+          <Route path="/myaccount" element={<Account />} />
         </Routes>
       </main>
       <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />
