@@ -108,23 +108,6 @@ export default function DishDetails() {
   }
 
   // create dish rating
-  // async function createDishRating(dish_id, user_id, rating, comment) {
-  //   console.log("createDishRating", dish_id, user_id, rating, comment)
-  //   console.log("compare rating", previousRating, hoverRating)
-  //   try {
-  //     const newDishUserRating = await createDishRating(dish_id, user_id, rating, comment)
-  //     console.log("newDishUserRating")
-  //       setPreviousRating(newDishUserRating.rating)
-  //       setHoverRating(newDishUserRating.rating)
-  //       setTimeout(() => {
-  //         alert('Your rating has been created!')
-  //       }, 500)
-  //     }
-  //   } catch (error) {
-  //       throw error
-  //   }
-  // }
-
   async function handleCreateDishRating({dish_id, user_id, hoverRating, comment}) {
     console.log("newRating", id, user_id, hoverRating, comment)
     if (previousRating === hoverRating) {
