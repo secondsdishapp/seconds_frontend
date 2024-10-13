@@ -1,10 +1,13 @@
 import "./SidebarMenu.css";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext";
 import { useNavigate } from "react-router-dom";
 
 import anime from "animejs";
 
 export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValue }) {
+
+    const { isLocalLoggedIn } = useContext(LocalAuthContext);
 
     const navigate = useNavigate();
 
@@ -24,12 +27,13 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
     return (
         <div className={`sidebar-container`}>
             <div className="links" onClick={() => {
-                navigate("/login");
+                isLocalLoggedIn ? navigate("/myaccount") : navigate("/login");
+                //navigate("/login");
                 setMenuToggle(false);
                 setValue(-1);
                 }
             }>
-                <p className="link-text">Log In</p>
+                <p className="link-text">{isLocalLoggedIn ? "My Account" : "Log In"}</p>
             </div>
             <div className="links" onClick={() => {
                 navigate("/about");

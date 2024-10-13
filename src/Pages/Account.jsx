@@ -70,7 +70,8 @@ export default function Account() {
                     renderInput={(params) => (
                         <TextField {...params} label="Cuisine" variant="standard" color="primary" inputProps={{ ...params.inputProps, tabIndex: -1 }}/>)}
                 />
-            </Stack>   
+            </Stack>
+            <button className="set-preference-btn" type="button">Submit</button>
         </div>
         </ThemeProvider>
     )
