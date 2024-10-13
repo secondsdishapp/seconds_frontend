@@ -1,10 +1,20 @@
 import "./SlidingCarousel.css";
+import { useState, useEffect, useContext } from "react";
+import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
-import { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 
 
 export default function SlidingCarousel({ filteredDishSearch, locationsInRadius }) {
+  // context
+  const {
+    isLocalLoggedIn
+    ,localUser
+    ,localLogin
+    ,localLogout
+    ,localAuthTest
+  } = useContext(LocalAuthContext);
+  console.log(localAuthTest);
 
     const [ slide, setSlide ] = useState(0);
 
