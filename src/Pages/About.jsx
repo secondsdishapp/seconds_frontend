@@ -15,7 +15,7 @@ const teamMembers = [
     {
         name: "Adeola Aina-Marshall",
         bio: "Adeola is a committed Project and...",
-        fullBio: "Adeola is a Project and Portfolio Manager with a strong foundation in technology, skilled in agile methodologies and project management. She is dedicated to fostering collaborative environments and driving project success. In her free time, she enjoys exploring culinary delights and volunteering within her community.",
+        fullBio: "Adeola is a committed Project and Portfolio Manager with a strong foundation in technology, skilled in agile methodologies and project management. She is dedicated to fostering collaborative environments and driving project success. In her free time, she enjoys exploring culinary delights and volunteering within her community.",
         pic: AdeolaPic,
         github: 'https://github.com/datCodeGirl',
         linkedin: 'https://www.linkedin.com/in/adeola-ainamarshall-114a63304/',
@@ -23,7 +23,7 @@ const teamMembers = [
     {
         name: "Anthony Cannonier",
         bio: "Anthony Cannonier is a passionate Data...",
-        fullBio: "Anthony Cannonier is a dedicated Data Specialist and Software Engineer based in the Bronx, New York. With expertise in data analytics and application development, he is passionate about using technology to solve complex problems. Outside of work, he enjoys hiking and photography.",
+        fullBio: "Anthony Cannonier is a passionate Data Specialist and Software Engineer based in the Bronx, New York. With expertise in data analytics and application development, he is passionate about using technology to solve complex problems. Outside of work, he enjoys hiking and photography.",
         pic: AnthonyPic,
         github: 'https://github.com/AntCannon',
         linkedin: 'https://www.linkedin.com/in/anthonycannonier/',
@@ -31,7 +31,7 @@ const teamMembers = [
     {
         name: "Ayyoub Belibel",
         bio: "Ayyoub is a devoted Project Coordinator...",
-        fullBio: "Ayyoub is a dedicated Project Coordinator at Hyundai Engineering Co. Ltd. based in Queens, New York. He has a background in civil engineering and excels in project management, ensuring projects are completed on time and within budget. In his leisure time, he enjoys traveling and discovering new cultures.",
+        fullBio: "Ayyoub is a devoted Project Coordinator at Hyundai Engineering Co. Ltd. based in Queens, New York. He has a background in civil engineering and excels in project management, ensuring projects are completed on time and within budget. In his leisure time, he enjoys traveling and discovering new cultures.",
         pic: AyyoubPic,
         github: 'https://github.com/ayoublos',
         linkedin: 'https://www.linkedin.com/in/ayyoub-belibel/',
@@ -45,9 +45,9 @@ const teamMembers = [
         linkedin: 'https://www.linkedin.com/in/jorgelgodoy/',
     },
     {
-        name: "Nahida Niki Khan",
+        name: "Nahida Niki Khanam",
         bio: "Niki is a tech enthusiast with a nonprofit...",
-        fullBio: "Niki Khanam is a tech enthusiast with a nonprofit background focused on supporting under-served communities and social justice initiatives. She combines her skills in technology with her passion for making a difference in the world. When she's not coding, she enjoys writing and exploring new music.",
+        fullBio: "Niki is a tech enthusiast with a nonprofit background focused on supporting under-served communities and social justice initiatives. She combines her skills in technology with her passion for making a difference in the world. When she's not coding, she enjoys writing and exploring new music.",
         pic: NikiPic,
         github: 'https://github.com/incognito1025',
         linkedin: 'https://linkedin.com/in/nahida-niki-khanam-34b0b9302/',
