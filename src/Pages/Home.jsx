@@ -1,15 +1,23 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { LocalAuthContext } from "../Context/LocalAuth/LocalAuthContext.jsx";
 import NearByOptions from "../Components/NearbyOptions/NearbyOptions";
 
+// local user
 const user = {
   user_id: 6,
   name: "Eater",
   email: "eater@gmail.com"
 }
 
-  export default function Home({count, menuToggle}) {
-  const { isLocalLoggedIn, localUser, localLogin, localLogout, localAuthTest } = React.useContext(LocalAuthContext);
+export default function Home({count, menuToggle}) {
+  // context
+  const {
+    isLocalLoggedIn
+    ,localUser
+    ,localLogin
+    ,localLogout
+    ,localAuthTest
+  } = useContext(LocalAuthContext);
 
   return (
     <div>

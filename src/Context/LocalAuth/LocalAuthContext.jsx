@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, createContext } from 'react';
 
-const LocalAuthContext = React.createContext();
+const LocalAuthContext = createContext();
 
 function LocalAuthProvider({ children }) {
   const [localAuthTest, setLocalAuthTest] = useState("Local Auth is working");

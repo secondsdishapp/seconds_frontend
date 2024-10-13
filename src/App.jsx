@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./Components/Navigation/Navigation.jsx"
 
@@ -19,7 +19,7 @@ import SidebarMenu from "./Components/SidebarMenu/SidebarMenu.jsx";
 // import { set } from "animejs";
 
 // context
-import { LocalAuthContext, LocalAuthProvider } from "./Context/LocalAuth/LocalAuthContext.jsx";
+import { LocalAuthProvider } from "./Context/LocalAuth/LocalAuthContext.jsx";
 
 function App() {
 
