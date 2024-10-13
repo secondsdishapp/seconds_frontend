@@ -18,7 +18,6 @@ export default function Home({count, menuToggle}) {
     ,localLogout
     ,localAuthTest
   } = useContext(LocalAuthContext);
-  console.log(localAuthTest);
 
   return (
     <div>

@@ -1,10 +1,22 @@
+import { useState, useEffect, useContext } from "react";
+import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Dish from "../Dish/dish";
-import { useState,useEffect } from "react";
-
-
 
 export default function NearByOptions({count, menuToggle}) {
+  const API = import.meta.env.VITE_API_URL;
+  const API_KEY = import.meta.env.VITE_API_KEY;
+
+  // context
+  const {
+    isLocalLoggedIn
+    ,localUser
+    ,localLogin
+    ,localLogout
+    ,localAuthTest
+  } = useContext(LocalAuthContext);
+  console.log(localAuthTest);
+
 
   const [ dishesLocations, setDishesLocations ] = useState([]);
   const [ nearByDishes, setNearByDishes ] = useState([]);
@@ -13,8 +25,6 @@ export default function NearByOptions({count, menuToggle}) {
   const [ search, setSearch ] = useState("");
   const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
 
-  const API = import.meta.env.VITE_API_URL;
-  const API_KEY = import.meta.env.VITE_API_KEY;
 
   const [ currentLocation, setCurrentLocation ] = useState({
     lat: null,
