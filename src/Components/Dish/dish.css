@@ -27,7 +27,8 @@
    
 
     .nearbyoptions_item_dish-name{
-        line-height: 3vw;
+        margin-left: 3vw;
+        line-height: 6vw;
         font-size: 3.5vw;
       
     }
@@ -42,7 +43,34 @@
         /* line-height: 1.6vw; */
     }
     
+    .nearbyoptions_item_dish-name-container{
+        width: 40vw;
+        display: flex;
+        justify-content: space-between;
+        line-: 10vw;
+        text-align: start;
+    }
+    .nearbyoptions_item_dish-restaurant-container{
+        display: flex;
+        width: 40vw;
+        justify-content: space-between;
+        line-height: 4vw;
+        text-align: start;
 
+
+
+
+    }
+    .nearbyoptions_item_dish-rating-container{
+        display: flex;
+        /* justify-content: space-evenly; */
+
+    }
+    .nearbyoptions_icon{
+        margin: 1vw;
+        height: 10vw;
+
+    }
 
 
   }
