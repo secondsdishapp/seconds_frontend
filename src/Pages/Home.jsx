@@ -18,10 +18,10 @@ export default function Home({count, menuToggle}) {
     ,localLogout
     ,localAuthTest
   } = useContext(LocalAuthContext);
+  console.log(localAuthTest);
 
   return (
     <div>
-      {localAuthTest}
       <h1>Hello, {localUser.name}!</h1>
       <button onClick={() => localLogin(user)}>Login</button>
       <button onClick={() => localLogout(user)}>Logout</button>
