@@ -35,8 +35,8 @@ export async function updateDishRatingByUserId(dish_id, user_id, rating, comment
       body: JSON.stringify({ user_id, rating, comment })
     };
     const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating`, options);
-    const rating = await res.json();
-    return rating;
+    const ratings = await res.json();
+    return ratings;
   } catch (error) {
     throw error;
   }
@@ -54,8 +54,8 @@ export async function createDishRating(dish_id, user_id, rating, comment) {
       body: JSON.stringify({ user_id, rating, comment })
     };
     const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings`, options);
-    const rating = await res.json();
-    return rating;
+    const ratings = await res.json();
+    return ratings;
   } catch (error) {
     throw error;
   }
