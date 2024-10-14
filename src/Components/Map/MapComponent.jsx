@@ -99,7 +99,7 @@ export default function MapComponent({ menuToggle }) {
 
     //Filtering the search
     useEffect(() => {
-        setSearchFilter( dishesLocations.filter((dish, index) => dish.dish_name.includes(search) || dish.restaurant_name.includes(search)));
+        setSearchFilter( dishesLocations.filter((dish, index) => dish.dish_name.toLowerCase().includes(search.toLowerCase()) || dish.restaurant_name.toLowerCase().includes(search.toLowerCase())));
     }, [search]);
 
     useEffect(() => {
