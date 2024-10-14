@@ -1,6 +1,60 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react'
+
 
 export default function Dish({ item, index }) {
+    const API = import.meta.env.VITE_API_URL;
+    const API_KEY = import.meta.env.VITE_API_KEY;
+    const [distance, setDistance] = useState(0);
+    const [ currentLocation, setCurrentLocation ] = useState({
+      lat: null,
+      lng: null,
+  });
+  let lat1=currentLocation.lat;
+  let lng1=currentLocation.lng;
+  const haversineDistance = (lat1, lng1, lat2, lng2) => {
+    const toRad = (value) => (value * Math.PI) / 180;
+
+    const R = 6371; // Radius of the Earth in kilometers
+    const dLat = toRad(lat2 - lat1);
+    const dLng = toRad(lng2 - lng1);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in kilometers
+};
+useEffect(() => {
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+          setCurrentLocation({
+              lat: Number(position.coords.latitude),
+              lng: Number(position.coords.longitude),
+          });
+      }),
+      (error) => {
+          setError(error.message);
+      };
+  } else {
+      setError("Geolocation is not supported by this browser.");
+  }
+},[]);
+
+const calculateDistance = () => {
+  const distanceResult = haversineDistance(
+      parseFloat(lat1),
+      parseFloat(lng1),
+      parseFloat(item.latitude),
+      parseFloat(item.longitude)
+  );
+  setDistance(distanceResult);
+};
+  useEffect(() => {
+    calculateDistance();
+  }, [lat1, lng1, item.latitude]);
+
+
   function ratingDishes(number) {
     let string = " ";
     for (let i = 0; i < number; i++) {
@@ -40,7 +94,10 @@ export default function Dish({ item, index }) {
             <img className="nearbyoptions_icon"  src="/dish.png" />
             <h3  className="nearbyoptions_rating-content">{item.avg_rating}</h3>
             <img className="nearbyoptions_icon"  src="distance.png" />
-            <h3  className="nearbyoptions_distance-content">{item.avg_rating}</h3>
+            <h3  className="nearbyoptions_distance-content">{distance.toString().slice(0,3)}</h3>
+            <br />
+            <h3  className="nearbyoptions_distance-km">km</h3>
+            
           </div>
         </div>
       </div>
