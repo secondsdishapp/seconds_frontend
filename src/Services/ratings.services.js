@@ -1,11 +1,22 @@
 const SECONDS_API = import.meta.env.VITE_API_URL;
 
+// fetch all dish ratings
+export async function fetchAllDishRatingsByDishId(dish_id) {
+  try {
+    const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings`);
+    const ratings = await res.json();
+    return ratings;
+  } catch (error) {
+    throw error;
+  }
+}
+
 // fetch dish rating by user id
 export async function fetchDishRatingByUserId(dish_id, user_id) {
   try {
     const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating?user_id=${user_id}`);
-    const ratings = await res.json();
-    return ratings;
+    const rating = await res.json();
+    return rating;
   } catch (error) {
     console.log(error)
     throw error;
@@ -24,8 +35,8 @@ export async function updateDishRatingByUserId(dish_id, user_id, rating, comment
       body: JSON.stringify({ user_id, rating, comment })
     };
     const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating`, options);
-    const ratings = await res.json();
-    return ratings;
+    const rating = await res.json();
+    return rating;
   } catch (error) {
     throw error;
   }
@@ -43,8 +54,8 @@ export async function createDishRating(dish_id, user_id, rating, comment) {
       body: JSON.stringify({ user_id, rating, comment })
     };
     const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings`, options);
-    const ratings = await res.json();
-    return ratings;
+    const rating = await res.json();
+    return rating;
   } catch (error) {
     throw error;
   }
