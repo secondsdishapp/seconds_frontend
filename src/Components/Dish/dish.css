@@ -66,13 +66,16 @@
     
     .nearbyoptions_icon{
         margin: 1vw;
-        height: 9vw;
+        height: 8.4vw;
 
     }
     .nearbyoptions_rating-content{
-        margin-right: 3vw;
+        margin-right: 1vw;
         margin-top: 5vw;
         margin-left: 1vw;
+    }
+    .nearbyoptions_distance-km{
+        font-size: 4vw;
     }
     
 
