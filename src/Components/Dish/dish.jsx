@@ -116,12 +116,12 @@ const calculateDistance = () => {
           <div className="nearbyoptions_item_dish-rating-container">
 
             <img className="nearbyoptions_icon"  src="/dish.png" />
-            <h3  className="nearbyoptions_rating-content">{item.avg_rating}</h3>
+            <h3  className="nearbyoptions_rating-content">{dishAverageRating}</h3>
             <img className="nearbyoptions_icon"  src="distance.png" />
             <h3  className="nearbyoptions_distance-content">{distance.toString().slice(0,3)}</h3>
             <br />
             <h3  className="nearbyoptions_distance-km">km</h3>
-            <h3 className='nearbyoptions_rating-content'>{dishAverageRating}</h3>
+            {/* <h3 className='nearbyoptions_rating-content'>{dishAverageRating}</h3> */}
 
             
           </div>
