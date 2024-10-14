@@ -77,7 +77,7 @@ export default function DishDetails() {
 
   useEffect(() => {
     getDishRatings(id)
-  }, [id])
+  }, [previousRating])
 
   // get dish user rating
   async function setDishUserRating(dish_id, user_id) {
