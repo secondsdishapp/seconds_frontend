@@ -1,10 +1,35 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
+import { fetchAllDishRatingsByDishId } from '../../Services/ratings.services.js';
+
+const API = import.meta.env.VITE_API_URL;
 
 export default function CarouselCard({
   dish
   ,index
   ,slide
 }) {
+
+  const [dishRatings, setDishRatings] = useState([]);
+  const [dishAverageRating, setDishAverageRating] = useState(0);
+
+  async function getDishRatings(dish_id) {
+    try {
+      const dishRatings = await fetchAllDishRatingsByDishId(dish_id)
+      setDishRatings(dishRatings)
+      const averageRating = dishRatings.length > 0 ? dishRatings.reduce((a, b) => a + b.rating, 0) / dishRatings.length : 0
+      setDishAverageRating(convertRating(averageRating))
+    } catch (error) {
+        throw error
+    }
+  }
+
+  function convertRating(rating) {
+    return Math.round((rating + Number.EPSILON) * 10) / 10
+  }
+
+  useEffect(() => {
+    getDishRatings(dish.dish_id)
+  }, [])
 
   function dishRating(rating) {
     let arrRating = rating.split(".");
