@@ -2,7 +2,8 @@ import { useState, useEffect, useContext } from 'react'
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import {
-  fetchDishRatingByUserId
+  fetchAllDishRatingsByDishId
+  ,fetchDishRatingByUserId
   ,updateDishRatingByUserId
   ,createDishRating
 } from '../../Services/ratings.services.js'
@@ -26,6 +27,8 @@ export default function DishDetails() {
   const [previousRating, setPreviousRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [dish, setDish] = useState({ 'dish_name': '', 'dish_image': '', 'avg_rating': 1, 'restaurant_name': '','latitude':'','longitude':''})
+  const [dishRatings, setDishRatings] = useState([]);
+  const [dishAverageRating, setDishAverageRating] = useState(0);
 
   // get user id
   const user_id = localUser.user_id
@@ -55,7 +58,26 @@ export default function DishDetails() {
         navigate("/notfound")
       })
   }, [id, navigate])
-  //{dish_id: 1, dish_name: 'Margherita Pizza', dish_image: 'https://cookieandkate.com/images/2021/07/margherita-pizza-recipe-1-2.jpg', avg_rating: '4.50', restaurant_name: 'Joes Pizza', …}
+
+  // get dish ratings by dish Id and calculate average rating
+  async function getDishRatings(dish_id) {
+    try {
+      const dishRatings = await fetchAllDishRatingsByDishId(dish_id)
+      setDishRatings(dishRatings)
+      const averageRating = dishRatings.length > 0 ? dishRatings.reduce((a, b) => a + b.rating, 0) / dishRatings.length : 0
+      setDishAverageRating(convertRating(averageRating))
+    } catch (error) {
+        throw error
+    }
+  }
+
+  function convertRating(rating) {
+    return Math.round((rating + Number.EPSILON) * 10) / 10
+  }
+
+  useEffect(() => {
+    getDishRatings(id)
+  }, [id])
 
   // get dish user rating
   async function setDishUserRating(dish_id, user_id) {
@@ -71,7 +93,9 @@ export default function DishDetails() {
   }
 
   useEffect(() => {
-    setDishUserRating(id, user_id)
+    if(user_id) {
+      setDishUserRating(id, user_id)
+    }
   }, [])
 
   // update dish rating
@@ -133,7 +157,7 @@ export default function DishDetails() {
       <h3 className='dish-details_dish-name'>{dish.name}</h3>
       <img className="dish-details_dish-image" src={dish.dish_image} alt="" />
       <h3 className='dish-details_rating-title'>Rating:</h3>
-      <h3 className='dish-details_rating-content'>{ratingDishes(dish.avg_rating)}</h3>
+      <h3 className='dish-details_rating-content'>{`${dishAverageRating} ${ratingDishes(dishAverageRating)} (+${dishRatings.length})`}</h3>
       
       <div className='dish-details_restaurant-info'>
         <h3 className='dish-details_restaurant-name'>{dish.restaurantname}</h3>
