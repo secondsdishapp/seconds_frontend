@@ -12,7 +12,6 @@ export default function Login() {
     ,localLogout
     ,localAuthTest
   } = useContext(LocalAuthContext);
-  console.log(localAuthTest);
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
