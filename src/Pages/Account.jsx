@@ -89,11 +89,11 @@ export default function Account() {
                     <ControlledCheckbox preference={vegetarian2} className="vegetarian-checkbox"  setVegan={setVegan} setGlutenFree={setGlutenFree} setVegetarian={setVegetarian}/>
                 </div>
                 <div className="vegetarian-selection-container">
-                    {vegan ? <img className="vegetarian-selected" src="/vegetarianSelected.svg" /> : <img className="vegetarian-selected" src="/vegetarianBorder.svg" />}
+                    {vegan ? <img className="vegetarian-selected" src="/vegan-selected.svg" /> : <img className="vegetarian-selected" src="/vegan-border.svg" />}
                     <ControlledCheckbox preference={vegan2} className="vegetarian-checkbox" setVegan={setVegan} setGlutenFree={setGlutenFree} setVegetarian={setVegetarian}/>
                 </div>
                 <div className="vegetarian-selection-container">
-                    {glutenFree ? <img className="vegetarian-selected" src="/vegetarianSelected.svg" /> : <img className="vegetarian-selected" src="/vegetarianBorder.svg" />}
+                    {glutenFree ? <img className="vegetarian-selected" src="/glutenfree-selected.svg" /> : <img className="vegetarian-selected" src="/glutenfree-border.svg" />}
                     <ControlledCheckbox preference={glutenFree2} className="glutenfree-checkbox" setGlutenFree={setGlutenFree} setVegan={setVegan} setVegetarian={setVegetarian}/>
                 </div>
             </div> 
