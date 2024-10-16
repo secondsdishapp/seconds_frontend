@@ -73,6 +73,6 @@ export default function CarouselCard({
             <img className="rest-icon" src="/restaurant.svg" />
             <p className="title-restaurant">{dish.restaurant_name}</p>  
           </div>
-        </div>
+    </div>
   )
 }
