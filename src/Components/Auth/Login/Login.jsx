@@ -11,19 +11,34 @@ export default function Login() {
     ,localLogout
     ,localAuthTest
   } = useContext(LocalAuthContext);
+  // current user
+  const [user, setUser] = useState({
+    user_id: 3,
+    name: "Eater",
+    email: "eater@gmail.com"
+  })
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // simulate login process (replace with actual authentication logic)
-    alert(`Email: ${email}, Password: ${password}`);
+    setUser({...user, email: email, password: password})
+    localLogin(user)
+    setTimeout(() => {
+      alert(`Email: ${email}, Password: ${password}`);
+    }, 500)
     // add the authentication logic here
   };
 
   return (
-    <div className="login-box">
+    <div>
+      <div>
+        <h1>Hello, {localUser.name}!</h1>
+        <button onClick={() => localLogin(user)}>Login</button>
+        <button onClick={() => localLogout()}>Logout</button>
+      </div>
+      <div className="login-box">
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
             <input
@@ -51,5 +66,6 @@ export default function Login() {
           </h5>
         </form>
       </div>
+    </div>
   )
 }
