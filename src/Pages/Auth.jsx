@@ -1,4 +1,4 @@
-import './Login.css'; // Import the CSS file for styling
+import './Auth.css'; // Import the CSS file for styling
 import { useState, useContext } from 'react';
 import { LocalAuthContext } from '../Context/LocalAuth/LocalAuthContext.jsx';
 import { FaBars } from 'react-icons/fa'; // Import hamburger icon
