@@ -1,43 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito:wght@400;700&display=swap');
 
-body {
-  font-family: Nunito, sans-serif;
-}
-
-p {
-  font-family: Montserrat, sans-serif;
-  font-weight: 700;
-}
-
-.login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px;
-  background-color: #f4f4f4;
-  height: 80vh;
-  gap: 2rem; /* Evenly space elements in the container */
-  margin-bottom: 100px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 400px; /* Align with login-box width */
-  padding: 0 1rem;
-}
-
-/* .logo {
-  width: 150px;
-} */
-
-.menu-icon {
-  font-size: 1rem; /* Adjust icon size */
-  cursor: pointer;
-}
-
 .login-box {
   border: 1px solid #ccc;
   border-radius: 9%;
@@ -78,14 +40,4 @@ p {
 
 .signup-prompt {
   margin-top: 1rem;
-}
-
-.food-images {
-  display: flex;
-  justify-content: center;
-  gap: 0rem; /* Space between images */
-}
-
-.food-image {
-  width: 45%;
 }
