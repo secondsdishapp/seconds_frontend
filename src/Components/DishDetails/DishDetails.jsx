@@ -81,6 +81,7 @@ export default function DishDetails() {
 
   // get dish user rating
   async function setDishUserRating(dish_id, user_id) {
+    if (!isLocalLoggedIn) return
     try {
       const dishUserRating = await fetchDishRatingByUserId(dish_id, user_id)
       if (dishUserRating.rating_id) {
@@ -93,9 +94,9 @@ export default function DishDetails() {
   }
 
   useEffect(() => {
-    if(user_id) {
-      setDishUserRating(id, user_id)
-    }
+    if (!isLocalLoggedIn) return
+    setDishUserRating(id, user_id)
+
   }, [])
 
   // update dish rating
@@ -107,6 +108,7 @@ export default function DishDetails() {
   }
 
   async function updateDishRating(updatedRating) {
+    if (!isLocalLoggedIn) return
     const { dish_id, user_id, hoverRating, comment } = updatedRating
     try {
       const dishUserRating = await updateDishRatingByUserId(dish_id, user_id, hoverRating, comment)
@@ -124,6 +126,7 @@ export default function DishDetails() {
   }
 
   function handleUpdateDishRating(id, user_id, hoverRating) {
+    if (!isLocalLoggedIn) return
     if (previousRating === hoverRating) {
       alert('Same rating, no update')
     } else {
@@ -133,6 +136,10 @@ export default function DishDetails() {
 
   // create dish rating
   async function handleCreateDishRating({dish_id, user_id, hoverRating, comment}) {
+    if (!isLocalLoggedIn) {
+      alert('Log in or Create an Account to rate this dish!')
+      return
+    }
     console.log("newRating", id, user_id, hoverRating, comment)
     if (previousRating === hoverRating) {
       alert('Dish already rated!')
@@ -150,7 +157,6 @@ export default function DishDetails() {
       }
     }
   }
-
 
   return (
     <div className='dish-details-container'>
