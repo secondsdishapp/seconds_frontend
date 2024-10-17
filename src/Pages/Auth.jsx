@@ -2,6 +2,7 @@ import './Login.css'; // Import the CSS file for styling
 import { useState, useContext } from 'react';
 import { LocalAuthContext } from '../Context/LocalAuth/LocalAuthContext.jsx';
 import { FaBars } from 'react-icons/fa'; // Import hamburger icon
+import Login from '../Components/Auth/Login/Login.jsx';
 
 export default function Auth() {
   // context
@@ -25,34 +26,7 @@ export default function Auth() {
 
   return (
     <div className="login-container">
-      <div className="login-box">
-        <form onSubmit={handleSubmit} className="login-form">
-          <div className="form-group">
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="input-field"
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="input-field"
-            />
-          </div>
-          <button type="submit" className="login-button">Log In</button>
-          <h5 className="signup-prompt">
-            Not Registered? <a href="/register">Sign Up</a>
-          </h5>
-        </form>
-      </div>
+      <Login />
       <div>
         <p>Take the guess work out of the equation...</p>
       </div>
