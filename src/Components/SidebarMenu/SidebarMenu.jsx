@@ -30,6 +30,7 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
         })
     },[])
 
+    console.log(isLocalLoggedIn)
     return (
         <div className={`sidebar-container`}>
             <div className="links" onClick={() => {
@@ -56,7 +57,7 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
             }>
                 <p className="link-text">Contact Us</p>
             </div>
-            {isLocalLoggedIn ?
+            {/* {isLocalLoggedIn ? */}
             <div className="links" onClick={() => {
                 localLogout();
                 setMenuToggle(false);
@@ -64,8 +65,8 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
                 }
             }>
                 <p className="link-text">Log Out</p>
-            </div> : null
-            }
+            </div>
+            {/* : null } */}
         </div>
     )
 }
