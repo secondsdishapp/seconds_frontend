@@ -14,7 +14,9 @@ export default function Dish({ item, index }) {
     try {
       const dishRatings = await fetchAllDishRatingsByDishId(dish_id)
       setDishRatings(dishRatings)
-      const averageRating = dishRatings.length > 0 ? dishRatings.reduce((a, b) => a + b.rating, 0) / dishRatings.length : 0
+      const averageRating = dishRatings.length > 0 ? 
+        dishRatings.reduce((a, b) => 
+          a + b.rating, 0) / dishRatings.length : 0
       setDishAverageRating(convertRating(averageRating))
     } catch (error) {
         throw error
@@ -79,7 +81,6 @@ const calculateDistance = () => {
 };
   useEffect(() => {
     calculateDistance();
-    console.log(distance);
   }, [lat1, lng1, item.latitude]);
 
 
