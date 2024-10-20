@@ -2,7 +2,7 @@ import * as React from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import { useState, useEffect } from 'react';
 
-export default function ControlledCheckbox({ setVegan, setVegetarian, setGlutenFree, preference }) {
+export default function ControlledCheckbox({ vegan, setVegan, vegetarian, setVegetarian, glutenFree, setGlutenFree, preference }) {
   const [checked, setChecked] = React.useState(false);
 
 //console.log(preference, "Prefence type");
@@ -13,17 +13,17 @@ export default function ControlledCheckbox({ setVegan, setVegetarian, setGlutenF
         if (preference === "vegetarian") {
             setVegetarian(true);
         } else if (preference === "vegan") {
-            setVegan(true)
+            setVegan(true);
         } else if (preference === "gluten free") {
-            setGlutenFree(true)
+            setGlutenFree(true);
         }
     } else {
         if (preference === "vegetarian") {
             setVegetarian(false);
         } else if (preference === "vegan") {
-            setVegan(false)
+            setVegan(false);
         } else if (preference === "gluten free") {
-            setGlutenFree(false)
+            setGlutenFree(false);
         }
     }
   };
@@ -39,7 +39,7 @@ export default function ControlledCheckbox({ setVegan, setVegetarian, setGlutenF
     <div style={{marginTop: "20px", position: "absolute", justifyContent: "center", alignItems: "center"}}>
         <Checkbox
             checked={checked}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
             inputProps={{ 'aria-label': 'controlled' }}
         />
     </div>

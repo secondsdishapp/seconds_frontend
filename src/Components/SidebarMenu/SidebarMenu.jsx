@@ -27,13 +27,14 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
     return (
         <div className={`sidebar-container`}>
             <div className="links" onClick={() => {
-                isLocalLoggedIn ? navigate("/myaccount") : navigate("/login");
-                //navigate("/login");
+                // isLocalLoggedIn ? navigate("/myaccount") : navigate("/login");
+                navigate("/myaccount");
                 setMenuToggle(false);
                 setValue(-1);
                 }
             }>
-                <p className="link-text">{isLocalLoggedIn ? "My Account" : "Log In"}</p>
+                {/* <p className="link-text">{isLocalLoggedIn ? "My Account" : "Log In"}</p> */}
+                <p className="link-text">My Account</p>
             </div>
             <div className="links" onClick={() => {
                 navigate("/about");
@@ -49,7 +50,7 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
                 setValue(-1);
                 }
             }>
-                <p className="link-text">Contact Us</p>
+                <p className="link-text">Log Out</p>
             </div>
         </div>
     )
