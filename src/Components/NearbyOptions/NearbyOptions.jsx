@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import { fetchAllDishRatingsByDishId } from "../../Services/ratings.services.js"
 import SearchBar from "../../Components/SearchBar/SearchBar";
@@ -7,7 +8,11 @@ import Dish from "../Dish/dish";
 const API = import.meta.env.VITE_API_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-export default function NearByOptions({count, menuToggle}) {
+export default function NearByOptions({ count, menuToggle, vegetarian, setVegetarian, vegan, setVegan, glutenFree, setGlutenFree }) {
+  const navigate = useNavigate();
+  const API = import.meta.env.VITE_API_URL;
+  const API_KEY = import.meta.env.VITE_API_KEY;
+
   // context
   const {
     isLocalLoggedIn
@@ -129,16 +134,74 @@ export default function NearByOptions({count, menuToggle}) {
     // console.log(filteredDishSearch, "Filtered Dish Search");
   }, [filteredDishSearch]);
 
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("vegetarian");
+    if (savedPreference !== null) {
+      setVegetarian(Boolean(savedPreference));
+    }
+  },[]);
+
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("vegan");
+    if (savedPreference !== null) {
+      setVegan(Boolean(savedPreference));
+    }
+  },[]);
+
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("glutenFree");
+    if (savedPreference !== null) {
+      setGlutenFree(Boolean(savedPreference));
+    }
+  },[])
+
+  useEffect(() => {
+    if (vegetarian) {
+      entireList.filter((item, index) => item.vegetarian === true);
+    }
+  }, [vegetarian]);
+
+
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("vegetarian");
+    if (savedPreference !== null) {
+      setVegetarian(Boolean(savedPreference));
+    }
+  },[]);
+
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("vegan");
+    if (savedPreference !== null) {
+      setVegan(Boolean(savedPreference));
+    }
+  },[]);
+
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("glutenFree");
+    if (savedPreference !== null) {
+      setGlutenFree(Boolean(savedPreference));
+    }
+  },[])
+
+  useEffect(() => {
+    if (vegetarian) {
+      entireList.filter((item, index) => item.vegetarian === true);
+    }
+  }, [vegetarian]);
+
   return (
     <div className="home-main-container">
-      <SearchBar search={search} setSearch={setSearch}/>
+      <div className="searchbar-map-container">
+        <SearchBar search={search} setSearch={setSearch} vegetarian={vegetarian} vegan={vegan} glutenFree={glutenFree}/>
+        <img className="map-icon" src="/map.svg" onClick={() => navigate("/map")}/>
+      </div>
       <h4 style={{display:'none'}} className="highly-rated-nearby-options">Highly rated nearby options</h4>
       <br />
       {search ?
         entireList.map((item,index) => (
           <Dish item={item} index={index} key={item.dish_id}/>
         )) :
-        highlyRatedDishes.map((item,index) => (
+        highlyRatedDishes.map((item,index)=> (
           <Dish item={item} index={index} key={item.dish_id}/>
         ))
       }

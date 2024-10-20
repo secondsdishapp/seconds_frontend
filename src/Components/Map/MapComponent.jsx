@@ -2,12 +2,15 @@ import "./MapComponent.css";
 import { useState, useEffect, useRef } from "react";
 import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps"; 
 import anime from "animejs";
+import { useNavigate } from "react-router-dom";
 
 //COMPONENTS
 import SlidingCarousel from "../SlidingCarousel/SlidingCarousel";
 import FilterMap from "../FilterMap/FilterMap";
 
 export default function MapComponent({ menuToggle }) {
+
+    const navigate = useNavigate();
 
     const API = import.meta.env.VITE_API_URL;
     const API_KEY = import.meta.env.VITE_API_KEY;
@@ -234,7 +237,7 @@ export default function MapComponent({ menuToggle }) {
     return (
         <div className="map-container" onClick={() => filterMap ? setFilterMap(!filterMap) : null}>
             <div className="upper-container">
-                <img className="map-icon" src="/map.svg" alt="Map Icon" />
+                <img className="map-icon" src="/list.svg" alt="Map Icon" onClick={() => navigate("/")}/>
                 <input className="search-bar" type="text" placeholder="Search dish or restaurant" value={search} onChange={(e) => setSearch(e.target.value) } onClick={() => setSelectedMarker(null)}/>
                 <div style={{overflow: "hidden"}}>
                     <img className="filter-icon" src="/filter2.svg" alt="Filter Icon" onClick={() => setFilterMap(!filterMap)}/>

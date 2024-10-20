@@ -27,6 +27,11 @@ function App() {
   const [menuToggle, setMenuToggle] = useState(false);
   const [ value, setValue ] = useState(-1);
 
+  //PREFERENCES FROM THE PROLFILE PAGE
+  const [ vegetarian, setVegetarian ] = useState(null);
+  const [ vegan, setVegan ] = useState(null);
+  const [ glutenFree, setGlutenFree ] = useState(null);
+
 
   return (
     <div>
@@ -35,14 +40,14 @@ function App() {
       {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> : null}
       <main className={`pages ${menuToggle ? "fixed" : ""}`}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>} />
           <Route path="/dishes" element={<Dishes />} />
           <Route path="/dishes/:id" element={<DishShow />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="*" element={<FourOFour />} />
           <Route path="/map" element={<Map />} />
           <Route path="/about" element={<About />} />
-          <Route path="/myaccount" element={<Account />} />
+          <Route path="/myaccount" element={<Account vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>} />
         </Routes>
       </main>
       <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />

@@ -5,21 +5,15 @@ import Stack from '@mui/material/Stack';
 import { createTheme, ThemeProvider } from "@mui/material";
 // import PreferenceCheckboxMUI from "../Components/PreferenceCheckboxMUI.jsx/PreferenceCheckboxMUI";
 import ControlledCheckbox from "../Components/PreferenceCheckboxMUI.jsx/CheckboxesMUI";
+import VegetarianCheckboxMUI from "../Components/PreferenceCheckboxMUI.jsx/VegetarianCheckboxMUI";
+import VeganCheckboxMUI from "../Components/PreferenceCheckboxMUI.jsx/VeganCheckboxMUI";
+import GlutenFreeCheckboxMUI from "../Components/PreferenceCheckboxMUI.jsx/GlutenFreeCheckboxMUI";
 import { useEffect, useState, useRef } from "react"; 
 
 
 const label = { inputProps: {'aria-label': 'Checkbox demo'} }
 
-export default function Account() {
-
-    const [ vegetarian, setVegetarian ] = useState(false);
-    const vegetarian2 = "vegetarian";
-
-    const [ vegan, setVegan ] = useState(false);
-    const vegan2 = "vegan";
-
-    const [ glutenFree, setGlutenFree ] = useState(false);
-    const glutenFree2 = "gluten free";
+export default function Account({ vegetarian, setVegetarian, vegan, setVegan, glutenFree, setGlutenFree }) {
 
     const [ currImage, setCurrImage ] = useState("../src/assets/images/seconds-white-middle-red-box.png")
 
@@ -44,9 +38,9 @@ export default function Account() {
     })
 
     const preferences = [
-        {title: "Vegetarian"},
-        {title: "Vegan"},
-        {title: "Gluten Free"}
+        {title: "vegetarian"},
+        {title: "vegan"},
+        {title: "gluten free"}
     ];
 
     const cuisines = [
@@ -69,7 +63,46 @@ export default function Account() {
         getOptionLabel: (option) => option.title,
     };
 
-    //---------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------
+
+    useEffect(() => {
+        const savedPreference = localStorage.getItem("vegetarian");
+        if (savedPreference !== null) {
+          setVegetarian(JSON.parse(savedPreference)); // Load saved state
+        }
+        console.log(vegetarian, "Account Page")
+      }, []);
+    const vegetarian2 = "vegetarian";
+
+    useEffect(() => {
+        const savedPreference = localStorage.getItem("vegan");
+        if (savedPreference !== null) {
+            setVegan(JSON.parse(savedPreference));
+        }
+    }, []);
+    const vegan2 = "vegan";
+
+    useEffect(() => {
+        const savedPreference = localStorage.getItem("glutenFree");
+        if (savedPreference !== null) {
+            setGlutenFree(JSON.parse(savedPreference));
+        }
+    }, []);
+    const glutenFree2 = "gluten free";
+
+
+    //-----------------------------------------------------------------------------------------------------------------------
+    useEffect(() => {
+        console.log(vegetarian, "Value of vegetarian in Account")
+    }, [vegetarian]);
+
+    useEffect(() => {
+        console.log(vegan, "Value of vegan in Account")
+    }, [vegan]);
+
+    useEffect(() => {
+        console.log(glutenFree, "Value of gluten free in Account")
+    }, [glutenFree]);
 
     return  (
         <ThemeProvider theme={theme}>
@@ -86,15 +119,15 @@ export default function Account() {
             <div className="selections-main-container">
                 <div className="vegetarian-selection-container">
                     {vegetarian ? <img className="vegetarian-selected" src="/vegetarianSelected.svg" /> : <img className="vegetarian-selected" src="/vegetarianBorder.svg" />}
-                    <ControlledCheckbox preference={vegetarian2} className="vegetarian-checkbox"  setVegan={setVegan} setGlutenFree={setGlutenFree} setVegetarian={setVegetarian}/>
+                    <VegetarianCheckboxMUI vegetarian={vegetarian} setVegetarian={setVegetarian}/>
                 </div>
                 <div className="vegetarian-selection-container">
                     {vegan ? <img className="vegetarian-selected" src="/vegan-selected.svg" /> : <img className="vegetarian-selected" src="/vegan-border.svg" />}
-                    <ControlledCheckbox preference={vegan2} className="vegetarian-checkbox" setVegan={setVegan} setGlutenFree={setGlutenFree} setVegetarian={setVegetarian}/>
+                    <VeganCheckboxMUI className="vegetarian-checkbox" vegan={vegan} setVegan={setVegan}/>
                 </div>
                 <div className="vegetarian-selection-container">
                     {glutenFree ? <img className="vegetarian-selected" src="/glutenfree-selected.svg" /> : <img className="vegetarian-selected" src="/glutenfree-border.svg" />}
-                    <ControlledCheckbox preference={glutenFree2} className="glutenfree-checkbox" setGlutenFree={setGlutenFree} setVegan={setVegan} setVegetarian={setVegetarian}/>
+                    <GlutenFreeCheckboxMUI className="glutenfree-checkbox" glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>
                 </div>
             </div> 
             <Stack spacing={4} sx={{ width: '70%', marginLeft: '15%'}} tabIndex={"-1"}>
