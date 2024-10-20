@@ -1,9 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Dish from "../Dish/dish";
 
-export default function NearByOptions({count, menuToggle}) {
+export default function NearByOptions({ count, menuToggle, vegetarian, setVegetarian, vegan, setVegan, glutenFree, setGlutenFree }) {
+  const navigate = useNavigate();
   const API = import.meta.env.VITE_API_URL;
   const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -108,11 +110,41 @@ export default function NearByOptions({count, menuToggle}) {
     // console.log(filteredDishSearch, "Filtered Dish Search");
   },[filteredDishSearch]);
 
+
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("vegetarian");
+    if (savedPreference !== null) {
+      setVegetarian(Boolean(savedPreference));
+    }
+  },[]);
+
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("vegan");
+    if (savedPreference !== null) {
+      setVegan(Boolean(savedPreference));
+    }
+  },[]);
+
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("glutenFree");
+    if (savedPreference !== null) {
+      setGlutenFree(Boolean(savedPreference));
+    }
+  },[])
+
+  useEffect(() => {
+    if (vegetarian) {
+      entireList.filter((item, index) => item.vegetarian === true);
+    }
+  }, [vegetarian]);
+
   return (
     search ?
       <div className="home-main-container">
-        {/* <h4>What are you going to eat today</h4> */}
-        <SearchBar search={search} setSearch={setSearch}/>
+        <div className="searchbar-map-container">
+          <SearchBar search={search} setSearch={setSearch} vegetarian={vegetarian} vegan={vegan} glutenFree={glutenFree}/>
+          <img className="map-icon" src="/map.svg" onClick={() => navigate("/map")}/>
+        </div>
         <h4 style={{display:'none'}} className="highly-rated-nearby-options">Highly rated nearby options</h4>
         <br />
         {entireList.map((item,index)=>{
@@ -122,8 +154,10 @@ export default function NearByOptions({count, menuToggle}) {
         }
       </div> :
       <div className="home-main-container">
-        {/* <h4>What are you going to eat today</h4> */}
-        <SearchBar search={search} setSearch={setSearch}/>
+        <div className="searchbar-map-container">
+          <SearchBar search={search} setSearch={setSearch}/>
+          <img className="map-icon" src="/map.svg" onClick={() => navigate("/map")}/>
+        </div>
         <h4 className="highly-rated-nearby-options">Highly rated nearby options</h4>
         {highlyRatedDishes.map((item,index)=>{
           return(

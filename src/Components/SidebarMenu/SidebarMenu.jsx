@@ -40,6 +40,7 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
                 }
             }>
                 <p className="link-text">{isLocalLoggedIn ? "My Account" : "Log In"}</p>
+                {/* <p className="link-text">My Account</p> */}
             </div>
             <div className="links" onClick={() => {
                 navigate("/about");
@@ -49,14 +50,14 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
             }>
                 <p className="link-text">About Us</p>
             </div>
-            <div className="links" onClick={() => {
+            {/* <div className="links" onClick={() => {
                 navigate("/contact-us");
                 setMenuToggle(false);
                 setValue(-1);
                 }
             }>
-                <p className="link-text">Contact Us</p>
-            </div>
+                <p className="link-text">Log Out</p>
+            </div> */}
             {isLocalLoggedIn ?
               <div className="links" onClick={() => {
                 localLogout();
