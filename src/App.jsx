@@ -44,10 +44,10 @@ function App() {
           <Route path="/dishes" element={<Dishes />} />
           <Route path="/dishes/:id" element={<DishShow />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="*" element={<FourOFour />} />
           <Route path="/map" element={<Map />} />
           <Route path="/about" element={<About />} />
           <Route path="/myaccount" element={<Account vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>} />
+          <Route path="*" element={<FourOFour />} />
         </Routes>
       </main>
       <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />

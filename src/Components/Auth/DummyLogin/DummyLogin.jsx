@@ -1,8 +1,8 @@
-import './Login.css'; // Import the CSS file for styling
+// import './Login.css'; // Import the CSS file for styling
 import { useState, useContext } from 'react';
 import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.jsx';
 
-export default function Login() {
+export default function DummyLogin({ setAuthToggle }) {
   // context
   const {
     isLocalLoggedIn
@@ -11,23 +11,19 @@ export default function Login() {
     ,localLogout
     ,localAuthTest
   } = useContext(LocalAuthContext);
-  
-  // current user
+
   const [user, setUser] = useState({
-    user_id: 3,
-    name: "Eater",
-    email: "eater@gmail.com"
+    user_id: '',
+    name: '',
+    email: '',
+    password: ''
   })
-  
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUser({...user, email: email, password: password})
     localLogin(user)
     setTimeout(() => {
-      alert(`Email: ${email}, Password: ${password}`);
+      alert(`User ${user.user_id} logged in!`);
     }, 500)
     // add the authentication logic here
   };
@@ -38,10 +34,10 @@ export default function Login() {
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
             <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="number"
+              placeholder="User ID"
+              value={user.user_id}
+              onChange={(e) => setUser({...user, user_id: e.target.value})}
               required
               className="input-field"
             />
@@ -50,18 +46,18 @@ export default function Login() {
             <input
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={user.password}
+              onChange={(e) => setUser({...user, password: e.target.value})}
               required
               className="input-field"
             />
           </div>
           <button type="submit" className="login-button">Log In</button>
           <h5 className="signup-prompt">
-            Not Registered? <a href="/register">Sign Up</a>
+            Not Registered? <span onClick={() => setAuthToggle('signUp')} >Sign Up</span>
           </h5>
         </form>
       </div>
     </div>
-  )
+  );
 }

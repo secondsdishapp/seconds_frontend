@@ -4,6 +4,8 @@ import { LocalAuthContext } from '../Context/LocalAuth/LocalAuthContext.jsx';
 import { FaBars } from 'react-icons/fa'; // Import hamburger icon
 import Login from '../Components/Auth/Login/Login.jsx';
 
+import DummyAuth from '../Components/Auth/DummyAuth/DummyAuth.jsx';
+
 export default function Auth() {
   // context
   const {
@@ -26,7 +28,8 @@ export default function Auth() {
 
   return (
     <div className="login-container">
-      <Login />
+      <DummyAuth />
+      {/* <Login /> */}
       <div>
         <p>Take the guess work out of the equation...</p>
       </div>
