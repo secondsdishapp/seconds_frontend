@@ -7,7 +7,13 @@ import anime from "animejs";
 
 export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValue }) {
 
-    const { isLocalLoggedIn } = useContext(LocalAuthContext);
+    const {
+      isLocalLoggedIn
+      ,localUser
+      ,localLogin
+      ,localLogout
+      ,localAuthTest
+    } = useContext(LocalAuthContext);
 
     const navigate = useNavigate();
 
@@ -27,8 +33,8 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
     return (
         <div className={`sidebar-container`}>
             <div className="links" onClick={() => {
-                // isLocalLoggedIn ? navigate("/myaccount") : navigate("/login");
-                navigate("/myaccount");
+                console.log("clicked")
+                isLocalLoggedIn ? navigate("/myaccount") : navigate("/auth");
                 setMenuToggle(false);
                 setValue(-1);
                 }
@@ -52,6 +58,18 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
             }>
                 <p className="link-text">Log Out</p>
             </div>
+            {isLocalLoggedIn ?
+              <div className="links" onClick={() => {
+                localLogout();
+                navigate("/");
+                setMenuToggle(false);
+                setValue(-1);
+                }
+              }>
+                <p className="link-text">Log Out</p>
+              </div> : 
+              null 
+            }
         </div>
     )
 }

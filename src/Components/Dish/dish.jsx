@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import { fetchAllDishRatingsByDishId } from "../../Services/ratings.services.js"
 
-
+const API = import.meta.env.VITE_API_URL;
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 export default function Dish({ item, index }) {
   const [dishRatings, setDishRatings] = useState([]);
@@ -27,10 +28,11 @@ export default function Dish({ item, index }) {
   useEffect(() => {
     getDishRatings(item.dish_id)
   }, [])
-    const API = import.meta.env.VITE_API_URL;
-    const API_KEY = import.meta.env.VITE_API_KEY;
-    const [distance, setDistance] = useState(0);
-    const [ currentLocation, setCurrentLocation ] = useState({
+
+  // distance calculation
+
+  const [distance, setDistance] = useState(0);
+  const [ currentLocation, setCurrentLocation ] = useState({
       lat: null,
       lng: null,
   });
@@ -49,6 +51,7 @@ export default function Dish({ item, index }) {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c; // Distance in kilometers
 };
+
 useEffect(() => {
   if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -76,6 +79,7 @@ const calculateDistance = () => {
 };
   useEffect(() => {
     calculateDistance();
+    console.log(distance);
   }, [lat1, lng1, item.latitude]);
 
 

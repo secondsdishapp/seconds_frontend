@@ -1,7 +1,6 @@
 import './Login.css'; // Import the CSS file for styling
 import { useState, useContext } from 'react';
-import { LocalAuthContext } from '../Context/LocalAuth/LocalAuthContext.jsx';
-import { FaBars } from 'react-icons/fa'; // Import hamburger icon
+import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.jsx';
 
 export default function Login() {
   // context
@@ -12,19 +11,33 @@ export default function Login() {
     ,localLogout
     ,localAuthTest
   } = useContext(LocalAuthContext);
-  
+  // current user
+  const [user, setUser] = useState({
+    user_id: 3,
+    name: "Eater",
+    email: "eater@gmail.com"
+  })
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // simulate login process (replace with actual authentication logic)
-    alert(`Email: ${email}, Password: ${password}`);
+    setUser({...user, email: email, password: password})
+    localLogin(user)
+    setTimeout(() => {
+      alert(`Email: ${email}, Password: ${password}`);
+    }, 500)
     // add the authentication logic here
   };
 
   return (
-    <div className="login-container">
+    <div>
+      <div>
+        <h1>Hello, {localUser.name}!</h1>
+        <button onClick={() => localLogin(user)}>Login</button>
+        <button onClick={() => localLogout()}>Logout</button>
+      </div>
       <div className="login-box">
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
@@ -53,17 +66,6 @@ export default function Login() {
           </h5>
         </form>
       </div>
-      <div>
-        <p>Take the guess work out of the equation...</p>
-      </div>
-      <div className="food-images">
-        <img src="src/assets/images/chicken-sandwich.webp" alt="Chicken Sandwich" className="food-image" />
-        <img src="src/assets/images/pizza.jpeg" alt="Pizza" className="food-image" />
-        <img src="src/assets/images/Ramen3.jpeg" alt="Ramen" className="food-image" />
-      </div>
-      <div>
-        <p>Ready to explore?</p>
-      </div>
     </div>
-  );
+  )
 }

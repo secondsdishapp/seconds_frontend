@@ -9,7 +9,7 @@ import Account from "./Pages/Account.jsx";
 import Dishes from "./Pages/Dishes";
 import DishShow from "./Pages/DishShow";
 import FourOFour from "./Pages/FourOFour";
-import Login from "./Pages/Login";
+import Auth from "./Pages/Auth";
 import Map from "./Pages/Map";
 import About from "./Pages/About";
 import TopMenuBar from "./Components/TopMenuBar/TopMenuBar.jsx";
@@ -43,7 +43,7 @@ function App() {
           <Route path="/" element={<Home vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>} />
           <Route path="/dishes" element={<Dishes />} />
           <Route path="/dishes/:id" element={<DishShow />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="*" element={<FourOFour />} />
           <Route path="/map" element={<Map />} />
           <Route path="/about" element={<About />} />
