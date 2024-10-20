@@ -28,10 +28,7 @@ export default function NearByOptions({ count, menuToggle, vegetarian, setVegeta
   const [ nearByDishes, setNearByDishes ] = useState([]);
   const [ search, setSearch ] = useState("");
   const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
-  const [ currentLocation, setCurrentLocation ] = useState({
-    lat: null,
-    lng: null,
-  });
+  const [ currentLocation, setCurrentLocation ] = useState({ lat: null, lng: null });
   const [ ratingThreshold, setRatingThreshold ] = useState(2.5);
   const [ distanceThreshold, setDistanceThreshold ] = useState(100);
   const [ radiusThreshold, setRadiusThreshold ] = useState(4);
@@ -160,7 +157,6 @@ export default function NearByOptions({ count, menuToggle, vegetarian, setVegeta
       entireList.filter((item, index) => item.vegetarian === true);
     }
   }, [vegetarian]);
-
 
   useEffect(() => {
     const savedPreference = localStorage.getItem("vegetarian");
