@@ -26,6 +26,7 @@ export default function DishDetails() {
 
   const [previousRating, setPreviousRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
+  const [sameRating, setSameRating] = useState(false);
   const [dish, setDish] = useState({ 'dish_name': '', 'dish_image': '', 'avg_rating': 1, 'restaurant_name': '','latitude':'','longitude':''})
   const [dishRatings, setDishRatings] = useState([]);
   const [dishAverageRating, setDishAverageRating] = useState(0);
@@ -96,7 +97,6 @@ export default function DishDetails() {
   useEffect(() => {
     if (!isLocalLoggedIn) return
     setDishUserRating(id, user_id)
-
   }, [])
 
   // update dish rating
@@ -107,54 +107,64 @@ export default function DishDetails() {
     comment: 'test comment'
   }
 
+  // set if hover rating is the same as previous rating
+  useEffect(() => {
+    if (hoverRating === previousRating && previousRating !== 0) {
+      setSameRating(true)
+    } else {
+      setSameRating(false)
+    }
+  }, [hoverRating])
+
+  // helper function to update dish rating
   async function updateDishRating(updatedRating) {
     if (!isLocalLoggedIn) return
+
+    if (sameRating) {
+      setTimeout(() => {
+        alert('Same rating, no update')
+      }, 500)
+      return null
+    }
+    
     const { dish_id, user_id, hoverRating, comment } = updatedRating
     try {
       const dishUserRating = await updateDishRatingByUserId(dish_id, user_id, hoverRating, comment)
-      console.log(dishUserRating)
-      if (dishUserRating.rating_id) {
-        setHoverRating(dishUserRating.rating)
-        setPreviousRating(dishUserRating.rating)
-        setTimeout(() => {
-          alert('Your rating has been updated!')
-        }, 500)
-      }
+      setHoverRating(dishUserRating.rating)
+      setPreviousRating(dishUserRating.rating)
+      setTimeout(() => {
+        alert('Your rating has been updated!')
+      }, 500)
     } catch (error) {
         throw error
     }
   }
 
   function handleUpdateDishRating(id, user_id, hoverRating) {
-    if (!isLocalLoggedIn) return
-    if (previousRating === hoverRating) {
-      alert('Same rating, no update')
-    } else {
-      updateDishRating(id, user_id, hoverRating)
-    }
+    updateDishRating(id, user_id, hoverRating)
   }
 
   // create dish rating
   async function handleCreateDishRating({dish_id, user_id, hoverRating, comment}) {
     if (!isLocalLoggedIn) {
       alert('Log in or Create an Account to rate this dish!')
-      return
+      return null
     }
-    console.log("newRating", id, user_id, hoverRating, comment)
+
     if (previousRating === hoverRating) {
       alert('Dish already rated!')
-    } else {
-      try {
-        const newDishUserRating = await createDishRating(dish_id, user_id, hoverRating, comment)
-        console.log("newDishUserRating", newDishUserRating)
-          setPreviousRating(newDishUserRating.rating)
-          setHoverRating(newDishUserRating.rating)
-          setTimeout(() => {
-            alert('Your rating has been created!')
-          }, 500)
-      } catch (error) {
-          throw error
-      }
+      return null
+    } 
+
+    try {
+      const newDishUserRating = await createDishRating(dish_id, user_id, hoverRating, comment)
+      setPreviousRating(newDishUserRating.rating)
+      setHoverRating(newDishUserRating.rating)
+      setTimeout(() => {
+        alert('Your rating has been created!')
+      }, 500)
+    } catch (error) {
+        throw error
     }
   }
 
@@ -201,10 +211,12 @@ export default function DishDetails() {
       {previousRating ?
         <button className='dish-details-rating-button'
           onClick={() => handleUpdateDishRating(updatedRating)}
+          disabled={sameRating}
         > Update Rating </button>
         :
         <button className='dish-details-rating-button'
-          onClick={() => handleCreateDishRating({dish_id: id, user_id, hoverRating, comment: 'test comment'})}
+          onClick={() =>
+            handleCreateDishRating(updatedRating)}
         > Rate Dish </button> 
         }
     </div>

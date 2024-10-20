@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
+import { fetchAllDishRatingsByDishId } from "../../Services/ratings.services.js"
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Dish from "../Dish/dish";
 
@@ -16,33 +17,33 @@ export default function NearByOptions({count, menuToggle}) {
     ,localAuthTest
   } = useContext(LocalAuthContext);
 
-  const [ dishesLocations, setDishesLocations ] = useState([]);
-  const [ nearByDishes, setNearByDishes ] = useState([]);
   const [ allNearByDishes, setAllNearByDishes ] = useState([]);
+  const [ dishesLocations, setDishesLocations ] = useState([]);
   const [ locationsInRadius, setLocationsInRadius ] = useState([]);
+  const [ nearByDishes, setNearByDishes ] = useState([]);
   const [ search, setSearch ] = useState("");
   const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
-
   const [ currentLocation, setCurrentLocation ] = useState({
     lat: null,
     lng: null,
   });
+  const [ ratingThreshold, setRatingThreshold ] = useState(2.5);
+  const [ distanceThreshold, setDistanceThreshold ] = useState(100);
+  const [ radiusThreshold, setRadiusThreshold ] = useState(4);
 
   // get nearby options
   useEffect(() => {
     fetch(`${API}/dishes/nearbyoptions`)
     .then((response) => response.json())
     .then(res => {
-      // console.log(res, "nearbyoptions");
-        setNearByDishes(res.sort((a,b)=>b.
-        avg_rating-a.avg_rating
-        ))
-        setAllNearByDishes(res.sort((a,b)=>b.
-        avg_rating-a.avg_rating
-        ))
+      const descDishesWithUserRatings =
+        res.sort((a,b) => 
+          b.avg_rating - a.avg_rating)
+      setNearByDishes(descDishesWithUserRatings)
+      setAllNearByDishes(descDishesWithUserRatings)
     })
   }, [count]);
-
+  
   // get dish locations
   useEffect(() => {
     fetch(`${API}/dishes/locations`)
@@ -87,7 +88,7 @@ export default function NearByOptions({count, menuToggle}) {
     // console.log(count, "Count");
     if (currentLocation) {
       setLocationsInRadius(dishesLocations.filter((dish, index) => 
-        calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 4));
+        calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= radiusThreshold));
     }
     // console.log(locationsInRadius, "Locations bad");
   }, [currentLocation,count]);
@@ -95,11 +96,12 @@ export default function NearByOptions({count, menuToggle}) {
   // filter dish locations by search
   useEffect(() => {
     const filtered = dishesLocations.filter((dish, index) => 
-      dish.dish_name.includes(search) || dish.restaurant_name.includes(search));
+      dish.dish_name.toLowerCase().includes(search) ||
+      dish.restaurant_name.toLowerCase().includes(search));
     
     if (filtered.length > 0) {
       setFilteredDishSearch(filtered.filter((dish, index) => 
-        calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= 100))
+        calculateDistance(currentLocation, {lat: Number(dish.latitude), lng: Number(dish.longitude)}) <= distanceThreshold));
     }
     // console.log(filtered, "Filtered");
   }, [search])  
@@ -112,20 +114,20 @@ export default function NearByOptions({count, menuToggle}) {
     )
   
   // filter dishes by rating
-  let highlyRatedDishes = nearByDishes.filter(el => el.avg_rating >= 4.5);
+  let highlyRatedDishes = nearByDishes.filter(el => el.avg_rating >= ratingThreshold);
 
   // console logs on state updates
   useEffect(() => {
     // console.log(dishesLocations, "Dishes Locations");
-  },[dishesLocations]);
+  }, [dishesLocations]);
 
   useEffect(() => {
     // console.log(locationsInRadius, "Locations good");
-  },[locationsInRadius]);
+  }, [locationsInRadius]);
 
   useEffect(() => {
     // console.log(filteredDishSearch, "Filtered Dish Search");
-  },[filteredDishSearch]);
+  }, [filteredDishSearch]);
 
   return (
     <div className="home-main-container">

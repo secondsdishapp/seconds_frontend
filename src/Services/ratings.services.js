@@ -25,7 +25,6 @@ export async function fetchDishRatingByUserId(dish_id, user_id) {
 
 // update dish rating by user id
 export async function updateDishRatingByUserId(dish_id, user_id, rating, comment) {
-  console.log("update args", dish_id, user_id, rating, comment)
   try {
     const options = {
       method: 'PUT',
@@ -44,7 +43,6 @@ export async function updateDishRatingByUserId(dish_id, user_id, rating, comment
 
 // create dish rating
 export async function createDishRating(dish_id, user_id, rating, comment) {
-  console.log("create args", dish_id, user_id, rating, comment)
   try {
     const options = {
       method: 'POST',
