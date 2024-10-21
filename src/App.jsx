@@ -36,7 +36,7 @@ function App() {
     <div>
       <AuthProvider>
       <TopMenuBar menuToggle={menuToggle} setMenuToggle={setMenuToggle} />
-      {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> : null}
+      {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle} setValue={setValue} /> : null}
       <main className={`pages ${menuToggle ? "fixed" : ""}`}>
         <Routes>
           <Route path="/" element={<Home vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>} />

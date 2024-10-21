@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.jsx';
 import { AuthContext } from '../../../Context/FirebaseAuth/AuthContext.jsx';
 
@@ -11,6 +12,8 @@ export default function DummyLogin({ setAuthToggle }) {
     logout,
     resetPassword,
   } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,7 +32,7 @@ export default function DummyLogin({ setAuthToggle }) {
       alert('Login successful!');
       setEmail('');
       setPassword('');
-      // navigate('/myaccount')
+      navigate('/myaccount')
     } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;

@@ -17,7 +17,7 @@ export default function TopMenuBar({ menuToggle, setMenuToggle }) {
       }/>
       <div className="hamburger-menu-container" >
           <label className="hamburger-menu" >
-            <input id="check" className=""  type="checkbox"  checked={menuToggle} onClick={() => setMenuToggle(!menuToggle)}/>
+            <input id="check" className=""  type="checkbox"  checked={menuToggle} onChange={() => setMenuToggle(!menuToggle)}/>
           </label>
       </div>
     </div>
