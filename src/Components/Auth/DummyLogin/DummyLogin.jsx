@@ -1,6 +1,6 @@
-// import './Login.css'; // Import the CSS file for styling
 import { useState, useContext } from 'react';
 import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.jsx';
+import { AuthContext } from '../../../Context/FirebaseAuth/AuthContext.jsx';
 
 export default function DummyLogin({ setAuthToggle }) {
   // context
@@ -12,19 +12,41 @@ export default function DummyLogin({ setAuthToggle }) {
     ,localAuthTest
   } = useContext(LocalAuthContext);
 
-  const [user, setUser] = useState({
-    user_id: '',
-    name: '',
-    email: '',
-    password: ''
-  })
+  const {
+    currentUser,
+    signUpWithEmail,
+    loginWithEmail,
+    logout,
+    resetPassword,
+  } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    localLogin(user)
-    setTimeout(() => {
-      alert(`User ${user.user_id} logged in!`);
-    }, 500)
+
+    if (!email || !password) {
+      alert('Please enter both email and password');
+      return;
+    }
+
+    try {
+      const userCredential = await loginWithEmail(email, password);
+      const user = userCredential.user;
+      console.log(user);
+      alert('Login successful!');
+      setEmail('');
+      setPassword('');
+      // navigate('/myaccount')
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        alert('Login failed. Please try again.');
+        setPasssword('');
+        throw error;
+    }
     // add the authentication logic here
   };
 
@@ -34,10 +56,10 @@ export default function DummyLogin({ setAuthToggle }) {
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
             <input
-              type="number"
-              placeholder="User ID"
-              value={user.user_id}
-              onChange={(e) => setUser({...user, user_id: e.target.value})}
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
               className="input-field"
             />
@@ -46,8 +68,8 @@ export default function DummyLogin({ setAuthToggle }) {
             <input
               type="password"
               placeholder="Password"
-              value={user.password}
-              onChange={(e) => setUser({...user, password: e.target.value})}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
               className="input-field"
             />

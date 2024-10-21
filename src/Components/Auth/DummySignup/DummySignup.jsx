@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.jsx';
 import { AuthContext } from '../../../Context/FirebaseAuth/AuthContext.jsx';
 
-
-
 export default function DummySignup({ setAuthToggle }) {
   // context
   const {
@@ -42,12 +40,15 @@ export default function DummySignup({ setAuthToggle }) {
       const user = userCredential.user;
       console.log(user);
       alert('Signup successful!');
+      setEmail('');
+      setPassword('');
       // navigate('/myaccount')
     } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
         alert('Signup failed. Please try again.');
+        setPassword('');
         throw error;
     }
   };
