@@ -1,24 +1,8 @@
 import './Login.css'; // Import the CSS file for styling
 import { useState, useContext } from 'react';
-import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.jsx';
 
 export default function Login() {
-  // context
-  const {
-    isLocalLoggedIn
-    ,localUser
-    ,localLogin
-    ,localLogout
-    ,localAuthTest
-  } = useContext(LocalAuthContext);
-  
-  // current user
-  const [user, setUser] = useState({
-    user_id: 3,
-    name: "Eater",
-    email: "eater@gmail.com"
-  })
-  
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

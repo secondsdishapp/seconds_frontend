@@ -1,17 +1,7 @@
 import "./TopMenuBar.css";
-import { useContext } from "react";
-import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 
 export default function TopMenuBar({ menuToggle, setMenuToggle }) {
-  // context
-  const {
-    isLocalLoggedIn
-    ,localUser
-    ,localLogin
-    ,localLogout
-    ,localAuthTest
-  } = useContext(LocalAuthContext);
 
   const navigate = useNavigate();
   return (

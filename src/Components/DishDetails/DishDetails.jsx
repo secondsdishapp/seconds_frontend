@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
+import { AuthContext } from "../../Context/FirebaseAuth/AuthContext.jsx";
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import {
   fetchAllDishRatingsByDishId
@@ -15,14 +16,14 @@ const plateImages = [
 ];
 
 export default function DishDetails() {
-  // context
+
   const {
-    isLocalLoggedIn
-    ,localUser
-    ,localLogin
-    ,localLogout
-    ,localAuthTest
-  } = useContext(LocalAuthContext);
+    currentUser,
+    signUpWithEmail,
+    loginWithEmail,
+    logout,
+    resetPassword,
+  } = useContext(AuthContext);
 
   const [previousRating, setPreviousRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
@@ -32,6 +33,7 @@ export default function DishDetails() {
   const [dishAverageRating, setDishAverageRating] = useState(0);
 
   // get user id
+  // add firebase uuid to database
   const user_id = localUser.user_id
   
   let navigate = useNavigate()
@@ -82,7 +84,8 @@ export default function DishDetails() {
 
   // get dish user rating
   async function setDishUserRating(dish_id, user_id) {
-    if (!isLocalLoggedIn) return
+    if (!currentUser) return
+
     try {
       const dishUserRating = await fetchDishRatingByUserId(dish_id, user_id)
       if (dishUserRating.rating_id) {
@@ -95,7 +98,8 @@ export default function DishDetails() {
   }
 
   useEffect(() => {
-    if (!isLocalLoggedIn) return
+    if (!currentUser) return
+
     setDishUserRating(id, user_id)
   }, [])
 
@@ -118,7 +122,7 @@ export default function DishDetails() {
 
   // helper function to update dish rating
   async function updateDishRating(updatedRating) {
-    if (!isLocalLoggedIn) return
+    if (!currentUser) return
 
     if (sameRating) {
       setTimeout(() => {
@@ -146,7 +150,8 @@ export default function DishDetails() {
 
   // create dish rating
   async function handleCreateDishRating({dish_id, user_id, hoverRating, comment}) {
-    if (!isLocalLoggedIn) {
+
+    if (!currentUser ) {
       alert('Log in or Create an Account to rate this dish!')
       return null
     }

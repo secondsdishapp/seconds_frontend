@@ -1,17 +1,7 @@
 import { useContext, useEffect } from "react";
-import { LocalAuthContext } from "../Context/LocalAuth/LocalAuthContext.jsx";
 import NearByOptions from "../Components/NearbyOptions/NearbyOptions";
 
 export default function Home({ count, menuToggle, vegetarian, setVegetarian, vegan, setVegan, glutenFree, setGlutenFree }) {
-
-  // context
-  const {
-    isLocalLoggedIn
-    ,localUser
-    ,localLogin
-    ,localLogout
-    ,localAuthTest
-  } = useContext(LocalAuthContext);
 
   return (
     <div>

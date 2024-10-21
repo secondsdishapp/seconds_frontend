@@ -9,14 +9,6 @@ export default function DummyAuth() {
   console.log('DUMMY AUTH')
   // context
   const {
-    isLocalLoggedIn
-    ,localUser
-    ,localLogin
-    ,localLogout
-    ,localAuthTest
-  } = useContext(LocalAuthContext);
-
-  const {
     currentUser,
     signUpWithEmail,
     loginWithEmail,
@@ -24,6 +16,8 @@ export default function DummyAuth() {
     resetPassword,
   } = useContext(AuthContext);
   const [ authToggle, setAuthToggle ] = useState('signIn');
+
+  console.log(currentUser)
 
   console.log('DUMMY AUTH')
   return (

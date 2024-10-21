@@ -5,14 +5,6 @@ import { AuthContext } from '../../../Context/FirebaseAuth/AuthContext.jsx';
 export default function DummyLogin({ setAuthToggle }) {
   // context
   const {
-    isLocalLoggedIn
-    ,localUser
-    ,localLogin
-    ,localLogout
-    ,localAuthTest
-  } = useContext(LocalAuthContext);
-
-  const {
     currentUser,
     signUpWithEmail,
     loginWithEmail,
