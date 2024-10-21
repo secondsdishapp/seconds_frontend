@@ -9,6 +9,8 @@ export default function Dish({ item, index }) {
   const [dishRatings, setDishRatings] = useState([]);
   const [dishAverageRating, setDishAverageRating] = useState(0);
 
+  console.log(API)
+
   // get dish ratings by dish Id and calculate average rating
   async function getDishRatings(dish_id) {
     try {

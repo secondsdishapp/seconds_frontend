@@ -43,14 +43,14 @@ export async function updateDishRatingByUserId(dish_id, firebase_id, rating, com
 }
 
 // create dish rating
-export async function createDishRating(dish_id, user_id, rating, comment) {
+export async function createDishRating(dish_id, firebase_id, rating, comment) {
   try {
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ user_id, rating, comment })
+      body: JSON.stringify({ firebase_id, rating, comment })
     };
     const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings`, options);
     const ratings = await res.json();

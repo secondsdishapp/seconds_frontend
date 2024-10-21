@@ -26,6 +26,8 @@ export default function DishDetails() {
     resetPassword,
   } = useContext(AuthContext);
 
+  console.log(currentUser)
+
   const [previousRating, setPreviousRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [sameRating, setSameRating] = useState(false);
@@ -34,8 +36,7 @@ export default function DishDetails() {
   const [dishAverageRating, setDishAverageRating] = useState(0);
 
   // get user id
-  const { uid } = currentUser
-  console.log(uid)
+  const  uid  = currentUser?.uid
   // get dish id
   let { id } = useParams()
   
@@ -98,8 +99,9 @@ export default function DishDetails() {
   }
 
   useEffect(() => {
-    if (!currentUser) return
-
+    if (!currentUser?.uid) return
+    console.log('should not see this')
+    console.log(currentUser)
     setDishUserRating(id, uid)
   }, [])
 

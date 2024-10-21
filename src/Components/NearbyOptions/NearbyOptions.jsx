@@ -6,9 +6,6 @@ import { AuthContext } from "../../Context/FirebaseAuth/AuthContext.jsx";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Dish from "../Dish/dish";
 
-const API = import.meta.env.VITE_API_URL;
-const API_KEY = import.meta.env.VITE_API_KEY;
-
 export default function NearByOptions({ count, menuToggle, vegetarian, setVegetarian, vegan, setVegan, glutenFree, setGlutenFree }) {
   const navigate = useNavigate();
   const API = import.meta.env.VITE_API_URL;
@@ -184,6 +181,7 @@ export default function NearByOptions({ count, menuToggle, vegetarian, setVegeta
       entireList.filter((item, index) => item.vegetarian === true);
     }
   }, [vegetarian]);
+
 
   return (
     <div className="home-main-container">
