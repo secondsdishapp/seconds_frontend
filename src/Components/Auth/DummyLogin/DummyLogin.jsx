@@ -1,8 +1,8 @@
-import './Login.css'; // Import the CSS file for styling
 import { useState, useContext } from 'react';
 import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.jsx';
+import { AuthContext } from '../../../Context/FirebaseAuth/AuthContext.jsx';
 
-export default function Login() {
+export default function DummyLogin({ setAuthToggle }) {
   // context
   const {
     isLocalLoggedIn
@@ -11,24 +11,42 @@ export default function Login() {
     ,localLogout
     ,localAuthTest
   } = useContext(LocalAuthContext);
-  
-  // current user
-  const [user, setUser] = useState({
-    user_id: 3,
-    name: "Eater",
-    email: "eater@gmail.com"
-  })
-  
+
+  const {
+    currentUser,
+    signUpWithEmail,
+    loginWithEmail,
+    logout,
+    resetPassword,
+  } = useContext(AuthContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setUser({...user, email: email, password: password})
-    localLogin(user)
-    setTimeout(() => {
-      alert(`Email: ${email}, Password: ${password}`);
-    }, 500)
+
+    if (!email || !password) {
+      alert('Please enter both email and password');
+      return;
+    }
+
+    try {
+      const userCredential = await loginWithEmail(email, password);
+      const user = userCredential.user;
+      console.log(user);
+      alert('Login successful!');
+      setEmail('');
+      setPassword('');
+      // navigate('/myaccount')
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        alert('Login failed. Please try again.');
+        setPasssword('');
+        throw error;
+    }
     // add the authentication logic here
   };
 
@@ -58,10 +76,10 @@ export default function Login() {
           </div>
           <button type="submit" className="login-button">Log In</button>
           <h5 className="signup-prompt">
-            Not Registered? <a href="/register">Sign Up</a>
+            Not Registered? <span onClick={() => setAuthToggle('signUp')} >Sign Up</span>
           </h5>
         </form>
       </div>
     </div>
-  )
+  );
 }
