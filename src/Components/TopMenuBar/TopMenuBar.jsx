@@ -1,17 +1,11 @@
 import "./TopMenuBar.css";
 import { useContext } from "react";
-import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../Context/FirebaseAuth/AuthContext.jsx';
 
 export default function TopMenuBar({ menuToggle, setMenuToggle }) {
-  // context
-  const {
-    isLocalLoggedIn
-    ,localUser
-    ,localLogin
-    ,localLogout
-    ,localAuthTest
-  } = useContext(LocalAuthContext);
+
+  const { currentUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
   return (
@@ -23,7 +17,7 @@ export default function TopMenuBar({ menuToggle, setMenuToggle }) {
       }/>
       <div className="hamburger-menu-container" >
           <label className="hamburger-menu" >
-            <input id="check" className=""  type="checkbox"  checked={menuToggle} onClick={() => setMenuToggle(!menuToggle)}/>
+            <input id="check" className=""  type="checkbox"  checked={menuToggle} onChange={() => setMenuToggle(!menuToggle)}/>
           </label>
       </div>
     </div>

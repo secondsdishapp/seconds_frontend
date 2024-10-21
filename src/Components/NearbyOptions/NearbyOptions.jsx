@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
-import { fetchAllDishRatingsByDishId } from "../../Services/ratings.services.js"
+import { AuthContext } from "../../Context/FirebaseAuth/AuthContext.jsx";
+
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Dish from "../Dish/dish";
 
@@ -13,14 +14,13 @@ export default function NearByOptions({ count, menuToggle, vegetarian, setVegeta
   const API = import.meta.env.VITE_API_URL;
   const API_KEY = import.meta.env.VITE_API_KEY;
 
-  // context
   const {
-    isLocalLoggedIn
-    ,localUser
-    ,localLogin
-    ,localLogout
-    ,localAuthTest
-  } = useContext(LocalAuthContext);
+    currentUser,
+    signUpWithEmail,
+    loginWithEmail,
+    logout,
+    resetPassword,
+  } = useContext(AuthContext);
 
   const [ allNearByDishes, setAllNearByDishes ] = useState([]);
   const [ dishesLocations, setDishesLocations ] = useState([]);

@@ -20,7 +20,6 @@ import SidebarMenu from "./Components/SidebarMenu/SidebarMenu.jsx";
 // import { set } from "animejs";
 
 // context
-import { LocalAuthProvider } from "./Context/LocalAuth/LocalAuthContext.jsx";
 import { AuthProvider } from "./Context/FirebaseAuth/AuthContext.jsx";
 
 function App() {
@@ -36,9 +35,8 @@ function App() {
   return (
     <div>
       <AuthProvider>
-      <LocalAuthProvider>
       <TopMenuBar menuToggle={menuToggle} setMenuToggle={setMenuToggle} />
-      {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> : null}
+      {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle} setValue={setValue} /> : null}
       <main className={`pages ${menuToggle ? "fixed" : ""}`}>
         <Routes>
           <Route path="/" element={<Home vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>} />
@@ -52,7 +50,6 @@ function App() {
         </Routes>
       </main>
       <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />
-      </LocalAuthProvider>
       </AuthProvider>
     </div>
   );

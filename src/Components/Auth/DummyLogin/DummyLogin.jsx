@@ -1,17 +1,10 @@
 import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.jsx';
 import { AuthContext } from '../../../Context/FirebaseAuth/AuthContext.jsx';
 
 export default function DummyLogin({ setAuthToggle }) {
   // context
-  const {
-    isLocalLoggedIn
-    ,localUser
-    ,localLogin
-    ,localLogout
-    ,localAuthTest
-  } = useContext(LocalAuthContext);
-
   const {
     currentUser,
     signUpWithEmail,
@@ -19,6 +12,8 @@ export default function DummyLogin({ setAuthToggle }) {
     logout,
     resetPassword,
   } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,20 +29,18 @@ export default function DummyLogin({ setAuthToggle }) {
     try {
       const userCredential = await loginWithEmail(email, password);
       const user = userCredential.user;
-      console.log(user);
       alert('Login successful!');
       setEmail('');
       setPassword('');
-      // navigate('/myaccount')
+      navigate('/myaccount')
     } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
         alert('Login failed. Please try again.');
-        setPasssword('');
+        setPassword('');
         throw error;
     }
-    // add the authentication logic here
   };
 
   return (
