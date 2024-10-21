@@ -21,6 +21,7 @@ import SidebarMenu from "./Components/SidebarMenu/SidebarMenu.jsx";
 
 // context
 import { LocalAuthProvider } from "./Context/LocalAuth/LocalAuthContext.jsx";
+import { AuthProvider } from "./Context/FirebaseAuth/AuthContext.jsx";
 
 function App() {
 
@@ -32,9 +33,9 @@ function App() {
   const [ vegan, setVegan ] = useState(null);
   const [ glutenFree, setGlutenFree ] = useState(null);
 
-
   return (
     <div>
+      <AuthProvider>
       <LocalAuthProvider>
       <TopMenuBar menuToggle={menuToggle} setMenuToggle={setMenuToggle} />
       {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> : null}
@@ -52,6 +53,7 @@ function App() {
       </main>
       <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />
       </LocalAuthProvider>
+      </AuthProvider>
     </div>
   );
 }

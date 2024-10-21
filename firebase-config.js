@@ -19,7 +19,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const fbApp = initializeApp(firebaseConfig);
-const fbAuth = getAuth(app);
-const fbAnalytics = getAnalytics(app);
+const fbAuth = getAuth(fbApp);
+const fbAnalytics = getAnalytics(fbApp);
 
 export {fbApp, fbAuth, fbAnalytics};

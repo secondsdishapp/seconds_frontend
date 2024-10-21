@@ -1,6 +1,9 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.jsx';
+import { AuthContext } from '../../../Context/FirebaseAuth/AuthContext.jsx';
+
+
 
 export default function DummySignup({ setAuthToggle }) {
   // context
@@ -12,26 +15,44 @@ export default function DummySignup({ setAuthToggle }) {
     ,localAuthTest
   } = useContext(LocalAuthContext);
 
+  const {
+    currentUser,
+    signUpWithEmail,
+    loginWithEmail,
+    logout,
+    resetPassword,
+  } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
-  const [newUser, setNewUser] = useState({
-    name: '',
-    email: '',
-    password: ''
-  })
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(newUser)
+    
+    if (password !== confirmPassword || !email || !password || !confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
 
-    setTimeout(() => {
-      alert(`Test user created!`);
-      navigate('/myaccount')
-    }, 500)
-    // add the authentication logic here
+    try {
+      const userCredential = await signUpWithEmail(email, password);
+      const user = userCredential.user;
+      console.log(user);
+      alert('Signup successful!');
+      // navigate('/myaccount')
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        alert('Signup failed. Please try again.');
+        throw error;
+    }
   };
+
+  console.log(currentUser);
 
   return (
     <div>
@@ -41,8 +62,8 @@ export default function DummySignup({ setAuthToggle }) {
             <input
               type="email"
               placeholder="Email"
-              value={newUser.email}
-              onChange={(e) => setNewUser({...newUser, email: e.target.value})}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
               className="input-field"
             />
@@ -51,8 +72,8 @@ export default function DummySignup({ setAuthToggle }) {
             <input
               type="password"
               placeholder="Password"
-              value={newUser.password}
-              onChange={(e) => setNewUser({...newUser, password: e.target.value})}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
               className="input-field"
             />
