@@ -16,7 +16,8 @@ const plateImages = [
 ];
 
 export default function DishDetails() {
-
+  // configs
+  let navigate = useNavigate()
   const {
     currentUser,
     signUpWithEmail,
@@ -33,10 +34,9 @@ export default function DishDetails() {
   const [dishAverageRating, setDishAverageRating] = useState(0);
 
   // get user id
-  // add firebase uuid to database
-  const user_id = localUser.user_id
-  
-  let navigate = useNavigate()
+  const { uid } = currentUser
+  console.log(uid)
+  // get dish id
   let { id } = useParams()
   
   function ratingDishes(number){
@@ -83,11 +83,11 @@ export default function DishDetails() {
   }, [previousRating])
 
   // get dish user rating
-  async function setDishUserRating(dish_id, user_id) {
+  async function setDishUserRating(dish_id, firebase_id) {
     if (!currentUser) return
 
     try {
-      const dishUserRating = await fetchDishRatingByUserId(dish_id, user_id)
+      const dishUserRating = await fetchDishRatingByUserId(dish_id, firebase_id)
       if (dishUserRating.rating_id) {
         setPreviousRating(dishUserRating.rating)
         setHoverRating(dishUserRating.rating)
@@ -100,13 +100,13 @@ export default function DishDetails() {
   useEffect(() => {
     if (!currentUser) return
 
-    setDishUserRating(id, user_id)
+    setDishUserRating(id, uid)
   }, [])
 
   // update dish rating
   const updatedRating = {
     dish_id: id,
-    user_id,
+    firebase_id: uid,
     hoverRating,
     comment: 'test comment'
   }
@@ -131,9 +131,9 @@ export default function DishDetails() {
       return null
     }
     
-    const { dish_id, user_id, hoverRating, comment } = updatedRating
+    const { dish_id, firebase_id, hoverRating, comment } = updatedRating
     try {
-      const dishUserRating = await updateDishRatingByUserId(dish_id, user_id, hoverRating, comment)
+      const dishUserRating = await updateDishRatingByUserId(dish_id, firebase_id, hoverRating, comment)
       setHoverRating(dishUserRating.rating)
       setPreviousRating(dishUserRating.rating)
       setTimeout(() => {
@@ -144,12 +144,12 @@ export default function DishDetails() {
     }
   }
 
-  function handleUpdateDishRating(id, user_id, hoverRating) {
-    updateDishRating(id, user_id, hoverRating)
+  function handleUpdateDishRating(id, firebase_id, hoverRating) {
+    updateDishRating(id, firebase_id, hoverRating)
   }
 
   // create dish rating
-  async function handleCreateDishRating({dish_id, user_id, hoverRating, comment}) {
+  async function handleCreateDishRating({dish_id, firebase_id, hoverRating, comment}) {
 
     if (!currentUser ) {
       alert('Log in or Create an Account to rate this dish!')
@@ -162,7 +162,7 @@ export default function DishDetails() {
     } 
 
     try {
-      const newDishUserRating = await createDishRating(dish_id, user_id, hoverRating, comment)
+      const newDishUserRating = await createDishRating(dish_id, firebase_id, hoverRating, comment)
       setPreviousRating(newDishUserRating.rating)
       setHoverRating(newDishUserRating.rating)
       setTimeout(() => {

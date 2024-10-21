@@ -12,9 +12,10 @@ export async function fetchAllDishRatingsByDishId(dish_id) {
 }
 
 // fetch dish rating by user id
-export async function fetchDishRatingByUserId(dish_id, user_id) {
+export async function fetchDishRatingByUserId(dish_id, firebase_id) {
   try {
-    const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating?user_id=${user_id}`);
+    console.log(dish_id, firebase_id)
+    const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating?firebase_id=${firebase_id}`);
     const rating = await res.json();
     return rating;
   } catch (error) {
@@ -24,14 +25,14 @@ export async function fetchDishRatingByUserId(dish_id, user_id) {
 }
 
 // update dish rating by user id
-export async function updateDishRatingByUserId(dish_id, user_id, rating, comment) {
+export async function updateDishRatingByUserId(dish_id, firebase_id, rating, comment) {
   try {
     const options = {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ user_id, rating, comment })
+      body: JSON.stringify({ firebase_id, rating, comment })
     };
     const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating`, options);
     const ratings = await res.json();
