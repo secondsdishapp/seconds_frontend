@@ -26,7 +26,6 @@ export default function DummyLogin({ setAuthToggle }) {
     try {
       const userCredential = await loginWithEmail(email, password);
       const user = userCredential.user;
-      console.log(user);
       alert('Login successful!');
       setEmail('');
       setPassword('');
@@ -36,10 +35,9 @@ export default function DummyLogin({ setAuthToggle }) {
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
         alert('Login failed. Please try again.');
-        setPasssword('');
+        setPassword('');
         throw error;
     }
-    // add the authentication logic here
   };
 
   return (

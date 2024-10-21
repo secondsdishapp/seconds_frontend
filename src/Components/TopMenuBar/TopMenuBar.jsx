@@ -1,7 +1,11 @@
 import "./TopMenuBar.css";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../Context/FirebaseAuth/AuthContext.jsx';
 
 export default function TopMenuBar({ menuToggle, setMenuToggle }) {
+
+  const { currentUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
   return (

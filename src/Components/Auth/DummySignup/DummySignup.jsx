@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.jsx';
 import { AuthContext } from '../../../Context/FirebaseAuth/AuthContext.jsx';
+import { createUser } from '../../../Services/users.services.js';
 
 export default function DummySignup({ setAuthToggle }) {
   // context
@@ -15,37 +15,47 @@ export default function DummySignup({ setAuthToggle }) {
 
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [formEmail, setFormEmail] = useState('');
+  const [formPassword, setFormPassword] = useState('');
+  const [formConfirmPassword, setFormConfirmPassword] = useState('');
 
   async function handleSubmit(e) {
     e.preventDefault();
     
-    if (password !== confirmPassword || !email || !password || !confirmPassword) {
+    if (formPassword !== formConfirmPassword || !formEmail || !formPassword || !formConfirmPassword) {
       alert('Passwords do not match');
       return;
     }
 
     try {
-      const userCredential = await signUpWithEmail(email, password);
+      const userCredential = await signUpWithEmail(formEmail, formPassword);
       const user = userCredential.user;
-      console.log(user);
+      const { uid, email } = user;
+      await sendUserToDb(uid, email);
       alert('Signup successful!');
-      setEmail('');
-      setPassword('');
+      setFormEmail('');
+      setFormPassword('');
+      setFormConfirmPassword('');
       // navigate('/myaccount')
     } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
         alert('Signup failed. Please try again.');
-        setPassword('');
-        throw error;
+        setFormPassword('');
+        setFormConfirmPassword('');
+      throw error;
     }
   };
 
-  console.log(currentUser);
+  async function sendUserToDb(firebase_id, email) {
+    try {
+      const newUser = await createUser({firebase_id, email});
+      console.log(newUser);
+    } catch (error) {
+        console.log(error);
+    }
+  }
 
   return (
     <div>
@@ -55,8 +65,8 @@ export default function DummySignup({ setAuthToggle }) {
             <input
               type="email"
               placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={formEmail}
+              onChange={(e) => setFormEmail(e.target.value)}
               required
               className="input-field"
             />
@@ -65,8 +75,8 @@ export default function DummySignup({ setAuthToggle }) {
             <input
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={formPassword}
+              onChange={(e) => setFormPassword(e.target.value)}
               required
               className="input-field"
             />
@@ -75,8 +85,8 @@ export default function DummySignup({ setAuthToggle }) {
             <input
               type="password"
               placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={formConfirmPassword}
+              onChange={(e) => setFormConfirmPassword(e.target.value)}
               required
               className="input-field"
             />
@@ -87,6 +97,7 @@ export default function DummySignup({ setAuthToggle }) {
           </h5>
         </form>
       </div>
+      <button onClick={() => sendUserToDb()}>Send User to DB</button>
     </div>
   );
 }
