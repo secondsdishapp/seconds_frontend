@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito:wght@400;700&display=swap');
+
+/* .login-box {
+  border: 1px solid #ccc;
+  border-radius: 9%;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+}  */
+
+
+/* .login-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  height: 80vh;
+  gap: 2rem;
+  margin-bottom: 100px;
+} */
+
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+input {
+  width: 50%;
+}
+
+
+.input-field {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+}
+
+.login-button {
+  background-color: #FF5252;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  width: 80%;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin: 0 auto;
+  
+}
+
+.login-button:hover {
+  background-color: #B33939;
+
+}
+
+.signup-prompt {
+  margin-top: 1rem;
+}
+
+/* 
+background-color: #4DD0E1;
+background-color: #009688; */
+
+/* background-color: #009688; */
+/* .login-button:active {
+  background-color:#A83232;
+} */
