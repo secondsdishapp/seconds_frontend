@@ -122,7 +122,7 @@ export default function NearByOptions({
         setNearByDishes(res.sort((a, b) => b.avg_rating - a.avg_rating));
         setAllNearByDishes(res.sort((a, b) => b.avg_rating - a.avg_rating));
       });
-    console.log(allNearByDishes);
+    console.log(highlyRatedDishes);
   }, [count,search]);
 
   let entireList = allNearByDishes.filter(
@@ -130,7 +130,7 @@ export default function NearByOptions({
       el.dish_name.toLowerCase().includes(search.toLowerCase()) ||
       el.restaurant_name.toLowerCase().includes(search.toLowerCase())
     );
-    let highlyRatedDishes = nearByDishes.filter((el) => el.avg_rating >= 4.5);
+    let highlyRatedDishes = nearByDishes.filter((el) => el.avg_rating >= 3.5);
   let objectOfEntireList = {};
   let filterEntireListPerCuisine = [];
   for (let element of entireList) {
@@ -250,7 +250,7 @@ export default function NearByOptions({
                 
                 }}
             ></img>
-            <p className="homepage_filterpercuisine_item_name">{dish.cuisine_name}</p>
+            <h5 className="homepage_filterpercuisine_item_name">{dish.cuisine_name}</h5>
           </div>
         ))}
       </div>
