@@ -1,0 +1,57 @@
+/* this is the container for the entire toggle */
+.toggle-container {
+  width: 150px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* the switch box, two-column layout */
+.toggle-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  /* border: 2px solid #343434; */
+  border-radius: 50px;
+  background-color: #DDDDDD;
+  overflow: hidden;
+  width: 90%;
+  height: 30px;
+}
+
+/* text inside the toggle options */
+.toggle-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 14px;
+  color: #191919;
+  z-index: 1;
+}
+
+/* active (highlighted) state */
+.toggle-option.active {
+  color: white;
+  background-color: transparent;
+}
+
+/* the sliding button */
+.slider {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #191919;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+/* position the slider on the left for Sign In */
+.slider.left {
+  left: 0;
+}
+
+/* position the slider on the right for Sign Up */
+.slider.right {
+  left: 50%;
+}
