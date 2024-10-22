@@ -1,0 +1,40 @@
+/* styles for the modal overlay that covers the entire screen */
+.modal-overlay {
+    position: fixed; /* position it relative to the viewport */
+    top: 0; /* align to the top of the viewport */
+    left: 0; /* align to the left of the viewport */
+    width: 100%; /* full width of the viewport */
+    height: 100%; /* full height of the viewport */
+    background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black background */
+    display: flex; /* use flexbox to center the modal content */
+    justify-content: center; /* center horizontally */
+    align-items: center; /* center vertically */
+    z-index: 1000; /* ensure it's on top of other content */
+}
+
+/* styles for the modal content area */
+.modal-content {
+    background-color: white; /* white background for the modal content */
+    border-radius: 8px; /* rounded corners */
+    padding: 20px; /* space inside the modal */
+    width: 90%; /* responsive width */
+    max-width: 500px; /* maximum width of the modal */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* subtle shadow for depth */
+    position: relative; /* for positioning the close button */
+}
+
+/* styles for the close button */
+.modal-close {
+    position: absolute; /* position it relative to the modal content */
+    top: 10px; /* space from the top */
+    right: 10px; /* space from the right */
+    background: none; /* no background */
+    border: none; /* no border */
+    font-size: 16px; /* font size */
+    cursor: pointer; /* show pointer cursor on hover */
+}
+
+/* optional: styles for the close button on hover */
+.modal-close:hover {
+    color: red; /* change color on hover for visual feedback */
+}
