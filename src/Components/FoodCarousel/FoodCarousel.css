@@ -1,73 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito:wght@400;700&display=swap');
+
+body {
+    font-family: nunito, sans-serif;
+    font-family: montserrat, sans-serif;
+    font-weight: 700;
+}
+
 .food-carousel-container {
-    position: relative;
-    width: 80%;
-    margin: 25px auto;
+    position: relative; /* position the container relative to its normal position */
+    width: 100%; /* set to 100% to occupy full width of the screen */
+    margin: 25px auto; /* center the carousel with vertical margins */
+    overflow: hidden; /* ensure items are clipped to the container */
+
 }
 
-.food-carousel {
+.food-button-container {
+    position: absolute; /* position buttons absolutely */
+    top: 50%; /* center vertically */
+    width: 100%; /* full width to center arrows */
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* space between left and right arrows */
+    transform: translateY(-50%); /* adjust vertical centering */
+    z-index: 10; /* ensure arrows are above other content */
+}
+
+.food-opacity-container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    height: 450px;
-    background-color: #f8f8f8;
-    border-radius: 7px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    position: relative;
 }
 
-.food-carousel-inner {
-    width: 100%;
-}
-
-.food-carousel-item {
-    width: 100%;
-    height: 100%;
+.food-carousel-image-container {
+    position: relative; /* position the container relative to its normal position */
+    width: 100%; /* set to 100% to occupy full width of the carousel */
 }
 
 .food-carousel-image {
-    width: 100%;
-    height: auto;
-    max-height: 500px; /* Adjust based on your preferred height */
-    object-fit: cover; /* Ensure images fill the container without distortion */
+    width: 100%; /* fill the width of the carousel container */
+    height: 500px; /* set a fixed height */
+    object-fit: cover; /* or use 'contain' if you want to avoid cropping */
+    border-radius: 7px; /* optional: match carousel style */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; /* optional: match carousel style */
+    transition: opacity 1s ease-in-out; /* increase duration for smoother transition */
+    opacity: 1; /* start fully opaque */
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+.fade-in {
+    opacity: 1;
+}
+
+/* position the button container absolutely over the carousel image */
+.food-button-container {
+    position: absolute; /* position buttons absolutely */
+    top: 50%; /* center vertically */
+    width: 100%; /* full width to center arrows */
+    display: flex;
+    justify-content: space-between; /* space between left and right arrows */
+    transform: translateY(-50%); /* adjust vertical centering */
+    z-index: 10; /* ensure arrows are above other content */
+}
+
+.food-carousel-btn {
+    background: transparent; /* make button background transparent */
+    border: none; /* remove button border */
+    cursor: pointer; /* change cursor to pointer */
+    padding: 0; /* remove any default padding */
+}
+
+.left-arrow-icon,
+.right-arrow-icon {
+    cursor: pointer; 
+    width: 30px; /* smaller width for arrow icons */
+    height: auto; /* maintain aspect ratio of icons */
+    opacity: 0.7; /* set transparency */
+    transition: opacity 0.3s; /* add transition for smooth hover effect */
+}
+
+.left-arrow-icon:hover,
+.right-arrow-icon:hover {
+    opacity: 1; /* fully opaque on hover */
+}
+
+.food-carousel-text-over,
+.food-carousel-text-under {
+    font-weight: bold;
 }
 
 @media (max-width: 768px) {
     .food-carousel-image {
-        max-height: 300px; /* Reduce height for smaller screens */
+        max-height: 300px; 
     }
-}
 
-
-.food-carousel-control-prev,
-.food-carousel-control-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.food-carousel-control-prev {
-    left: 1.2rem;
-}
-
-.food-carousel-control-next {
-    right: 1.2rem;
-}
-
-.food-carousel-control-prev-icon,
-.food-carousel-control-next-icon {
-    width: 2rem;
-    height: 2rem;
-    color: #009688; /* or any other color */
-}
-
-.food-carousel-item {
-    display: none;
-    transition: opacity 0.5s ease;
-}
-
-.food-carousel-item.active {
-    display: block;
-    opacity: 1;
+    .left-arrow-icon,
+    .right-arrow-icon {
+        width: 25px; /* adjust size of arrow icons for mobile */
+    }
 }
