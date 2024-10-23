@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { LocalAuthContext } from "../Context/LocalAuth/LocalAuthContext.jsx";
 import NearByOptions from "../Components/NearbyOptions/NearbyOptions";
 
-export default function Home({ count, menuToggle, vegetarian, setVegetarian, vegan, setVegan, glutenFree, setGlutenFree }) {
+export default function Home({cuisine,setCuisine, count, menuToggle, vegetarian, setVegetarian, vegan, setVegan, glutenFree, setGlutenFree }) {
 
   // context
   const {
@@ -15,7 +15,7 @@ export default function Home({ count, menuToggle, vegetarian, setVegetarian, veg
 
   return (
     <div>
-      <NearByOptions count={count} menuToggle={menuToggle} vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>
+      <NearByOptions cuisine={cuisine} setCuisine={setCuisine} count={count} menuToggle={menuToggle} vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>
     </div>
   );
 }

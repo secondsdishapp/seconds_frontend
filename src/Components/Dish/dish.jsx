@@ -121,8 +121,8 @@ const calculateDistance = () => {
 
             <img className="nearbyoptions_icon"  src="/dish.png" />
             <h3  className="nearbyoptions_rating-content">{dishAverageRating}</h3>
-            <img className="nearbyoptions_icon"  src="distance.png" />
-            <h3  className="nearbyoptions_distance-content">{distance.toString().slice(0,3)}</h3>
+            <img className="nearbyoptions_icon_distance"  src="distance.png" />
+            <h3  className="nearbyoptions_distance-content">{distance?distance.toString().slice(0,4):null}</h3>
             <br />
             <h3  className="nearbyoptions_distance-km">km</h3>
             {/* <h3 className='nearbyoptions_rating-content'>{dishAverageRating}</h3> */}
