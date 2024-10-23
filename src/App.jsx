@@ -31,6 +31,8 @@ function App() {
   const [ vegetarian, setVegetarian ] = useState(null);
   const [ vegan, setVegan ] = useState(null);
   const [ glutenFree, setGlutenFree ] = useState(null);
+  const [ cuisine, setCuisine ] = useState('');
+
 
 
   return (
@@ -40,7 +42,7 @@ function App() {
       {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> : null}
       <main className={`pages ${menuToggle ? "fixed" : ""}`}>
         <Routes>
-          <Route path="/" element={<Home vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>} />
+          <Route path="/" element={<Home cuisine={cuisine} setCuisine={setCuisine} vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>} />
           <Route path="/dishes" element={<Dishes />} />
           <Route path="/dishes/:id" element={<DishShow />} />
           <Route path="/auth" element={<Auth />} />
@@ -50,7 +52,7 @@ function App() {
           <Route path="/myaccount" element={<Account vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>} />
         </Routes>
       </main>
-      <Footer style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />
+      <Footer setCuisine={setCuisine} style={{zIndex: "99"}} menuToogle={menuToggle} setMenuToggle={setMenuToggle} />
       </LocalAuthProvider>
     </div>
   );

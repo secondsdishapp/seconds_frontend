@@ -1,7 +1,8 @@
-export default function SearchBar({ search, setSearch, vegetarian, vegan, glutenFree }) {
+export default function SearchBar({ setCuisine, search, setSearch, vegetarian, vegan, glutenFree }) {
 
     function handleSearch (e) {
         setSearch(e.target.value)
+        setCuisine('')
     };
 
     

@@ -18,7 +18,7 @@
     }
    .nearbyoptions_item_infos{
     margin-right: 2vw;
-    grid-column: 2/2;
+    
     margin-top: 3vw;
    }
     .nearbyoptions_item{
@@ -41,13 +41,28 @@
     .nearbyoptions_item_dish-name-container{
         width: 40vw;
         display: flex;
-        justify-content: space-between;
+        /* justify-content: space-between; */
         text-align: start;
+        line-height: 5vw;
+        
+       
+
+    }
+    .nearbyoptions_item_dish-name{
+        font-size: 3.1vw;
+        /* margin-left: -5vw; */
+       
+        margin-top: 3vw;
+    }
+    .nearbyoptions_item_restaurant-name{
+        font-weight: 700;
+      
+        
     }
     .nearbyoptions_item_dish-restaurant-container{
         display: flex;
         width: 40vw;
-        justify-content: space-between;
+        /* justify-content: space-between; */
         line-height: 4vw;
         text-align: start;
 
@@ -66,7 +81,17 @@
     
     .nearbyoptions_icon{
         margin: 1vw;
+        margin-left: -1vw;
         height: 8.4vw;
+       
+
+    }
+    .nearbyoptions_icon_distance{
+        margin: 1vw;
+        
+        height: 8.4vw;
+
+       
 
     }
     .nearbyoptions_rating-content{
@@ -76,6 +101,7 @@
     }
     .nearbyoptions_distance-km{
         font-size: 4vw;
+        margin-left: 1vw;
     }
     
 

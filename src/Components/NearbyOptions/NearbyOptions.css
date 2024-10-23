@@ -11,3 +11,36 @@ br{height: 2vw;}
 .map-icon:hover {
     cursor: pointer;
 }
+.homepage_filterpercuisine{
+    display: flex;
+    justify-content: space-evenly;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    margin-left: 7vw;
+    margin-right: 7vw;
+    margin-top: 8vw;
+    margin-bottom: -8vw;
+
+   
+    
+}
+.homepage_filterpercuisine_item_image{
+    height: 12vw;
+    width: 15vw;
+    border-radius: 50%;
+    border:solid 1px turquoise;
+    
+}
+.homepage_filterpercuisine_item{
+    /* margin: 2vw; */
+   
+    
+}
+.homepage_filterpercuisine_item_name{
+    margin-top: -1vw;
+    font-size: 3vw;
+    text-align: center;
+    
+    font-weight: 700;
+    
+    
+}
