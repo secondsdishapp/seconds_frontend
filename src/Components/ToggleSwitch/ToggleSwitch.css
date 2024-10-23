@@ -1,8 +1,10 @@
 /* this is the container for the entire toggle */
+
+
 .toggle-container {
-  width: 150px;
-  position: relative;
-  cursor: pointer;
+  width: 150px;               /* Width of the toggle switch */
+  margin: 20px auto;         /* Center horizontally and space from top */
+  cursor: pointer;            /* Change cursor on hover */
 }
 
 /* the switch box, two-column layout */
@@ -36,7 +38,7 @@
 }
 
 /* the sliding button */
-.slider {
+.toggle-slider {
   position: absolute;
   top: 0;
   width: 50%;
@@ -47,11 +49,11 @@
 }
 
 /* position the slider on the left for Sign In */
-.slider.left {
+.toggle-slider.left {
   left: 0;
 }
 
 /* position the slider on the right for Sign Up */
-.slider.right {
+.toggle-slider.right {
   left: 50%;
 }
