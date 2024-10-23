@@ -29,9 +29,9 @@ function App() {
   const [ value, setValue ] = useState(-1);
 
   //PREFERENCES FROM THE PROFILE PAGE
-  const [ vegetarian, setVegetarian ] = useState(null);
-  const [ vegan, setVegan ] = useState(null);
-  const [ glutenFree, setGlutenFree ] = useState(null);
+  const [ vegetarian, setVegetarian ] = useState(false);
+  const [ vegan, setVegan ] = useState(false);
+  const [ glutenFree, setGlutenFree ] = useState(false);
   const [ cuisine, setCuisine ] = useState('');
 
   return (

@@ -1,19 +1,50 @@
-import { useState, useContext } from 'react'
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Context/AuthContext/AuthContext.jsx';
 
-export default function DummyLogin() {
+export default function DummyLogin({ setAuthToggle }) {
+  // context
+  const {
+    currentUser,
+    signUpWithEmail,
+    loginWithEmail,
+    logout,
+    resetPassword,
+  } = useContext(AuthContext);
 
-  const [ email, setEmail ] = useState('')
-  const [ password, setPassword ] = useState('')
+  const navigate = useNavigate();
 
-  function handleSubmit() {
-    e.preventDefault()
-    console.log('submit works')
-  }
-  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!email || !password) {
+      alert('Please enter both email and password');
+      return;
+    }
+
+    try {
+      const userCredential = await loginWithEmail(email, password);
+      const user = userCredential.user;
+      alert('Login successful!');
+      setEmail('');
+      setPassword('');
+      navigate('/myaccount')
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        alert('Login failed. Please try again.');
+        setPassword('');
+        throw error;
+    }
+  };
+
   return (
     <div>
       <div className="login-box">
-        <h2>Login to Seconds!</h2>
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
             <input
@@ -37,10 +68,10 @@ export default function DummyLogin() {
           </div>
           <button type="submit" className="login-button">Log In</button>
           <h5 className="signup-prompt">
-            Not Registered? <a href="/register">Sign Up</a>
+            Not Registered? <span onClick={() => setAuthToggle('signUp')} >Sign Up</span>
           </h5>
         </form>
       </div>
     </div>
-  )
+  );
 }

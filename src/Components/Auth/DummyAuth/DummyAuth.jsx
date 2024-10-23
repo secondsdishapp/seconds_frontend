@@ -13,10 +13,18 @@ export default function DummyAuth() {
     resetPassword,
   } = useContext(AuthContext);
 
+  async function handleLogout(e) {
+    e.preventDefault()
+    await logout()
+    alert('See you soon!')
+  }
+  
+  console.log(currentUser)
+
   return (
     <div>
       DummyAuth
-      <button type="button" onClick={logout}>Log Out</button>
+      <button type="button" onClick={handleLogout}>Log Out</button>
       <DummyLogin />
     </div>
   )
