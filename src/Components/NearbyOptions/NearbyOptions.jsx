@@ -122,7 +122,6 @@ export default function NearByOptions({
         setNearByDishes(res.sort((a, b) => b.avg_rating - a.avg_rating));
         setAllNearByDishes(res.sort((a, b) => b.avg_rating - a.avg_rating));
       });
-    console.log(highlyRatedDishes);
   }, [count,search]);
 
   let entireList = allNearByDishes.filter(
