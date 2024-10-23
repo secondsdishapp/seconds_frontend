@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useState, useContext } from 'react'
 import { AuthContext } from '../../../Context/AuthContext/AuthContext.jsx'
 
 import DummyLogin from './DummyLogin.jsx'
@@ -14,6 +14,8 @@ export default function DummyAuth() {
     resetPassword,
   } = useContext(AuthContext);
 
+  const [ authToggle, setAuthToggle ] = useState('signIn');
+
   async function handleLogout(e) {
     e.preventDefault()
     await logout()
@@ -23,11 +25,18 @@ export default function DummyAuth() {
   console.log(currentUser)
 
   return (
-    <div>
-      DummyAuth
-      <button type="button" onClick={handleLogout}>Log Out</button>
-      <DummyLogin />
-      <DummySignup />
+    <div className='dummyAuth'>
+      DUMMY AUTH
+      <div className='dummyAuth-header'>
+        <h1>Hello, {currentUser?.displayName || currentUser?.email}!</h1>
+      </div>
+      <button onClick={() => setAuthToggle('signIn')}>Sign In</button>
+      <button onClick={() => setAuthToggle('signUp')}>Sign Up</button>
+      {authToggle === 'signIn' ?
+        <DummyLogin setAuthToggle={setAuthToggle} /> :
+        <DummySignup setAuthToggle={setAuthToggle} />
+      }
+      DUMMY AUTH
     </div>
   )
 }
