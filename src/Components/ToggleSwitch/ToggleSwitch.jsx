@@ -11,7 +11,7 @@ const ToggleSwitch = ({ isSignIn, onToggle }) => {
         <div className={`toggle-option ${!isSignIn ? 'active' : ''}`}>
           Sign Up
         </div>
-        <div className={`slider ${isSignIn ? 'left' : 'right'}`}></div>
+        <div className={`toggle-slider ${isSignIn ? 'left' : 'right'}`}></div>
       </div>
     </div>
   );
