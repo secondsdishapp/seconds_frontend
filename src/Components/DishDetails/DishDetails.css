@@ -1,5 +1,9 @@
 
 @media (max-width: 500px) {
+    .dish-details-container{
+        margin-top: -15vw;
+
+    }
     .dish-details_dish-name  {
         margin-top: 20vw;
         
@@ -13,9 +17,13 @@
     .dish-details_dish-image{
         /* margin-top: 10vw; */
         width: 80vw;
+        margin-left: 10vw;
+
         height: 50vw;
-        margin-left: 8vw;
         text-align: center;
+        /* margin-left: 8vw; */
+        text-align: center;
+        border-radius: 1vw;
 
     }
     .dish-details_restaurant-buttons{
@@ -23,6 +31,12 @@
         text-align: center;
        
 
+    }
+    .dish-details_rating-length{
+        transform: translate(0vw,-20vw);
+        text-align: center;
+        color:gray;
+       
     }
     .dish-details_restaurant-buttons_call{
         margin: 2vw;
@@ -73,11 +87,13 @@
 
  text-align: center;
  margin-left: 33vw;
- width: 30vw;
+ font-size: 4vw;
+ width: 35vw;
  height: 8vw;
  margin-bottom: 3vw;
  border-radius: 3vw;
- transform: translate(0vw, -8vw);
+ transform: translate(1vw, -6vw);
+ border: solid 0.2vw gray;
 
 
 }
