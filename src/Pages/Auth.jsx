@@ -41,7 +41,7 @@ export default function Auth() {
   };
 
   return (
-    <div className="auth-container">
+    <div>
             {/* ToggleSwitch component for switching between sign in and sign up */}
       <ToggleSwitch 
         isSignIn={isSignIn}     // pass isSignIn to T=toggleSwitch
