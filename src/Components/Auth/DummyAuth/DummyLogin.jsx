@@ -45,6 +45,7 @@ export default function DummyLogin({ setAuthToggle }) {
   return (
     <div>
       <div className="login-box">
+        <h2>Login to Seconds!</h2>
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
             <input

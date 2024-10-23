@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../../../Context/AuthContext/AuthContext.jsx'
 
 import DummyLogin from './DummyLogin.jsx'
+import DummySignup from './DummySignup.jsx'
 
 export default function DummyAuth() {
 
@@ -26,6 +27,7 @@ export default function DummyAuth() {
       DummyAuth
       <button type="button" onClick={handleLogout}>Log Out</button>
       <DummyLogin />
+      <DummySignup />
     </div>
   )
 }
