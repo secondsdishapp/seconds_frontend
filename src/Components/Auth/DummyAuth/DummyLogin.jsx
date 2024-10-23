@@ -1,4 +1,9 @@
+import { useState, useContext } from 'react'
+
 export default function DummyLogin() {
+
+  const [ email, setEmail ] = useState('')
+  const [ password, setPassword ] = useState('')
 
   function handleSubmit() {
     e.preventDefault()
@@ -7,8 +12,8 @@ export default function DummyLogin() {
   
   return (
     <div>
-      Login to Seconds!
       <div className="login-box">
+        <h2>Login to Seconds!</h2>
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
             <input
