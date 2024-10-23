@@ -1,4 +1,4 @@
-// import './Login.css'; 
+import './Login.css'; 
 // Import the CSS file for styling
 import { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; //this will allow programmatic navigation to a different Page
@@ -6,7 +6,6 @@ import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.js
 import SignUpForm from '../../SignUpForm/SignUpForm.jsx'
 import ToggleSwitch from '../../ToggleSwitch/ToggleSwitch.jsx'
 import Modal from '../../Modal/Modal.jsx';
-
 
 export default function Login() {
   // context

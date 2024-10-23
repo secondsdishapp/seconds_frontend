@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './Login.css'; // Import the CSS file for styling
-import RegistrationForm from '../Components/RegistrationForm/RegistrationForm'; // Import the RegistrationForm component
+import SignUpForm from '../Components/SignUpForm/SignUpForm'; // Import the RegistrationForm component
 import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
@@ -60,7 +60,7 @@ export default function Login() {
           </form>
         </div>
       ) : (
-        <RegistrationForm setCurrentForm={setCurrentForm} /> // Pass setCurrentForm to RegistrationForm
+        <SignUpForm setCurrentForm={setCurrentForm} /> // Pass setCurrentForm to RegistrationForm
       )}
       <div>
         <p>Take the guess work out of the equation...</p>

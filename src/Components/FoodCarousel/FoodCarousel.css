@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f8f8; /* Light background for a food theme */
+}
+
+/* Main container for carousel */
+.slidingCarousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    height: 250px; /* Reduced height for a footer-like effect */
+    margin-top: auto; /* Pushes the carousel to the bottom */
+    border-radius: 10px;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden; /* Prevents overflow */
+}
+
+/* Styling for carousel images */
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    opacity: 0.9; /* Slightly increase opacity for food images */
+    object-fit: cover;
+}
+
+/* Text styling within the carousel */
+.sliding-carousel-text {
+    position: absolute;
+    color: white;
+    font-size: 30px; /* Adjusted for better visibility */
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 700;
+}
+
+.sliding-carousel-text-under {
+    position: absolute;
+    color: white;
+    font-size: 1rem; /* Adjusted for a food theme */
+    text-align: center;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

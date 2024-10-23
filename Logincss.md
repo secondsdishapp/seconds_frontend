@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito:wght@400;700&display=swap');
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: Nunito, sans-serif;
 }
 
 p {
-  font-family: 'Montserrat', sans-serif;
+  font-family: Montserrat, sans-serif;
   font-weight: 700;
 }
 
@@ -15,38 +15,27 @@ p {
   align-items: center;
   padding: 50px;
   background-color: #f4f4f4;
-  min-height: 100vh; /* Updated height to ensure it fills the viewport */
+  height: 80vh;
   gap: 2rem; /* Evenly space elements in the container */
   margin-bottom: 100px;
-  margin-bottom: 100px;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 400px; /* Align with login-box width */
+  padding: 0 1rem;
+}
+
+/* .logo {
+  width: 150px;
+} */
 
 .menu-icon {
-  font-size: 2rem; /* Adjust icon size for better visibility */
+  font-size: 1rem; /* Adjust icon size */
   cursor: pointer;
-  color: #333; /* Set a color for visibility */
-  transition: transform 0.3s; /* Add a transition effect */
-}
-
-.menu-icon:hover {
-  transform: rotate(90deg); /* Rotate on hover for effect */
-}
-
-
-.logo {
-  width: 200px;
-}
-
-.menu-icon {
-  font-size: 2rem; /* Adjust icon size for better visibility */
-  cursor: pointer;
-  color: #333; /* Set a color for visibility */
-  transition: transform 0.3s; /* Add a transition effect */
-}
-
-.menu-icon:hover {
-  transform: rotate(90deg); /* Rotate on hover for effect */
 }
 
 .login-box {
@@ -81,7 +70,6 @@ p {
   border-radius: 4px;
   cursor: pointer;
   width: 40%;
-  transition: background-color 0.3s ease;
 }
 
 .login-button:hover {
@@ -100,9 +88,4 @@ p {
 
 .food-image {
   width: 45%;
-}
-
-.food-image:hover {
-  transform: scale(1.05); /* Slight zoom effect on hover */
-
 }

@@ -5,6 +5,7 @@ import Login from '../Components/Auth/Login/Login.jsx';
 import Modal from '../Components/Modal/Modal.jsx';
 import SignUpForm from '../Components/SignUpForm/SignUpForm.jsx';
 import ToggleSwitch from '../Components/ToggleSwitch/ToggleSwitch.jsx';
+import FoodCarousel from '../Components/FoodCarousel/FoodCarousel.jsx';
 
 export default function Auth() {
   // context
@@ -62,7 +63,11 @@ export default function Auth() {
         
       </Modal> */}
     
-    <div className="auth-bottom-container">
+
+    <div>
+      <FoodCarousel />
+    </div>
+    {/* <div className="auth-bottom-container">
     <div className="auth-guess-slogan">
         <p>Take the guess work out of the equation...</p>
       </div>
@@ -74,7 +79,7 @@ export default function Auth() {
       <div className="auth-explore-slogan">
         <p>Ready to explore?</p>
       </div>
-      </div>
+      </div> */}
     </div>
   );
 }
