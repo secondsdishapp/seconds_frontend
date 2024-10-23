@@ -1,3 +1,4 @@
+//FoodCarouselImages.js
 // Dynamically import all images from the carousel folder
 const foodImages = import.meta.glob('../../assets/images/carousel/*.{png,jpeg,jpg,webp}', { eager: true });
 
