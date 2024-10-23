@@ -1,54 +1,73 @@
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f8f8f8; /* Light background for a food theme */
+.food-carousel-container {
+    position: relative;
+    width: 80%;
+    margin: 25px auto;
 }
 
-/* Main container for carousel */
-.slidingCarousel-container {
+.food-carousel {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    height: 250px; /* Reduced height for a footer-like effect */
-    margin-top: auto; /* Pushes the carousel to the bottom */
-    border-radius: 10px;
-    position: relative;
-    box-sizing: border-box;
-    overflow: hidden; /* Prevents overflow */
+    height: 450px;
+    background-color: #f8f8f8;
+    border-radius: 7px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-/* Styling for carousel images */
-.carousel-image {
+.food-carousel-inner {
+    width: 100%;
+}
+
+.food-carousel-item {
     width: 100%;
     height: 100%;
-    opacity: 0.9; /* Slightly increase opacity for food images */
-    object-fit: cover;
 }
 
-/* Text styling within the carousel */
-.sliding-carousel-text {
+.food-carousel-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px; /* Adjust based on your preferred height */
+    object-fit: cover; /* Ensure images fill the container without distortion */
+}
+
+@media (max-width: 768px) {
+    .food-carousel-image {
+        max-height: 300px; /* Reduce height for smaller screens */
+    }
+}
+
+
+.food-carousel-control-prev,
+.food-carousel-control-next {
     position: absolute;
-    color: white;
-    font-size: 30px; /* Adjusted for better visibility */
-    text-align: center;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: 700;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
-.sliding-carousel-text-under {
-    position: absolute;
-    color: white;
-    font-size: 1rem; /* Adjusted for a food theme */
-    text-align: center;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.food-carousel-control-prev {
+    left: 1.2rem;
+}
+
+.food-carousel-control-next {
+    right: 1.2rem;
+}
+
+.food-carousel-control-prev-icon,
+.food-carousel-control-next-icon {
+    width: 2rem;
+    height: 2rem;
+    color: #009688; /* or any other color */
+}
+
+.food-carousel-item {
+    display: none;
+    transition: opacity 0.5s ease;
+}
+
+.food-carousel-item.active {
+    display: block;
+    opacity: 1;
 }
