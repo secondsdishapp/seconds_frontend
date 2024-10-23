@@ -1,0 +1,68 @@
+:root {
+    --sign-in-color: green;
+    --sign-up-color: black;
+    --active-sign-in-color: gray;
+}
+
+.sign-in {
+    background-color: var(--sign-in-color);
+}
+
+.sign-up {
+    background-color: var(--sign-up-color);
+}
+
+.active .sign-in {
+    background-color: var(--sign-up-color);
+}
+
+.active .sign-up {
+    background-color: var(--active-sign-in-color);
+}
+
+.toggle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.toggle-switch {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 200px;
+    height: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-option {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform transition */
+}
+
+
+.sign-in {
+    background-color: gray;
+}
+
+.sign-up {
+    background-color: black;
+}
+
+.active .sign-in {
+    background-color: black;
+}
+
+.active .sign-up {
+    background-color: gray;
+}
+
+.form-container {
+    margin-top: 20px;
+}
