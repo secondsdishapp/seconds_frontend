@@ -162,16 +162,17 @@ export default function DishDetails() {
     <div className='dish-details-container'>
       <h3 className='dish-details_dish-name'>{dish.name}</h3>
       <img className="dish-details_dish-image" src={dish.dish_image} alt="" />
-      <h3 className='dish-details_rating-title'>Rating:</h3>
-      <h3 className='dish-details_rating-content'>{`${dishAverageRating} ${ratingDishes(dishAverageRating)} (+${dishRatings.length})`}</h3>
+      <h1 className='dish-details_rating-title'>Rating:         {`${dishAverageRating}`}</h1>
+      <h3 className='dish-details_rating-content'>{` ${ratingDishes(dishAverageRating)}`}</h3>
+      <h3 className='dish-details_rating-length'>{` (${dishRatings.length} users)`}</h3>
       
-      <div className='dish-details_restaurant-info'>
+      {/* <div className='dish-details_restaurant-info'>
         <h3 className='dish-details_restaurant-name'>{dish.restaurantname}</h3>
         <div className='dish-details_restaurant-buttons'>
           <button className='dish-details_restaurant-buttons_call'>Call</button>
           <button className='dish-details_restaurant-buttons_directions'>Directions</button>
         </div>
-      </div>
+      </div> */}
     
       <div className="rating-container">  
         <h3 className='dish-details_ask-for-rating'>
