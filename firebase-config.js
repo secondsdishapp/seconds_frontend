@@ -18,12 +18,12 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const fbApp = initializeApp(firebaseConfig);
-const fbAuth = getAuth(app);
-const fbAnalytics = getAnalytics(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+// const analytics = getAnalytics(app);
 
 export {
-  fbApp
-  , fbAuth
+  app
+  , auth
   // , fbAnalytics
 };
