@@ -13,7 +13,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useState, useEffect } from 'react';
 
 
-export default function FixedBottomNavigation({ setCount, count, menuToggle, setMenuToggle, value, setValue }) {
+export default function FixedBottomNavigation({ setCuisine, setCount, count, menuToggle, setMenuToggle, value, setValue }) {
  
   const ref = React.useRef(null);
 
@@ -28,6 +28,7 @@ export default function FixedBottomNavigation({ setCount, count, menuToggle, set
           onChange={(event, newValue) => {
             setValue(newValue);
             setMenuToggle(false);
+            setCuisine('')
           }}
         >
           <BottomNavigationAction style={{color: value === 0 ? "#009688" : "#FF5252"}} label="Map" icon={<PlaceIcon htmlColor='inherit' />} component={Link} to="/map" />
