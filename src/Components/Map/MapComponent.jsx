@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import SlidingCarousel from "../SlidingCarousel/SlidingCarousel";
 import FilterMap from "../FilterMap/FilterMap";
 
-export default function MapComponent({ menuToggle }) {
+export default function MapComponent({ menuToggle, search, setSearch }) {
 
     const navigate = useNavigate();
 
@@ -56,7 +56,10 @@ export default function MapComponent({ menuToggle }) {
     const [ filterMap, setFilterMap ] = useState(false);
 
     //SEARCH BAR
-    const [ search, setSearch ] = useState("");
+    const [ search2, setSearch2 ] = useState("");
+    useEffect(() => {
+        console.log(search, "Line 60");
+    }, [search])
 
     //SEARCH FILTER
     const [ searchFilter, setSearchFilter ] = useState([]);
@@ -101,9 +104,18 @@ export default function MapComponent({ menuToggle }) {
     }
 
     //Filtering the search
+
     useEffect(() => {
-        setSearchFilter( dishesLocations.filter((dish, index) => dish.dish_name.toLowerCase().includes(search.toLowerCase()) || dish.restaurant_name.toLowerCase().includes(search.toLowerCase())));
+        if (search) {
+            setSearch2(search);
+        } else {
+            setSearch2("");
+        }
     }, [search]);
+
+    useEffect(() => {
+            setSearchFilter( dishesLocations.filter((dish, index) => dish.dish_name.toLowerCase().includes(search2.toLowerCase()) || dish.restaurant_name.toLowerCase().includes(search2.toLowerCase()))); 
+    },[search2, dishesLocations]);
 
     useEffect(() => {
         console.log(searchFilter, "Search Filter")
