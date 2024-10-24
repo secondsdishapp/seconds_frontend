@@ -14,7 +14,9 @@ export default function NearByOptions({
   glutenFree,
   setGlutenFree,
   cuisine,
-  setCuisine
+  setCuisine,
+  search,
+  setSearch,
 }) {
   const navigate = useNavigate();
   const API = import.meta.env.VITE_API_URL;
@@ -28,7 +30,6 @@ export default function NearByOptions({
   const [nearByDishes, setNearByDishes] = useState([]);
   const [allNearByDishes, setAllNearByDishes] = useState([]);
   const [locationsInRadius, setLocationsInRadius] = useState([]);
-  const [search, setSearch] = useState("");
   const [filteredDishSearch, setFilteredDishSearch] = useState([]);
   const [cuisine1, setCuisine1] = useState('');
 
@@ -183,6 +184,10 @@ export default function NearByOptions({
       entireList.filter((item, index) => item.vegetarian === true);
     }
   }, [vegetarian]);
+
+  useEffect(() => {
+    console.log(search, "Nearby Options Search")
+  }, [search]);
 
   return search ?
   
