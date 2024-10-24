@@ -15,6 +15,9 @@ const plateImages = [
 ];
 
 export default function DishDetails() {
+
+  const phoneNumber = "+16463745482";
+
   // context
   const {
     isLocalLoggedIn
@@ -166,13 +169,13 @@ export default function DishDetails() {
       <h3 className='dish-details_rating-content'>{` ${ratingDishes(dishAverageRating)}`}</h3>
       <h3 className='dish-details_rating-length'>{` (${dishRatings.length} users)`}</h3>
       
-      {/* <div className='dish-details_restaurant-info'>
+      <div className='dish-details_restaurant-info'>
         <h3 className='dish-details_restaurant-name'>{dish.restaurantname}</h3>
         <div className='dish-details_restaurant-buttons'>
-          <button className='dish-details_restaurant-buttons_call'>Call</button>
+          <button className='dish-details_restaurant-buttons_call'><a href={`tel:${phoneNumber}`} style={{color:"black", textDecoration: "none"}}>Call</a></button>
           <button className='dish-details_restaurant-buttons_directions'>Directions</button>
         </div>
-      </div> */}
+      </div>
     
       <div className="rating-container">  
         <h3 className='dish-details_ask-for-rating'>
