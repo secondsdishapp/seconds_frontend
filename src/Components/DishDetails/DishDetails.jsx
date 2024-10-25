@@ -49,7 +49,7 @@ export default function DishDetails() {
   
   // get dish details
   useEffect(() => {
-    fetch(`${API}/dishes/${id}`)
+    fetch(`${API}/dishes/${id}/location`)
       .then((res) => {
         return res.json()
       })
@@ -161,19 +161,27 @@ export default function DishDetails() {
     }
   }
 
+  function getDirections () {
+    const restaurantAdress = `${dish.address}, ${dish.city}, ${dish.state} ${dish.zipcode}`;
+    const encodedAddress = encodeURIComponent(restaurantAdress);
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+    window.open(googleMapsUrl, '_blank');
+  }
+
+ 
   return (
     <div className='dish-details-container'>
-      <h3 className='dish-details_dish-name'>{dish.name}</h3>
+      <h3 className='dish-details_dish-name'>{dish.dish_name}</h3>
       <img className="dish-details_dish-image" src={dish.dish_image} alt="" />
       <h1 className='dish-details_rating-title'>Rating:         {`${dishAverageRating}`}</h1>
       <h3 className='dish-details_rating-content'>{` ${ratingDishes(dishAverageRating)}`}</h3>
       <h3 className='dish-details_rating-length'>{` (${dishRatings.length} users)`}</h3>
       
       <div className='dish-details_restaurant-info'>
-        <h3 className='dish-details_restaurant-name'>{dish.restaurantname}</h3>
+        <h3 className='dish-details_restaurant-name'>{dish.restaurant_name}</h3>
         <div className='dish-details_restaurant-buttons'>
-          <button className='dish-details_restaurant-buttons_call'><a href={`tel:${phoneNumber}`} style={{color:"black", textDecoration: "none"}}>Call</a></button>
-          <button className='dish-details_restaurant-buttons_directions'>Directions</button>
+          <a href={`tel:${phoneNumber}`} style={{color:"white", textDecoration: "none"}}><img className='dish-details_restaurant-buttons_call' src="/viber.svg"/></a>
+          <img className='dish-details_restaurant-buttons_directions' src="/direction.svg" onClick={getDirections}/>
         </div>
       </div>
     
