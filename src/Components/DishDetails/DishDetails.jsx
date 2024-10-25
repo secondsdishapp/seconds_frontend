@@ -173,9 +173,9 @@ export default function DishDetails() {
     <div className='dish-details-container'>
       <h3 className='dish-details_dish-name'>{dish.dish_name}</h3>
       <img className="dish-details_dish-image" src={dish.dish_image} alt="" />
-      <h1 className='dish-details_rating-title'>Rating:         {`${dishAverageRating}`}</h1>
+      {/* <h1 className='dish-details_rating-title'>Rating:         {`${dishAverageRating}`}</h1> */}
       <h3 className='dish-details_rating-content'>{` ${ratingDishes(dishAverageRating)}`}</h3>
-      <h3 className='dish-details_rating-length'>{` (${dishRatings.length} users)`}</h3>
+      <h3 className='dish-details_rating-length'>{`Reviews (${dishRatings.length})`}</h3>
       
       <div className='dish-details_restaurant-info'>
         <h3 className='dish-details_restaurant-name'>{dish.restaurant_name}</h3>
@@ -188,9 +188,9 @@ export default function DishDetails() {
       <div className="rating-container">  
         <h3 className='dish-details_ask-for-rating'>
           {previousRating ?
-            "Thank you for rating this dish!"
+            <p>"Thank you for rating this dish!"</p>
             :
-            "Did you try this dish? Please rate it from 1 to 5 !"
+            <p style={{color: "#009688"}}>Had it? Please rate it from 1 to 5!</p>
           }
         </h3>
         <div className="dish-details_plate-rating">

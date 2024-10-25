@@ -3,7 +3,6 @@
 
     .nearbyoptions-container{
         /* margin-left: 1.5vw; */
-     
         display: grid;
         grid-template-columns: 1fr 1fr;
         
@@ -24,11 +23,13 @@
     .nearbyoptions_item{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        border: solid 0.2vw gray;
+        /* border: solid 0.2vw gray; */
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 18px -10px;
         margin: 1vw;
         border-radius: 1vw;
         line-height: 1.6vw;
-        
+        margin-top: 7vw;
     }
     /* .highly-rated-nearby-options{
         margin-top: 10vw;

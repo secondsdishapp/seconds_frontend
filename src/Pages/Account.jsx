@@ -130,13 +130,12 @@ export default function Account({ vegetarian, setVegetarian, vegan, setVegan, gl
                     <GlutenFreeCheckboxMUI className="glutenfree-checkbox" glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>
                 </div>
             </div> 
-            <Stack spacing={4} sx={{ width: '70%', marginLeft: '15%'}} tabIndex={"-1"}>
+            {/* <Stack spacing={4} sx={{ width: '70%', marginLeft: '15%'}} tabIndex={"-1"}>
                 <Autocomplete
                     {...preferenceProps}
                     id="auto-complete"
                     autoComplete
                     tabIndex={"-1"}
-                    // onChange={(event, value) => value ? setFilterPreferences(value.title) : setFilterPreferences("")}
                     includeInputInList
                     renderInput={(params) => (
                         <TextField {...params} label="Preferences" variant="standard" color="primary" inputProps={{ ...params.inputProps, tabIndex: -1 }}/>)}
@@ -146,12 +145,11 @@ export default function Account({ vegetarian, setVegetarian, vegan, setVegan, gl
                     id="auto-complete"
                     autoComplete
                     tabIndex={"-1"}
-                    // onChange={(event, value) => value ? setFilterPreferences(value.title) : setFilterPreferences("")}
                     includeInputInList
                     renderInput={(params) => (
                         <TextField {...params} label="Cuisine" variant="standard" color="primary" inputProps={{ ...params.inputProps, tabIndex: -1 }}/>)}
                 />
-            </Stack>
+            </Stack> */}
             <button className="set-preference-btn" type="button">Submit</button>
         </div>
         </ThemeProvider>
