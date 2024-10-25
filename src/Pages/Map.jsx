@@ -3,7 +3,7 @@ import { LocalAuthContext } from "../Context/LocalAuth/LocalAuthContext.jsx";
 import MapComponent from "../Components/Map/MapComponent.jsx";
 import "./Map.css";
 
-export default function Map({ menuToggle }) {
+export default function Map({ menuToggle, search, setSearch }) {
   // context
   const { 
     isLocalLoggedIn
@@ -15,7 +15,7 @@ export default function Map({ menuToggle }) {
 
   return (
     <div className={`map-page-container ${menuToggle ? "fixed" : ""}`} style={{overflow: "hidden"}}>
-        <MapComponent menuToggle={menuToggle}/>
+        <MapComponent menuToggle={menuToggle} search={search} setSearch={setSearch}/>
     </div>
   )
 }
