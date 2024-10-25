@@ -4,7 +4,7 @@ br{height: 2vw;}
     display: flex;
     flex-direction: row;
     margin-top: 30px;
-    gap: 3%;
+    gap: 9%;
     margin-left: 5%;
 }
 
@@ -15,32 +15,33 @@ br{height: 2vw;}
     display: flex;
     justify-content: space-evenly;
     overflow-x: auto; /* Enable horizontal scrolling */
-    margin-left: 7vw;
+    margin-left: 3vw;
     margin-right: 7vw;
     margin-top: 8vw;
     margin-bottom: -8vw;
-
-   
-    
+    gap: 3px; 
 }
+
 .homepage_filterpercuisine_item_image{
-    height: 12vw;
+    height: 15vw;
     width: 15vw;
     border-radius: 50%;
-    border:solid 1px turquoise;
-    
+    border:solid 1px turquoise;  
 }
+
 .homepage_filterpercuisine_item{
-    /* margin: 2vw; */
-   
-    
+    /* margin: 2vw; */ 
 }
 .homepage_filterpercuisine_item_name{
     margin-top: -1vw;
     font-size: 3vw;
-    text-align: center;
-    
+    text-align: center;  
     font-weight: 700;
-    
-    
+}
+
+.highly-rated-nearby-options {
+    font-size: 27px;
+    margin-bottom: 0px;
+    margin-top: 15vw;
+    margin-left: 5%;
 }

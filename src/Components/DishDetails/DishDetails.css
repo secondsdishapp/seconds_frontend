@@ -6,12 +6,13 @@
     }
     .dish-details_dish-name  {
         margin-top: 20vw;
-        
+        font-size: 27px;
         text-align: center;
+        color: #FF5252;
     }
     .dish-details_restaurant-name {
 
-        
+        color: #009688;
         text-align: center;
     }
     .dish-details_dish-image{
@@ -34,33 +35,47 @@
     }
     .dish-details_rating-length{
         transform: translate(0vw,-20vw);
-        text-align: center;
-        color:gray;
-       
+        /* text-align: center; */
+        margin-left: 60%;
+        color:#a9a9a9;
+        font-size: 16px;
+        font-weight: 550;
     }
     .dish-details_restaurant-buttons_call{
         margin: 2vw;
         width: 25vw;
         height: 8vw;
-        border-radius: 3vw;
-
+        border-radius: 4vw;
+        border: none;
+        /* background-color: #FF5252; */
+        /* color: white; */
     }
     .dish-details_restaurant-buttons_directions{
         margin: 2vw;
         width: 25vw;
         height: 8vw;
-        border-radius: 3vw;
-
+        border-radius: 4vw;
+        border: none;
+        /* background-color: #FF5252; */
+        /* color: white; */
     }
+    .dish-details_restaurant-buttons_directions:hover{
+        cursor: pointer;
+    }
+
 .dish-details_restaurant-info{
+    width: 70%;
     margin: 8vw;
-    margin-top: 0vw ;
+    margin-top: 8vw;
+    margin-left: 15%;
     transform: translate(0vw, -15vw);
-  
-    border: solid 0.2vw gray;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    /* border: solid 0.2vw gray; */
     text-align: center;
     justify-content: center;
     padding: 1vw;
+    padding-bottom: 3vw;
+    border-radius: 10px;
 }
 .dish-details_ingredients-title{
     margin-left: 10vw;
@@ -89,13 +104,16 @@
  margin-left: 33vw;
  font-size: 4vw;
  width: 35vw;
- height: 8vw;
+ height: 9vw;
+ margin-top: 3vw;
  margin-bottom: 3vw;
- border-radius: 3vw;
+ border-radius: 5vw;
  transform: translate(1vw, -6vw);
- border: solid 0.2vw gray;
-
-
+ /* border: solid 0.2vw gray; */
+border: none;
+background-color: #FF5252;
+color: white;
+font-weight: 600;
 }
 .dish-details_plate-rating {
     

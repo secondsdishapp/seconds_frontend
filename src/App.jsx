@@ -34,6 +34,9 @@ function App() {
   const [ vegan, setVegan ] = useState(false);
   const [ glutenFree, setGlutenFree ] = useState(false);
   const [ cuisine, setCuisine ] = useState('');
+  const [ search, setSearch ] = useState('');
+
+
 
   return (
     <div>
@@ -43,11 +46,11 @@ function App() {
       {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> : null}
       <main className={`pages ${menuToggle ? "fixed" : ""}`}>
         <Routes>
-          <Route path="/" element={<Home cuisine={cuisine} setCuisine={setCuisine} vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>} />
+          <Route path="/" element={<Home cuisine={cuisine} setCuisine={setCuisine} vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree} search={search} setSearch={setSearch}/>} />
           <Route path="/dishes" element={<Dishes />} />
           <Route path="/dishes/:id" element={<DishShow />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/map" element={<Map />} />
+          <Route path="/map" element={<Map search={search} setSearch={setSearch}/>} />
           <Route path="/about" element={<About />} />
           <Route path="/myaccount" element={<Account vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree}/>} />
           <Route path="*" element={<FourOFour />} />

@@ -14,11 +14,49 @@ export default function NearByOptions({
   glutenFree,
   setGlutenFree,
   cuisine,
-  setCuisine
+  setCuisine,
+  search,
+  setSearch,
 }) {
   const navigate = useNavigate();
   const API = import.meta.env.VITE_API_URL;
   const API_KEY = import.meta.env.VITE_API_KEY;
+
+  //CREATE A STATE TO FILTER THE ENTIRE LIST BASED ON THE PREFERENCES-------------------------------------------------------------------
+  const [ preferenceListVegetarian, setPreferenceListVegetarian ] = useState([]);
+  const [ preferenceListVegan, setPreferenceListVegan ] = useState([]);
+  const [ preferenceListGlutenFree, setPreferenceListGlutenFree ] = useState([]);
+
+
+  //USING LOCALSTORAGE TO GET THE PREFERENCES---------------------------------------------------------------------------------------------
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("vegetarian");
+    if (savedPreference === "false") {
+      setVegetarian(false);
+    } else if (savedPreference === "true") {
+      setVegetarian(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("vegan");
+    if (savedPreference === "false") {
+      setVegan(false);
+    } else if (savedPreference === "true") {
+      setVegan(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("glutenFree");
+    if (savedPreference === "false") {
+      setGlutenFree(false);
+    } else if (savedPreference === "true") {
+      setGlutenFree(true);
+    }
+  }, []);  
+
+  //---------------------------------------------------------------------------------------------------------------------------
 
   // context
   const { isLocalLoggedIn, localUser, localLogin, localLogout, localAuthTest } =
@@ -28,8 +66,8 @@ export default function NearByOptions({
   const [nearByDishes, setNearByDishes] = useState([]);
   const [allNearByDishes, setAllNearByDishes] = useState([]);
   const [locationsInRadius, setLocationsInRadius] = useState([]);
-  const [search, setSearch] = useState("");
   const [filteredDishSearch, setFilteredDishSearch] = useState([]);
+  const [ entireList, setEntireList ] = useState([]);
   const [cuisine1, setCuisine1] = useState('');
 
   const [currentLocation, setCurrentLocation] = useState({
@@ -115,7 +153,7 @@ export default function NearByOptions({
   }, [count]);
 
   useEffect(() => {
-    fetch(`${API}/dishes/nearbyoptions`)
+    fetch(`${API}/dishes/locations`)
       .then((response) => response.json())
       .then((res) => {
         // console.log(res, "nearbyoptions");
@@ -124,14 +162,78 @@ export default function NearByOptions({
       });
   }, [count,search]);
 
-  let entireList = allNearByDishes.filter(
-    (el) =>
-      el.dish_name.toLowerCase().includes(search.toLowerCase()) ||
-      el.restaurant_name.toLowerCase().includes(search.toLowerCase())
-    );
-    let highlyRatedDishes = nearByDishes.filter((el) => el.avg_rating >= 3.5);
+  //USING LOCALSTORAGE PREFERENCES TO FILTER THE LIST FIRST--------------------------------------------------------------------------------
+
+  useEffect(() => {
+    if (vegetarian) {
+      setPreferenceListVegetarian(allNearByDishes.filter((dish) => dish.vegetarian === true));
+    } else {
+      setPreferenceListVegetarian(allNearByDishes);
+    }
+  }, [allNearByDishes,vegetarian]);
+
+  useEffect(() => {
+    if (vegan) {
+      setPreferenceListVegan(preferenceListVegetarian.filter((dish) => dish.vegan === true));
+    } else {
+      setPreferenceListVegan(preferenceListVegetarian);
+    }
+  }, [preferenceListVegetarian]);
+
+  useEffect(() => {
+    if (glutenFree) {
+      setPreferenceListGlutenFree(preferenceListVegan.filter((dish) => dish.gluten_free === true));
+    } else {
+      setPreferenceListGlutenFree(preferenceListVegan);
+    }
+  }, [glutenFree, preferenceListVegan]);
+
+
+  //---------------------------------------------------------------------------------------------------------------------------
+  useEffect(() => {
+    console.log(vegetarian, "Vegetarian value on nearby options page")
+  }, [vegetarian]);
+
+  useEffect(() => {
+    setEntireList(preferenceListGlutenFree.filter((el) => el.dish_name.toLowerCase().includes(search.toLowerCase()) || el.restaurant_name.toLowerCase().includes(search.toLowerCase())));
+  }, [preferenceListGlutenFree, vegetarian, vegan, glutenFree]);
+    //   preferenceListGlutenFree.filter(
+    // (el) =>
+    //   el.dish_name.toLowerCase().includes(search.toLowerCase()) ||
+    //   el.restaurant_name.toLowerCase().includes(search.toLowerCase())
+    // );
+  
+
+  useEffect(() => {
+    console.log(allNearByDishes, "allNearbyDishes State");
+  }, [allNearByDishes]);
+
+  useEffect(() => {
+    console.log(preferenceListVegetarian, "Preference List Vegetarian");
+  }, [preferenceListVegetarian]);
+
+  useEffect(() => {
+    console.log(preferenceListVegan, "Preference List Vegan");
+  }, [preferenceListVegan]);
+
+  useEffect(() => {
+    console.log(preferenceListGlutenFree, "Preference List Gluten Free");
+  }, [preferenceListGlutenFree]);
+
+  //---------------------------------------------------------------------------------------------------------------------------
+
+  useEffect(() => {
+
+    console.log(entireList, "Entire List line 194")
+  }, [entireList])
+
+
+  let highlyRatedDishes = nearByDishes.filter((el) => el.avg_rating >= 3.5);
+
   let objectOfEntireList = {};
+
   let filterEntireListPerCuisine = [];
+
   for (let element of entireList) {
     if (!objectOfEntireList[element.cuisine_name]) {
       filterEntireListPerCuisine.push(element);
@@ -157,31 +259,8 @@ export default function NearByOptions({
   }, [filteredDishSearch]);
 
   useEffect(() => {
-    const savedPreference = localStorage.getItem("vegetarian");
-    if (savedPreference !== null) {
-      setVegetarian(Boolean(savedPreference));
-    }
-  }, []);
-
-  useEffect(() => {
-    const savedPreference = localStorage.getItem("vegan");
-    if (savedPreference !== null) {
-      setVegan(Boolean(savedPreference));
-    }
-  }, []);
-
-  useEffect(() => {
-    const savedPreference = localStorage.getItem("glutenFree");
-    if (savedPreference !== null) {
-      setGlutenFree(Boolean(savedPreference));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (vegetarian) {
-      entireList.filter((item, index) => item.vegetarian === true);
-    }
-  }, [vegetarian]);
+    console.log(search, "Nearby Options Search")
+  }, [search]);
 
   return search ?
   
@@ -239,7 +318,7 @@ export default function NearByOptions({
         />
       </div>
       <div className="homepage_filterpercuisine">
-        {filterRecommendedListPerCuisine.map((dish) => (
+        {entireList.map((dish) => (
           <div className="homepage_filterpercuisine_item">
             <img
               className="homepage_filterpercuisine_item_image"
@@ -255,11 +334,11 @@ export default function NearByOptions({
       </div>
 
       <h4 className="highly-rated-nearby-options">
-        Highly rated nearby options
+        Highly rated nearby
       </h4>
       {cuisine?highlyRatedDishes.filter(el=>el.cuisine_name===cuisine).map((item, index) => {
         return <Dish item={item} index={index} key={item.dish_id} />;
-      }):highlyRatedDishes.map((item, index) => {
+      }):entireList.map((item, index) => {
         return <Dish item={item} index={index} key={item.dish_id} />;
       })}
     </div>
