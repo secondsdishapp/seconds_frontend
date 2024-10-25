@@ -1,6 +1,6 @@
 import "./App.css";
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Routes, Route } from "react-router-dom"
 import Navigation from "./Components/Navigation/Navigation.jsx"
 
 // PAGES
@@ -27,6 +27,7 @@ function App() {
 
   const [menuToggle, setMenuToggle] = useState(false);
   const [ value, setValue ] = useState(-1);
+ 
 
   //PREFERENCES FROM THE PROFILE PAGE
   const [ vegetarian, setVegetarian ] = useState(false);

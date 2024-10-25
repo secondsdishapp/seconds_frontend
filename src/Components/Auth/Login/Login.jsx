@@ -2,11 +2,13 @@ import './Login.css';
 import { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.jsx';
+import { AuthContext } from '../../../Context/AuthContext/AuthContext.jsx';
 import SignUpForm from '../../SignUpForm/SignUpForm.jsx'
 import ToggleSwitch from '../../ToggleSwitch/ToggleSwitch.jsx'
 import Modal from '../../Modal/Modal.jsx';
 
 export default function Login() {
+  // local context for testing
   const {
     isLocalLoggedIn,
     localUser,
@@ -21,6 +23,16 @@ export default function Login() {
     email: "eater@gmail.com"
   });
 
+  // auth context for live site
+  const {
+    currentUser,
+    signUpWithEmail,
+    loginWithEmail,
+    logout,
+    resetPassword,
+  } = useContext(AuthContext);
+
+  // states for login form
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,15 +41,38 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setUser({ ...user, email: email, password: password });
-    localLogin(user);
-    setTimeout(() => {
-      alert(`Email: ${email}, Password: ${password}`);
-      navigate('/');
-    }, 500);
+
+    // local auth - uncomment for local testing, comment out for live site
+    // if (isLocalLoggedIn) return
+    // setUser({ ...user, email: email, password: password }); 
+    // localLogin(user);
+    // setTimeout(() => {
+    //   alert(`Email: ${email}, Password: ${password}`);
+    //   navigate('/');
+    // }, 500);
+
+    // auth - uncomment for live site, comment out for local testing
+    if (currentUser) return
+    try {
+      const userCredential = await loginWithEmail(email, password);
+      const user = userCredential.user;
+      alert('Login successful!');
+      setEmail('');
+      setPassword('');
+      navigate('/myaccount')
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        alert('Login failed. Please try again.');
+        setPassword('');
+        throw error;
+    }
   };
+
+  console.log(currentUser);
 
   const handleSignUpClick = (e) => {
     e.preventDefault(); // Prevent default anchor behavior
@@ -47,7 +82,6 @@ export default function Login() {
   const closeModal = () => {
     setModalOpen(false); // Close the modal
   };
-
 
   return (
     <div className="login-form-container">
@@ -75,12 +109,11 @@ export default function Login() {
           </div>
           <button type="submit" className="login-form-button">Sign In</button>
           
-{/* Google Sign-In Button with Animation */}
-<div className="g-signin-btn" onClick={() => window.open('https://google.com', '_blank')}>
-    <div className="g-logo"></div>
-    <span>Continue with Google</span>
-</div>
-
+          {/* Google Sign-In Button with Animation */}
+          <div className="g-signin-btn" onClick={() => window.open('https://google.com', '_blank')}>
+              <div className="g-logo"></div>
+              <span>Continue with Google</span>
+          </div>
 
           {/* Facebook Sign-In Button */}
           <div className="fb-login-button"
@@ -98,8 +131,8 @@ export default function Login() {
               <path d="M24 12.073C24 5.405 18.627 0 12 0 5.373 0 0 5.405 0 12.073c0 6.045 4.388 11.054 10.125 12.037v-8.531H7.078v-3.506h3.047V9.4c0-3.018 1.792-4.692 4.533-4.692 1.313 0 2.686.235 2.686.235v2.959h-1.513c-1.492 0-1.955.924-1.955 1.872v2.213h3.328l-.532 3.506h-2.796v8.53C19.612 23.127 24 18.118 24 12.073z"/>
             </svg>
             Continue with Facebook
-            </a>
-            <h5 className="login-form-signup-prompt">
+          </a>
+          <h5 className="login-form-signup-prompt">
             Not Registered? <Link to="#" onClick={handleSignUpClick}>Sign Up</Link>
           </h5>
         </form>
