@@ -3,6 +3,7 @@ import './SignUpForm.css'; // Import your CSS if you have one
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext/AuthContext';
+import { sendNewUserToDb } from '../../Services/users.services.js';
 
 const SignUpForm = ({ setCurrentForm }) => {
   // live site auth context
@@ -13,7 +14,7 @@ const SignUpForm = ({ setCurrentForm }) => {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [formEmail, setFormEmail] = useState('');
   const [country, setCountry] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
 
@@ -23,25 +24,21 @@ const SignUpForm = ({ setCurrentForm }) => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const formData = {
-      firstName,
-      lastName,
-      email,
-      country,
-      mobileNumber,
-    };
-    console.log('Registration Data:', formData);
+   
     // Here you can handle form submission, e.g., send data to your backend
     if (password !== confirmPassword) {
       alert('Passwords do not match');
       return;
     }
-    signUpWithEmail(email, password);
-    setEmail('')
+    const newUser = await signUpWithEmail(formEmail, password);
+    console.log('New User:', newUser);
+    const { uid: firebase_id, email } = newUser.user;
+    console.log('New User:', firebase_id);
+    sendNewUserToDb({firebase_email: email, firebase_id});
+    setFormEmail('')
     setPassword("");
     setConfirmPassword("");
     navigate('/myaccount');
-
   };
 
   return (
@@ -57,8 +54,8 @@ const SignUpForm = ({ setCurrentForm }) => {
               id="email"
               type="email"
               className="input-field"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={formEmail}
+              onChange={(e) => setFormEmail(e.target.value)}
               required
             />
           </label>

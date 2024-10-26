@@ -37,7 +37,6 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
     return (
         <div className={`sidebar-container`}>
             <div className="links" onClick={() => {
-                console.log("clicked")
                 currentUser ? navigate("/myaccount") : navigate("/auth");
                 setMenuToggle(false);
                 setValue(-1);

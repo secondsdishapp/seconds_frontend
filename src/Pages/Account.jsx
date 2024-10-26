@@ -1,6 +1,7 @@
 import "./Account.css";
 import { useEffect, useState, useRef, useContext } from "react";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
+import { sendNewUserToDb } from "../Services/users.services.js";
 
 // material ui
 import TextField from '@mui/material/TextField';
@@ -27,8 +28,9 @@ export default function Account({
 
   // live site context
   const { currentUser } = useContext(AuthContext);
+  const { email, uid } = currentUser;
   function getEmailUsername(email) {
-    if (!currentUser) return "User"
+    if (!email) return "User"
     return email.slice(0, email.indexOf('@'))
   }
 
@@ -132,6 +134,7 @@ export default function Account({
                 </div>
                 <p className="account-name">Welcome {getEmailUsername(currentUser?.email)}!</p>
             </div>
+            <button type="button" onClick={() => sendNewUserToDb({firebase_email: email, firebase_id: uid})}>send user to db</button>
             <p className="preference-title">Set Preferences</p>
             <div className="selections-main-container">
                 <div className="vegetarian-selection-container">
