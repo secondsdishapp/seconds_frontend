@@ -296,7 +296,7 @@ export default function NearByOptions({
           onClick={() => navigate("/map")}
         />
       </div>
-      <div className="homepage_filterpercuisine">
+      {/* <div className="homepage_filterpercuisine">
         {uniqueListPerCuisine.map((dish) => (
           <div className="homepage_filterpercuisine_item">
             <img
@@ -311,7 +311,7 @@ export default function NearByOptions({
             <p className="homepage_filterpercuisine_item_name">{dish.cuisine_name}</p>
           </div>
         ))}
-      </div>
+      </div> */}
       <h4 style={{ display: "none" }} className="highly-rated-nearby-options">
         Highly rated nearby options
       </h4>
