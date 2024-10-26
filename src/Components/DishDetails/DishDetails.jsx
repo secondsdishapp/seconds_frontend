@@ -1,11 +1,14 @@
 import { useState, useEffect, useContext } from 'react'
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
+import { AuthContext } from "../../Context/AuthContext/AuthContext.jsx";
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import {
   fetchAllDishRatingsByDishId
   ,fetchDishRatingByUserId
   ,updateDishRatingByUserId
   ,createDishRating
+  ,fetchDishRatingByFirebaseId
+  ,updateDishRatingByFirebaseId
 } from '../../Services/ratings.services.js'
 
 const API = import.meta.env.VITE_API_URL;
@@ -27,6 +30,8 @@ export default function DishDetails() {
     ,localAuthTest
   } = useContext(LocalAuthContext);
 
+  const { currentUser } = useContext(AuthContext);
+
   const [previousRating, setPreviousRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [dish, setDish] = useState({ 'dish_name': '', 'dish_image': '', 'avg_rating': 1, 'restaurant_name': '','latitude':'','longitude':''})
@@ -35,6 +40,7 @@ export default function DishDetails() {
 
   // get user id
   const user_id = localUser.user_id
+  const firebase_id = currentUser?.uid || null
   
   let navigate = useNavigate()
   let { id } = useParams()
@@ -65,9 +71,9 @@ export default function DishDetails() {
   // get dish ratings by dish Id and calculate average rating
   async function getDishRatings(dish_id) {
     try {
-      const dishRatings = await fetchAllDishRatingsByDishId(dish_id)
-      setDishRatings(dishRatings)
-      const averageRating = dishRatings.length > 0 ? dishRatings.reduce((a, b) => a + b.rating, 0) / dishRatings.length : 0
+      const fetchedDishRatings = await fetchAllDishRatingsByDishId(dish_id)
+      setDishRatings(fetchedDishRatings)
+      const averageRating = fetchedDishRatings.length > 0 ? fetchedDishRatings.reduce((a, b) => a + b.rating, 0) / fetchedDishRatings.length : 0
       setDishAverageRating(convertRating(averageRating))
     } catch (error) {
         throw error
@@ -83,80 +89,122 @@ export default function DishDetails() {
   }, [previousRating])
 
   // get dish user rating
-  async function setDishUserRating(dish_id, user_id) {
-    if (!isLocalLoggedIn) return
-    try {
-      const dishUserRating = await fetchDishRatingByUserId(dish_id, user_id)
-      if (dishUserRating.rating_id) {
-        setPreviousRating(dishUserRating.rating)
-        setHoverRating(dishUserRating.rating)
+  async function setDishUserRating(dish_id, firebase_id) {
+    if (currentUser) {
+      try {
+        const dishUserRating = await fetchDishRatingByFirebaseId(dish_id, firebase_id)
+        if (dishUserRating?.rating_id) {
+          setPreviousRating(dishUserRating.rating)
+          setHoverRating(dishUserRating.rating)
+        } else {
+          setPreviousRating(0)
+        }
+      } catch (error) {
+          throw error
       }
-    } catch (error) {
-        throw error
+
+    } else if (isLocalLoggedIn) {
+        try {
+          const dishUserRating = await fetchDishRatingByUserId(dish_id, user_id)
+          if (dishUserRating.rating_id) {
+            setPreviousRating(dishUserRating.rating)
+            setHoverRating(dishUserRating.rating)
+          }
+        } catch (error) {
+            throw error
+        }
     }
   }
 
   useEffect(() => {
-    if (!isLocalLoggedIn) return
-    setDishUserRating(id, user_id)
+    if (currentUser) {
+      setDishUserRating(id, firebase_id)
+
+    } else if (isLocalLoggedIn) {
+      setDishUserRating(id, user_id)
+    }
 
   }, [])
 
   // update dish rating
   const updatedRating = {
     dish_id: id,
+    firebase_id,
     user_id,
     hoverRating,
     comment: 'test comment'
   }
 
   async function updateDishRating(updatedRating) {
-    if (!isLocalLoggedIn) return
-    const { dish_id, user_id, hoverRating, comment } = updatedRating
-    try {
-      const dishUserRating = await updateDishRatingByUserId(dish_id, user_id, hoverRating, comment)
-      console.log(dishUserRating)
-      if (dishUserRating.rating_id) {
-        setHoverRating(dishUserRating.rating)
-        setPreviousRating(dishUserRating.rating)
-        setTimeout(() => {
-          alert('Your rating has been updated!')
-        }, 500)
-      }
-    } catch (error) {
-        throw error
+    console.log(updatedRating)
+    if (currentUser) {
+      const { dish_id, firebase_id, hoverRating, comment } = updatedRating
+        try {
+          const dishUserRating = await updateDishRatingByFirebaseId(dish_id, firebase_id, hoverRating, comment)
+          console.log(dishUserRating)
+          if (dishUserRating.rating_id) {
+            setHoverRating(dishUserRating.rating)
+            setPreviousRating(dishUserRating.rating)
+            setTimeout(() => {
+              alert('Your rating has been updated!')
+            }, 500)
+          }
+        } catch (error) {
+            throw error
+        }
+    } else if (isLocalLoggedIn) {
+        const { dish_id, user_id, hoverRating, comment } = updatedRating
+        try {
+          const dishUserRating = await updateDishRatingByUserId(dish_id, user_id, hoverRating, comment)
+          console.log(dishUserRating)
+          if (dishUserRating.rating_id) {
+            setHoverRating(dishUserRating.rating)
+            setPreviousRating(dishUserRating.rating)
+            setTimeout(() => {
+              alert('Your rating has been updated!')
+            }, 500)
+          }
+        } catch (error) {
+            throw error
+        }
     }
   }
 
-  function handleUpdateDishRating(id, user_id, hoverRating) {
-    if (!isLocalLoggedIn) return
-    if (previousRating === hoverRating) {
-      alert('Same rating, no update')
-    } else {
-      updateDishRating(id, user_id, hoverRating)
+  function handleUpdateDishRating(id, user_id, firebase_id, hoverRating) {
+    if (currentUser) {
+      if (previousRating === hoverRating) {
+        alert('Same rating, no update')
+      } else {
+          updateDishRating(id, firebase_id, hoverRating)
+      }
+    } else if (isLocalLoggedIn) {
+      if (previousRating === hoverRating) {
+        alert('Same rating, no update')
+      } else {
+          updateDishRating(id, user_id, hoverRating)
+      }
     }
   }
 
   // create dish rating
   async function handleCreateDishRating({dish_id, user_id, hoverRating, comment}) {
-    if (!isLocalLoggedIn) {
-      alert('Log in or Create an Account to rate this dish!')
-      return
-    }
-    console.log("newRating", id, user_id, hoverRating, comment)
-    if (previousRating === hoverRating) {
-      alert('Dish already rated!')
-    } else {
-      try {
-        const newDishUserRating = await createDishRating(dish_id, user_id, hoverRating, comment)
-        console.log("newDishUserRating", newDishUserRating)
-          setPreviousRating(newDishUserRating.rating)
-          setHoverRating(newDishUserRating.rating)
-          setTimeout(() => {
-            alert('Your rating has been created!')
-          }, 500)
-      } catch (error) {
-          throw error
+    if (currentUser) {
+    
+    } else if (isLocalLoggedIn) {
+      if (previousRating === hoverRating) {
+        alert('Dish already rated!')
+      } else {
+          try {
+            const newDishUserRating = await createDishRating(dish_id, user_id, hoverRating, comment)
+            console.log("newDishUserRating", newDishUserRating)
+              setPreviousRating(newDishUserRating.rating)
+              setHoverRating(newDishUserRating.rating)
+              setTimeout(() => {
+                alert('Your rating has been created!')
+              }, 500)
+          } catch (error) {
+              throw error
+          }
       }
     }
   }
@@ -168,13 +216,12 @@ export default function DishDetails() {
     window.open(googleMapsUrl, '_blank');
   }
 
- 
   return (
     <div className='dish-details-container'>
       <h3 className='dish-details_dish-name'>{dish.dish_name}</h3>
       <img className="dish-details_dish-image" src={dish.dish_image} alt="" />
-      {/* <h1 className='dish-details_rating-title'>Rating:         {`${dishAverageRating}`}</h1> */}
-      <h3 className='dish-details_rating-content'>{` ${ratingDishes(dishAverageRating)}`}</h3>
+      {/* <h1 className='dish-details_rating-title'>Rating: {`${dishAverageRating}`}</h1> */}
+      <h3 className='dish-details_rating-content'>{`${dishAverageRating} ${ratingDishes(dishAverageRating)}`}</h3>
       <h3 className='dish-details_rating-length'>{`Reviews (${dishRatings.length})`}</h3>
       
       <div className='dish-details_restaurant-info'>

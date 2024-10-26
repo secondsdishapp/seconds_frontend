@@ -23,6 +23,18 @@ export async function fetchDishRatingByUserId(dish_id, user_id) {
   }
 }
 
+// fetch dish rating by firebase id
+export async function fetchDishRatingByFirebaseId(dish_id, firebase_id) {
+  try {
+    const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating?firebase_id=${firebase_id}`);
+    const rating = await res.json();
+    return rating;
+  } catch (error) {
+    console.log(error)
+    throw error;
+  }
+}
+
 // update dish rating by user id
 export async function updateDishRatingByUserId(dish_id, user_id, rating, comment) {
   console.log("update args", dish_id, user_id, rating, comment)
@@ -33,6 +45,25 @@ export async function updateDishRatingByUserId(dish_id, user_id, rating, comment
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ user_id, rating, comment })
+    };
+    const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating`, options);
+    const ratings = await res.json();
+    return ratings;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// update dish rating by firebase id
+export async function updateDishRatingByFirebaseId(dish_id, firebase_id, rating, comment) {
+  console.log("update args", dish_id, firebase_id, rating, comment)
+  try {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ firebase_id, rating, comment })
     };
     const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating`, options);
     const ratings = await res.json();

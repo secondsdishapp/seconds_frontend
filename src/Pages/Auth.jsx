@@ -6,6 +6,7 @@ import Modal from '../Components/Modal/Modal.jsx';
 import SignUpForm from '../Components/SignUpForm/SignUpForm.jsx';
 import ToggleSwitch from '../Components/ToggleSwitch/ToggleSwitch.jsx';
 import FoodCarousel from '../Components/FoodCarousel/FoodCarousel.jsx';
+import DummyAuth from '../Components/Auth/DummyAuth/DummyAuth.jsx'
 
 export default function Auth() {
   // context
@@ -22,23 +23,13 @@ export default function Auth() {
   // state to manage modal open/close
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  
   //state to manage toggle switches
   const [isSignIn, setIsSignIn] = useState(true);
-
 
   //handle the toggle change
   const handleToggle = () => {
     setIsSignIn(prev => !prev); //Toggle between true and flase
 };
-  
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // simulate login process (replace with actual authentication logic)
-    alert(`Email: ${email}, Password: ${password}`);
-    // add the authentication logic here
-  };
 
   return (
     <div>

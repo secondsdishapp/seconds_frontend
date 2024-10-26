@@ -79,7 +79,6 @@ const calculateDistance = () => {
 };
   useEffect(() => {
     calculateDistance();
-    console.log(distance);
   }, [lat1, lng1, item.latitude]);
 
 

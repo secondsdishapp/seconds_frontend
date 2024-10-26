@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { auth } from "../../firebase-config";
+import { auth } from "../../../firebase-config.js";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -8,16 +8,9 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-const AuthContext = createContext({
-  currentUser: {},
-  signUp: () => {},
-  login: () => {},
-  logout: () => {},
-  resetPassword: () => {},
-});
-
-
-export default function AuthContextProvider({ children }) {
+const AuthContext = createContext();
+ 
+function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState({});
 
   async function signUpWithEmail(email, password) {
@@ -37,20 +30,15 @@ export default function AuthContextProvider({ children }) {
   //   return signInWithPopup(auth, provider);
   // }
 
-
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log(auth, "auth");
-      setCurrentUser(user);
+      setCurrentUser(user || null);
     });
-
 
     return () => unsubscribe();
   }, []);
 
-
-  const ctxValue = {
+  const contextValue = {
     currentUser,
     signUpWithEmail,
     loginWithEmail,
@@ -58,10 +46,11 @@ export default function AuthContextProvider({ children }) {
     resetPassword,
   };
 
-
   return (
-    <AuthContext.Provider value={ctxValue}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>
+      {children}
+    </AuthContext.Provider>
   );
 }
 
-export const useAuth = () => useContext(AuthContext);
+export { AuthContext, AuthProvider }

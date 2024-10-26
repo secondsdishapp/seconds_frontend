@@ -1,12 +1,13 @@
 import "./SidebarMenu.css";
 import { useEffect, useContext } from "react";
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext";
+import { AuthContext } from "../../Context/AuthContext/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 import anime from "animejs";
 
 export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValue }) {
-
+    // local user context for testing
     const {
       isLocalLoggedIn
       ,localUser
@@ -14,6 +15,9 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
       ,localLogout
       ,localAuthTest
     } = useContext(LocalAuthContext);
+
+    // auth context for live site
+    const { currentUser, logout } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -33,13 +37,12 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
     return (
         <div className={`sidebar-container`}>
             <div className="links" onClick={() => {
-                console.log("clicked")
-                isLocalLoggedIn ? navigate("/myaccount") : navigate("/auth");
+                currentUser ? navigate("/myaccount") : navigate("/auth");
                 setMenuToggle(false);
                 setValue(-1);
                 }
             }>
-                <p className="link-text">{isLocalLoggedIn ? "My Account" : "Log In"}</p>
+                <p className="link-text">{currentUser ? "My Account" : "Log In"}</p>
                 {/* <p className="link-text">My Account</p> */}
             </div>
             <div className="links" onClick={() => {
@@ -50,17 +53,10 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
             }>
                 <p className="link-text">About Us</p>
             </div>
-            {/* <div className="links" onClick={() => {
-                navigate("/contact-us");
-                setMenuToggle(false);
-                setValue(-1);
-                }
-            }>
-                <p className="link-text">Log Out</p>
-            </div> */}
-            {isLocalLoggedIn ?
+            {currentUser ?
               <div className="links" onClick={() => {
                 localLogout();
+                logout();
                 navigate("/");
                 setMenuToggle(false);
                 setValue(-1);
