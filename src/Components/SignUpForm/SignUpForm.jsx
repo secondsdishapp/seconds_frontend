@@ -1,11 +1,15 @@
 import '../SignUp/SignUp.css'; // Import your CSS if you have one
 import './SignUpForm.css'; // Import your CSS if you have one
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext/AuthContext';
 
 const SignUpForm = ({ setCurrentForm }) => {
   // live site auth context
   const { signUpWithEmail } = useContext(AuthContext);
+
+  // configs
+  const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -33,6 +37,10 @@ const SignUpForm = ({ setCurrentForm }) => {
       return;
     }
     signUpWithEmail(email, password);
+    setEmail('')
+    setPassword("");
+    setConfirmPassword("");
+    navigate('/myaccount');
 
   };
 
