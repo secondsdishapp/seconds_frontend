@@ -89,7 +89,6 @@ export default function DishDetails() {
 
   // get dish user rating
   async function setDishUserRating(dish_id, firebase_id) {
-    console.log("dish_id", dish_id, "firebase_id", firebase_id)
     if (currentUser) {
       try {
         const dishUserRating = await fetchDishRatingByFirebaseId(dish_id, firebase_id)
