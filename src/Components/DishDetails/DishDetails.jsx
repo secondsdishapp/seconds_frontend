@@ -7,6 +7,7 @@ import {
   ,fetchDishRatingByUserId
   ,updateDishRatingByUserId
   ,createDishRating
+  ,fetchDishRatingByFirebaseId
 } from '../../Services/ratings.services.js'
 
 const API = import.meta.env.VITE_API_URL;
@@ -38,7 +39,7 @@ export default function DishDetails() {
 
   // get user id
   const user_id = localUser.user_id
-  const firebase_id = localUser?.firebase_id || null
+  const firebase_id = currentUser?.uid || null
   
   let navigate = useNavigate()
   let { id } = useParams()
@@ -87,8 +88,18 @@ export default function DishDetails() {
   }, [previousRating])
 
   // get dish user rating
-  async function setDishUserRating(dish_id, user_id) {
+  async function setDishUserRating(dish_id, firebase_id) {
+    console.log("dish_id", dish_id, "firebase_id", firebase_id)
     if (currentUser) {
+      try {
+        const dishUserRating = await fetchDishRatingByFirebaseId(dish_id, firebase_id)
+        if (dishUserRating.rating_id) {
+          setPreviousRating(dishUserRating.rating)
+          setHoverRating(dishUserRating.rating)
+        }
+      } catch (error) {
+          throw error
+      }
 
     } else if (isLocalLoggedIn) {
         try {
@@ -105,6 +116,7 @@ export default function DishDetails() {
 
   useEffect(() => {
     if (currentUser) {
+      setDishUserRating(id, firebase_id)
 
     } else if (isLocalLoggedIn) {
       setDishUserRating(id, user_id)
