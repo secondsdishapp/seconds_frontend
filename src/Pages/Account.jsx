@@ -1,4 +1,8 @@
 import "./Account.css";
+import { useEffect, useState, useRef, useContext } from "react";
+import { AuthContext } from "../Context/AuthContext/AuthContext";
+
+// material ui
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
@@ -8,12 +12,25 @@ import ControlledCheckbox from "../Components/PreferenceCheckboxMUI.jsx/Checkbox
 import VegetarianCheckboxMUI from "../Components/PreferenceCheckboxMUI.jsx/VegetarianCheckboxMUI";
 import VeganCheckboxMUI from "../Components/PreferenceCheckboxMUI.jsx/VeganCheckboxMUI";
 import GlutenFreeCheckboxMUI from "../Components/PreferenceCheckboxMUI.jsx/GlutenFreeCheckboxMUI";
-import { useEffect, useState, useRef } from "react"; 
 
 
 const label = { inputProps: {'aria-label': 'Checkbox demo'} }
 
-export default function Account({ vegetarian, setVegetarian, vegan, setVegan, glutenFree, setGlutenFree }) {
+export default function Account({
+  vegetarian
+  , setVegetarian
+  , vegan
+  , setVegan
+  , glutenFree
+  , setGlutenFree
+}) {
+
+  // live site context
+  const { currentUser } = useContext(AuthContext);
+  function getEmailUsername(email) {
+    if (!currentUser) return "User"
+    return email.slice(0, email.indexOf('@'))
+  }
 
     const [ currImage, setCurrImage ] = useState("../src/assets/images/seconds-white-middle-red-box.png")
 
@@ -113,7 +130,7 @@ export default function Account({ vegetarian, setVegetarian, vegan, setVegan, gl
                     <img className="profile-pic2" src={currImage} />
                     <input ref={fileUploader} type="file" className="choose-file" onChange={uploadedFile} hidden/>
                 </div>
-                <p className="account-name">Welcome User!</p>
+                <p className="account-name">Welcome {getEmailUsername(currentUser.email)}!</p>
             </div>
             <p className="preference-title">Set Preferences</p>
             <div className="selections-main-container">
