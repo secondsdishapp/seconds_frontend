@@ -9,6 +9,7 @@ import {
   ,createDishRating
   ,fetchDishRatingByFirebaseId
   ,updateDishRatingByFirebaseId
+  ,createDishRatingByFirebaseId
 } from '../../Services/ratings.services.js'
 
 const API = import.meta.env.VITE_API_URL;
@@ -187,9 +188,27 @@ export default function DishDetails() {
   }
 
   // create dish rating
-  async function handleCreateDishRating({dish_id, user_id, hoverRating, comment}) {
+  async function handleCreateDishRating({dish_id, user_id, firebase_id, hoverRating, comment}) {
+    if (!currentUser) {
+      alert('Login to rate this dish!')
+      return
+    }
     if (currentUser) {
-    
+      if (previousRating === hoverRating) {
+        alert('Dish already rated!')
+      } else {
+          try {
+            const newDishUserRating = await createDishRatingByFirebaseId(dish_id, firebase_id, hoverRating, comment)
+            console.log("newDishUserRating", newDishUserRating)
+              setPreviousRating(newDishUserRating.rating)
+              setHoverRating(newDishUserRating.rating)
+              setTimeout(() => {
+                alert('Your rating has been created!')
+              }, 500)
+          } catch (error) {
+              throw error
+          }
+      }
     } else if (isLocalLoggedIn) {
       if (previousRating === hoverRating) {
         alert('Dish already rated!')
@@ -263,7 +282,7 @@ export default function DishDetails() {
         > Update Rating </button>
         :
         <button className='dish-details-rating-button'
-          onClick={() => handleCreateDishRating({dish_id: id, user_id, hoverRating, comment: 'test comment'})}
+          onClick={() => handleCreateDishRating({dish_id: id, user_id, firebase_id, hoverRating, comment: 'test comment'})}
         > Rate Dish </button> 
         }
     </div>
