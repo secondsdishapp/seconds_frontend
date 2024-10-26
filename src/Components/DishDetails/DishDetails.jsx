@@ -8,6 +8,7 @@ import {
   ,updateDishRatingByUserId
   ,createDishRating
   ,fetchDishRatingByFirebaseId
+  ,updateDishRatingByFirebaseId
 } from '../../Services/ratings.services.js'
 
 const API = import.meta.env.VITE_API_URL;
@@ -92,9 +93,11 @@ export default function DishDetails() {
     if (currentUser) {
       try {
         const dishUserRating = await fetchDishRatingByFirebaseId(dish_id, firebase_id)
-        if (dishUserRating.rating_id) {
+        if (dishUserRating?.rating_id) {
           setPreviousRating(dishUserRating.rating)
           setHoverRating(dishUserRating.rating)
+        } else {
+          setPreviousRating(0)
         }
       } catch (error) {
           throw error
@@ -126,14 +129,29 @@ export default function DishDetails() {
   // update dish rating
   const updatedRating = {
     dish_id: id,
+    firebase_id,
     user_id,
     hoverRating,
     comment: 'test comment'
   }
 
   async function updateDishRating(updatedRating) {
+    console.log(updatedRating)
     if (currentUser) {
-
+      const { dish_id, firebase_id, hoverRating, comment } = updatedRating
+        try {
+          const dishUserRating = await updateDishRatingByFirebaseId(dish_id, firebase_id, hoverRating, comment)
+          console.log(dishUserRating)
+          if (dishUserRating.rating_id) {
+            setHoverRating(dishUserRating.rating)
+            setPreviousRating(dishUserRating.rating)
+            setTimeout(() => {
+              alert('Your rating has been updated!')
+            }, 500)
+          }
+        } catch (error) {
+            throw error
+        }
     } else if (isLocalLoggedIn) {
         const { dish_id, user_id, hoverRating, comment } = updatedRating
         try {
@@ -152,9 +170,13 @@ export default function DishDetails() {
     }
   }
 
-  function handleUpdateDishRating(id, user_id, hoverRating) {
+  function handleUpdateDishRating(id, user_id, firebase_id, hoverRating) {
     if (currentUser) {
-
+      if (previousRating === hoverRating) {
+        alert('Same rating, no update')
+      } else {
+          updateDishRating(id, firebase_id, hoverRating)
+      }
     } else if (isLocalLoggedIn) {
       if (previousRating === hoverRating) {
         alert('Same rating, no update')
