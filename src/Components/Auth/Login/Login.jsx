@@ -72,8 +72,6 @@ export default function Login() {
     }
   };
 
-  console.log(currentUser);
-
   const handleSignUpClick = (e) => {
     e.preventDefault(); // Prevent default anchor behavior
     setModalOpen(true); // Open the modal

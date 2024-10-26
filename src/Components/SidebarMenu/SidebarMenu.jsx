@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import anime from "animejs";
 
 export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValue }) {
-
+    // local user context for testing
     const {
       isLocalLoggedIn
       ,localUser
@@ -16,8 +16,8 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
       ,localAuthTest
     } = useContext(LocalAuthContext);
 
-    const data = useContext(AuthContext);
-    const currentUser = data?.currentUser;
+    // auth context for live site
+    const { currentUser, logout } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -57,6 +57,7 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
             {currentUser ?
               <div className="links" onClick={() => {
                 localLogout();
+                logout();
                 navigate("/");
                 setMenuToggle(false);
                 setValue(-1);

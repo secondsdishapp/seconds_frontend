@@ -90,13 +90,10 @@
     transform: translate(0vw, -20vw);
 }
 .dish-details_rating-content{
-    margin-left: 15vw;
+    margin-left: 10vw;
     transform: translate(6vw, -10vw);
-
-   
     font-size: 10vw;
     color: black;
-  
 }
 .dish-details-rating-button{
 

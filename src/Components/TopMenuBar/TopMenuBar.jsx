@@ -14,10 +14,11 @@ export default function TopMenuBar({ menuToggle, setMenuToggle }) {
     ,localAuthTest
   } = useContext(LocalAuthContext);
 
-  const data = useContext(AuthContext);
-  console.log(data);
+  const { currentUser } = useContext(AuthContext);
+  console.log(currentUser);
 
   const navigate = useNavigate();
+  
   return (
     <div className={`top-menubar-container ${menuToggle ? "fixed" : ""}`}>
       <img src="/seconds-logo2.png" className="logo" onClick={() => {
