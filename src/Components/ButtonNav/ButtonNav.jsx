@@ -9,6 +9,7 @@ import MapIcon from '@mui/icons-material/Map';
 import PlaceIcon from '@mui/icons-material/Place';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import AddIcon from '@mui/icons-material/Add';
 
 import { useState, useEffect } from 'react';
 
@@ -31,7 +32,7 @@ export default function FixedBottomNavigation({ setCuisine, setCount, count, men
             setCuisine('')
           }}
         >
-          <BottomNavigationAction style={{color: value === 0 ? "#009688" : "#FF5252"}} label="Map" icon={<PlaceIcon htmlColor='inherit' />} component={Link} to="/map" />
+          <BottomNavigationAction style={{color: value === 0 ? "#009688" : "#FF5252"}} label="Add" icon={<AddIcon htmlColor='inherit' />} component={Link} to="/map" />
           <BottomNavigationAction style={{color: value === 1 ? "#009688" : "#FF5252"}} label="Home" icon={<RestaurantIcon htmlColor='inherit'/>} component={Link} to="/" />
           <BottomNavigationAction style={{color: value === 2 ? "#009688" : "#FF5252"}} label="Dishes" icon={<FavoriteIcon htmlColor='inherit'/>} component ={Link} to="/dishes" />
         </BottomNavigation>
