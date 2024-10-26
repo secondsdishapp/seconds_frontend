@@ -54,6 +54,25 @@ export async function updateDishRatingByUserId(dish_id, user_id, rating, comment
   }
 }
 
+// update dish rating by firebase id
+export async function updateDishRatingByFirebaseId(dish_id, firebase_id, rating, comment) {
+  console.log("update args", dish_id, firebase_id, rating, comment)
+  try {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ firebase_id, rating, comment })
+    };
+    const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating`, options);
+    const ratings = await res.json();
+    return ratings;
+  } catch (error) {
+    throw error;
+  }
+}
+
 // create dish rating
 export async function createDishRating(dish_id, user_id, rating, comment) {
   console.log("create args", dish_id, user_id, rating, comment)
