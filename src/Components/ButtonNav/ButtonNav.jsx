@@ -32,7 +32,7 @@ export default function FixedBottomNavigation({ setCuisine, setCount, count, men
             setCuisine('')
           }}
         >
-          <BottomNavigationAction style={{color: value === 0 ? "#009688" : "#FF5252"}} label="Add" icon={<AddIcon htmlColor='inherit' />} component={Link} to="/map" />
+          <BottomNavigationAction style={{color: value === 0 ? "#009688" : "#FF5252"}} label="Add" icon={<AddIcon htmlColor='inherit' />} component={Link} to="/adddish" />
           <BottomNavigationAction style={{color: value === 1 ? "#009688" : "#FF5252"}} label="Home" icon={<RestaurantIcon htmlColor='inherit'/>} component={Link} to="/" />
           <BottomNavigationAction style={{color: value === 2 ? "#009688" : "#FF5252"}} label="Dishes" icon={<FavoriteIcon htmlColor='inherit'/>} component ={Link} to="/dishes" />
         </BottomNavigation>

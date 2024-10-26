@@ -16,12 +16,14 @@ import TopMenuBar from "./Components/TopMenuBar/TopMenuBar.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
 import zIndex from "@mui/material/styles/zIndex.js";
 import SidebarMenu from "./Components/SidebarMenu/SidebarMenu.jsx";
+import AddDish from "./Pages/AddDish.jsx";
 
 // import { set } from "animejs";
 
 // context
 import { LocalAuthProvider } from "./Context/LocalAuth/LocalAuthContext.jsx";
 import { AuthProvider } from "./Context/AuthContext/AuthContext.jsx";
+
 
 function App() {
 
@@ -49,6 +51,7 @@ function App() {
           <Route path="/" element={<Home cuisine={cuisine} setCuisine={setCuisine} vegetarian={vegetarian} setVegetarian={setVegetarian} vegan={vegan} setVegan={setVegan} glutenFree={glutenFree} setGlutenFree={setGlutenFree} search={search} setSearch={setSearch}/>} />
           <Route path="/dishes" element={<Dishes />} />
           <Route path="/dishes/:id" element={<DishShow />} />
+          <Route path="/adddish" element={<AddDish />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/map" element={<Map search={search} setSearch={setSearch}/>} />
           <Route path="/about" element={<About />} />
