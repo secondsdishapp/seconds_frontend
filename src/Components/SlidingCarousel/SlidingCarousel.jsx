@@ -39,11 +39,17 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
       delta: 10
   });
 
+
+  useEffect(() => {
+    console.log(filteredDishSearch, "Sliding Carousel Data");
+  }, [filteredDishSearch]);
+  
+
   return (
   <div {...swipeHandlers} className="carousel-container" onClick={(e) => e.preventDefault()}>
     <BsArrowLeftCircleFill className="arrow arrow-left" onClick={prevSlide}/>
     {filteredDishSearch.map((dish, index) => (
-      <CarouselCard key={index} dish={dish} index={index} slide={slide}/>
+      <CarouselCard key={index} dish={dish} index={index} slide={slide} />
     ))}
     <BsArrowRightCircleFill className="arrow arrow-right" onClick={nextSlide}/>
     <span className="indicators">

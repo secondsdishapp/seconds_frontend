@@ -39,16 +39,14 @@
     position: absolute;
     width: 7%;
     z-index: 2;
-    margin-top: 90%;
+    margin-top: 300px;
     margin-left: 30%;
 }
 .change-image:hover {
     cursor: pointer;
 }
 
-.profile-pic-name {
-    /* margin-top: 10px; */
-}
+
 
 .preference-title {
     margin-top: 50px;

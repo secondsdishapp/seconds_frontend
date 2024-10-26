@@ -26,7 +26,8 @@ br{height: 2vw;}
     height: 15vw;
     width: 15vw;
     border-radius: 50%;
-    border:solid 1px turquoise;  
+    border: solid 1px turquoise;
+    
 }
 
 .homepage_filterpercuisine_item{
