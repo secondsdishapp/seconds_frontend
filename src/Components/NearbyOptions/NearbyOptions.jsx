@@ -343,7 +343,7 @@ export default function NearByOptions({
                 
                 }}
             ></img>
-            <h5 className="homepage_filterpercuisine_item_name">{dish.cuisine_name}</h5>
+            <h5 className="homepage_filterpercuisine_item_name">{dish}</h5>
           </div>
         ))}
       </div>
