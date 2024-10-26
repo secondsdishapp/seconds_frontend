@@ -130,7 +130,7 @@ export default function Account({
                     <img className="profile-pic2" src={currImage} />
                     <input ref={fileUploader} type="file" className="choose-file" onChange={uploadedFile} hidden/>
                 </div>
-                <p className="account-name">Welcome {getEmailUsername(currentUser.email)}!</p>
+                <p className="account-name">Welcome {getEmailUsername(currentUser?.email)}!</p>
             </div>
             <p className="preference-title">Set Preferences</p>
             <div className="selections-main-container">
