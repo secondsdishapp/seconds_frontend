@@ -6,6 +6,7 @@ import Modal from '../Components/Modal/Modal.jsx';
 import SignUpForm from '../Components/SignUpForm/SignUpForm.jsx';
 import ToggleSwitch from '../Components/ToggleSwitch/ToggleSwitch.jsx';
 import FoodCarousel from '../Components/FoodCarousel/FoodCarousel.jsx';
+import DummyAuth from '../Components/Auth/DummyAuth/DummyAuth.jsx'
 
 export default function Auth() {
   // context
