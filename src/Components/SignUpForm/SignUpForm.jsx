@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
 import '../SignUp/SignUp.css'; // Import your CSS if you have one
 import './SignUpForm.css'; // Import your CSS if you have one
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../../Context/AuthContext/AuthContext';
 
 const SignUpForm = ({ setCurrentForm }) => {
+  // live site auth context
+  const { signUpWithEmail } = useContext(AuthContext);
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -13,7 +17,7 @@ const SignUpForm = ({ setCurrentForm }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     const formData = {
       firstName,
@@ -24,6 +28,12 @@ const SignUpForm = ({ setCurrentForm }) => {
     };
     console.log('Registration Data:', formData);
     // Here you can handle form submission, e.g., send data to your backend
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+    signUpWithEmail(email, password);
+
   };
 
   return (
