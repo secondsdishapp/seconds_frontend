@@ -23,6 +23,18 @@ export async function fetchDishRatingByUserId(dish_id, user_id) {
   }
 }
 
+// fetch dish rating by firebase id
+export async function fetchDishRatingByFirebaseId(dish_id, firebase_id) {
+  try {
+    const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating?firebase_id=${firebase_id}`);
+    const rating = await res.json();
+    return rating;
+  } catch (error) {
+    console.log(error)
+    throw error;
+  }
+}
+
 // update dish rating by user id
 export async function updateDishRatingByUserId(dish_id, user_id, rating, comment) {
   console.log("update args", dish_id, user_id, rating, comment)
