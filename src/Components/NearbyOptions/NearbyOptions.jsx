@@ -68,6 +68,10 @@ export default function NearByOptions({
   const [locationsInRadius, setLocationsInRadius] = useState([]);
   const [filteredDishSearch, setFilteredDishSearch] = useState([]);
   const [ entireList, setEntireList ] = useState([]);
+  const [ finalEntireList, setFinalEntireList ] = useState([]);
+  const [ listPerCuisine, setListPerCuisine ] = useState([]);
+  const [ uniqueListPerCuisine, setUniqueListPerCuisine ] = useState([]);
+  const [ cuisineIcons, setCuisineIcons ] = useState([]);
   const [cuisine1, setCuisine1] = useState('');
 
   const [currentLocation, setCurrentLocation] = useState({
@@ -162,6 +166,36 @@ export default function NearByOptions({
       });
   }, [count,search]);
 
+  useEffect(() => {
+    fetch(`${API}/dishes/nearbyoptions`)
+    .then((response) => response.json())
+    .then((res) => {
+      setListPerCuisine(res.sort((a, b) => b.avg_rating - a.avg_rating));
+    });
+  }, [])
+
+  useEffect(() => {
+    console.log(listPerCuisine, "listPerCuisine");
+  }, [listPerCuisine])
+
+  useEffect(() => {
+    const cuisines = listPerCuisine.map((dish) => dish.cuisine_name);
+    setCuisineIcons([...cuisines]);
+    // setCuisineIcons(cuisineIcons.filter((cuisine, index) => cuisineIcons.indexOf(cuisine) === index));
+  }, [entireList]);
+
+  useEffect(() => {
+    setUniqueListPerCuisine(cuisineIcons.filter((cuisine, index) => cuisineIcons.indexOf(cuisine) === index));
+  }, [cuisineIcons]);
+
+  useEffect(() => {
+    console.log(cuisineIcons, "cuisineIcons Array Line 188");
+  }, [cuisineIcons]);
+
+  useEffect(() => {
+    console.log(uniqueListPerCuisine, "uniqueListPerCuisine");
+  }, [uniqueListPerCuisine]);
+
   //USING LOCALSTORAGE PREFERENCES TO FILTER THE LIST FIRST--------------------------------------------------------------------------------
 
   useEffect(() => {
@@ -197,36 +231,17 @@ export default function NearByOptions({
   useEffect(() => {
     setEntireList(preferenceListGlutenFree.filter((el) => el.dish_name.toLowerCase().includes(search.toLowerCase()) || el.restaurant_name.toLowerCase().includes(search.toLowerCase())));
   }, [preferenceListGlutenFree, vegetarian, vegan, glutenFree]);
-    //   preferenceListGlutenFree.filter(
-    // (el) =>
-    //   el.dish_name.toLowerCase().includes(search.toLowerCase()) ||
-    //   el.restaurant_name.toLowerCase().includes(search.toLowerCase())
-    // );
-  
-
-  useEffect(() => {
-    console.log(allNearByDishes, "allNearbyDishes State");
-  }, [allNearByDishes]);
-
-  useEffect(() => {
-    console.log(preferenceListVegetarian, "Preference List Vegetarian");
-  }, [preferenceListVegetarian]);
-
-  useEffect(() => {
-    console.log(preferenceListVegan, "Preference List Vegan");
-  }, [preferenceListVegan]);
-
-  useEffect(() => {
-    console.log(preferenceListGlutenFree, "Preference List Gluten Free");
-  }, [preferenceListGlutenFree]);
-
+ 
   //---------------------------------------------------------------------------------------------------------------------------
 
   useEffect(() => {
-
     console.log(entireList, "Entire List line 194")
   }, [entireList])
 
+  useEffect(() => {
+    setFinalEntireList(entireList.filter((el) => el.avg_rating >= 3.5));
+  }, [entireList]);
+  
 
   let highlyRatedDishes = nearByDishes.filter((el) => el.avg_rating >= 3.5);
 
@@ -282,7 +297,7 @@ export default function NearByOptions({
         />
       </div>
       <div className="homepage_filterpercuisine">
-        {filterEntireListPerCuisine.map((dish) => (
+        {uniqueListPerCuisine.map((dish) => (
           <div className="homepage_filterpercuisine_item">
             <img
               className="homepage_filterpercuisine_item_image"
@@ -303,7 +318,7 @@ export default function NearByOptions({
       <br />
 
   
-      {entireList.map((item, index) => {
+      {finalEntireList.map((item, index) => {
         return <Dish item={item} index={index} key={item.dish_id} />;
       })}
     </div>
@@ -318,11 +333,11 @@ export default function NearByOptions({
         />
       </div>
       <div className="homepage_filterpercuisine">
-        {entireList.map((dish) => (
+        {uniqueListPerCuisine.map((dish) => (
           <div className="homepage_filterpercuisine_item">
             <img
               className="homepage_filterpercuisine_item_image"
-              src={dish.dish_image}
+              src={`/${dish}.svg`}
               onClick={()=>{
                 setCuisine(dish.cuisine_name)
                 
@@ -338,7 +353,7 @@ export default function NearByOptions({
       </h4>
       {cuisine?highlyRatedDishes.filter(el=>el.cuisine_name===cuisine).map((item, index) => {
         return <Dish item={item} index={index} key={item.dish_id} />;
-      }):entireList.map((item, index) => {
+      }):finalEntireList.map((item, index) => {
         return <Dish item={item} index={index} key={item.dish_id} />;
       })}
     </div>

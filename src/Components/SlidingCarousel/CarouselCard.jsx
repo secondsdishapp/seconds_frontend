@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { fetchAllDishRatingsByDishId } from '../../Services/ratings.services.js';
+import { useNavigate } from 'react-router-dom';
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -9,6 +10,7 @@ export default function CarouselCard({
   ,slide
 }) {
 
+  const navigate = useNavigate();
   const [dishRatings, setDishRatings] = useState([]);
   const [dishAverageRating, setDishAverageRating] = useState(0);
 
@@ -51,7 +53,7 @@ export default function CarouselCard({
 }
 
   return (
-    <div key={index} className={slide === index ? "single-card" : "single-card hidden"}>
+    <div key={index} className={slide === index ? "single-card" : "single-card hidden"} onClick={() => navigate(`/dishes/${dish.dish_id}`)}>
           <div style={{display: "flex", marginLeft: "0%", alignItems: "center", width: "100%", gap: "2%"}}>
               {dishRating(dish.avg_rating).map((elem, index) => elem === "full" ?
                 <img className="rate-icon" src="/eat.png"/>
