@@ -13,8 +13,6 @@ export default function NearByOptions({
   setVegan,
   glutenFree,
   setGlutenFree,
-  cuisine,
-  setCuisine,
   search,
   setSearch,
 }) {
@@ -72,7 +70,9 @@ export default function NearByOptions({
   const [ listPerCuisine, setListPerCuisine ] = useState([]);
   const [ uniqueListPerCuisine, setUniqueListPerCuisine ] = useState([]);
   const [ cuisineIcons, setCuisineIcons ] = useState([]);
-  const [cuisine1, setCuisine1] = useState('');
+  const [cuisine, setCuisine] = useState('');
+  const [ finalCuisineFilterList, setFinalCuisineFilterList ] = useState([]);
+  const [ clicked, setClicked ] = useState("");
 
   const [currentLocation, setCurrentLocation] = useState({
     lat: null,
@@ -243,6 +243,20 @@ export default function NearByOptions({
   }, [entireList]);
   
 
+  //CUISINE FILTER LIST----------------------------------------------------------------------------------------------------------
+
+  useEffect(() => {
+    setFinalCuisineFilterList(listPerCuisine.filter(dish => dish.cuisine_name === cuisine));
+  }, [cuisine])
+
+  useEffect(() => {
+    console.log(listPerCuisine, "Final Entire List line 252");
+  }, [cuisine])
+
+  useEffect(() => {
+    console.log(finalCuisineFilterList, "Final Cuisine Filter List line 252");
+  }, [finalCuisineFilterList])
+
   let highlyRatedDishes = nearByDishes.filter((el) => el.avg_rating >= 3.5);
 
   let objectOfEntireList = {};
@@ -264,6 +278,10 @@ export default function NearByOptions({
     objectOfRecommendedList[element.cuisine_name] = 1;
   }
 
+
+  useEffect(() => {
+    console.log(cuisine, "Cuisine state line 269");
+  }, [cuisine])
 
   useEffect(() => {
     // console.log(dishesLocations, "Dishes Locations");
@@ -336,11 +354,11 @@ export default function NearByOptions({
         {uniqueListPerCuisine.map((dish) => (
           <div className="homepage_filterpercuisine_item">
             <img
-              className="homepage_filterpercuisine_item_image"
+              className={`homepage_filterpercuisine_item_image ${clicked === dish ? "active" : ""}`}
               src={`/${dish}.svg`}
               onClick={()=>{
-                setCuisine(dish.cuisine_name)
-                
+                setCuisine(dish)
+                setClicked(dish)
                 }}
             ></img>
             <h5 className="homepage_filterpercuisine_item_name">{dish}</h5>
@@ -351,7 +369,7 @@ export default function NearByOptions({
       <h4 className="highly-rated-nearby-options">
         Highly rated nearby
       </h4>
-      {cuisine?highlyRatedDishes.filter(el=>el.cuisine_name===cuisine).map((item, index) => {
+      {cuisine ? finalCuisineFilterList.map((item, index) => {
         return <Dish item={item} index={index} key={item.dish_id} />;
       }):finalEntireList.map((item, index) => {
         return <Dish item={item} index={index} key={item.dish_id} />;
