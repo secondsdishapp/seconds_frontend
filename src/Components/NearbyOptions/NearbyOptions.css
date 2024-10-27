@@ -27,7 +27,13 @@ br{height: 2vw;}
     width: 15vw;
     border-radius: 50%;
     border: solid 1px turquoise;
-    
+}
+.homepage_filterpercuisine_item_image:hover {
+    cursor: pointer;
+    background-color: black;
+}
+.homepage_filterpercuisine_item_image.active {
+    background-color: black;
 }
 
 .homepage_filterpercuisine_item{
