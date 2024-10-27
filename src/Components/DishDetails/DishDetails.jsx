@@ -10,6 +10,7 @@ import {
   ,fetchDishRatingByFirebaseId
   ,updateDishRatingByFirebaseId
   ,createDishRatingByFirebaseId
+  ,deleteDishRatingByFirebaseId
 } from '../../Services/ratings.services.js'
 
 const API = import.meta.env.VITE_API_URL;
@@ -137,7 +138,6 @@ export default function DishDetails() {
   }
 
   async function updateDishRating(updatedRating) {
-    console.log(updatedRating)
     if (currentUser) {
       const { dish_id, firebase_id, hoverRating, comment } = updatedRating
         try {
@@ -187,7 +187,30 @@ export default function DishDetails() {
     }
   }
 
+  // delete dish user rating
+  async function deleteDishRating({dish_id, firebase_id}) {
+    if (currentUser) {
+      try {
+        const dishUserRating = await deleteDishRatingByFirebaseId(dish_id, firebase_id)
+        console.log(dishUserRating)
+        setPreviousRating(0)
+        setHoverRating(0)
+        setTimeout(() => {
+          alert('Your rating has been removed!')
+        }, 500)
+      } catch (error) {
+          throw error
+      }
+    }
+  }
 
+  function handleDeleteDishRating(id, firebase_id) {
+    if (currentUser) {
+      deleteDishRating(id, firebase_id)
+    } else if (isLocalLoggedIn) {
+      deleteDishRating(id, user_id)
+    }
+  }
 
   // create dish rating
   async function handleCreateDishRating({dish_id, user_id, firebase_id, hoverRating, comment}) {
