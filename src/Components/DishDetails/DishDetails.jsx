@@ -171,6 +171,10 @@ export default function DishDetails() {
   }
 
   function handleUpdateDishRating(id, user_id, firebase_id, hoverRating) {
+    if (!hoverRating) {
+      alert('Please select a rating before submitting')
+      return
+    }
     if (currentUser) {
       if (previousRating === hoverRating) {
         alert('Same rating, no update')
@@ -214,6 +218,10 @@ export default function DishDetails() {
   async function handleCreateDishRating({dish_id, user_id, firebase_id, hoverRating, comment}) {
     if (!currentUser) {
       alert('Login to rate this dish!')
+      return
+    }
+    if (!hoverRating) {
+      alert('Please select a rating before submitting')
       return
     }
     if (currentUser) {
