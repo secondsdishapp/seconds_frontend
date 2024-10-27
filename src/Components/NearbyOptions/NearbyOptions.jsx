@@ -60,21 +60,21 @@ export default function NearByOptions({
   const { isLocalLoggedIn, localUser, localLogin, localLogout, localAuthTest } =
     useContext(LocalAuthContext);
 
-  const [dishesLocations, setDishesLocations] = useState([]);
-  const [nearByDishes, setNearByDishes] = useState([]);
-  const [allNearByDishes, setAllNearByDishes] = useState([]);
-  const [locationsInRadius, setLocationsInRadius] = useState([]);
-  const [filteredDishSearch, setFilteredDishSearch] = useState([]);
+  const [ dishesLocations, setDishesLocations ] = useState([]);
+  const [ nearByDishes, setNearByDishes ] = useState([]);
+  const [ allNearByDishes, setAllNearByDishes ] = useState([]);
+  const [ locationsInRadius, setLocationsInRadius ] = useState([]);
+  const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
   const [ entireList, setEntireList ] = useState([]);
   const [ finalEntireList, setFinalEntireList ] = useState([]);
   const [ listPerCuisine, setListPerCuisine ] = useState([]);
   const [ uniqueListPerCuisine, setUniqueListPerCuisine ] = useState([]);
   const [ cuisineIcons, setCuisineIcons ] = useState([]);
-  const [cuisine, setCuisine] = useState('');
+  const [ cuisine, setCuisine ] = useState('');
   const [ finalCuisineFilterList, setFinalCuisineFilterList ] = useState([]);
   const [ clicked, setClicked ] = useState("");
 
-  const [currentLocation, setCurrentLocation] = useState({
+  const [ currentLocation, setCurrentLocation ] = useState({
     lat: null,
     lng: null,
   });
@@ -359,7 +359,7 @@ export default function NearByOptions({
               onClick={()=>{
                 setCuisine(dish)
                 setClicked(dish)
-                }}
+              }}
             ></img>
             <h5 className="homepage_filterpercuisine_item_name">{dish}</h5>
           </div>
@@ -369,11 +369,14 @@ export default function NearByOptions({
       <h4 className="highly-rated-nearby-options">
         Highly rated nearby
       </h4>
-      {cuisine ? finalCuisineFilterList.map((item, index) => {
-        return <Dish item={item} index={index} key={item.dish_id} />;
-      }):finalEntireList.map((item, index) => {
-        return <Dish item={item} index={index} key={item.dish_id} />;
-      })}
+      {cuisine ?
+        finalCuisineFilterList.map((item, index) => {
+          return <Dish item={item} index={index} key={item.dish_id} />;
+        }) :
+        finalEntireList.map((item, index) => {
+          return <Dish item={item} index={index} key={item.dish_id} />;
+        })
+      }
     </div>
   );
 }
