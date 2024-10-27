@@ -171,7 +171,7 @@ export default function DishDetails() {
   }
 
   function handleUpdateDishRating(id, user_id, firebase_id, hoverRating) {
-    if (!hoverRating) {
+    if (hoverRating === 0) {
       alert('Please select a rating before submitting')
       return
     }
@@ -220,7 +220,7 @@ export default function DishDetails() {
       alert('Login to rate this dish!')
       return
     }
-    if (!hoverRating) {
+    if (hoverRating === 0) {
       alert('Please select a rating before submitting')
       return
     }
