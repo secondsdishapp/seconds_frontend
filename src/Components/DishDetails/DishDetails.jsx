@@ -192,7 +192,6 @@ export default function DishDetails() {
     if (currentUser) {
       try {
         const dishUserRating = await deleteDishRatingByFirebaseId(dish_id, firebase_id)
-        console.log(dishUserRating)
         setPreviousRating(0)
         setHoverRating(0)
         setTimeout(() => {
