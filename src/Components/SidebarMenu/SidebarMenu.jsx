@@ -42,7 +42,7 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
                 setValue(-1);
                 }
             }>
-                <p className="link-text">{currentUser ? "My Account" : "Log In"}</p>
+                <p className="link-text">{currentUser ? "My Account" : "Log In / Sign"}</p>
                 {/* <p className="link-text">My Account</p> */}
             </div>
             <div className="links" onClick={() => {
@@ -66,6 +66,7 @@ export default function SidebarMenu ({ menuToggle, setMenuToggle, value, setValu
               </div> : 
               null 
             }
+            <div></div>
         </div>
     )
 }

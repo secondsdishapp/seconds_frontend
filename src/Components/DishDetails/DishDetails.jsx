@@ -187,6 +187,8 @@ export default function DishDetails() {
     }
   }
 
+  
+
   // create dish rating
   async function handleCreateDishRating({dish_id, user_id, firebase_id, hoverRating, comment}) {
     if (!currentUser) {
@@ -229,8 +231,8 @@ export default function DishDetails() {
   }
 
   function getDirections () {
-    const restaurantAdress = `${dish.address}, ${dish.city}, ${dish.state} ${dish.zipcode}`;
-    const encodedAddress = encodeURIComponent(restaurantAdress);
+    const restaurantAddress = `${dish.address}, ${dish.city}, ${dish.state} ${dish.zipcode}`;
+    const encodedAddress = encodeURIComponent(restaurantAddress);
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
     window.open(googleMapsUrl, '_blank');
   }
@@ -277,9 +279,14 @@ export default function DishDetails() {
         </div>
       </div>
       {previousRating ?
-        <button className='dish-details-rating-button'
-          onClick={() => handleUpdateDishRating(updatedRating)}
-        > Update Rating </button>
+        <div>
+          <button className='dish-details-rating-button'
+            onClick={() => handleDeleteDishRating(updatedRating)}
+          > Remove Rating </button>
+          <button className='dish-details-rating-button'
+            onClick={() => handleUpdateDishRating(updatedRating)}
+          > Update Rating </button>
+        </div>
         :
         <button className='dish-details-rating-button'
           onClick={() => handleCreateDishRating({dish_id: id, user_id, firebase_id, hoverRating, comment: 'test comment'})}
