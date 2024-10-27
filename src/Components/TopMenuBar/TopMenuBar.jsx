@@ -16,7 +16,7 @@ export default function TopMenuBar({ menuToggle, setMenuToggle }) {
 
   const { currentUser } = useContext(AuthContext);
   console.log(currentUser);
-
+  
   const navigate = useNavigate();
   
   return (

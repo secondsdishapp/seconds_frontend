@@ -18,10 +18,9 @@ const plateImages = [
   "https://t3.ftcdn.net/jpg/03/06/75/66/360_F_306756617_moZMl2JAPW5rwxj8TBggViHvKtX1QDK2.jpg",
   "https://www.shutterstock.com/image-vector/hands-holding-fork-spoon-empty-260nw-1292484178.jpg",
 ];
+const phoneNumber = import.meta.env.VITE_PHONE_NUMBER;;
 
 export default function DishDetails() {
-
-  const phoneNumber = "+16463745482";
 
   // context
   const {
@@ -126,7 +125,7 @@ export default function DishDetails() {
       setDishUserRating(id, user_id)
     }
 
-  }, [])
+  }, [currentUser])
 
   // update dish rating
   const updatedRating = {
