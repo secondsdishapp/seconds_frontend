@@ -112,6 +112,12 @@ background-color: #FF5252;
 color: white;
 font-weight: 600;
 }
+
+  .delete-rating {
+    color: #ff5252;
+    border: 1px solid #ff5252;
+    background-color: white;
+  }
 .dish-details_plate-rating {
     
     display: flex;

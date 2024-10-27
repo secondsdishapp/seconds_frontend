@@ -187,7 +187,7 @@ export default function DishDetails() {
     }
   }
 
-  
+
 
   // create dish rating
   async function handleCreateDishRating({dish_id, user_id, firebase_id, hoverRating, comment}) {
@@ -280,7 +280,7 @@ export default function DishDetails() {
       </div>
       {previousRating ?
         <div>
-          <button className='dish-details-rating-button'
+          <button className='dish-details-rating-button delete-rating'
             onClick={() => handleDeleteDishRating(updatedRating)}
           > Remove Rating </button>
           <button className='dish-details-rating-button'
