@@ -111,6 +111,22 @@ export async function createDishRatingByFirebaseId(dish_id, firebase_id, rating,
   }
 }
 
+// delete dish rating
+export async function deleteDishRatingByFirebaseId(dish_id, firebase_id) {
+	try {
+		const res = await fetch(`${SECONDS_API}/dishes/${dish_id}/ratings/user_rating?firebase_id=${firebase_id}`, {
+			method: "DELETE",
+		});
+		if (!res.ok) {
+			throw new Error(`Failed to delete listing with status: ${res.status}`);
+		}
+		const deletedDish = await res.json();
+		return deletedDish;
+	} catch (error) {
+		  throw error;
+	}
+}
+
 // export async function fetchAllShoes() {
 // 	try {
 // 		const res = await fetch(NIKEDAS_API);
