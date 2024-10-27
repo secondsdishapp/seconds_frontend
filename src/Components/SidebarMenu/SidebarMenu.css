@@ -20,6 +20,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: calc(84vH / 2);
     /* border: 1px solid black; */
 }
 

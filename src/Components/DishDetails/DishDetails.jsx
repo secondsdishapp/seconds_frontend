@@ -10,6 +10,7 @@ import {
   ,fetchDishRatingByFirebaseId
   ,updateDishRatingByFirebaseId
   ,createDishRatingByFirebaseId
+  ,deleteDishRatingByFirebaseId
 } from '../../Services/ratings.services.js'
 
 const API = import.meta.env.VITE_API_URL;
@@ -17,10 +18,9 @@ const plateImages = [
   "https://t3.ftcdn.net/jpg/03/06/75/66/360_F_306756617_moZMl2JAPW5rwxj8TBggViHvKtX1QDK2.jpg",
   "https://www.shutterstock.com/image-vector/hands-holding-fork-spoon-empty-260nw-1292484178.jpg",
 ];
+const phoneNumber = import.meta.env.VITE_PHONE_NUMBER;
 
 export default function DishDetails() {
-
-  const phoneNumber = "+16463745482";
 
   // context
   const {
@@ -125,7 +125,7 @@ export default function DishDetails() {
       setDishUserRating(id, user_id)
     }
 
-  }, [])
+  }, [currentUser])
 
   // update dish rating
   const updatedRating = {
@@ -137,7 +137,6 @@ export default function DishDetails() {
   }
 
   async function updateDishRating(updatedRating) {
-    console.log(updatedRating)
     if (currentUser) {
       const { dish_id, firebase_id, hoverRating, comment } = updatedRating
         try {
@@ -187,6 +186,30 @@ export default function DishDetails() {
     }
   }
 
+  // delete dish user rating
+  async function deleteDishRating({dish_id, firebase_id}) {
+    if (currentUser) {
+      try {
+        const dishUserRating = await deleteDishRatingByFirebaseId(dish_id, firebase_id)
+        setPreviousRating(0)
+        setHoverRating(0)
+        setTimeout(() => {
+          alert('Your rating has been removed!')
+        }, 500)
+      } catch (error) {
+          throw error
+      }
+    }
+  }
+
+  function handleDeleteDishRating(id, firebase_id) {
+    if (currentUser) {
+      deleteDishRating(id, firebase_id)
+    } else if (isLocalLoggedIn) {
+      deleteDishRating(id, user_id)
+    }
+  }
+
   // create dish rating
   async function handleCreateDishRating({dish_id, user_id, firebase_id, hoverRating, comment}) {
     if (!currentUser) {
@@ -229,8 +252,8 @@ export default function DishDetails() {
   }
 
   function getDirections () {
-    const restaurantAdress = `${dish.address}, ${dish.city}, ${dish.state} ${dish.zipcode}`;
-    const encodedAddress = encodeURIComponent(restaurantAdress);
+    const restaurantAddress = `${dish.address}, ${dish.city}, ${dish.state} ${dish.zipcode}`;
+    const encodedAddress = encodeURIComponent(restaurantAddress);
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
     window.open(googleMapsUrl, '_blank');
   }
@@ -277,13 +300,20 @@ export default function DishDetails() {
         </div>
       </div>
       {previousRating ?
-        <button className='dish-details-rating-button'
-          onClick={() => handleUpdateDishRating(updatedRating)}
-        > Update Rating </button>
+        <div className='dish-details-button-group'>
+          <button className='dish-details-rating-button delete-rating-button'
+            onClick={() => handleDeleteDishRating(updatedRating)}
+          > Remove Rating </button>
+          <button className='dish-details-rating-button'
+            onClick={() => handleUpdateDishRating(updatedRating)}
+          > Update Rating </button>
+        </div>
         :
-        <button className='dish-details-rating-button'
-          onClick={() => handleCreateDishRating({dish_id: id, user_id, firebase_id, hoverRating, comment: 'test comment'})}
-        > Rate Dish </button> 
+        <div className='dish-details-button-group'>
+          <button className='dish-details-rating-button'
+            onClick={() => handleCreateDishRating({dish_id: id, user_id, firebase_id, hoverRating, comment: 'test comment'})}
+          > Rate Dish </button>
+        </div>
         }
     </div>
   )
