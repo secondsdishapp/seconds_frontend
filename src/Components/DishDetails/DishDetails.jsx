@@ -279,8 +279,8 @@ export default function DishDetails() {
         </div>
       </div>
       {previousRating ?
-        <div>
-          <button className='dish-details-rating-button delete-rating'
+        <div className='dish-details-button-group'>
+          <button className='dish-details-rating-button delete-rating-button'
             onClick={() => handleDeleteDishRating(updatedRating)}
           > Remove Rating </button>
           <button className='dish-details-rating-button'
@@ -288,9 +288,11 @@ export default function DishDetails() {
           > Update Rating </button>
         </div>
         :
-        <button className='dish-details-rating-button'
-          onClick={() => handleCreateDishRating({dish_id: id, user_id, firebase_id, hoverRating, comment: 'test comment'})}
-        > Rate Dish </button> 
+        <div className='dish-details-button-group'>
+          <button className='dish-details-rating-button'
+            onClick={() => handleCreateDishRating({dish_id: id, user_id, firebase_id, hoverRating, comment: 'test comment'})}
+          > Rate Dish </button>
+        </div>
         }
     </div>
   )

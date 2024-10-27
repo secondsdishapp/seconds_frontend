@@ -1,69 +1,71 @@
 
 @media (max-width: 500px) {
-    .dish-details-container{
-        margin-top: -15vw;
+  .dish-details-container{
+    margin-top: -15vw;
+  }
+  
+  .dish-details_dish-name  {
+    margin-top: 20vw;
+    font-size: 27px;
+    text-align: center;
+    color: #FF5252;
+  }
 
-    }
-    .dish-details_dish-name  {
-        margin-top: 20vw;
-        font-size: 27px;
-        text-align: center;
-        color: #FF5252;
-    }
-    .dish-details_restaurant-name {
+  .dish-details_restaurant-name {
+    color: #009688;
+    text-align: center;
+  }
+  
+  .dish-details_dish-image{
+    /* margin-top: 10vw; */
+    width: 80vw;
+    margin-left: 10vw;
 
-        color: #009688;
-        text-align: center;
-    }
-    .dish-details_dish-image{
-        /* margin-top: 10vw; */
-        width: 80vw;
-        margin-left: 10vw;
+    height: 50vw;
+    text-align: center;
+    /* margin-left: 8vw; */
+    text-align: center;
+    border-radius: 1vw;
+  }
 
-        height: 50vw;
-        text-align: center;
-        /* margin-left: 8vw; */
-        text-align: center;
-        border-radius: 1vw;
+  .dish-details_restaurant-buttons{    
+    text-align: center;
+  }
 
-    }
-    .dish-details_restaurant-buttons{
-       
-        text-align: center;
-       
+  .dish-details_rating-length{
+    transform: translate(0vw,-20vw);
+    /* text-align: center; */
+    margin-left: 60%;
+    color:#a9a9a9;
+    font-size: 16px;
+    font-weight: 550;
+  }
 
-    }
-    .dish-details_rating-length{
-        transform: translate(0vw,-20vw);
-        /* text-align: center; */
-        margin-left: 60%;
-        color:#a9a9a9;
-        font-size: 16px;
-        font-weight: 550;
-    }
-    .dish-details_restaurant-buttons_call{
-        margin: 2vw;
-        width: 25vw;
-        height: 8vw;
-        border-radius: 4vw;
-        border: none;
-        /* background-color: #FF5252; */
-        /* color: white; */
-    }
-    .dish-details_restaurant-buttons_directions{
-        margin: 2vw;
-        width: 25vw;
-        height: 8vw;
-        border-radius: 4vw;
-        border: none;
-        /* background-color: #FF5252; */
-        /* color: white; */
-    }
-    .dish-details_restaurant-buttons_directions:hover{
-        cursor: pointer;
-    }
+  .dish-details_restaurant-buttons_call{
+    margin: 2vw;
+    width: 25vw;
+    height: 8vw;
+    border-radius: 4vw;
+    border: none;
+    /* background-color: #FF5252; */
+    /* color: white; */
+  }
 
-.dish-details_restaurant-info{
+  .dish-details_restaurant-buttons_directions{
+    margin: 2vw;
+    width: 25vw;
+    height: 8vw;
+    border-radius: 4vw;
+    border: none;
+    /* background-color: #FF5252; */
+    /* color: white; */
+  }
+
+  .dish-details_restaurant-buttons_directions:hover{
+    cursor: pointer;
+  }
+
+  .dish-details_restaurant-info{
     width: 70%;
     margin: 8vw;
     margin-top: 8vw;
@@ -76,76 +78,84 @@
     padding: 1vw;
     padding-bottom: 3vw;
     border-radius: 10px;
-}
-.dish-details_ingredients-title{
+  }
+
+  .dish-details_ingredients-title{
     margin-left: 10vw;
     transform: translate(0vw, -20vw);
-}
- .dish-details_rating-title{
+  }
+
+  .dish-details_rating-title{
     margin-left: 10vw;
     transform: translate(0vw, 0vw);
-}
-.dish-details_ingredients-content{
+  }
+
+  .dish-details_ingredients-content{
     margin-left: 10vw;
     transform: translate(0vw, -20vw);
-}
-.dish-details_rating-content{
+  }
+
+  .dish-details_rating-content{
     margin-left: 10vw;
     transform: translate(6vw, -10vw);
     font-size: 10vw;
     color: black;
-}
-.dish-details-rating-button{
+  }
 
- text-align: center;
- margin-left: 33vw;
- font-size: 4vw;
- width: 35vw;
- height: 9vw;
- margin-top: 3vw;
- margin-bottom: 3vw;
- border-radius: 5vw;
- transform: translate(1vw, -6vw);
- /* border: solid 0.2vw gray; */
-border: none;
-background-color: #FF5252;
-color: white;
-font-weight: 600;
-}
+  /* make buttons side by side */
+  .dish-details-button-group{
+    /* width: 80%; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+  }
 
-  .delete-rating {
+  .dish-details-rating-button{
+    text-align: center;
+    /* margin-left: 33vw; */
+    font-size: 4vw;
+    width: 35vw;
+    height: 9vw;
+    margin-top: 3vw;
+    margin-bottom: 3vw;
+    border-radius: 5vw;
+    transform: translate(1vw, -6vw);
+    /* border: solid 0.2vw gray; */
+    border: none;
+    background-color: #FF5252;
+    color: white;
+    font-weight: 600;
+  }
+
+  .delete-rating-button {
     color: #ff5252;
     border: 1px solid #ff5252;
     background-color: white;
   }
-.dish-details_plate-rating {
-    
+
+  .dish-details_plate-rating {
     display: flex;
     gap: 5px;
     margin-left: 10vw;
-
   }
   
   .dish-details_plate-rating img {
     transform: translate(0vw, -12vw);
-
     width: 15vw;
     height: 15vw;
     cursor: pointer;
   }
+
   .plate-rating{
     margin-top: 2vw;
     margin-left: 15vw;
   }
+
   .dish-details_ask-for-rating{
     margin-left: 10vw;
     margin-right: 7vw;
     transform: translate(0vw, -15vw);
-
-
   }
-  
-
-
-
-  }
+}
