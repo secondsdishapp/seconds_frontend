@@ -1,5 +1,5 @@
 import './Login.css'; 
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { LocalAuthContext } from '../../../Context/LocalAuth/LocalAuthContext.jsx';
 import { AuthContext } from '../../../Context/AuthContext/AuthContext.jsx';
@@ -81,29 +81,49 @@ export default function Login() {
     setModalOpen(false); // Close the modal
   };
 
+
+  useEffect(() => {
+    if (window.AppleID) {
+      window.AppleID.auth.init({
+        clientId: 'YOUR_APPLE_CLIENT_ID', // Replace with your client ID from Apple
+        scope: 'name email',
+        redirectURI: 'YOUR_REDIRECT_URI', // Replace with your redirect URI
+        state: 'origin=https://example.com', // Optional state value
+        usePopup: true, // Popup mode for sign-in
+      });
+    }
+  }, []);
+  
   return (
     <div className="login-form-container">
       <div className="login-form-box">
         <form onSubmit={handleSubmit} className="login-form">
           <div className="login-form-group-email">
+            <label htmlFor="email" className="login-form-label-email">
+              Email:
             <input
+              id="email"
               type="email"
-              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               className="login-form-input-field-email"
             />
+            </label>
           </div>
           <div className="login-form-group-password">
+            <label htmlFor="password" 
+            className="login-form-label-password">
+              Password:
             <input
+              id="password"
               type="password"
-              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
               className="login-form-input-field-password"
             />
+            </label>
           </div>
           <button type="submit" className="login-form-button">Sign In</button>
           
@@ -130,18 +150,29 @@ export default function Login() {
             </svg>
             Continue with Facebook
           </a>
-          <h5 className="login-form-signup-prompt">
+
+          {/* Apple Sign-In Button */}
+          <div id="appleid-signin" className="apple-signin-button" data-color="black" data-border="true" data-border-radius="50" data-type="continue" data-mode="center-align" data-width="100%" data-height-property="100%" data-logo-size="medium" data-font="bold"></div>
+
+          {/* <h5 className="login-form-signup-prompt">
             Not Registered? <Link to="#" onClick={handleSignUpClick}>Sign Up</Link>
+          </h5> */}
+
+          <h5 className="login-form-signup-prompt">
+            Not Registered? <a href="#" onClick={() => setCurrentForm('signup')}>Sign Up</a>
           </h5>
+
+          
         </form>
       </div>
 
+
       {/* Render the Modal with SignUpForm */}
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <Modal onClose={closeModal}>
           <SignUpForm onClose={closeModal} />
         </Modal>
-      )}
+      )} */}
     </div>
   );
 }
