@@ -61,7 +61,7 @@ export default function Login() {
       alert('Login successful!');
       setEmail('');
       setPassword('');
-      navigate('/myaccount')
+      navigate(`/myaccount`)
     } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;

@@ -199,16 +199,24 @@ export default function NearByOptions({
   //USING LOCALSTORAGE PREFERENCES TO FILTER THE LIST FIRST--------------------------------------------------------------------------------
 
   useEffect(() => {
+    console.log(allNearByDishes, "allNearByDishes Line 202");
+  }, [allNearByDishes]);
+
+  useEffect(() => {
     if (vegetarian) {
-      setPreferenceListVegetarian(allNearByDishes.filter((dish) => dish.vegetarian === true));
+      setPreferenceListVegetarian(allNearByDishes.filter((dish) => dish.is_vegetarian === true));
     } else {
       setPreferenceListVegetarian(allNearByDishes);
     }
   }, [allNearByDishes,vegetarian]);
 
   useEffect(() => {
+    console.log(preferenceListVegetarian, "preferenceListVegetarian Line 209");
+  }, [preferenceListVegetarian]);
+
+  useEffect(() => {
     if (vegan) {
-      setPreferenceListVegan(preferenceListVegetarian.filter((dish) => dish.vegan === true));
+      setPreferenceListVegan(preferenceListVegetarian.filter((dish) => dish.is_vegan === true));
     } else {
       setPreferenceListVegan(preferenceListVegetarian);
     }
@@ -216,7 +224,7 @@ export default function NearByOptions({
 
   useEffect(() => {
     if (glutenFree) {
-      setPreferenceListGlutenFree(preferenceListVegan.filter((dish) => dish.gluten_free === true));
+      setPreferenceListGlutenFree(preferenceListVegan.filter((dish) => dish.is_gluten_free === true));
     } else {
       setPreferenceListGlutenFree(preferenceListVegan);
     }
