@@ -2,7 +2,13 @@ import * as React from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import { useState, useEffect } from 'react';
 
-export default function VeganCheckboxMUI({ vegan, setVegan }) {
+export default function VeganCheckboxMUI({ vegan, setVegan, activeUser }) {
+
+  useEffect(() => {
+    if (activeUser[0]?.is_vegan) {
+      setVegan(activeUser[0]?.is_vegetarian);
+    }
+  }, [activeUser[0]?.is_vegan]);
 
   useEffect(() => {
     if (vegan !== null) {

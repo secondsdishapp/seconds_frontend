@@ -2,7 +2,13 @@ import * as React from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import { useState, useEffect } from 'react';
 
-export default function GlutenFreeCheckboxMUI({ glutenFree, setGlutenFree }) {
+export default function GlutenFreeCheckboxMUI({ glutenFree, setGlutenFree, activeUser }) {
+
+    useEffect(() => {
+        if (activeUser[0]?.is_gluten_free) {
+          setVegetarian(activeUser[0]?.is_gluten_free);
+        }
+      }, [activeUser[0]?.is_gluten_free]);
 
     useEffect(() => {
         if (glutenFree !== null) {
