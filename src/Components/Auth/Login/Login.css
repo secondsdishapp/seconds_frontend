@@ -19,19 +19,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%; /* Full width of the container */
-  max-width: 90%; /* Set a wider max-width to allow flexibility, or use 100% for full width */
-  padding: 2rem; /* Padding inside the form box */
-  background-color: #fff; /* White background for the form */
-  border-radius: 8px; /* Rounded corners */
-  box-sizing: border-box; /* Ensure padding doesn't affect width */
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin-top: -20px; /* Add a negative margin to move it up */
 }
 
 .login-form {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Center items horizontally */
-  width: 100%; /* Full width for the form */
+  flex-direction: column;
+  align-items: center;
 }
 
 .login-form-group-email,
@@ -45,8 +45,8 @@ body {
 
 .login-form-input-field-email,
 .login-form-input-field-password {
-    width: 95%; /* Wider input fields */
-    max-width: 100%; /* Allow input fields to stretch fully */
+    width: 100%; /* Wider input fields */
+    max-width: 400px; /* Allow input fields to stretch fully */
     padding: 0.5rem; /* Padding for input fields */
     border: 1px solid #ccc; /* Border for input fields */
     border-radius: 4px; /* Rounded corners */
@@ -87,27 +87,34 @@ body {
 
 /* Adjustments for responsiveness */
 @media (max-width: 600px) {
-    .login-form-container {
-        padding: 20px; /* Less padding on smaller screens */
-    }
-    
-    .login-form-box {
-        padding: 1rem; /* Less padding in the box */
-        width: 90%; /* Adjust width on small screens */
-        max-width: 95%; /* Ensure the form box takes up more width on mobile */
-        padding: 1.5rem; /* Adjust padding for smaller screens */
-    }
+  .login-form-container {
+    padding: 20px;
+    height: auto;
+    margin-bottom: 50px;
+  }
 
-    .login-form-input-field-email,
-    .login-form-input-field-password {
-        width: 100%; /* Full width for input fields */
-        padding: 0.5rem; /* Padding for input fields */
-        border: 1px solid #ccc; /* Border for input fields */
-        border-radius: 4px; /* Rounded corners */
-        font-family: Montserrat, sans-serif; /* Font style */
-        font-size: 14px; /* Font size */
-    }
-    
+  .login-form-box {
+    padding: 1rem;
+    width: 90%;
+  }
+
+  .login-form-button {
+    width: 100%;
+  }
+
+
+
+  .login-form-input-field-email,
+  .login-form-input-field-password {
+    width: 340px; /* Match the width of the buttons */
+    max-width: 400px; /* Keep this to allow some flexibility on larger screens */
+    padding: 0.5rem; /* Padding for input fields */
+    border: 1px solid #ccc; /* Border for input fields */
+    border-radius: 4px; /* Rounded corners */
+    font-family: Montserrat, sans-serif; /* Font style */
+    font-size: 14px; /* Font size */
+}
+
     .login-form-input-field-email:focus,
     .login-form-input-field-password:focus {
         border-color: #FF5252; /* Change border color on focus */
@@ -115,7 +122,6 @@ body {
         background-color: rgba(255, 82, 82, 0.2); /* Light red background */
         box-shadow: 0 0 5px rgba(255, 82, 82, 0.5); /* Add subtle shadow */
     }
-    
     
 
     .login-form-button:active {
@@ -223,3 +229,10 @@ body {
   height: 20px;
   fill: white;
 }
+
+.apple-signin-button {
+  width: 340px;
+  height: 35px;
+  margin-top: .5rem;
+}
+
