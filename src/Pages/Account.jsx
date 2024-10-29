@@ -1,5 +1,6 @@
 import "./Account.css";
 import { useEffect, useState, useRef, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 import { sendNewUserToDb } from "../Services/users.services.js";
 
@@ -27,6 +28,8 @@ export default function Account({
   , setGlutenFree
 }) {
 
+
+//   const { id } = useParams();
   const API = import.meta.env.VITE_API_URL;
 
   //STATE TO KEEP TRACK OF THE USER
@@ -35,7 +38,7 @@ export default function Account({
 
   // live site context
   const { currentUser } = useContext(AuthContext);
-  const { email, uid } = currentUser;
+  const { email, uid} = currentUser;
 
   function getEmailUsername(email) {
     if (!email) return "User"
@@ -93,7 +96,7 @@ export default function Account({
     //FETCHING THE ACTIVE USER DATA----------------------------------------------------------------------------------------------
     useEffect(() => {
         setActiveUser(users.filter(user => user.firebase_id === uid));
-    }, [uid])
+    }, [uid, users])
     useEffect(() => {
         console.log(activeUser[0], "Active User")
     }, [activeUser]);
@@ -115,28 +118,31 @@ export default function Account({
     //----------------------------------------------------------------------------------------------------------------------
 
     useEffect(() => {
-        const savedPreference = localStorage.getItem("vegetarian");
-        if (savedPreference !== null) {
-          setVegetarian(Boolean(JSON.parse(savedPreference))); // Load saved state
-        }
-        console.log(vegetarian, "Account Page")
-      }, []);
+        // const savedPreference = localStorage.getItem("vegetarian");
+        // if (savedPreference !== null) {
+        //   setVegetarian(Boolean(JSON.parse(savedPreference))); // Load saved state
+        // }
+        // console.log(vegetarian, "Account Page")
+        setVegetarian(activeUser[0]?.is_vegetarian)
+      }, [activeUser, activeUser[0]?.is_vegetarian, uid]);
     const vegetarian2 = "vegetarian";
 
     useEffect(() => {
-        const savedPreference = localStorage.getItem("vegan");
-        if (savedPreference !== null) {
-            setVegan(Boolean(JSON.parse(savedPreference)));
-        }
-    }, []);
+        // const savedPreference = localStorage.getItem("vegan");
+        // if (savedPreference !== null) {
+        //     setVegan(Boolean(JSON.parse(savedPreference)));
+        // }
+        setVegan(activeUser[0]?.is_vegan)
+    }, [activeUser, activeUser[0]?.is_vegan, uid]);
     const vegan2 = "vegan";
 
     useEffect(() => {
-        const savedPreference = localStorage.getItem("glutenFree");
-        if (savedPreference !== null) {
-            setGlutenFree(Boolean(JSON.parse(savedPreference)));
-        }
-    }, []);
+        // const savedPreference = localStorage.getItem("glutenFree");
+        // if (savedPreference !== null) {
+        //     setGlutenFree(Boolean(JSON.parse(savedPreference)));
+        // }
+        setGlutenFree(activeUser[0]?.is_gluten_free)
+    }, [activeUser, activeUser[0]?.is_gluten_free, uid]);
     const glutenFree2 = "gluten free";
 
     function handleSubmit(e) {
@@ -182,6 +188,7 @@ export default function Account({
 
     return  (
         <ThemeProvider theme={theme}>
+        {uid !== undefined ? 
         <div className="account-main-container">
             <div className="profile-pic-name">
                 <div className="profile-pic-container">
@@ -229,6 +236,7 @@ export default function Account({
             </Stack> */}
             <button className="set-preference-btn" type="submit" onClick={(e) => handleSubmit(e)}>Submit</button>
         </div>
+        : <p>Loading...</p>}
         </ThemeProvider>
     )
 }

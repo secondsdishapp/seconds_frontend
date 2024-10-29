@@ -10,11 +10,11 @@ export default function VegetarianCheckboxMUI({ vegetarian, setVegetarian, activ
     }
   }, [activeUser[0]?.is_vegetarian]);
 
-  useEffect(() => {
-    if (vegetarian !== null) {
-        localStorage.setItem("vegetarian", JSON.stringify(vegetarian));
-    }
-  }, [vegetarian]);
+  // useEffect(() => {
+  //   if (vegetarian !== null) {
+  //       localStorage.setItem("vegetarian", JSON.stringify(vegetarian));
+  //   }
+  // }, [vegetarian]);
   
   return (
     <div style={{marginTop: "20px", position: "absolute", justifyContent: "center", alignItems: "center"}}>

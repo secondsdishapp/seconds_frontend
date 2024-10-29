@@ -10,11 +10,11 @@ export default function GlutenFreeCheckboxMUI({ glutenFree, setGlutenFree, activ
         }
       }, [activeUser[0]?.is_gluten_free]);
 
-    useEffect(() => {
-        if (glutenFree !== null) {
-            localStorage.setItem("glutenFree", JSON.stringify(glutenFree));
-        }
-      }, [glutenFree]);
+    // useEffect(() => {
+    //     if (glutenFree !== null) {
+    //         localStorage.setItem("glutenFree", JSON.stringify(glutenFree));
+    //     }
+    //   }, [glutenFree]);
 
   return (
     <div style={{marginTop: "20px", position: "absolute", justifyContent: "center", alignItems: "center"}}>
