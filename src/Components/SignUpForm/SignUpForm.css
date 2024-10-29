@@ -1,45 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+:root {
+  --form-width: 400px; /* Define a consistent width */
+}
+
+body {
+  font-family: Montserrat, sans-serif;
+  margin: 0; /* Reset default margin */
+  padding: 0; /* Reset default padding */
+  background-color: #f8f9fa; /* Light background color for better contrast */
+}
+
+
+.signup-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  margin-bottom: 100px;
+  width: 100%;
+  margin-top: -40px;
+}
+
+.signup-form-title {
+  /* margin-bottom: 20px; */
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
 .signup-form {
   display: flex;
   flex-direction: column;
-}
-
-.form-group-row {
-  display: flex;
-  justify-content: space-between;
-}
-
-.form-group-row .form-group {
-  flex: 1; /* Ensures equal space for each field */
-  margin-right: 10px; /* Adds space between Country and Mobile Number */
-}
-
-.form-group-row .form-group:last-child {
-  margin-right: 0; /* Removes margin from the last form group */
-}
-
-.form-group {
-  margin-bottom: 1rem; /* Adds space between fields vertically */
-}
-
-.input-field {
+  align-items: center;
+  margin-top: -20px;
   width: 100%;
+  max-width: 400px; /* Adjust as needed */
+  margin: 0 auto;
+}
+
+
+.signup-form-group-row {
+  display: flex; /* Use flexbox layout */
+  justify-content: space-between; /* Space out items evenly */
+  margin-bottom: 4px; /* Add space between rows */
+  /* width: 340px; */
+  /* max-width: 400px; */
+  /* padding: 0.5rem; */
+  /* border: 1px solid #ccc; */
+  /* border-radius: 4px; */
+  /* font-family: Montserrat, sans-serif; */
+  /* font-size: 14px; */
+  
+}
+
+.signup-form-group-first-name {
+  flex: 1; /* Allow items to grow and fill space */
+  width: 150px;
+  padding: 0.5rem;
+  border-radius: 4px;
+
+}
+
+/* Remove margin for the last item to avoid overflow */
+.signup-form-group-last-name {
+  flex: 1; /* Remove right margin from the last item */
+  margin-left: 5px;
+  width: 200px;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.signup-form-group-first-name input,
+.signup-form-group-last-name input {
+  width: 100%; /* Ensure input fields take full width of their parent */
+  max-width: 400px;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-family: Montserrat, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
 }
 
-.submit-button {
+.signup-form-group-country {
+  flex: 1;
+  width: 100px;
   padding: 0.5rem;
-  font-size: 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
   border-radius: 4px;
-  cursor: pointer;
 }
 
-.submit-button:hover {
-  background-color: #0056b3;
+.signup-form-group-country input {
+  width: 100%; /* Keep this to take the full width of the parent */
+  max-width: 100px; /* Change this value to reduce the width */
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
 }
+
+.signup-form-group-mobile {
+  margin-left: 5px;
+  width: 250px;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.signup-form-group-mobile input {
+  width: 100%; /* Keep this to take the full width of the parent */
+  max-width: 275px; /* Change this value to reduce the width */
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+
+}
+
+
+.signup-form-group-email,
+.signup-form-group-password,
+.signup-form-group-confirm-password {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.signup-form-input-field-email,
+.signup-form-input-field-password {
+  width: 340px;
+  max-width: 400px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+}
+
+
+.signup-form-input-field-email:focus,
+.signup-form-input-field-password:focus,
+.signup-form-input-field-mobile:focus,
+.signup-form-input-field-country:focus,
+.signup-form-input-field-first-name:focus,
+.signup-form-input-field-last-name:focus {
+    border-color: #FF5252; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+    background-color: rgba(255, 82, 82, 0.2); /* Light red background */
+    box-shadow: 0 0 5px rgba(255, 82, 82, 0.5); /* Add subtle shadow */
+}
+
+
+.signup-form-button {
+  background-color: #FF5252;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  width: 340px;
+  max-width: 400px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.signup-form-button:hover {
+  background-color: #B33939;
+}
+
+.signup-form-login-prompt {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .signup-form-container {
+    padding: 20px;
+    height: auto;
+    margin-bottom: 50px;
+  }
+
+  .signup-form {
+    padding: 1rem;
+    width: 90%;
+  }
+
+  /* .signup-form-input-field-email,
+  .signup-form-input-field-password {
+    width: 340px;
+  } */
+}
+
+
+
+.g-signin-btn {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  background-color: #4285F4; /* Google blue */
+  color: white;
+  padding: 0.4rem 0.8rem; /* Adjusted padding for a slimmer button */
+  border: none; /* No border */
+  border-radius: 25px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  width: 340px; /* Set a fixed width */
+  max-width: 400px; /* Optional: limit how wide it can get */
+  font-size: 14px; /* Font size */
+  font-weight: bold; /* Bold text */
+  margin-top: 0.5rem; /* Space above the button */
+  text-align: center;
+  transition: background-color 0.3s ease; /* Smooth transition */
+  position: relative; /* For positioning child elements */
+}
+
+.g-signin-btn:hover {
+  background-color: #357AE8; /* Darker shade on hover */
+}
+
+.g-signin-btn:hover .g-logo {
+  transform: rotate(360deg); /* Rotate logo on hover */
+}
+
+.g-signin-btn:active {
+  background-color: #D6D6D6; /* Change color when clicked */
+}
+
+/* New class for clicked state specific to the Google button */
+.login-btn-clicked {
+  background-color: #D6D6D6; /* Permanent clicked color */
+}
+
+.g-logo {
+  width: 20px; /* Size of the Google logo */
+  height: 20px; /* Maintain a square aspect ratio */
+  background: white; /* Set the background to white */
+  border-radius: 50%; /* Rounded corners for the white background */
+  display: flex; /* Flex display to center the logo */
+  align-items: center; /* Center the logo vertically */
+  justify-content: center; /* Center the logo horizontally */
+  margin-right: 0.5rem; /* Space between logo and text */
+  transition: transform 0.7s; /* Animation on hover */
+  background-size: contain;
+}
+
+.g-logo:before {
+  content: ''; /* Empty content for the logo image */
+  background: url('http://pluspng.com/img-png/google-logo-png-open-2000.png') no-repeat center center; /* Google logo URL */
+  background-size: contain; /* Ensure logo fits */
+  width: 18px; /* Adjusted logo size for better fit */
+  height: 18px; /* Adjusted logo size for better fit */
+  display: block; /* Display as block */
+}
+
+
+.facebook-btn {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  background-color: #3b5998 ; /* Facebook blue */
+  color: white;
+  padding: 0.4rem 0.8rem; /* Match the Google button's padding */
+  font-size: 14px; /* Match the font size */
+  font-weight: bold; /* Ensure bold text */
+  border: none; /* No border */
+  border-radius: 25px; /* Match rounded corners with Google button */
+  cursor: pointer; /* Pointer cursor on hover */
+  width: 340px; /* Set a fixed width */
+  max-width: 400px; /* Optional: limit how wide it can get */
+  text-align: center; /* Center text */
+  margin-top: .5rem; /* Space above the button */
+  transition: background-color 0.3s ease; /* Smooth transition */
+  text-decoration: none;
+
+}
+
+.facebook-btn:hover {
+  background-color: #0F1F56; /* Darker blue on hover */
+  text-decoration: none;
+}
+
+.facebook-btn svg {
+  margin-right: 0.5rem; /* Add space between icon and text */
+  width: 20px; /* Set icon size */
+  height: 20px; /* Set icon size */
+}
+
+
+.facebook-btn-icon {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+.apple-signin-button {
+  width: 340px;
+  height: 35px;
+  margin-top: .5rem;
+}
+
