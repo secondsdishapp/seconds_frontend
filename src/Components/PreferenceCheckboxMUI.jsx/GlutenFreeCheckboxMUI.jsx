@@ -6,7 +6,7 @@ export default function GlutenFreeCheckboxMUI({ glutenFree, setGlutenFree, activ
 
     useEffect(() => {
         if (activeUser[0]?.is_gluten_free) {
-          setVegetarian(activeUser[0]?.is_gluten_free);
+          setGlutenFree(activeUser[0]?.is_gluten_free);
         }
       }, [activeUser[0]?.is_gluten_free]);
 
