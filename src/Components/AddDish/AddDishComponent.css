@@ -5,7 +5,7 @@
   font-size: 6vw;
 }
 .add-dish-form{
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
   flex-direction: column;
   justify-content: center;
