@@ -247,7 +247,7 @@ export default function NearByOptions({
   }, [entireList])
 
   useEffect(() => {
-    setFinalEntireList(entireList.filter((el) => el.avg_rating >= 3.5));
+    setFinalEntireList(entireList.filter((el) => el.avg_rating >= 0));
   }, [entireList]);
   
 
