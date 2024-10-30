@@ -29,7 +29,7 @@ export default function FixedBottomNavigation({ setCuisine, setCount, count, men
           onChange={(event, newValue) => {
             setValue(newValue);
             setMenuToggle(false);
-            setCuisine('')
+            // setCuisine('')
           }}
         >
           <BottomNavigationAction style={{color: value === 0 ? "#009688" : "#FF5252"}} label="Add" icon={<AddIcon htmlColor='inherit' />} component={Link} to="/adddish" />
