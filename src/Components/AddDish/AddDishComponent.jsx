@@ -2,64 +2,158 @@ import { Api, Category } from "@mui/icons-material";
 import "../../Components/AddDish/AddDishComponent.css";
 import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+
+
+
 export default function AddDishComponent() {
   const [cuisines, setCuisines] = useState([]);
+  const [ currImage, setCurrImage ] = useState("");
+  const [ databaseRest, setDatabaseRest ] = useState([]);
+  const [ databaseDishes, setDatabaseDishes ] = useState([]);
+
 
   let navigate = useNavigate();
   const API = import.meta.env.VITE_API_URL;
   const API_KEY = import.meta.env.VITE_API_KEY;
   const [hoverRating, setHoverRating] = useState(0);
   
-  const [newDish, setNewDish] = useState({
-    name: "",
-    image: "",
-    description: "",
-    restaurant:'',
-    cuisine:"",
-    category_id:'',
-    price: "",
-    rating: 0,
-    vegetarian: "",
-    vegan: "",
-    glutenFree: "",
-    address: "",
-    city:'',
-    state:'',
-    dish_id: "",
-    user_id: "",
-    lat:'',
-    lng:''
-  
-  });
+  //STATE TO KEEP TRACK OF DISH INPUTS
+//   const [ nameDishInput, setNameDishInput ] = useState("");
+//   const [ imageURLInput, setImageURLInput ] = useState("");
+//   const [ cuisineInput, setCuisineInput ] = useState("");
+//   const [ dishAvgRating, setDishAvgRating ] = useState(0);
 
+  //STATE TO KEEP TRACK OF RESTAURANT INPUTS
+  const [ restaurantIdInput, setRestaurantIdInput ] = useState(0);
+//   const [ restaurantNameInput, setRestaurantNameInput ] = useState("");
+//   const [ restaurantStreetInput, setRestaurantStreetInput ] = useState("");
+//   const [ restaurantCityInput, setRestaurantCityInput ] = useState("");
+//   const [ restaurantStateInput, setRestaurantStateInput ] = useState("");
+
+
+//NEW RESTAURANT
+const [ newRestaurant, setNewRestaurant ] = useState({
+    name: "",
+    address: "",
+    city: "",
+    state: "",
+    country: "United States",
+});
+
+//NEW DISH
+const [newDish, setNewDish] = useState({
+    name: "",
+    description: "",
+    region: "",
+    dish_image: "",
+    is_vegetarian: false,
+    is_vegan: false,
+    is_gluten_free: false,
+    avg_rating: 0,   
+});
+
+//FUNCTION TO CHECK IF THE RESTAURANT ALREADY EXISTS--------------------------------------------------------------------
+// function checkRestaurantId(name) {
+
+//     const itExists = databaseRest.filter(rest => rest.name === name);
+//     console.log(itExists, "itExists")
+//     if (itExists[0]) {
+//         return setRestaurantIdInput(itExists[0].restaurant_id);
+//     }
+//     return 0;
+// }
+
+// useEffect(() => {
+//     setRestaurantIdInput(checkRestaurantId(newRestaurant.name));
+// },[newRestaurant]);
+
+// useEffect(() => {
+//     console.log(restaurantIdInput, "Restaurant ID")
+// }, [restaurantIdInput])
+
+//------------------------------------------------------------------------------------------------------------------------
+  useEffect(() => {
+    fetch(`${API}/restaurants`)
+    .then((response) => response.json())
+    .then(res => setDatabaseRest(res))
+    .catch(err => console.log(err));
+  }, [newRestaurant, restaurantIdInput])
+
+  useEffect(() => {
+    fetch(`${API}/dishes`)
+    .then((response) => response.json())
+    .then(res => setDatabaseDishes(res))
+    .catch(err => console.log(err));
+  }, [])
+
+
+//   useEffect(() => {
+//     console.log(databaseDishes, "databaseDishes")
+//   }, [databaseDishes]);
+//   useEffect(() => {
+//     console.log(databaseRest, "databaseRest")
+//   }, [databaseRest]);
+//----------------------------------------------------------------------------------------------------------------------
   const plateImages = [
     "https://t3.ftcdn.net/jpg/03/06/75/66/360_F_306756617_moZMl2JAPW5rwxj8TBggViHvKtX1QDK2.jpg",
     "https://www.shutterstock.com/image-vector/hands-holding-fork-spoon-empty-260nw-1292484178.jpg",
   ];
-  
+
+
   function handleTextChange(e) {
     setNewDish({ ...newDish, [e.target.id]: e.target.value });
-    console.log(newDish);
   }
-  function addDish() {
-    fetch(`${API}/dishes`, {
-      method: "POST",
-      body: JSON.stringify(newDish),
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
-      // .then(navigate("/"))
-      .catch((error) => console.error("catch", error));
-  }
-  function handleSubmit(e) {
-    getLatLng(fullAddress);
-    e.preventDefault();
-    addDish();
-    console.log(newDish)
 
-    
+  function handleRestTextChange(e) {
+    setNewRestaurant({ ...newRestaurant, [e.target.id]: e.target.value });
   }
+
+  useEffect(() => {
+    console.log(newDish, "newDish Line 88")
+  }, [newDish]);
+
+  useEffect(() => {
+    console.log(newRestaurant, "newRestaurant Line 97")
+  }, [newRestaurant]);
+
+//----------------------------------------------------------------------------------------------------------------------
+async function addRestauranAndDish(newRestaurant, newDish) {
+    fetch(`${API}/restaurants`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            resData: newRestaurant,
+            dishData: newDish,
+        })
+        })
+        .then(response => response.json())
+}
+  
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    getLatLng(fullAddress);
+    addRestauranAndDish(newRestaurant, newDish)
+    console.log(newDish)
+  }
+
+  const fileUploader = useRef();
+
+  function editImage() {
+      fileUploader.current.click();
+  };
+
+  function uploadedFile () {
+    const uploadedImage = fileUploader.current.files[0];
+    const imageURL = URL.createObjectURL(uploadedImage);
+    setCurrImage(imageURL);
+
+    setNewDish((newDish) => ({...newDish, dish_image: imageURL}))
+  }
+
   let fullAddress=`${newDish.address},${newDish.city},${newDish.state}`;
   async function getLatLng(address) {
    // Replace with your API key
@@ -71,7 +165,7 @@ export default function AddDishComponent() {
 
         if (data.status === "OK") {
             const location = data.results[0].geometry.location;
-            return setNewDish({ ...newDish, lat: location.lat, lng: location.lng });
+            return setNewDish({ ...newDish, lat: String(location.lat), lng: String(location.lng) });
         } else {
             throw new Error(`Geocoding error: ${data.status}`);
         }
@@ -88,55 +182,83 @@ useEffect(() => {
       
     });
 }, [newDish.name]);
+
+    useEffect(() => {
+        console.log(uploadedFile,"Image uploaded")
+    }, [uploadedFile])
+
+    useEffect(() => {
+        console.log(currImage,"Image uploaded 2")
+    }, [currImage]);
+
   return (
-    <div>
+    <div style={{overflow:"hidden"}}>
 
         <form className="add-dish-form" onSubmit={handleSubmit}>
-          <label htmlFor="">Dish Name
+            <div className="dish-name-container">
+                <label htmlFor="">Dish Name
+                    <br />
+                    <input className="dish-name-input" placeholder="Please enter the dish name" type="text" id="name" value={newDish.name} onChange={handleTextChange} />
+                </label>
+            </div>
             <br />
-            <input placeholder="Please enter the dish name" type="text" id="name" value={newDish.name} onChange={handleTextChange} />
-          </label>
-          <br />
-          <label htmlFor="">
-            Dish image
+
+            <div className="dish-image-container">
+                <label htmlFor="">
+                Dish image
+                    <br />
+                    {/* <input className="dish-image-input" placeholder="Please upload a picture of a dish " type="text" id="image" name="image"  value={currImage} onChange={handleTextChange} hidden/> */}
+                </label>
+                <img className="dish-image" src={currImage} alt="dish"/>
+                <input ref={fileUploader} type="file" id="image" className="choose-file2" onChange={uploadedFile} />
+            </div>
             <br />
-            <input placeholder="Please upload a picture of a dish " type="text" id="image" name="image"  value={newDish.image} onChange={handleTextChange} />
-          </label>
-          <br />
-          <label htmlFor="">
-            Cuisine
+
+            <div className="cuisine-container">
+                <label htmlFor="">
+                Cuisine
+                <br />
+                <select className="cuisine" id="cuisine" name="cuisine" value={newDish.cuisine} onChange={handleTextChange}>
+                <option className="select" value=""></option>
+                {...cuisines.map(dish=>   <option className="select" value={dish.cuisine_name}>{dish.cuisine_name}</option>)}    
+                 </select> 
+                </label>
+            </div>
             <br />
-            <select className="cuisine" id="cuisine" name="cuisine" value={newDish.cuisine} onChange={handleTextChange}>
-        <option className="select" value=""></option>
-        {...cuisines.map(dish=>   <option value={dish.cuisine_name}>{dish.cuisine_name}</option>)}
-     
-       
-    </select> 
-          </label>
-          <br />
+
+        <div className="restaurant-name-container">
           <label htmlFor="">
             Restaurant Name
             <br />
-            <input placeholder="Please enter the restaurant name"  type="text" id="restaurant" name="restaurant" value={newDish.restaurant} onChange={handleTextChange} />
+            <input className="restaurant-name-input" placeholder="Please enter the restaurant name"  type="text" id="name" name="name" value={newRestaurant.name} onChange={handleRestTextChange} />
           </label>
+        </div>
           <br />
+
+          <div className="restaurant-street-container">
           <label htmlFor="">
             Street 
             <br />
-            <input  placeholder="Please enter the street"  type="text" id="address" name="address" value={newDish.address} onChange={handleTextChange} />
+            <input className="restaurant-street-input" placeholder="Please enter the street"  type="text" id="address" name="address" value={newRestaurant.address} onChange={handleRestTextChange} />
           </label>
+          </div>
           <br />
+
+          <div className="restaurant-city-container">
           <label htmlFor="">
             City
             <br />
-            <input  placeholder="Please enter the city"  type="text" id="city" name="city" value={newDish.city} onChange={handleTextChange} />
+            <input className="restaurant-city-input" placeholder="Please enter the city"  type="text" id="city" name="city" value={newRestaurant.city} onChange={handleRestTextChange} />
           </label>
+          </div>
           <br />
+
+
+     <div className="restaurant-state-container">
           <label htmlFor="">
             State
             <br />
-     
-    <select className="states" id="state" name="states" value={newDish.state} onChange={handleTextChange}>
+    <select className="states" id="state" name="states" value={newRestaurant.state} onChange={handleRestTextChange}>
         <option className="select" value=""></option>
         <option value="AL">AL</option>
         <option value="AK">AK</option>
@@ -188,39 +310,48 @@ useEffect(() => {
         <option value="WV">WV</option>
         <option value="WI">WI</option>
         <option value="WY">WY</option>
-    </select>      </label>
+    </select>
+    </label>
+    </div>
           <br />
+
+          <div className="restaurant-phone-container">
           <label htmlFor="">
             Phone number
             <br />
             
-            <input placeholder="Please enter the phone number"  type="text" id="phone-number" name="phone-number" value={newDish.phone_number} onChange={handleTextChange} />
+            <input className="restaurant-phone-input" placeholder="Please enter the phone number"  type="text" id="phone-number" name="phone-number" value={newDish.phone_number} onChange={handleTextChange} />
           </label>
+          </div>
+      
+          {/* <br />
           <br />
-          <br />
-          <br />
-         <label htmlFor="">Rating</label>
-         
-          <div className="dish-details_plate-rating" id="rating" value={newDish.rating} onChange={handleTextChange}>
-          {[1, 2, 3, 4, 5].map((rating, index) => (
+          <br /> */}
+
+          <p className="rating-title">Rating</p>
+          <div className="dish-rating-container">
+          <div className="dish-details_plate-rating" id="dish-rating" value={newDish.avg_rating} onChange={handleTextChange}>
+          {[1, 2, 3, 4, 5].map((avg_rating, index) => (
             <img
               src={
-                rating <= (hoverRating || newDish.rating)
+                avg_rating <= (hoverRating || newDish.avg_rating)
                 ? plateImages[1]
                 : plateImages[0]
               }
-              alt={`Plate ${rating}`}
-              onMouseEnter={() => setHoverRating(rating)
+              alt={`Plate ${avg_rating}`}
+              onMouseEnter={() => setHoverRating(avg_rating)
                
               }
-              onMouseLeave={() => setHoverRating(rating)}
+              onMouseLeave={() => setHoverRating(avg_rating)}
               onClick={() => {
-                setNewDish({ ...newDish, rating: rating });
+                setNewDish({ ...newDish, avg_rating: avg_rating });
               }}
               key={index}
             />
           ))}
         </div>
+        </div>
+       
 
     
             <button className="add-new-dish_submit">Submit</button>
