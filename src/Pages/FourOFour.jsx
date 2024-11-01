@@ -1,16 +1,8 @@
-//FourOFour.jsx
+//fourofour.jsx//FourOFour.jsx
 import "./FourOFour.css";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { gsap } from 'gsap';
-import EmptyPlate1 from '../assets/images/fourofour/empty-plate1.jpg';
-import EmptyPlate2 from '../assets/images/fourofour/empty-plate2.jpg';
-import EmptyPlate3 from '../assets/images/fourofour/empty-plate3.jpg';
-import EmptyPlate5 from '../assets/images/fourofour/empty-plate5.jpg';
-import EmptyPlate6 from '../assets/images/fourofour/empty-plate6.jpg';
-import EmptyPlate7 from '../assets/images/fourofour/empty-plate7.jpg';
-import EmptyPlate8 from '../assets/images/fourofour/empty-plate8.png';
-import EmptyPlate9 from '../assets/images/fourofour/empty-plate9.png';
+import { gsap } from "gsap";
 
 // Array of jokes
 const food404Jokes = [
@@ -31,7 +23,7 @@ const food404Jokes = [
   "404 Error: The page you’re looking for is like a lost pancake—flipped and gone!",
   "404 Error: This page is like a doughnut without a hole—just not complete!",
   "404 Error: This page is currently on a food adventure... it’ll be back after a slice of life!",
-  "404 Error: This page has gone to find a better recipe!"
+  "404 Error: This page has gone to find a better recipe!",
 ];
 
 const jokes = [
@@ -67,124 +59,194 @@ const jokes = [
   "Why did the grape stop in the middle of the road? It ran out of juice!",
   "I'm just a chef who loves to bake... mostly because I can eat the profits!",
   "I don't need an excuse to eat cake. I just need a fork!",
-  "What do you call cheese that isn't yours? Nacho cheese!"
+  "What do you call cheese that isn't yours? Nacho cheese!",
 ];
 
-
 export default function FourOFour() {
-
   const carouselItems = document.querySelectorAll(".four-o-four-carousel-item");
 
-  carouselItems.forEach(item => {
-      item.addEventListener("click", function () {
-          // Stop carousel and expand item
-          stopCarousel(); 
-          item.classList.toggle("expanded");
-          item.querySelector(".four-o-four-carousel-quote").classList.toggle("expanded");
-      });
+  carouselItems.forEach((item) => {
+    item.addEventListener("click", function () {
+      // Stop carousel and expand item
+      stopCarousel();
+      item.classList.toggle("expanded");
+      item
+        .querySelector(".four-o-four-carousel-quote")
+        .classList.toggle("expanded");
+    });
   });
-  
+
   function stopCarousel() {
-      document.getElementById("four-o-four-carousel").style.animationPlayState = "paused";
+    document.getElementById("four-o-four-carousel").style.animationPlayState =
+      "paused";
   }
-  
+
   function closeExpandedJoke() {
-      document.querySelector(".expanded").classList.remove("expanded");
-      document.querySelector(".expanded .four-o-four-carousel-quote").classList.remove("expanded");
-      resumeCarousel();
+    document.querySelector(".expanded").classList.remove("expanded");
+    document
+      .querySelector(".expanded .four-o-four-carousel-quote")
+      .classList.remove("expanded");
+    resumeCarousel();
   }
-  
+
   function resumeCarousel() {
-      document.getElementById("four-o-four-carousel").style.animationPlayState = "running";
+    document.getElementById("four-o-four-carousel").style.animationPlayState =
+      "running";
   }
-  
-  
+
   useEffect(() => {
     gsap.from(".error-page", { duration: 1, opacity: 0, y: -50 });
-    
+
     const items = document.querySelectorAll(".four-o-four-carousel-item");
     const totalItems = items.length;
     const angle = 360 / totalItems;
     let rotation = 0;
-  
+
     // Apply initial rotation for each item
     items.forEach((item, index) => {
       item.style.transform = `rotateY(${index * angle}deg) translateZ(500px)`;
     });
-  
+
     // Animation loop
     const animate = () => {
-      rotation += .25; // Adjust rotation speed if necessary
+      rotation += 0.25; // Adjust rotation speed if necessary
       items.forEach((item, index) => {
         item.style.transform = `rotateY(${rotation + index * angle}deg) translateZ(500px)`;
       });
       requestAnimationFrame(animate);
     };
-    
+
     animate();
-  }, []); 
-  
+  }, []);
+
   return (
     <div className="four-o-four-page">
       <h1>404 - Lost Your Appetite?</h1>
+      <h3>{food404Jokes[Math.floor(Math.random() * food404Jokes.length)]}</h3>
       <h3>
-      {food404Jokes[Math.floor(Math.random() * food404Jokes.length)]}
-      </h3>
-      <h3>
-        How about heading back to <Link to="/">our homepage</Link> or checking out some <Link to="/dishes">delicious dishes</Link> instead?
+        How about heading back to <Link to="/">our homepage</Link> or checking
+        out some <Link to="/dishes">delicious dishes</Link> instead?
       </h3>
 
       <div id="four-o-four-carousel-container">
-            <div id="four-o-four-carousel">
-              <figure className="four-o-four-carousel-item">
-                <img src={EmptyPlate1} alt="empty plate1" />
-                <p className="four-o-four-carousel-quote">{jokes[Math.floor(Math.random() * jokes.length)]}</p>
-                <button class="four-o-four-close-btn" onclick="closeExpandedJoke()">Close</button>
-              </figure>
+        <div id="four-o-four-carousel">
+          <figure className="four-o-four-carousel-item">
+            <img src="/fourofour/empty-plate1.jpg" alt="Empty Plate 1" />
+            <p className="four-o-four-carousel-quote">
+              {jokes[Math.floor(Math.random() * jokes.length)]}
+            </p>
+            <button
+              className="four-o-four-close-btn"
+              onclick="closeExpandedJoke()"
+            >
+              Close
+            </button>
+          </figure>
 
-              <figure className="four-o-four-carousel-item">
-                <img src={EmptyPlate2} alt="empty plate2" />
-                <p className="four-o-four-carousel-quote">{jokes[Math.floor(Math.random() * jokes.length)]}</p>
-                <button class="four-o-four-close-btn" onclick="closeExpandedJoke()">Close</button>
-              </figure>
+          <figure className="four-o-four-carousel-item">
+            <img src="/fourofour/empty-plate2.jpg" alt="Empty Plate 2" />
+            <p className="four-o-four-carousel-quote">
+              {jokes[Math.floor(Math.random() * jokes.length)]}
+            </p>
+            <button
+              className="four-o-four-close-btn"
+              onclick="closeExpandedJoke()"
+            >
+              Close
+            </button>
+          </figure>
 
-              <figure className="four-o-four-carousel-item">
-                <img src={EmptyPlate3} alt="empty plate3" />
-                <p className="four-o-four-carousel-quote">{jokes[Math.floor(Math.random() * jokes.length)]}</p>
-                <button class="four-o-four-close-btn" onclick="closeExpandedJoke()">Close</button>
-              </figure>
+          <figure className="four-o-four-carousel-item">
+            <img src="/fourofour/empty-plate3.jpg" alt="Empty Plate 3" />
+            <p className="four-o-four-carousel-quote">
+              {jokes[Math.floor(Math.random() * jokes.length)]}
+            </p>
+            <button
+              className="four-o-four-close-btn"
+              onclick="closeExpandedJoke()"
+            >
+              Close
+            </button>
+          </figure>
 
-              <figure className="four-o-four-carousel-item">
-                <img src={EmptyPlate5} alt="empty plate5" />
-                <p className="four-o-four-carousel-quote">{jokes[Math.floor(Math.random() * jokes.length)]}</p>
-                <button class="four-o-four-close-btn" onclick="closeExpandedJoke()">Close</button>
-              </figure>
+          <figure className="four-o-four-carousel-item">
+            <img src="/fourofour/empty-plate4.jpg" alt="Empty Plate 4" />
+            <p className="four-o-four-carousel-quote">
+              {jokes[Math.floor(Math.random() * jokes.length)]}
+            </p>
+            <button
+              className="four-o-four-close-btn"
+              onclick="closeExpandedJoke()"
+            >
+              Close
+            </button>
+          </figure>
 
-              <figure className="four-o-four-carousel-item">
-                <img src={EmptyPlate6} alt="empty plate6" />
-                <p className="four-o-four-carousel-quote">{jokes[Math.floor(Math.random() * jokes.length)]}</p>
-                <button class="four-o-four-close-btn" onclick="closeExpandedJoke()">Close</button>
-              </figure>
+          <figure className="four-o-four-carousel-item">
+            <img src="/fourofour/empty-plate5.jpg" alt="Empty Plate 5" />
+            <p className="four-o-four-carousel-quote">
+              {jokes[Math.floor(Math.random() * jokes.length)]}
+            </p>
+            <button
+              className="four-o-four-close-btn"
+              onclick="closeExpandedJoke()"
+            >
+              Close
+            </button>
+          </figure>
 
-              <figure className="four-o-four-carousel-item">
-                <img src={EmptyPlate7} alt="empty plate7" />
-                <p className="four-o-four-carousel-quote">{jokes[Math.floor(Math.random() * jokes.length)]}</p>
-                <button class="four-o-four-close-btn" onclick="closeExpandedJoke()">Close</button>
-              </figure>
+          <figure className="four-o-four-carousel-item">
+            <img src="/fourofour/empty-plate6.jpg" alt="Empty Plate 6" />
+            <p className="four-o-four-carousel-quote">
+              {jokes[Math.floor(Math.random() * jokes.length)]}
+            </p>
+            <button
+              className="four-o-four-close-btn"
+              onclick="closeExpandedJoke()"
+            >
+              Close
+            </button>
+          </figure>
 
-              <figure className="four-o-four-carousel-item">
-                <img src={EmptyPlate8} alt="empty plate8" />
-                <p className="four-o-four-carousel-quote">{jokes[Math.floor(Math.random() * jokes.length)]}</p>
-                <button class="four-o-four-close-btn" onclick="closeExpandedJoke()">Close</button>
-              </figure>
+          <figure className="four-o-four-carousel-item">
+            <img src="/fourofour/empty-plate7.jpg" alt="Empty Plate 7" />
+            <p className="four-o-four-carousel-quote">
+              {jokes[Math.floor(Math.random() * jokes.length)]}
+            </p>
+            <button
+              className="four-o-four-close-btn"
+              onclick="closeExpandedJoke()"
+            >
+              Close
+            </button>
+          </figure>
 
-              <figure className="four-o-four-carousel-item">
-                <img src={EmptyPlate9} alt="empty plate9" />
-                <p className="four-o-four-carousel-quote">{jokes[Math.floor(Math.random() * jokes.length)]}</p>
-                <button class="four-o-four-close-btn" onclick="closeExpandedJoke()">Close</button>
-              </figure>
-                
-            </div>
+          <figure className="four-o-four-carousel-item">
+            <img src="/fourofour/empty-plate8.png" alt="Empty Plate 8" />
+            <p className="four-o-four-carousel-quote">
+              {jokes[Math.floor(Math.random() * jokes.length)]}
+            </p>
+            <button
+              className="four-o-four-close-btn"
+              onclick="closeExpandedJoke()"
+            >
+              Close
+            </button>
+          </figure>
+
+          <figure className="four-o-four-carousel-item">
+            <img src="/fourofour/empty-plate9.png" alt="Empty Plate 9" />
+            <p className="four-o-four-carousel-quote">
+              {jokes[Math.floor(Math.random() * jokes.length)]}
+            </p>
+            <button
+              className="four-o-four-close-btn"
+              onclick="closeExpandedJoke()"
+            >
+              Close
+            </button>
+          </figure>
+        </div>
       </div>
     </div>
   );
