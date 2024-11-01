@@ -1,39 +1,132 @@
 /* FourOFour.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito:wght@400;700&display=swap');
 
-.error-page {
+body {
+    font-family: Nunito, sans-serif;
+    margin: 0; /* Reset margin for body */
+}
+
+.four-o-four-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
     height: 100vh;
-    padding: 20px;
+    padding: 10px;
+    padding-bottom: 20px;
     color: #ffffff; /* white text for good contrast */
-    font-family: 'Arial', sans-serif;
     background-color: #ff5252; /* sets the background color to #ff5252 */
+    overflow: hidden;
   }
-  
-  .error-page h1 {
+
+#four-o-four-carousel-container {
+    perspective: 1000px; /* Add perspective for 3D effect */
+    max-width: 500px;
+    
+}
+
+#four-o-four-carousel {
+    position: relative; /* Necessary for proper positioning */
+    width: 100%; /* Set width for the carousel */
+    height: auto; /* Set height for the carousel */
+    transform-style: preserve-3d; /* Necessary for 3D effect */
+}
+
+.four-o-four-carousel-item {
+    position: absolute; /* Positioning for 3D effect */
+    margin: 20px 0;
+    width: 50%; /* Set width for individual items */
+    height: auto; /* Set height for individual items */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.four-o-four-carousel-item img {
+    width: 100%; /* Ensures images fit the container */
+    height: 100%; /* Ensures images fit the container */
+    object-fit: cover; /* Maintains aspect ratio while covering the area */
+}
+
+.four-o-four-carousel-quote {
+  margin-top: 10px; /* Add space above the quote */
+  color: white; /* Quote text color */
+  background: rgba(0, 0, 0, 0.6); /* Optional: background for readability */
+  padding: 5px; /* Adjust padding for better appearance */
+  border-radius: 5px; /* Rounded corners */
+  font-style: italic; /* Italic text */
+  font-size: 0.8rem; /* Font size for quotes */
+}
+
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  #four-o-four-carousel-container {
+      width: 95%; /* Adjust width for mobile */
+  }
+
+  .four-o-four-carousel-item {
+    width: 50%; /* Wider items for better visibility */
+    margin: 10px auto; /* Center and add spacing */
+}
+
+  .four-o-four-carousel {
+    height: auto; /* Allow height to adjust based on content */
+    max-height: 400px; /* Set a max height if necessary */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+}
+ 
+  .four-o-four-carousel-quote {
+      font-size: 0.1rem; /* Smaller font size for mobile */
+      padding: 5px; /* Adjust padding for mobile */
+  }
+
+    .four-o-four-page h1 {
+        font-size: 2rem;
+    }
+
+    .four-o-four-page p {
+        font-size: .9rem;
+    }
+}
+
+
+/* Uncomment this if you want to use a spin animation with CSS */
+@keyframes spin {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.four-o-four-page h1 {
     font-size: 3rem;
-    margin-bottom: 20px;
+    margin-top: 0; /* No margin at the top */
+    margin-bottom: 20px; /* Keep margin-bottom for spacing below */
     color: #ffffff; /* white color for good contrast */
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* add a subtle shadow for better readability */
-  }
-  
-  .error-page p {
-    font-size: 1.2rem;
+}
+
+
+.four-o-four-page p {
+    font-size: 1.4rem;
     margin-bottom: 15px;
     color: #ffffff; /* white color for good contrast */
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* subtle shadow for readability */
+    font-weight: bolder;
   }
-  
-  .error-page a {
+
+.four-o-four-page a {
     color: #4DD0E1; /* link color to match the white text */
     text-decoration: underline;
     font-weight: bold;
-  }
-  
-  .error-page a:hover {
+}
+
+.four-o-four-page a:hover {
     color: #ffcc00; /* change color on hover for a visual cue */
-  }
- 
+}
+

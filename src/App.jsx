@@ -65,7 +65,7 @@ function App() {
           <Route path="*" element={<FourOFour />} />
         </Routes>
       </main>
-      <Footer setCuisine={setCuisine} style={{zIndex: "99"}} menuToggle={menuToggle} setMenuToggle={setMenuToggle} />
+      <Footer setCuisine={setCuisine} style={{zIndex: "99"}} menuToggle={menuToggle} setMenuToggle={setMenuToggle} setValue={setValue} value={value}/>
       </AuthProvider>
       </LocalAuthProvider>
     </div>

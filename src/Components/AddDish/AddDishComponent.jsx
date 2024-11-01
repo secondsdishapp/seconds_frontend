@@ -135,6 +135,7 @@ async function addRestauranAndDish(newRestaurant, newDish) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    e.preventDefault();
     getLatLng(fullAddress);
     addRestauranAndDish(newRestaurant, newDish)
     console.log(newDish)
@@ -152,7 +153,9 @@ async function addRestauranAndDish(newRestaurant, newDish) {
     setCurrImage(imageURL);
 
     setNewDish((newDish) => ({...newDish, dish_image: imageURL}))
+    setNewDish((newDish) => ({...newDish, dish_image: imageURL}))
   }
+
 
   let fullAddress=`${newDish.address},${newDish.city},${newDish.state}`;
   async function getLatLng(address) {
@@ -165,6 +168,7 @@ async function addRestauranAndDish(newRestaurant, newDish) {
 
         if (data.status === "OK") {
             const location = data.results[0].geometry.location;
+            return setNewDish({ ...newDish, lat: String(location.lat), lng: String(location.lng) });
             return setNewDish({ ...newDish, lat: String(location.lat), lng: String(location.lng) });
         } else {
             throw new Error(`Geocoding error: ${data.status}`);
