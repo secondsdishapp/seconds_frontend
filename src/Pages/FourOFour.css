@@ -1,132 +1,155 @@
 /* FourOFour.css */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito:wght@400;700&display=swap");
 
 body {
-    font-family: Nunito, sans-serif;
-    margin: 0; /* Reset margin for body */
+  font-family: Nunito, sans-serif;
+  margin: 0; /* Reset margin for body */
 }
 
 .four-o-four-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: center;
-    height: 100vh;
-    padding: 10px;
-    padding-bottom: 20px;
-    color: #ffffff; /* white text for good contrast */
-    background-color: #ff5252; /* sets the background color to #ff5252 */
-    overflow: hidden;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  height: 100vh;
+  padding: 10px;
+  padding-bottom: 20px;
+  color: #ffffff; /* white text for good contrast */
+  background-color: #ff5252; /* sets the background color to #ff5252 */
+  overflow: hidden;
+}
 
 #four-o-four-carousel-container {
-    perspective: 1000px; /* Add perspective for 3D effect */
-    max-width: 500px;
-    
+  perspective: 1000px; /* Add perspective for 3D effect */
+  max-width: 500px;
+  /* height: 200px;
+    overflow: hidden; */
 }
 
 #four-o-four-carousel {
-    position: relative; /* Necessary for proper positioning */
-    width: 100%; /* Set width for the carousel */
-    height: auto; /* Set height for the carousel */
-    transform-style: preserve-3d; /* Necessary for 3D effect */
+  position: relative; /* Necessary for proper positioning */
+  width: 100%; /* Set width for the carousel */
+  height: auto; /* Set height for the carousel */
+  transform-style: preserve-3d; /* Necessary for 3D effect */
+  font-size: 0.1rem;
 }
 
 .four-o-four-carousel-item {
-    position: absolute; /* Positioning for 3D effect */
-    margin: 20px 0;
-    width: 50%; /* Set width for individual items */
-    height: auto; /* Set height for individual items */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  position: absolute;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .four-o-four-carousel-item img {
-    width: 100%; /* Ensures images fit the container */
-    height: 100%; /* Ensures images fit the container */
-    object-fit: cover; /* Maintains aspect ratio while covering the area */
+  width: 100%; /* Ensures images fit the container */
+  height: 100%; /* Ensures images fit the container */
+  object-fit: cover; /* Maintains aspect ratio while covering the area */
 }
 
 .four-o-four-carousel-quote {
-  margin-top: 10px; /* Add space above the quote */
-  color: white; /* Quote text color */
-  background: rgba(0, 0, 0, 0.6); /* Optional: background for readability */
-  padding: 5px; /* Adjust padding for better appearance */
-  border-radius: 5px; /* Rounded corners */
-  font-style: italic; /* Italic text */
-  font-size: 0.8rem; /* Font size for quotes */
+  font-size: 1rem;
+  line-height: 1.2;
+  max-height: 60px; /* Limit height */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  background: linear-gradient(135deg, #0fa4a6, #29cec8, #4899a0, #012a29);
+  color: #ffffff;
+  padding: 5px;
+  text-align: center;
 }
-
-
 
 /* Responsive styles */
 @media (max-width: 768px) {
   #four-o-four-carousel-container {
-      width: 95%; /* Adjust width for mobile */
+    width: 95%; /* Adjust width for mobile */
   }
 
   .four-o-four-carousel-item {
     width: 50%; /* Wider items for better visibility */
     margin: 10px auto; /* Center and add spacing */
-}
+    font-size: 0.1rem;
+  }
 
   .four-o-four-carousel {
     height: auto; /* Allow height to adjust based on content */
     max-height: 400px; /* Set a max height if necessary */
     overflow-y: auto; /* Enable vertical scrolling if needed */
-}
- 
-  .four-o-four-carousel-quote {
-      font-size: 0.1rem; /* Smaller font size for mobile */
-      padding: 5px; /* Adjust padding for mobile */
   }
 
-    .four-o-four-page h1 {
-        font-size: 2rem;
-    }
+  /* .four-o-four-carousel-quote {
+    font-size: 0.1rem;
+    padding: 5px;
+    word-spacing: normal;
+    line-height: .1;
+} */
 
-    .four-o-four-page p {
-        font-size: .9rem;
-    }
+  .four-o-four-page h1 {
+    font-size: 1.5rem;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: 1.2;
+  }
+
+  .four-o-four-page p {
+    font-size: 0.1rem;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: 1.4;
+  }
 }
-
 
 /* Uncomment this if you want to use a spin animation with CSS */
 @keyframes spin {
-    from {
-        transform: rotateY(0deg);
-    }
-    to {
-        transform: rotateY(360deg);
-    }
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
 
 .four-o-four-page h1 {
-    font-size: 3rem;
-    margin-top: 0; /* No margin at the top */
-    margin-bottom: 20px; /* Keep margin-bottom for spacing below */
-    color: #ffffff; /* white color for good contrast */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* add a subtle shadow for better readability */
+  font-size: 2.5rem;
+  margin-top: 0; /* No margin at the top */
+  margin-bottom: 20px; /* Keep margin-bottom for spacing below */
+  color: #ffffff; /* white color for good contrast */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* add a subtle shadow for better readability */
 }
 
+.four-o-four-page h3 {
+  font-size: 1.2rem;
+  margin-top: 0; /* No margin at the top */
+  margin-bottom: 15px; /* Keep margin-bottom for spacing below */
+  color: #ffffff; /* white color for good contrast */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* add a subtle shadow for better readability */
+  font-weight: bolder;
+}
 
 .four-o-four-page p {
-    font-size: 1.4rem;
-    margin-bottom: 15px;
-    color: #ffffff; /* white color for good contrast */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* subtle shadow for readability */
-    font-weight: bolder;
-  }
+  margin-top: 0;
+  font-size: 0.8rem;
+  margin-bottom: 15px;
+  color: #ffffff; /* white color for good contrast */
+
+  font-weight: bolder;
+  text-shadow: #4dbcbe;
+}
 
 .four-o-four-page a {
-    color: #4DD0E1; /* link color to match the white text */
-    text-decoration: underline;
-    font-weight: bold;
+  color: #4dd0e1; /* link color to match the white text */
+  text-decoration: underline;
+  font-weight: bold;
 }
 
 .four-o-four-page a:hover {
-    color: #ffcc00; /* change color on hover for a visual cue */
+  color: #ffcc00; /* change color on hover for a visual cue */
 }
-
