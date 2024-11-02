@@ -1,7 +1,6 @@
 import "./App.css";
 import { useState, useContext } from "react";
 import { Routes, Route } from "react-router-dom"
-import Navigation from "./Components/Navigation/Navigation.jsx"
 
 // PAGES
 import Home from "./Pages/Home";
