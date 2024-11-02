@@ -303,10 +303,9 @@ export default function NearByOptions({
     console.log(search, "Nearby Options Search")
   }, [search]);
 
-  return search ?
-  
-   (
+  return (
     <div className="home-main-container">
+      {/* search bar */}
       <div className="searchbar-map-container">
         <SearchBar
           search={search}
@@ -322,69 +321,52 @@ export default function NearByOptions({
           onClick={() => navigate("/map")}
         />
       </div>
-      {/* <div className="homepage_filterpercuisine">
-        {uniqueListPerCuisine.map((dish) => (
-          <div className="homepage_filterpercuisine_item">
-            <img
-              className="homepage_filterpercuisine_item_image"
-              src={dish.dish_image}
-              onClick={()=>{
-                setCuisine1(dish.cuisine_name)
-                console.log(cuisine1)
-                
+
+      {/* if searching dont show cuisine filters */}
+      {search ?
+        null :
+        <div className="homepage_filterpercuisine">
+          {uniqueListPerCuisine.map((dish) => (
+            <div className="homepage_filterpercuisine_item">
+              <img
+                className={`homepage_filterpercuisine_item_image ${clicked === dish ? "active" : ""}`}
+                src={`/${dish}.svg`}
+                onClick={()=>{
+                  setCuisine(dish)
+                  setClicked(dish)
                 }}
-            ></img>
-            <p className="homepage_filterpercuisine_item_name">{dish.cuisine_name}</p>
-          </div>
-        ))}
-      </div> */}
-      <h4 style={{ display: "none" }} className="highly-rated-nearby-options">
-        Highly rated nearby options
-      </h4>
-      <br />
+              ></img>
+              <h5 className="homepage_filterpercuisine_item_name">{dish}</h5>
+            </div>
+          ))}
+        </div>
+      }
 
-  
-      {finalEntireList.map((item, index) => {
-        return <Dish item={item} index={index} key={item.dish_id} />;
-      })}
-    </div>
-  ) : (
-    <div className="home-main-container">
-      <div className="searchbar-map-container">
-        <SearchBar set search={search} setSearch={setSearch} />
-        <img
-          className="map-icon"
-          src="/map.svg"
-          onClick={() => navigate("/map")}
-        />
-      </div>
-      <div className="homepage_filterpercuisine">
-        {uniqueListPerCuisine.map((dish) => (
-          <div className="homepage_filterpercuisine_item">
-            <img
-              className={`homepage_filterpercuisine_item_image ${clicked === dish ? "active" : ""}`}
-              src={`/${dish}.svg`}
-              onClick={()=>{
-                setCuisine(dish)
-                setClicked(dish)
-              }}
-            ></img>
-            <h5 className="homepage_filterpercuisine_item_name">{dish}</h5>
-          </div>
-        ))}
-      </div>
-
-      <h4 className="highly-rated-nearby-options">
-        Highly rated nearby
+      {/* change header based on search */}
+      <h4 
+        // style={search ? { display: "none" } : null} 
+        className="highly-rated-nearby-options">
+          {search ? "Dish Results" : "Highly Rated Nearby Options"}
       </h4>
-      {cuisine ?
-        finalCuisineFilterList.map((item, index) => {
-          return <Dish item={item} index={index} key={item.dish_id} />;
-        }) :
-        finalEntireList.map((item, index) => {
-          return <Dish item={item} index={index} key={item.dish_id} />;
-        })
+      
+      {/* show entire list or cuisine filtered list */}
+      {search ?
+        <div>
+          {finalEntireList.map((item, index) => (
+            <Dish item={item} index={index} key={item.dish_id} />
+          ))} 
+        </div> :
+        <div>
+          {cuisine ?
+            finalCuisineFilterList.map((item, index) => {
+              return <Dish item={item} index={index} key={item.dish_id} />;
+            }) :
+            finalEntireList.map((item, index) => {
+              return <Dish item={item} index={index} key={item.dish_id} />;
+            })
+          }
+        </div> 
       }
     </div>
-  );
+  )
 }
