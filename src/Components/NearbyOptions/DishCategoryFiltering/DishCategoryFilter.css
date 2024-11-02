@@ -1,0 +1,19 @@
+.category-filter-container {
+  border: 1px solid black;
+  width: 85%;
+  margin: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.category-filter-button {
+  width: 100px;
+  height: 50px;
+  border: 1px solid #000;
+  border-radius: 50px;
+  background: #fff;
+}
+
+.cfg-active {
+  background: lightcoral;
+}

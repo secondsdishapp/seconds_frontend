@@ -1,7 +1,9 @@
+import "./DishCategoryFiltering/DishCategoryFilter.css";
 import { useState, useEffect, useContext } from "react";
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "../../Components/SearchBar/SearchBar";
+import DishCategoryFilter from "./DishCategoryFiltering/DishCategoryFilter.jsx";
 import Dish from "../Dish/dish";
 
 export default function NearByOptions({
@@ -73,6 +75,10 @@ export default function NearByOptions({
   const [ cuisine, setCuisine ] = useState('');
   const [ finalCuisineFilterList, setFinalCuisineFilterList ] = useState([]);
   const [ clicked, setClicked ] = useState("");
+
+  const [ restaurantResults, setRestaurantResults ] = useState([]);
+  const [ dishCategoryFilters, setDishCategoryFilters ] = useState(["Pizza", "Pepperoni", "Margherita"]);
+  const [ dishCategoryFilter, setDishCategoryFilter ] = useState("");
 
   const [ currentLocation, setCurrentLocation ] = useState({
     lat: null,
@@ -303,6 +309,12 @@ export default function NearByOptions({
     console.log(search, "Nearby Options Search")
   }, [search]);
 
+  // dish categeory filtering
+  function handleDishCategroyfiltering(category) {
+    console.log(category);
+    setDishCategoryFilter(category);
+  }
+
   return (
     <div className="home-main-container">
       {/* search bar */}
@@ -341,6 +353,21 @@ export default function NearByOptions({
           ))}
         </div>
       }
+
+      {/* Dish category filters */}
+      <DishCategoryFilter />
+      <div className="category-filter-container">
+        {dishCategoryFilters.map((category) => (
+          <button 
+            className={
+              `category-filter-button 
+              ${category === dishCategoryFilter ? "cfg-active" : ""}
+            `}
+            onClick={() => handleDishCategroyfiltering(category)}>
+              <strong>{category}</strong>
+          </button>
+        ))}
+      </div>
 
       {/* change header based on search */}
       <h4 
