@@ -373,16 +373,22 @@ export default function NearByOptions({
       <DishCategoryFilter />
       {search ?
         <div className="category-filter-container">
-        {dishCategoryFilters.map((category) => (
-          <button 
-            className={
-              `category-filter-button 
-              ${category === dishCategoryFilter ? "cfg-active" : ""}
-            `}
-            onClick={() => handleDishCategoryfiltering(category)}>
-              <strong>{category.length > 10 ? category.slice(0,10) +'...' : category }</strong>
-          </button>
-        ))}
+          <div className="category-filters">
+            {dishCategoryFilters.map((category) => (
+              <button 
+                className={
+                  `category-filter-button ${category === dishCategoryFilter ? "cfb-active" : ""}`
+                }
+                onClick={() => handleDishCategoryfiltering(category)}>
+                  <strong>{category.length > 10 ? category.slice(0,10) +'...' : category }</strong>
+              </button>
+            ))}
+          </div>
+          {dishCategoryFilter ? 
+            <h4 className="active-dish-filter"><strong>Current Filter: {dishCategoryFilter}</strong></h4> :
+            null
+
+          }
         </div> :
         null
       }
