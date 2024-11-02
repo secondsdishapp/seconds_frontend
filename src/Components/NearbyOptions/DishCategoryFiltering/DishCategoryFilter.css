@@ -7,11 +7,12 @@
 }
 
 .category-filter-button {
-  width: 100px;
-  height: 50px;
+  width: fit-content;
+  height: 40px;
   border: 1px solid #000;
   border-radius: 50px;
   background: #fff;
+  padding: 0 20px;
 }
 
 .cfg-active {
