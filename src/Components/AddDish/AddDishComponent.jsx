@@ -3,34 +3,29 @@ import "../../Components/AddDish/AddDishComponent.css";
 import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
-
-
+import GooglePlaces from "../GooglePlaces/GooglePlaces";
 
 export default function AddDishComponent() {
+
   const [cuisines, setCuisines] = useState([]);
   const [ currImage, setCurrImage ] = useState("");
-  const [ databaseRest, setDatabaseRest ] = useState([]);
-  const [ databaseDishes, setDatabaseDishes ] = useState([]);
+  const [selectedPlace, setSelectedPlace] = useState(null);
+  const [ searchInput, setSearchInput ] = useState("");
+  const [ arrSearchInput, setArrSearchInput ] = useState("");
+  const [ restNameInput, setRestNameInput ] = useState("");
+  const [ stateInput, setStateInput ] = useState("");
+  const [ phoneNumber, setPhoneNumber ] = useState("");
+ 
 
 
-  let navigate = useNavigate();
-  const API = import.meta.env.VITE_API_URL;
-  const API_KEY = import.meta.env.VITE_API_KEY;
-  const [hoverRating, setHoverRating] = useState(0);
+let navigate = useNavigate();
+const API = import.meta.env.VITE_API_URL;
+const API_KEY = import.meta.env.VITE_API_KEY;
+const [hoverRating, setHoverRating] = useState(0);
   
-  //STATE TO KEEP TRACK OF DISH INPUTS
-//   const [ nameDishInput, setNameDishInput ] = useState("");
-//   const [ imageURLInput, setImageURLInput ] = useState("");
-//   const [ cuisineInput, setCuisineInput ] = useState("");
-//   const [ dishAvgRating, setDishAvgRating ] = useState(0);
 
-  //STATE TO KEEP TRACK OF RESTAURANT INPUTS
-  const [ restaurantIdInput, setRestaurantIdInput ] = useState(0);
-//   const [ restaurantNameInput, setRestaurantNameInput ] = useState("");
-//   const [ restaurantStreetInput, setRestaurantStreetInput ] = useState("");
-//   const [ restaurantCityInput, setRestaurantCityInput ] = useState("");
-//   const [ restaurantStateInput, setRestaurantStateInput ] = useState("");
-
+//STATE TO KEEP TRACK OF RESTAURANT INPUTS
+const [ restaurantIdInput, setRestaurantIdInput ] = useState(0);
 
 //NEW RESTAURANT
 const [ newRestaurant, setNewRestaurant ] = useState({
@@ -53,25 +48,6 @@ const [newDish, setNewDish] = useState({
     avg_rating: 0,   
 });
 
-//FUNCTION TO CHECK IF THE RESTAURANT ALREADY EXISTS--------------------------------------------------------------------
-// function checkRestaurantId(name) {
-
-//     const itExists = databaseRest.filter(rest => rest.name === name);
-//     console.log(itExists, "itExists")
-//     if (itExists[0]) {
-//         return setRestaurantIdInput(itExists[0].restaurant_id);
-//     }
-//     return 0;
-// }
-
-// useEffect(() => {
-//     setRestaurantIdInput(checkRestaurantId(newRestaurant.name));
-// },[newRestaurant]);
-
-// useEffect(() => {
-//     console.log(restaurantIdInput, "Restaurant ID")
-// }, [restaurantIdInput])
-
 //------------------------------------------------------------------------------------------------------------------------
   useEffect(() => {
     fetch(`${API}/restaurants`)
@@ -87,13 +63,6 @@ const [newDish, setNewDish] = useState({
     .catch(err => console.log(err));
   }, [])
 
-
-//   useEffect(() => {
-//     console.log(databaseDishes, "databaseDishes")
-//   }, [databaseDishes]);
-//   useEffect(() => {
-//     console.log(databaseRest, "databaseRest")
-//   }, [databaseRest]);
 //----------------------------------------------------------------------------------------------------------------------
   const plateImages = [
     "https://t3.ftcdn.net/jpg/03/06/75/66/360_F_306756617_moZMl2JAPW5rwxj8TBggViHvKtX1QDK2.jpg",
@@ -136,7 +105,7 @@ async function addRestauranAndDish(newRestaurant, newDish) {
   function handleSubmit(e) {
     e.preventDefault();
     e.preventDefault();
-    getLatLng(fullAddress);
+    // getLatLng(fullAddress);
     addRestauranAndDish(newRestaurant, newDish)
     console.log(newDish)
   }
@@ -149,17 +118,26 @@ async function addRestauranAndDish(newRestaurant, newDish) {
 
   function uploadedFile () {
     const uploadedImage = fileUploader.current.files[0];
-    const imageURL = URL.createObjectURL(uploadedImage);
-    setCurrImage(imageURL);
+    // const imageURL = URL.createObjectURL(uploadedImage);
+    const reader = new FileReader();
+    // setCurrImage(imageURL);
+    reader.onloadend = () => {
+      const base64String = reader.result;
+      setCurrImage(base64String);
+      setNewDish((newDish) => ({...newDish, dish_image: base64String}))
+    }
 
-    setNewDish((newDish) => ({...newDish, dish_image: imageURL}))
-    setNewDish((newDish) => ({...newDish, dish_image: imageURL}))
+    // setNewDish((newDish) => ({...newDish, dish_image: imageURL}))
+    // setNewDish((newDish) => ({...newDish, dish_image: imageURL}))
+    reader.readAsDataURL(uploadedImage);
   }
 
 
   let fullAddress=`${newDish.address},${newDish.city},${newDish.state}`;
+
+
   async function getLatLng(address) {
-   // Replace with your API key
+  
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY}`;
 
     try {
@@ -168,8 +146,7 @@ async function addRestauranAndDish(newRestaurant, newDish) {
 
         if (data.status === "OK") {
             const location = data.results[0].geometry.location;
-            return setNewDish({ ...newDish, lat: String(location.lat), lng: String(location.lng) });
-            return setNewDish({ ...newDish, lat: String(location.lat), lng: String(location.lng) });
+            return setNewDish({ ...newDish, lat: Number(location.lat), lng: Number(location.lng) });
         } else {
             throw new Error(`Geocoding error: ${data.status}`);
         }
@@ -178,23 +155,71 @@ async function addRestauranAndDish(newRestaurant, newDish) {
         return null;
     }
 }
-useEffect(() => {
-  fetch(`${API}/cuisines`)
-    .then((response) => response.json())
-    .then((res) => {
-      setCuisines(res);
-      
-    });
-}, [newDish.name]);
+  useEffect(() => {
+    fetch(`${API}/cuisines`)
+      .then((response) => response.json())
+      .then((res) => {
+        setCuisines(res);     
+      });
+  }, [newDish.name]);
 
-    useEffect(() => {
-        console.log(uploadedFile,"Image uploaded")
-    }, [uploadedFile])
+  useEffect(() => {
+      console.log(uploadedFile,"Image uploaded")
+  }, [uploadedFile])
 
-    useEffect(() => {
-        console.log(currImage,"Image uploaded 2")
-    }, [currImage]);
+  useEffect(() => {
+      console.log(currImage,"Image uploaded 2")
+  }, [currImage]);
 
+
+  //GET THE STREET, CITY AND STATE FROM THE ADDRESS
+  useEffect(() => {
+    if (searchInput && searchInput !== " ") {
+      setArrSearchInput(searchInput.split(","));
+    }
+  }, [searchInput]);
+
+  useEffect(() => {
+    if (arrSearchInput.length > 0) {
+      setStateInput(arrSearchInput[2].trim().split(" ")[0]);
+    }
+  }, [arrSearchInput])
+
+  useEffect(() => {
+    console.log(stateInput, "stateInput")
+  }, [searchInput])
+
+  useEffect(() => {
+    console.log(arrSearchInput, "Search Input Array")
+  }, [arrSearchInput])
+
+  useEffect(() => {
+    console.log(stateInput, "State Input")
+  }, [stateInput]);
+
+  useEffect(() => {
+    console.log(phoneNumber, "Phone Number")
+  }, [phoneNumber]);
+
+  useEffect(() => {
+    console.log(restNameInput, "Restaurant Name")
+  }, [restNameInput]);
+
+  useEffect(() => {
+    console.log(newRestaurant, "New Restaurant")
+  }, [newRestaurant])
+
+  //----------------------------------------------------------------------------------------------------------------------
+  // const calculateDistance = () => {
+  //   const distanceResult = haversineDistance(
+  //       parseFloat(lat1),
+  //       parseFloat(lng1),
+  //       parseFloat(item.latitude),
+  //       parseFloat(item.longitude)
+  //   );
+  //   setDistance(distanceResult);
+  // };
+  
   return (
     <div style={{overflow:"hidden"}}>
 
@@ -230,11 +255,13 @@ useEffect(() => {
             </div>
             <br />
 
+        <GooglePlaces searchInput={searchInput} setSearchInput={setSearchInput} phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} restNameInput={restNameInput} setRestNameInput={setRestNameInput} newRestaurant={newRestaurant} setNewRestaurant={setNewRestaurant}/>
+
         <div className="restaurant-name-container">
           <label htmlFor="">
             Restaurant Name
             <br />
-            <input className="restaurant-name-input" placeholder="Please enter the restaurant name"  type="text" id="name" name="name" value={newRestaurant.name} onChange={handleRestTextChange} />
+            <input className="restaurant-name-input" placeholder={restNameInput || "Please enter the restaurant name"}  type="text" id="name" name="name" value={restNameInput} onChange={handleRestTextChange} disabled/>
           </label>
         </div>
           <br />
@@ -243,7 +270,7 @@ useEffect(() => {
           <label htmlFor="">
             Street 
             <br />
-            <input className="restaurant-street-input" placeholder="Please enter the street"  type="text" id="address" name="address" value={newRestaurant.address} onChange={handleRestTextChange} />
+            <input className="restaurant-street-input" placeholder={arrSearchInput[0] || "Please enter the name"}  type="text" id="address" name="address" value={arrSearchInput[0]} onChange={handleRestTextChange} disabled/>
           </label>
           </div>
           <br />
@@ -252,7 +279,7 @@ useEffect(() => {
           <label htmlFor="">
             City
             <br />
-            <input className="restaurant-city-input" placeholder="Please enter the city"  type="text" id="city" name="city" value={newRestaurant.city} onChange={handleRestTextChange} />
+            <input className="restaurant-city-input" placeholder={arrSearchInput[1] || "Please enter the city"}  type="text" id="city" name="city" value={arrSearchInput[1]} onChange={handleRestTextChange} disabled/>
           </label>
           </div>
           <br />
@@ -261,7 +288,9 @@ useEffect(() => {
      <div className="restaurant-state-container">
           <label htmlFor="">
             State
-            <br />
+            <br/>
+            <input className="restaurant-state-input" placeholder={stateInput || "Please enter state"}  type="text" id="state" name="state" value={stateInput} onChange={handleRestTextChange} disabled/>
+            {/* <br />
     <select className="states" id="state" name="states" value={newRestaurant.state} onChange={handleRestTextChange}>
         <option className="select" value=""></option>
         <option value="AL">AL</option>
@@ -314,7 +343,7 @@ useEffect(() => {
         <option value="WV">WV</option>
         <option value="WI">WI</option>
         <option value="WY">WY</option>
-    </select>
+    </select> */}
     </label>
     </div>
           <br />
@@ -324,13 +353,9 @@ useEffect(() => {
             Phone number
             <br />
             
-            <input className="restaurant-phone-input" placeholder="Please enter the phone number"  type="text" id="phone-number" name="phone-number" value={newDish.phone_number} onChange={handleTextChange} />
+            <input className="restaurant-phone-input" placeholder={phoneNumber || "Please enter the phone number"}  type="text" id="phone-number" name="phone-number" value={phoneNumber} onChange={handleTextChange} disabled/>
           </label>
           </div>
-      
-          {/* <br />
-          <br />
-          <br /> */}
 
           <p className="rating-title">Rating</p>
           <div className="dish-rating-container">
