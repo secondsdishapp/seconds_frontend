@@ -77,7 +77,7 @@ export default function NearByOptions({
   const [ clicked, setClicked ] = useState("");
 
   const [ restaurantResults, setRestaurantResults ] = useState([]);
-  const [ dishCategoryFilters, setDishCategoryFilters ] = useState(["Pizza", "Pepperoni", "Margherita"]);
+  const [ dishCategoryFilters, setDishCategoryFilters ] = useState([]);
   const [ dishCategoryFilter, setDishCategoryFilter ] = useState("");
 
   const [ currentLocation, setCurrentLocation ] = useState({
@@ -136,6 +136,17 @@ export default function NearByOptions({
       );
     }
     // console.log(filtered, "Filtered");
+    // get unique dish names from search
+    const uniqueDishNames = [...new Set([...finalEntireList.filter((dish) => 
+      dish.dish_name.toLowerCase()
+        .includes(search.toLowerCase()))])
+        .keys()
+        .map((dish) => dish.dish_name)]
+    // sort unique dish names
+    if(uniqueDishNames) uniqueDishNames.sort((a, b) => a.localeCompare(b));
+    console.log(uniqueDishNames)
+    setDishCategoryFilters(uniqueDishNames);
+
   }, [search]);
 
   useEffect(() => {
@@ -360,7 +371,8 @@ export default function NearByOptions({
 
       {/* Dish category filters */}
       <DishCategoryFilter />
-      <div className="category-filter-container">
+      {search ?
+        <div className="category-filter-container">
         {dishCategoryFilters.map((category) => (
           <button 
             className={
@@ -368,10 +380,12 @@ export default function NearByOptions({
               ${category === dishCategoryFilter ? "cfg-active" : ""}
             `}
             onClick={() => handleDishCategoryfiltering(category)}>
-              <strong>{category}</strong>
+              <strong>{category.length > 10 ? category.slice(0,10) +'...' : category }</strong>
           </button>
         ))}
-      </div>
+        </div> :
+        null
+      }
 
       {/* change header based on search */}
       <h4 
