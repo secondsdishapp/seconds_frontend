@@ -1,7 +1,9 @@
+import "./DishCategoryFiltering/DishCategoryFilter.css";
 import { useState, useEffect, useContext } from "react";
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "../../Components/SearchBar/SearchBar";
+import DishCategoryFilter from "./DishCategoryFiltering/DishCategoryFilter.jsx";
 import Dish from "../Dish/dish";
 
 export default function NearByOptions({
@@ -74,6 +76,10 @@ export default function NearByOptions({
   const [ finalCuisineFilterList, setFinalCuisineFilterList ] = useState([]);
   const [ clicked, setClicked ] = useState("");
 
+  const [ restaurantResults, setRestaurantResults ] = useState([]);
+  const [ dishCategoryFilters, setDishCategoryFilters ] = useState([]);
+  const [ dishCategoryFilter, setDishCategoryFilter ] = useState("");
+
   const [ currentLocation, setCurrentLocation ] = useState({
     lat: null,
     lng: null,
@@ -130,6 +136,17 @@ export default function NearByOptions({
       );
     }
     // console.log(filtered, "Filtered");
+    // get unique dish names from search
+    const uniqueDishNames = [...new Set([...finalEntireList.filter((dish) => 
+      dish.dish_name.toLowerCase()
+        .includes(search.toLowerCase()))])
+        .keys()
+        .map((dish) => dish.dish_name)]
+    // sort unique dish names
+    if(uniqueDishNames) uniqueDishNames.sort((a, b) => a.localeCompare(b));
+    console.log(uniqueDishNames)
+    setDishCategoryFilters(uniqueDishNames);
+
   }, [search]);
 
   useEffect(() => {
@@ -175,7 +192,7 @@ export default function NearByOptions({
   }, [])
 
   useEffect(() => {
-    console.log(listPerCuisine, "listPerCuisine");
+    // console.log(listPerCuisine, "listPerCuisine");
   }, [listPerCuisine])
 
   useEffect(() => {
@@ -189,17 +206,17 @@ export default function NearByOptions({
   }, [cuisineIcons]);
 
   useEffect(() => {
-    console.log(cuisineIcons, "cuisineIcons Array Line 188");
+    // console.log(cuisineIcons, "cuisineIcons Array Line 188");
   }, [cuisineIcons]);
 
   useEffect(() => {
-    console.log(uniqueListPerCuisine, "uniqueListPerCuisine");
+    // console.log(uniqueListPerCuisine, "uniqueListPerCuisine");
   }, [uniqueListPerCuisine]);
 
   //USING LOCALSTORAGE PREFERENCES TO FILTER THE LIST FIRST--------------------------------------------------------------------------------
 
   useEffect(() => {
-    console.log(allNearByDishes, "allNearByDishes Line 202");
+    // console.log(allNearByDishes, "allNearByDishes Line 202");
   }, [allNearByDishes]);
 
   useEffect(() => {
@@ -211,7 +228,7 @@ export default function NearByOptions({
   }, [allNearByDishes,vegetarian]);
 
   useEffect(() => {
-    console.log(preferenceListVegetarian, "preferenceListVegetarian Line 209");
+    // console.log(preferenceListVegetarian, "preferenceListVegetarian Line 209");
   }, [preferenceListVegetarian]);
 
   useEffect(() => {
@@ -233,7 +250,7 @@ export default function NearByOptions({
 
   //---------------------------------------------------------------------------------------------------------------------------
   useEffect(() => {
-    console.log(vegetarian, "Vegetarian value on nearby options page")
+    // console.log(vegetarian, "Vegetarian value on nearby options page")
   }, [vegetarian]);
 
   useEffect(() => {
@@ -243,7 +260,7 @@ export default function NearByOptions({
   //---------------------------------------------------------------------------------------------------------------------------
 
   useEffect(() => {
-    console.log(entireList, "Entire List line 194")
+    // console.log(entireList, "Entire List line 194")
   }, [entireList])
 
   useEffect(() => {
@@ -258,11 +275,11 @@ export default function NearByOptions({
   }, [cuisine])
 
   useEffect(() => {
-    console.log(listPerCuisine, "Final Entire List line 252");
+    // console.log(listPerCuisine, "Final Entire List line 252");
   }, [cuisine])
 
   useEffect(() => {
-    console.log(finalCuisineFilterList, "Final Cuisine Filter List line 252");
+    // console.log(finalCuisineFilterList, "Final Cuisine Filter List line 252");
   }, [finalCuisineFilterList])
 
   let highlyRatedDishes = nearByDishes.filter((el) => el.avg_rating >= 3.5);
@@ -286,9 +303,8 @@ export default function NearByOptions({
     objectOfRecommendedList[element.cuisine_name] = 1;
   }
 
-
   useEffect(() => {
-    console.log(cuisine, "Cuisine state line 269");
+    // console.log(cuisine, "Cuisine state line 269");
   }, [cuisine])
 
   useEffect(() => {
@@ -300,8 +316,19 @@ export default function NearByOptions({
   }, [filteredDishSearch]);
 
   useEffect(() => {
-    console.log(search, "Nearby Options Search")
+    // console.log(search, "Nearby Options Search")
   }, [search]);
+
+  // dish categeory filtering
+  function handleDishCategoryfiltering(category) {
+    if (category === dishCategoryFilter) {
+      setDishCategoryFilter("");
+      setFinalEntireList(entireList);
+    } else {
+        setDishCategoryFilter(category);
+        setFinalEntireList(entireList.filter((el) => el.dish_name.toLowerCase().includes(category.toLowerCase())));
+    }
+  }
 
   return (
     <div className="home-main-container">
@@ -340,6 +367,30 @@ export default function NearByOptions({
             </div>
           ))}
         </div>
+      }
+
+      {/* Dish category filters */}
+      <DishCategoryFilter />
+      {search ?
+        <div className="category-filter-container">
+          <div className="category-filters">
+            {dishCategoryFilters.map((category) => (
+              <button 
+                className={
+                  `category-filter-button ${category === dishCategoryFilter ? "cfb-active" : ""}`
+                }
+                onClick={() => handleDishCategoryfiltering(category)}>
+                  <strong>{category.length > 10 ? category.slice(0,10) +'...' : category }</strong>
+              </button>
+            ))}
+          </div>
+          {dishCategoryFilter ? 
+            <h4 className="active-dish-filter"><strong>Current Filter: {dishCategoryFilter}</strong></h4> :
+            null
+
+          }
+        </div> :
+        null
       }
 
       {/* change header based on search */}
