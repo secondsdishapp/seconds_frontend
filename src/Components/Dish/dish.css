@@ -16,9 +16,9 @@
         
     }
    .nearbyoptions_item_infos{
-    margin-right: 2vw;
-    
-    margin-top: 3vw;
+    margin-right: 0%;
+    width: 100%;
+    margin-top: 0vw;
    }
     .nearbyoptions_item{
         display: grid;
@@ -40,25 +40,36 @@
    
     
     .nearbyoptions_item_dish-name-container{
-        width: 40vw;
+        width: 100%;
         display: flex;
         /* justify-content: space-between; */
-        text-align: start;
+        /* text-align: start; */
         line-height: 5vw;
-        
-       
-
+        align-items: center;
     }
     .nearbyoptions_item_dish-name{
-        font-size: 3.1vw;
-        /* margin-left: -5vw; */
-       
-        margin-top: 3vw;
+        font-size: 3.1vw; 
+        margin-top: 0;
+        margin-bottom: 0px;
+        display: flex;
+        align-items: center;
+        /* border: 1px solid black; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
     }
     .nearbyoptions_item_restaurant-name{
         font-weight: 700;
-      
-        
+        margin-top: 0;
+        margin-bottom: 0px;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FF5252;
     }
     .nearbyoptions_item_dish-restaurant-container{
         display: flex;
@@ -74,36 +85,43 @@
     .nearbyoptions_item_dish-rating-container{
         display: flex;
         font-size: 3.5vw;
-    ;
-
+        align-items: center;
+        gap: 3%;
         /* justify-content: space-evenly; */
 
     }
     
     .nearbyoptions_icon{
-        margin: 1vw;
-        margin-left: -1vw;
-        height: 8.4vw;
+        margin: 0vw;
+        margin-left: 0vw;
+        width: 6vw;
+        height: 6vw;
        
 
     }
     .nearbyoptions_icon_distance{
-        margin: 1vw;
-        
-        height: 8.4vw;
+        margin: 0;
+        width: 6vw;
+        height: 6vw;
 
        
 
     }
     .nearbyoptions_rating-content{
         margin-right: 1vw;
-        margin-top: 5vw;
+        margin-top: 0vw;
         margin-left: 1vw;
     }
     .nearbyoptions_distance-km{
-        font-size: 4vw;
-        margin-left: 1vw;
+        font-size: 12px;
+        margin-left: -1vw;
     }
     
+    .nearbyoptions_rating-content {
+        margin-bottom: 0;
+    }
 
+    .nearbyoptions_distance-content {
+        font-size: 12px;
+    }
   }

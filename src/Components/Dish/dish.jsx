@@ -103,6 +103,7 @@ const calculateDistance = () => {
           src={item.dish_image}
           alt=""
         />
+        <div style={{display: "grid", gridTemplateRows: "33% 33% 33%", width: "100%", alignContent: "center", paddingTop: "10px"}}>
         <div className="nearbyoptions_item_infos">
           <div className="nearbyoptions_item_dish-restaurant-container">
           <img className="nearbyoptions_icon"  src="/restaurant.svg" />
@@ -111,16 +112,20 @@ const calculateDistance = () => {
           </p>
 
           </div>
+        </div>
+        <div>
           <div className="nearbyoptions_item_dish-name-container">
             <img className="nearbyoptions_icon" src="/dinner.svg" />
 
             <h5 className="nearbyoptions_item_dish-name">{item.dish_name}</h5>
           </div>
+        </div>
+        <div>
           <div className="nearbyoptions_item_dish-rating-container">
 
-            <img className="nearbyoptions_icon"  src="/dish.png" />
+            <img className="nearbyoptions_icon"  src="/cutlery.svg" />
             <h3  className="nearbyoptions_rating-content">{dishAverageRating}</h3>
-            <img className="nearbyoptions_icon_distance"  src="distance.png" />
+            <img className="nearbyoptions_icon_distance"  src="distance.svg" />
             <h3  className="nearbyoptions_distance-content">{distance?distance.toString().slice(0,4):null}</h3>
             <br />
             <h3  className="nearbyoptions_distance-km">km</h3>
@@ -128,6 +133,7 @@ const calculateDistance = () => {
 
             
           </div>
+        </div>
         </div>
       </div>
     </div>
