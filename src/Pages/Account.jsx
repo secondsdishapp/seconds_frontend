@@ -198,7 +198,7 @@ export default function Account({
                 </div>
                 <p className="account-name">Welcome {getEmailUsername(currentUser?.email)}!</p>
             </div>
-            <button type="button" onClick={() => sendNewUserToDb({firebase_email: email, firebase_id: uid})}>send user to db</button>
+            {/* <button type="button" onClick={() => sendNewUserToDb({firebase_email: email, firebase_id: uid})}>send user to db</button> */}
             <p className="preference-title">Set Preferences</p>
             <div className="selections-main-container">
                 <div className="vegetarian-selection-container">

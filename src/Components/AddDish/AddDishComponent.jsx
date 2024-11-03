@@ -13,8 +13,13 @@ export default function AddDishComponent() {
   const [ searchInput, setSearchInput ] = useState("");
   const [ arrSearchInput, setArrSearchInput ] = useState("");
   const [ restNameInput, setRestNameInput ] = useState("");
+  const [ cityInput, setCityInput ] = useState("");
   const [ stateInput, setStateInput ] = useState("");
   const [ phoneNumber, setPhoneNumber ] = useState("");
+  const [ coordinates, setCoordinates ] = useState({
+    lat: 0,
+    lng: 0,
+});
  
 
 
@@ -86,7 +91,7 @@ const [newDish, setNewDish] = useState({
     console.log(newRestaurant, "newRestaurant Line 97")
   }, [newRestaurant]);
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
 async function addRestauranAndDish(newRestaurant, newDish) {
     fetch(`${API}/restaurants`, {
         method: "POST",
@@ -100,12 +105,18 @@ async function addRestauranAndDish(newRestaurant, newDish) {
         })
         .then(response => response.json())
 }
-  
+//UPDATING COORDINATES OF RESTAURANT-----------------------------------------------------------------------------------------
+useEffect(() => {
+  if (coordinates.lat !== 0 && coordinates.lng !== 0) {
+      setNewRestaurant({...newRestaurant, latitude: coordinates.lat, longitude: coordinates.lng})
+    }
+}, [coordinates])
+
+//---------------------------------------------------------------------------------------------------------------------------
 
   function handleSubmit(e) {
     e.preventDefault();
     e.preventDefault();
-    // getLatLng(fullAddress);
     addRestauranAndDish(newRestaurant, newDish)
     console.log(newDish)
   }
@@ -163,13 +174,6 @@ async function addRestauranAndDish(newRestaurant, newDish) {
       });
   }, [newDish.name]);
 
-  useEffect(() => {
-      console.log(uploadedFile,"Image uploaded")
-  }, [uploadedFile])
-
-  useEffect(() => {
-      console.log(currImage,"Image uploaded 2")
-  }, [currImage]);
 
 
   //GET THE STREET, CITY AND STATE FROM THE ADDRESS
@@ -180,10 +184,25 @@ async function addRestauranAndDish(newRestaurant, newDish) {
   }, [searchInput]);
 
   useEffect(() => {
+    setNewRestaurant({...newRestaurant, address: arrSearchInput[0]});
+  }, [arrSearchInput]);
+
+  useEffect(() => {
     if (arrSearchInput.length > 0) {
-      setStateInput(arrSearchInput[2].trim().split(" ")[0]);
+      setCityInput(arrSearchInput[1]?.trim());
+      setStateInput(arrSearchInput[2]?.trim().split(" ")[0]);
+      setNewRestaurant({
+        ...newRestaurant,
+        address: arrSearchInput[0],
+        city: arrSearchInput[1]?.trim(),
+        state: arrSearchInput[2]?.trim().split(" ")[0],
+      })
     }
   }, [arrSearchInput])
+
+  // useEffect(() => {
+  //   setNewRestaurant({...newRestaurant, state: stateInput});
+  // }, [stateInput]);
 
   useEffect(() => {
     console.log(stateInput, "stateInput")
@@ -225,7 +244,7 @@ async function addRestauranAndDish(newRestaurant, newDish) {
 
         <form className="add-dish-form" onSubmit={handleSubmit}>
             <div className="dish-name-container">
-                <label htmlFor="">Dish Name
+                <label className="label-css" htmlFor="">Dish Name
                     <br />
                     <input className="dish-name-input" placeholder="Please enter the dish name" type="text" id="name" value={newDish.name} onChange={handleTextChange} />
                 </label>
@@ -233,18 +252,20 @@ async function addRestauranAndDish(newRestaurant, newDish) {
             <br />
 
             <div className="dish-image-container">
-                <label htmlFor="">
+                <label className="label-css" htmlFor="">
                 Dish image
                     <br />
                     {/* <input className="dish-image-input" placeholder="Please upload a picture of a dish " type="text" id="image" name="image"  value={currImage} onChange={handleTextChange} hidden/> */}
                 </label>
                 <img className="dish-image" src={currImage} alt="dish"/>
                 <input ref={fileUploader} type="file" id="image" className="choose-file2" onChange={uploadedFile} />
+                <br/>
+                <button className="edit-image" onClick={editImage}>Upload Image</button>
             </div>
             <br />
 
             <div className="cuisine-container">
-                <label htmlFor="">
+                <label className="label-css" htmlFor="">
                 Cuisine
                 <br />
                 <select className="cuisine" id="cuisine" name="cuisine" value={newDish.cuisine} onChange={handleTextChange}>
@@ -255,10 +276,10 @@ async function addRestauranAndDish(newRestaurant, newDish) {
             </div>
             <br />
 
-        <GooglePlaces searchInput={searchInput} setSearchInput={setSearchInput} phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} restNameInput={restNameInput} setRestNameInput={setRestNameInput} newRestaurant={newRestaurant} setNewRestaurant={setNewRestaurant}/>
+        <GooglePlaces searchInput={searchInput} setSearchInput={setSearchInput} phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} restNameInput={restNameInput} setRestNameInput={setRestNameInput} newRestaurant={newRestaurant} setNewRestaurant={setNewRestaurant} coordinates={coordinates} setCoordinates={setCoordinates}/>
 
         <div className="restaurant-name-container">
-          <label htmlFor="">
+          <label className="label-css" htmlFor="">
             Restaurant Name
             <br />
             <input className="restaurant-name-input" placeholder={restNameInput || "Please enter the restaurant name"}  type="text" id="name" name="name" value={restNameInput} onChange={handleRestTextChange} disabled/>
@@ -267,7 +288,7 @@ async function addRestauranAndDish(newRestaurant, newDish) {
           <br />
 
           <div className="restaurant-street-container">
-          <label htmlFor="">
+          <label className="label-css" htmlFor="">
             Street 
             <br />
             <input className="restaurant-street-input" placeholder={arrSearchInput[0] || "Please enter the name"}  type="text" id="address" name="address" value={arrSearchInput[0]} onChange={handleRestTextChange} disabled/>
@@ -276,17 +297,17 @@ async function addRestauranAndDish(newRestaurant, newDish) {
           <br />
 
           <div className="restaurant-city-container">
-          <label htmlFor="">
+          <label className="label-css" htmlFor="">
             City
             <br />
-            <input className="restaurant-city-input" placeholder={arrSearchInput[1] || "Please enter the city"}  type="text" id="city" name="city" value={arrSearchInput[1]} onChange={handleRestTextChange} disabled/>
+            <input className="restaurant-city-input" placeholder={cityInput || "Please enter the city"}  type="text" id="city" name="city" value={cityInput} onChange={handleRestTextChange} disabled/>
           </label>
           </div>
           <br />
 
 
      <div className="restaurant-state-container">
-          <label htmlFor="">
+          <label className="label-css" htmlFor="">
             State
             <br/>
             <input className="restaurant-state-input" placeholder={stateInput || "Please enter state"}  type="text" id="state" name="state" value={stateInput} onChange={handleRestTextChange} disabled/>
@@ -349,7 +370,7 @@ async function addRestauranAndDish(newRestaurant, newDish) {
           <br />
 
           <div className="restaurant-phone-container">
-          <label htmlFor="">
+          <label className="label-css" htmlFor="">
             Phone number
             <br />
             

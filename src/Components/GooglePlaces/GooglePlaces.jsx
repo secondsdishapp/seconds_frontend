@@ -5,7 +5,7 @@ import { GoogleMap, useJsApiLoader, StandaloneSearchBox } from "@react-google-ma
 import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps"; 
 import { useRef } from "react";
 
-export default function GooglePlaces({ searchInput, setSearchInput, phoneNumber, setPhoneNumber, restNameInput, setRestNameInput, newRestaurant, setNewRestaurant}) {
+export default function GooglePlaces({ searchInput, setSearchInput, phoneNumber, setPhoneNumber, restNameInput, setRestNameInput, newRestaurant, setNewRestaurant, coordinates, setCoordinates}) {
 
     const inputRef = useRef();
     const API_KEY = import.meta.env.VITE_API_KEY;
@@ -13,11 +13,7 @@ export default function GooglePlaces({ searchInput, setSearchInput, phoneNumber,
     // const [map, setMap] = useState(google.maps.Map || null);
     // const [ autoComplete, setAutoComplete ] = useState(google.maps.places.Autocomplete || null);
     const [ selectedMarket, setSelectedMarket ] = useState(null);
-    const [ coordinates, setCoordinates ] = useState({
-        lat: 0,
-        lng: 0,
-    });
-
+  
     const [ currentLocation, setCurrentLocation ] = useState({
         lat: null,
         lng: null,
