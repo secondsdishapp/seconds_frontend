@@ -32,4 +32,4 @@ function LocalAuthProvider({ children }) {
   );
 }
 
-export { LocalAuthContext, LocalAuthProvider };;
+export { LocalAuthContext, LocalAuthProvider };
