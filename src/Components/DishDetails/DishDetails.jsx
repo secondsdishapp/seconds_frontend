@@ -37,7 +37,7 @@ export default function DishDetails() {
   const [hoverRating, setHoverRating] = useState(0);
   const [dish, setDish] = useState({ 'dish_name': '', 'dish_image': '', 'avg_rating': 1, 'restaurant_name': '','latitude':'','longitude':''})
   const [dishRatings, setDishRatings] = useState([]);
-  const [dishAverageRating, setDishAverageRating] = useState(0);
+  const [dishAverageRating, setDishAverageRating] = useState(dish.avg_rating);
 
   // get user id
   const user_id = localUser.user_id
@@ -62,24 +62,26 @@ export default function DishDetails() {
       })
       .then(resJSON => {
         setDish(resJSON)
-        // console.log(dish)
       })
       .catch(() => {
         navigate("/notfound")
       })
-  }, [id, navigate])
+  }, [ id, navigate])
 
   // get dish ratings by dish Id and calculate average rating
   async function getDishRatings(dish_id) {
     try {
       const fetchedDishRatings = await fetchAllDishRatingsByDishId(dish_id)
       setDishRatings(fetchedDishRatings)
-      const averageRating = fetchedDishRatings.length > 0 ? fetchedDishRatings.reduce((a, b) => a + b.rating, 0) / fetchedDishRatings.length : 0
+      const averageRating = fetchedDishRatings.length > 0 ? fetchedDishRatings.reduce((a, b) => a + b.rating, 0) / fetchedDishRatings.length : +dish.avg_rating
+      console.log(averageRating)
       setDishAverageRating(convertRating(averageRating))
     } catch (error) {
         throw error
     }
   }
+
+  console.log(dish)
 
   function convertRating(rating) {
     return Math.round((rating + Number.EPSILON) * 10) / 10
@@ -87,7 +89,7 @@ export default function DishDetails() {
 
   useEffect(() => {
     getDishRatings(id)
-  }, [previousRating])
+  }, [dish, previousRating])
 
   // get dish user rating
   async function setDishUserRating(dish_id, firebase_id) {
@@ -272,7 +274,7 @@ export default function DishDetails() {
       <img className="dish-details_dish-image" src={dish.dish_image} alt="" />
       {/* <h1 className='dish-details_rating-title'>Rating: {`${dishAverageRating}`}</h1> */}
       <h3 className='dish-details_rating-content'>{`${dishAverageRating} ${ratingDishes(dishAverageRating)}`}</h3>
-      <h3 className='dish-details_rating-length'>{`Reviews (${dishRatings.length})`}</h3>
+      <h3 className='dish-details_rating-length'>{`Ratings (${dishRatings.length || 1})`}</h3>
       
       <div className='dish-details_restaurant-info'>
         <h3 className='dish-details_restaurant-name'>{dish.restaurant_name}</h3>
