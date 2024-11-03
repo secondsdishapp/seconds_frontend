@@ -376,7 +376,7 @@ export default function NearByOptions({
       <h4 
         // style={search ? { display: "none" } : null} 
         className="highly-rated-nearby-options">
-          {search ? "Dish Results" : "Highly Rated Nearby Options"}
+          {search ? "Dish Results" : "Highly Rated Nearby"}
       </h4>
       
       {/* show entire list or cuisine filtered list */}
