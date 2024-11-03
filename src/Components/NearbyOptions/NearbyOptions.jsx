@@ -356,11 +356,18 @@ export default function NearByOptions({
           {uniqueListPerCuisine.map((dish) => (
             <div className="homepage_filterpercuisine_item">
               <img
-                className={`homepage_filterpercuisine_item_image ${clicked === dish ? "active" : ""}`}
+                className={`homepage_filterpercuisine_item_image ${clicked === dish ? "active" : "inactive"}`}
                 src={`/${dish}.svg`}
                 onClick={()=>{
-                  setCuisine(dish)
-                  setClicked(dish)
+                  if(cuisine === dish){
+                    setClicked("")
+                    setCuisine("")
+                  }else{
+                    setClicked(dish)
+                    setCuisine(dish)
+                  }
+               
+
                 }}
               ></img>
               <h5 className="homepage_filterpercuisine_item_name">{dish}</h5>

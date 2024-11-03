@@ -35,6 +35,9 @@ br{height: 2vw;}
 .homepage_filterpercuisine_item_image.active {
     background-color: black;
 }
+.homepage_filterpercuisine_item_image.inactive {
+    background-color: white;
+}
 
 .homepage_filterpercuisine_item{
     /* margin: 2vw; */ 
