@@ -26,6 +26,7 @@ import ProtectedRoutes from "./Utils/ProtectedRoutes.jsx";
 // context
 import { LocalAuthProvider } from "./Context/LocalAuth/LocalAuthContext.jsx";
 import { AuthProvider } from "./Context/AuthContext/AuthContext.jsx";
+import { StateContextProvider } from "./Context/StateContext.jsx";
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
     <div>
       <LocalAuthProvider>
       <AuthProvider>
+      <StateContextProvider>
       <TopMenuBar menuToggle={menuToggle} setMenuToggle={setMenuToggle} />
       {menuToggle ? <SidebarMenu menuToggle={menuToggle} setMenuToggle={setMenuToggle}/> : null}
       <main className={`pages ${menuToggle ? "fixed" : ""}`}>
@@ -65,6 +67,7 @@ function App() {
         </Routes>
       </main>
       <Footer setCuisine={setCuisine} style={{zIndex: "99"}} menuToggle={menuToggle} setMenuToggle={setMenuToggle} setValue={setValue} value={value}/>
+      </StateContextProvider>
       </AuthProvider>
       </LocalAuthProvider>
     </div>
