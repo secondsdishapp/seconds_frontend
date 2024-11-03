@@ -17,7 +17,8 @@ export default function NearByOptions({
   setGlutenFree,
   search,
   setSearch,
-}) {
+}) 
+{
   const navigate = useNavigate();
   const API = import.meta.env.VITE_API_URL;
   const API_KEY = import.meta.env.VITE_API_KEY;
@@ -58,10 +59,9 @@ export default function NearByOptions({
 
   //---------------------------------------------------------------------------------------------------------------------------
 
-  // context
-  const { isLocalLoggedIn, localUser, localLogin, localLogout, localAuthTest } =
-    useContext(LocalAuthContext);
-
+  // CONTEXT------------------------------------------------------------------------------------------------------------------
+  const { isLocalLoggedIn, localUser, localLogin, localLogout, localAuthTest } = useContext(LocalAuthContext);
+  //---------------------------------------------------------------------------------------------------------------------------
   const [ dishesLocations, setDishesLocations ] = useState([]);
   const [ nearByDishes, setNearByDishes ] = useState([]);
   const [ allNearByDishes, setAllNearByDishes ] = useState([]);
@@ -75,19 +75,13 @@ export default function NearByOptions({
   const [ cuisine, setCuisine ] = useState('');
   const [ finalCuisineFilterList, setFinalCuisineFilterList ] = useState([]);
   const [ clicked, setClicked ] = useState("");
-
   const [ restaurantResults, setRestaurantResults ] = useState([]);
   const [ dishCategoryFilters, setDishCategoryFilters ] = useState([]);
   const [ dishCategoryFilter, setDishCategoryFilter ] = useState("");
-
   const [ currentLocation, setCurrentLocation ] = useState({
     lat: null,
     lng: null,
   });
-
-  useEffect(() => {
-    // console.log(locationsInRadius, "Locations good");
-  }, [locationsInRadius]);
 
   function calculateDistance(point1, point2) {
     const earthRadiusMiles = 3959;
@@ -137,16 +131,16 @@ export default function NearByOptions({
     }
     // console.log(filtered, "Filtered");
     // get unique dish names from search
-    const uniqueDishNames = [...new Set([...finalEntireList.filter((dish) => 
-      dish.dish_name.toLowerCase()
-        .includes(search.toLowerCase()))])
-        .keys()
-        .map((dish) => dish.dish_name)]
+    // const uniqueDishNames = [...new Set([...finalEntireList.filter((dish) => 
+    //   dish.dish_name.toLowerCase()
+    //     .includes(search.toLowerCase()))])
+    //     .keys()
+    //     .map((dish) => dish.dish_name)]
     // sort unique dish names
-    if(uniqueDishNames) uniqueDishNames.sort((a, b) => a.localeCompare(b));
-    console.log(uniqueDishNames)
-    setDishCategoryFilters(uniqueDishNames);
-
+  //   if(uniqueDishNames) uniqueDishNames.sort((a, b) => a.localeCompare(b));
+  //   console.log(uniqueDishNames)
+  //   setDishCategoryFilters(uniqueDishNames);
+  // }, [search]);
   }, [search]);
 
   useEffect(() => {
@@ -420,4 +414,4 @@ export default function NearByOptions({
       }
     </div>
   )
-}
+};

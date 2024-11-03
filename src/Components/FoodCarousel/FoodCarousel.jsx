@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import foodImagesData from './FoodCarouselImages';
+import foodImagesData from './FoodCarouselImages.js';
 import './FoodCarousel.css';
 import { useNavigate } from "react-router-dom";
 import RightArrowIcon from '../../assets/images/right-arrow-green.svg';

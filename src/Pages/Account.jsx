@@ -10,10 +10,10 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import { createTheme, ThemeProvider } from "@mui/material";
 // import PreferenceCheckboxMUI from "../Components/PreferenceCheckboxMUI.jsx/PreferenceCheckboxMUI";
-import ControlledCheckbox from "../Components/PreferenceCheckboxMUI.jsx/CheckboxesMUI";
-import VegetarianCheckboxMUI from "../Components/PreferenceCheckboxMUI.jsx/VegetarianCheckboxMUI";
-import VeganCheckboxMUI from "../Components/PreferenceCheckboxMUI.jsx/VeganCheckboxMUI";
-import GlutenFreeCheckboxMUI from "../Components/PreferenceCheckboxMUI.jsx/GlutenFreeCheckboxMUI";
+import ControlledCheckbox from "../Components/PreferenceCheckboxMUI/CheckboxesMUI.jsx";
+import VegetarianCheckboxMUI from "../Components/PreferenceCheckboxMUI/VegetarianCheckboxMUI.jsx";
+import VeganCheckboxMUI from "../Components/PreferenceCheckboxMUI/VeganCheckboxMUI.jsx";
+import GlutenFreeCheckboxMUI from "../Components/PreferenceCheckboxMUI/GlutenFreeCheckboxMUI.jsx";
 
 
 
