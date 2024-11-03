@@ -1,145 +1,182 @@
 .states{
-  font-size: 6vw;
+    font-size: 6vw;
 }
+
 .cuisine{
-  font-size: 6vw;
+    font-size: 6vw;
 }
+
 .add-dish-form{
-  /* border: 1px solid black; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding-top: 30px;
-  padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
+
 .dish-name-container {
-  width: 80%;
+    width: 80%;
 }
+
 .dish-name-input {
-  width: 100%;
-  height: 35px;
-  border: none;
-  border-bottom: 1px solid #009688;
-  outline-color: #FF5252;
-  margin-top: 10px;
+    width: 100%;
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid #009688;
+    outline-color: #FF5252;
+    margin-top: 10px;
 }
+
 .dish-image-container {
-  width: 80%;
+    width: 80%;
 }
+
 .dish-image {
-  width: 100%;
-  margin: 0;
+    width: 100%;
+    margin: 0;
 }
+
 .dish-image-input {
-  width: 100%;
-  height: 35px;
-  border: none;
-  border-bottom: 1px solid #009688;
-  outline-color: #FF5252;
-  margin-top: 10px;
+    width: 100%;
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid #009688;
+    outline-color: #FF5252;
+    margin-top: 10px;
 }
+
 .choose-file2 {
-  width: 100%;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  align-content: center;
-  margin-left: 20%;
-  margin-top: 20px;
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    margin-left: 20%;
+    margin-top: 20px;
+    
 }
+
 .cuisine-container {
-  width: 80%;
+    width: 80%;
 }
+
 .cuisine {
-  width: 100%;
-  height: 35px;
-  color: #009688;
-  font-size: 17px;
-  border: none;
-  border-bottom: 1px solid #009688;
-  outline-color: #009688;
-  margin-top: 10px;
+    width: 100%;
+    height: 35px;
+    color: #009688;
+    font-size: 17px;
+    border: none;
+    border-bottom: 1px solid #009688;
+    outline-color: #009688;
+    margin-top: 10px;
 }
+
 .restaurant-name-container {
-  width: 100%;
+    width: 100%;
+    margin-top: 30px;
 }
+
 .restaurant-name-input {
-  width: 80%;
-  height: 35px;
-  border: none;
-  border-bottom: 1px solid #009688;
-  outline-color: #FF5252;
-  margin-top: 10px;
+    width: 80%;
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid #009688;
+    outline-color: #FF5252;
+    margin-top: 10px;
 }
+
 .restaurant-street-container {
-  width: 100%;
+    width: 100%;
 }
+
 .restaurant-street-input {
-  width: 80%;
-  height: 35px;
-  border: none;
-  border-bottom: 1px solid #009688;
-  outline-color: #FF5252;
-  margin-top: 10px;
+    width: 80%;
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid #009688;
+    outline-color: #FF5252;
+    margin-top: 10px;
 }
+
 .restaurant-city-container {
-  width: 100%;
+    width: 100%;
 }
+
 .restaurant-city-input {
-  width: 80%;
-  height: 35px;
-  border: none;
-  border-bottom: 1px solid #009688;
-  outline-color: #FF5252;
-  margin-top: 10px;
+    width: 80%;
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid #009688;
+    outline-color: #FF5252;
+    margin-top: 10px;
 }
+
 .restaurant-state-container {
-  width: 100%;
+    width: 100%;
 }
+
+.restaurant-state-input {
+  width: 80%;
+  height: 35px;
+  border: none;
+  border-bottom: 1px solid #009688;
+  outline-color: #FF5252;
+  margin-top: 10px;
+}
+
 .states {
-  width: 80%;
-  height: 35px;
-  color: #009688;
-  font-size: 17px;
-  border: none;
-  border-bottom: 1px solid #009688;
-  outline-color: #FF5252;
-  margin-top: 10px;
+    width: 80%;
+    height: 35px;
+    color: #009688;
+    font-size: 17px;
+    border: none;
+    border-bottom: 1px solid #009688;
+    outline-color: #FF5252;
+    margin-top: 10px;
 }
+
 .restaurant-phone-container {
-  width: 100%;
+    width: 100%;
 }
+
 .restaurant-phone-input {
-  width: 80%;
-  height: 35px;
-  border: none;
-  border-bottom: 1px solid #009688;
-  outline-color: #FF5252;
-  margin-top: 10px;
+    width: 80%;
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid #009688;
+    outline-color: #FF5252;
+    margin-top: 10px;
 }
+
 .rating-title {
-  margin-bottom: 0px;
-  margin-top: 30px;
+    margin-bottom: 0px;
+    margin-top: 30px;
 }
+
 .dish-rating-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
 }
+
 .dish-details-plate-rating {
-  margin-top: 30px;
+    margin-top: 30px;
 }
+
 .add-new-dish_submit {
-  width: 80%;
-  height: 37px;
-  border: none;
-  border-radius: 17px;
-  background-color: #FF5252;
-  color: white;
-  font-size: 18px;
+    width: 80%;
+    height: 37px;
+    border: none;
+    border-radius: 17px;
+    background-color: #FF5252;
+    color: white;
+    font-size: 18px;
 }
+
+
+  
