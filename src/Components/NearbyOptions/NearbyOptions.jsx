@@ -2,6 +2,9 @@ import "./DishCategoryFiltering/DishCategoryFilter.css";
 import { useState, useEffect, useContext } from "react";
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import { useNavigate } from "react-router-dom";
+import { StateContext } from "../../Context/StateContext.jsx";
+
+// components
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import DishCategoryFilter from "./DishCategoryFiltering/DishCategoryFilter.jsx";
 import Dish from "../Dish/dish";
@@ -21,6 +24,13 @@ export default function NearByOptions({
   const navigate = useNavigate();
   const API = import.meta.env.VITE_API_URL;
   const API_KEY = import.meta.env.VITE_API_KEY;
+
+  const { 
+    dishCategoryFilters
+    , setDishCategoryFilters
+    , dishCategoryFilter
+    , setDishCategoryFilter
+  } = useContext(StateContext);
 
   //CREATE A STATE TO FILTER THE ENTIRE LIST BASED ON THE PREFERENCES-------------------------------------------------------------------
   const [ preferenceListVegetarian, setPreferenceListVegetarian ] = useState([]);
@@ -77,8 +87,8 @@ export default function NearByOptions({
   const [ clicked, setClicked ] = useState("");
 
   const [ restaurantResults, setRestaurantResults ] = useState([]);
-  const [ dishCategoryFilters, setDishCategoryFilters ] = useState([]);
-  const [ dishCategoryFilter, setDishCategoryFilter ] = useState("");
+  // const [ dishCategoryFilters, setDishCategoryFilters ] = useState([]);
+  // const [ dishCategoryFilter, setDishCategoryFilter ] = useState("");
 
   const [ currentLocation, setCurrentLocation ] = useState({
     lat: null,
