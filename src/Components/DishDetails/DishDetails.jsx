@@ -74,7 +74,6 @@ export default function DishDetails() {
       const fetchedDishRatings = await fetchAllDishRatingsByDishId(dish_id)
       setDishRatings(fetchedDishRatings)
       const averageRating = fetchedDishRatings.length > 0 ? fetchedDishRatings.reduce((a, b) => a + b.rating, 0) / fetchedDishRatings.length : +dish.avg_rating
-      console.log(averageRating)
       setDishAverageRating(convertRating(averageRating))
     } catch (error) {
         throw error

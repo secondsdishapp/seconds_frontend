@@ -14,7 +14,7 @@ export default function Dish({ item, index }) {
     try {
       const dishRatings = await fetchAllDishRatingsByDishId(dish_id)
       setDishRatings(dishRatings)
-      const averageRating = dishRatings.length > 0 ? dishRatings.reduce((a, b) => a + b.rating, 0) / dishRatings.length : 0
+      const averageRating = dishRatings.length > 0 ? dishRatings.reduce((a, b) => a + b.rating, 0) / dishRatings.length : +item.avg_rating
       setDishAverageRating(convertRating(averageRating))
     } catch (error) {
         throw error
@@ -104,36 +104,34 @@ const calculateDistance = () => {
           alt=""
         />
         <div style={{display: "grid", gridTemplateRows: "33% 33% 33%", width: "100%", alignContent: "center", paddingTop: "10px"}}>
-        <div className="nearbyoptions_item_infos">
-          <div className="nearbyoptions_item_dish-restaurant-container">
-          <img className="nearbyoptions_icon"  src="/restaurant.svg" />
-          <p className="nearbyoptions_item_restaurant-name">
-            {item.restaurant_name}
-          </p>
-
+        
+          <div className="nearbyoptions_item_infos">
+            <div className="nearbyoptions_item_dish-restaurant-container">
+              <img className="nearbyoptions_icon"  src="/restaurant.svg" />
+              <p className="nearbyoptions_item_restaurant-name">
+                {item.restaurant_name}
+              </p>
+            </div>
           </div>
-        </div>
-        <div>
-          <div className="nearbyoptions_item_dish-name-container">
-            <img className="nearbyoptions_icon" src="/dinner.svg" />
 
-            <h5 className="nearbyoptions_item_dish-name">{item.dish_name}</h5>
+          <div>
+            <div className="nearbyoptions_item_dish-name-container">
+              <img className="nearbyoptions_icon" src="/dinner.svg" />
+              <h5 className="nearbyoptions_item_dish-name">{item.dish_name}</h5>
+            </div>
           </div>
-        </div>
-        <div>
-          <div className="nearbyoptions_item_dish-rating-container">
 
-            <img className="nearbyoptions_icon"  src="/cutlery.svg" />
-            <h3  className="nearbyoptions_rating-content">{dishAverageRating}</h3>
-            <img className="nearbyoptions_icon_distance"  src="distance.svg" />
-            <h3  className="nearbyoptions_distance-content">{distance?distance.toString().slice(0,4):null}</h3>
-            <br />
-            <h3  className="nearbyoptions_distance-km">km</h3>
-            {/* <h3 className='nearbyoptions_rating-content'>{dishAverageRating}</h3> */}
-
-            
+          <div>
+            <div className="nearbyoptions_item_dish-rating-container">
+              <img className="nearbyoptions_icon"  src="/cutlery.svg" />
+              <h3  className="nearbyoptions_rating-content">{dishAverageRating}</h3>
+              <img className="nearbyoptions_icon_distance"  src="distance.svg" />
+              <h3  className="nearbyoptions_distance-content">{distance?distance.toString().slice(0,4):null}</h3>
+              <br />
+              <h3  className="nearbyoptions_distance-km">km</h3>
+              {/* <h3 className='nearbyoptions_rating-content'>{dishAverageRating}</h3> */}
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
