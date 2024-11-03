@@ -151,8 +151,8 @@ export default function NearByOptions({
     const uniqueDishNames = [...new Set([...finalEntireList.filter((dish) => 
       dish.dish_name.toLowerCase()
         .includes(search.toLowerCase()))])
-        .keys()
-        .map((dish) => dish.dish_name)]
+        .keys()]
+        .map((dish) => dish.dish_name)
     // sort unique dish names
     if(uniqueDishNames) uniqueDishNames.sort((a, b) => a.localeCompare(b));
     console.log(uniqueDishNames)
