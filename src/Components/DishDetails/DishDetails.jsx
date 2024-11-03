@@ -300,7 +300,7 @@ export default function DishDetails() {
               }
               alt={`Plate ${rating}`}
               onMouseEnter={() => setHoverRating(rating)}
-              onMouseLeave={() => setHoverRating(0)}
+              onMouseLeave={() => setHoverRating(rating)}
               onClick={() => {}}
               key={index}
             />
