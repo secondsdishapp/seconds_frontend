@@ -25,11 +25,14 @@ export default function NearByOptions({
   const API = import.meta.env.VITE_API_URL;
   const API_KEY = import.meta.env.VITE_API_KEY;
 
-  const { 
-    dishCategoryFilters
-    , setDishCategoryFilters
-    , dishCategoryFilter
-    , setDishCategoryFilter
+  const {
+    // dish results
+    entireList, setEntireList
+    , finalEntireList, setFinalEntireList
+    // dish category filtering
+    , dishCategoryFilters, setDishCategoryFilters
+    , dishCategoryFilter, setDishCategoryFilter
+    , handleDishCategoryfiltering
   } = useContext(StateContext);
 
   //CREATE A STATE TO FILTER THE ENTIRE LIST BASED ON THE PREFERENCES-------------------------------------------------------------------
@@ -77,8 +80,8 @@ export default function NearByOptions({
   const [ allNearByDishes, setAllNearByDishes ] = useState([]);
   const [ locationsInRadius, setLocationsInRadius ] = useState([]);
   const [ filteredDishSearch, setFilteredDishSearch ] = useState([]);
-  const [ entireList, setEntireList ] = useState([]);
-  const [ finalEntireList, setFinalEntireList ] = useState([]);
+  // const [ entireList, setEntireList ] = useState([]);
+  // const [ finalEntireList, setFinalEntireList ] = useState([]);
   const [ listPerCuisine, setListPerCuisine ] = useState([]);
   const [ uniqueListPerCuisine, setUniqueListPerCuisine ] = useState([]);
   const [ cuisineIcons, setCuisineIcons ] = useState([]);
@@ -87,8 +90,6 @@ export default function NearByOptions({
   const [ clicked, setClicked ] = useState("");
 
   const [ restaurantResults, setRestaurantResults ] = useState([]);
-  // const [ dishCategoryFilters, setDishCategoryFilters ] = useState([]);
-  // const [ dishCategoryFilter, setDishCategoryFilter ] = useState("");
 
   const [ currentLocation, setCurrentLocation ] = useState({
     lat: null,
@@ -329,17 +330,6 @@ export default function NearByOptions({
     // console.log(search, "Nearby Options Search")
   }, [search]);
 
-  // dish categeory filtering
-  function handleDishCategoryfiltering(category) {
-    if (category === dishCategoryFilter) {
-      setDishCategoryFilter("");
-      setFinalEntireList(entireList);
-    } else {
-        setDishCategoryFilter(category);
-        setFinalEntireList(entireList.filter((el) => el.dish_name.toLowerCase().includes(category.toLowerCase())));
-    }
-  }
-
   return (
     <div className="home-main-container">
       {/* search bar */}
@@ -380,28 +370,7 @@ export default function NearByOptions({
       }
 
       {/* Dish category filters */}
-      <DishCategoryFilter />
-      {search ?
-        <div className="category-filter-container">
-          <div className="category-filters">
-            {dishCategoryFilters.map((category) => (
-              <button 
-                className={
-                  `category-filter-button ${category === dishCategoryFilter ? "cfb-active" : ""}`
-                }
-                onClick={() => handleDishCategoryfiltering(category)}>
-                  <strong>{category.length > 10 ? category.slice(0,10) +'...' : category }</strong>
-              </button>
-            ))}
-          </div>
-          {dishCategoryFilter ? 
-            <h4 className="active-dish-filter"><strong>Current Filter: {dishCategoryFilter}</strong></h4> :
-            null
-
-          }
-        </div> :
-        null
-      }
+      {search ? <DishCategoryFilter /> : null}
 
       {/* change header based on search */}
       <h4 
