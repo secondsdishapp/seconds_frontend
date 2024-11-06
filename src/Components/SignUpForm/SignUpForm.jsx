@@ -54,10 +54,10 @@ const SignUpForm = ({ setCurrentForm }) => {
   }, []);
   return (
     <div className="signup-form-container">
-          <h2 className="signup-form-title">Create an Account</h2>
-          <form className="signup-form" onSubmit={handleSubmit}>
-
-          <div className="signup-form-group-row">
+      <h2 className="signup-form-title">Create an Account</h2>
+      <form className="signup-form" onSubmit={handleSubmit}>
+        
+        {/* <div className="signup-form-group-row">
           <div className="signup-form-group-first-name">
             <label htmlFor="first-name" className="form-label">
               First Name:
@@ -71,6 +71,7 @@ const SignUpForm = ({ setCurrentForm }) => {
               />
             </label>
           </div>
+
           <div className="signup-form-group-last-name">
             <label htmlFor="last-name" className="form-label">
               Last Name:
@@ -84,49 +85,51 @@ const SignUpForm = ({ setCurrentForm }) => {
               />
             </label>
           </div>
+        </div> */}
+
+        <div className="signup-form-group-email">
+          <label htmlFor="email" className="form-label">
+            Email:
+            <input
+              id="email"
+              type="email"
+              className="signup-form-input-field-email"
+              value={formEmail}
+              onChange={(e) => setFormEmail(e.target.value)}
+              required
+            />
+          </label>
         </div>
 
-            <div className="signup-form-group-email">
-              <label htmlFor="email" className="form-label">
-                Email:
-                <input
-                  id="email"
-                  type="email"
-                  className="signup-form-input-field-email"
-                  value={formEmail}
-                  onChange={(e) => setFormEmail(e.target.value)}
-                  required
-                />
-              </label>
-            </div>
-            <div className="signup-form-group-password">
-              <label htmlFor="password" className="form-label">
-                Password:
-                <input
-                  id="password"
-                  type="password"
-                  className="signup-form-input-field-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </label>
-            </div>
-            <div className="signup-form-group-confirm-password">
-              <label htmlFor="confirmPassword" className="form-label">
-                Confirm Password:
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  className="signup-form-input-field-password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                />
-              </label>
-            </div>
+        <div className="signup-form-group-password">
+          <label htmlFor="password" className="form-label">
+            Password:
+            <input
+              id="password"
+              type="password"
+              className="signup-form-input-field-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+        </div>
 
-          <div className="signup-form-group-row">
+        <div className="signup-form-group-confirm-password">
+          <label htmlFor="confirmPassword" className="form-label">
+            Confirm Password:
+            <input
+              id="confirmPassword"
+              type="password"
+              className="signup-form-input-field-password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+
+        {/* <div className="signup-form-group-row">
           <div className="signup-form-group-country">
             <label htmlFor="country" className="form-label">
               Country:
@@ -140,6 +143,7 @@ const SignUpForm = ({ setCurrentForm }) => {
               />
             </label>
           </div>
+
           <div className="signup-form-group-mobile">
             <label htmlFor="mobile-number" className="form-label">
               Mobile Number:
@@ -153,42 +157,41 @@ const SignUpForm = ({ setCurrentForm }) => {
               />
             </label>
           </div>
-        </div>
-      
-      <button type="submit" className="signup-form-button">Sign</button>
+        </div> */}
+    
+        <button type="submit" className="signup-form-button">Create Account</button>
         
         <h5 className="signup-form-login-prompt">
           Already have an account?{' '}
           <a href="#" onClick={() => setCurrentForm('login')}>Log In</a>
         </h5>
 
-         
-          {/* Google Sign-In Button with Animation */}
-          <div className="g-signin-btn" onClick={() => window.open('https://google.com', '_blank')}>
-              <div className="g-logo"></div>
-              <span>Continue with Google</span>
-          </div>
+        {/* Google Sign-Up Button with Animation */}
+        <div className="g-signin-btn" onClick={() => window.open('https://google.com', '_blank')}>
+          <div className="g-logo"></div>
+          <span>Sign-Up with Google</span>
+        </div>
 
-          {/* Facebook Sign-In Button */}
-          <div className="fb-login-button"
-            data-width="340"
-            data-size="large"
-            data-button-type="continue_with"
-            data-layout="default"
-            data-auto-logout-link="false"
-            data-use-continue-as="true">
-          </div>
+        {/* Facebook Sign-Up Button */}
+        <div className="fb-login-button"
+          data-width="340"
+          data-size="large"
+          data-button-type="continue_with"
+          data-layout="default"
+          data-auto-logout-link="false"
+          data-use-continue-as="true">
+        </div>
 
-          {/* Facebook Sign-In Button */}
-          <a href="#" className="facebook-btn">
-            <svg className="facebook-btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M24 12.073C24 5.405 18.627 0 12 0 5.373 0 0 5.405 0 12.073c0 6.045 4.388 11.054 10.125 12.037v-8.531H7.078v-3.506h3.047V9.4c0-3.018 1.792-4.692 4.533-4.692 1.313 0 2.686.235 2.686.235v2.959h-1.513c-1.492 0-1.955.924-1.955 1.872v2.213h3.328l-.532 3.506h-2.796v8.53C19.612 23.127 24 18.118 24 12.073z"/>
-            </svg>
-            Continue with Facebook
-          </a>
+        {/* Facebook Sign-Up Button */}
+        <a href="#" className="facebook-btn">
+          <svg className="facebook-btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M24 12.073C24 5.405 18.627 0 12 0 5.373 0 0 5.405 0 12.073c0 6.045 4.388 11.054 10.125 12.037v-8.531H7.078v-3.506h3.047V9.4c0-3.018 1.792-4.692 4.533-4.692 1.313 0 2.686.235 2.686.235v2.959h-1.513c-1.492 0-1.955.924-1.955 1.872v2.213h3.328l-.532 3.506h-2.796v8.53C19.612 23.127 24 18.118 24 12.073z"/>
+          </svg>
+          Sign-Up with Facebook
+        </a>
 
-          {/* Apple Sign-In Button */}
-          <div id="appleid-signin" className="apple-signin-button" data-color="black" data-border="true" data-border-radius="50" data-type="continue" data-mode="center-align" data-width="100%" data-height-property="100%" data-logo-size="medium" data-font="bold"></div>
+        {/* Apple Sign-Up Button */}
+        <div id="appleid-signin" className="apple-signin-button" data-color="black" data-border="true" data-border-radius="50" data-type="continue" data-mode="center-align" data-width="100%" data-height-property="100%" data-logo-size="medium" data-font="bold"></div>
       </form>
     </div>
   );

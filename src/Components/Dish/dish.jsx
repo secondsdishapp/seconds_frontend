@@ -1,13 +1,19 @@
+import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from 'react'
 import { fetchAllDishRatingsByDishId } from "../../Services/ratings.services.js"
+import { AuthContext } from "../../Context/AuthContext/AuthContext.jsx";
 
 const API = import.meta.env.VITE_API_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 export default function Dish({ item, index }) {
+
+  const { currentUser } = useContext(AuthContext);
+  const { uid: firebase_id } = currentUser;
   const [dishRatings, setDishRatings] = useState([]);
   const [dishAverageRating, setDishAverageRating] = useState(0);
+  const [isRatedByUser, setIsRatedByUser] = useState(false);
+  console.log('isRatedByUser', isRatedByUser)
 
   // get dish ratings by dish Id and calculate average rating
   async function getDishRatings(dish_id) {
@@ -28,6 +34,13 @@ export default function Dish({ item, index }) {
   useEffect(() => {
     getDishRatings(item.dish_id)
   }, [])
+
+  useEffect (() => {
+    if (firebase_id) {
+      const isRatedByUser = dishRatings.some(rating => rating.firebase_id === firebase_id)
+      setIsRatedByUser(isRatedByUser)
+    }
+  }, [firebase_id])
 
   // distance calculation
 
