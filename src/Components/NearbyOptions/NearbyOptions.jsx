@@ -155,7 +155,7 @@ export default function NearByOptions({
         .map((dish) => dish.dish_name)
     // sort unique dish names
     if(uniqueDishNames) uniqueDishNames.sort((a, b) => a.localeCompare(b));
-    console.log(uniqueDishNames)
+    // console.log(uniqueDishNames)
     setDishCategoryFilters(uniqueDishNames);
 
   }, [search]);
@@ -275,7 +275,7 @@ export default function NearByOptions({
   }, [entireList])
 
   useEffect(() => {
-    setFinalEntireList(entireList.filter((el) => el.avg_rating >= 3.5));
+    setFinalEntireList(entireList.filter((el) => el.avg_rating >= 0));
   }, [entireList]);
   
 
@@ -330,9 +330,9 @@ export default function NearByOptions({
     // console.log(search, "Nearby Options Search")
   }, [search]);
 
-  useEffect(() => {
-    console.log(finalEntireList, "Final Entire List line 334");
-  }, [finalEntireList]);
+  // useEffect(() => {
+  //   console.log(finalEntireList, "Final Entire List line 334");
+  // }, [finalEntireList]);
 
   return (
     <div className="home-main-container">
@@ -357,8 +357,8 @@ export default function NearByOptions({
       {search ?
         null :
         <div className="homepage_filterpercuisine">
-          {uniqueListPerCuisine.map((dish) => (
-            <div className="homepage_filterpercuisine_item">
+          {uniqueListPerCuisine.map((dish, index) => (
+            <div key={index} className="homepage_filterpercuisine_item">
               <img
                 className={`homepage_filterpercuisine_item_image ${clicked === dish ? "active" : "inactive"}`}
                 src={`/${dish}.svg`}

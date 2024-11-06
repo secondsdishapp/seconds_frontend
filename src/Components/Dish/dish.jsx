@@ -13,7 +13,7 @@ export default function Dish({ item, index }) {
   async function getDishRatings(dish_id) {
     try {
       const dishRatings = await fetchAllDishRatingsByDishId(dish_id);
-      console.log(dishRatings, "Dish Ratings");
+      // console.log(dishRatings, "Dish Ratings");
       setDishRatings(dishRatings)
       const averageRating = dishRatings.length > 0 ? dishRatings.reduce((a, b) => a + b.rating, 0) / dishRatings.length : +item.avg_rating
       setDishAverageRating(convertRating(averageRating))
@@ -101,7 +101,7 @@ const calculateDistance = () => {
       <div className="nearbyoptions_item">
         <img
           className="nearbyoptions_item_image"
-          src={item.dish_image}
+          src={item.dish_image || "/emptydish.png"}
           alt=""
         />
         <div style={{display: "grid", gridTemplateRows: "33% 33% 33%", width: "100%", alignContent: "center", paddingTop: "10px"}}>

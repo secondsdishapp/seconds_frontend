@@ -64,9 +64,9 @@ export default function GooglePlaces({ searchInput, setSearchInput, phoneNumber,
       })    
 
 
-    useEffect(() => {
-        console.log(isLoaded)
-    }, [isLoaded]);
+    // useEffect(() => {
+    //     console.log(isLoaded)
+    // }, [isLoaded]);
 
     function handleOnPlacesChanged() {
         let address = inputRef.current.getPlaces();
@@ -88,11 +88,11 @@ export default function GooglePlaces({ searchInput, setSearchInput, phoneNumber,
         setNewRestaurant({...newRestaurant, name: restNameInput})
     }, [restNameInput])
 
-    useEffect(() => {
-        if (searchInput) {
-            console.log(searchInput, "Search Input")
-        }
-    }, [searchInput]);
+    // useEffect(() => {
+    //     if (searchInput) {
+    //         console.log(searchInput, "Search Input")
+    //     }
+    // }, [searchInput]);
 
 
     //FUNCTION TO GET COORDINATES OF AN ADDRESS----------------------------------------------------------------------------
@@ -126,9 +126,9 @@ export default function GooglePlaces({ searchInput, setSearchInput, phoneNumber,
     } , [searchInput]);
 
 
-    useEffect(() => {
-        console.log(coordinates, "Coordinates")
-    }, [coordinates]);
+    // useEffect(() => {
+    //     console.log(coordinates, "Coordinates")
+    // }, [coordinates]);
 
 
     //CALCULATING DISTANCE BETWEEN TWO COORDINATES---------------------------------------------------------------------
@@ -147,9 +147,9 @@ export default function GooglePlaces({ searchInput, setSearchInput, phoneNumber,
     return earthRadiusMiles * c;
   }
 
-  useEffect(() => {
-    console.log(currentLocation, "Current Location")
-  }, [currentLocation]);
+//   useEffect(() => {
+//     console.log(currentLocation, "Current Location")
+//   }, [currentLocation]);
 
 
     return (

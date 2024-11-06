@@ -15,7 +15,7 @@ export default function TopMenuBar({ menuToggle, setMenuToggle }) {
   } = useContext(LocalAuthContext);
 
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
+  // console.log(currentUser);
   
   const navigate = useNavigate();
   
