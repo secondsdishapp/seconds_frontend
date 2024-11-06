@@ -76,7 +76,7 @@ const calculateDistance = () => {
       parseFloat(item.latitude),
       parseFloat(item.longitude)
   );
-  setDistance(distanceResult);
+  setDistance(distanceResult*0.621371); //Convert to miles
 };
   useEffect(() => {
     calculateDistance();
@@ -128,7 +128,7 @@ const calculateDistance = () => {
               <h3  className="nearbyoptions_rating-content">{dishAverageRating}</h3>
               <div style={{display: "flex", alignItems: "center", width: "100%", justifyContent: "right"}}>
                 <img className="nearbyoptions_icon_distance"  src="distance.svg" />
-                <h3  className="nearbyoptions_distance-content">{distance?distance.toString().slice(0,4):null}km</h3>
+                <h3  className="nearbyoptions_distance-content">{distance?distance.toString().slice(0,4):null} mi</h3>
               </div>
               <br />
               {/* <h3  className="nearbyoptions_distance-km">km</h3> */}
