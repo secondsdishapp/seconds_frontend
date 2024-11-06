@@ -281,7 +281,7 @@ export default function DishDetails() {
   return (
     <div className='dish-details-container'>
       <h3 className='dish-details_dish-name'>{dish.dish_name}</h3>
-      <img className="dish-details_dish-image" src={dish.dish_image} alt="" />
+      <img className="dish-details_dish-image" src={dish.dish_image || "/emptydish.png"} alt="" />
       {/* <h1 className='dish-details_rating-title'>Rating: {`${dishAverageRating}`}</h1> */}
       <div style={{display: "flex", flexDirection: "row", height: "60px", alignItems: "center"}}>
         <h3 className='dish-details_rating-content'>{dishAverageRating}</h3>

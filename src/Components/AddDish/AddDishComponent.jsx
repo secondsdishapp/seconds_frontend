@@ -7,9 +7,12 @@ import GooglePlaces from "../GooglePlaces/GooglePlaces";
 
 export default function AddDishComponent() {
 
+  const [ addedDishAndRestaurant, setAddedDishAndRestaurant ] = useState(null);
+  const [ databaseDishes, setDatabaseDishes ] = useState([]);
+  const [ databaseRest, setDatabaseRest ] = useState([]);
   const [cuisines, setCuisines] = useState([]);
   const [ currImage, setCurrImage ] = useState("/seconds-logo.png");
-  const [selectedPlace, setSelectedPlace] = useState(null);
+  const [ selectedPlace, setSelectedPlace ] = useState(null);
   const [ searchInput, setSearchInput ] = useState("");
   const [ arrSearchInput, setArrSearchInput ] = useState("");
   const [ restNameInput, setRestNameInput ] = useState("");
@@ -21,9 +24,7 @@ export default function AddDishComponent() {
     lng: 0,
 });
  
-
-
-let navigate = useNavigate();
+const navigate = useNavigate();
 const API = import.meta.env.VITE_API_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
 const [hoverRating, setHoverRating] = useState(0);
@@ -66,7 +67,7 @@ const [newDish, setNewDish] = useState({
     .then((response) => response.json())
     .then(res => setDatabaseDishes(res))
     .catch(err => console.log(err));
-  }, [])
+  }, [newDish.name])
 
 //----------------------------------------------------------------------------------------------------------------------
   const plateImages = [
@@ -83,15 +84,16 @@ const [newDish, setNewDish] = useState({
     setNewRestaurant({ ...newRestaurant, [e.target.id]: e.target.value });
   }
 
-  useEffect(() => {
-    console.log(newDish, "newDish Line 88")
-  }, [newDish]);
+  // useEffect(() => {
+  //   console.log(newDish, "newDish Line 88")
+  // }, [newDish]);
 
-  useEffect(() => {
-    console.log(newRestaurant, "newRestaurant Line 97")
-  }, [newRestaurant]);
+  // useEffect(() => {
+  //   console.log(newRestaurant, "newRestaurant Line 97")
+  // }, [newRestaurant]);
 
 //---------------------------------------------------------------------------------------------------------------------------
+
 async function addRestauranAndDish(newRestaurant, newDish) {
     fetch(`${API}/restaurants`, {
         method: "POST",
@@ -104,6 +106,7 @@ async function addRestauranAndDish(newRestaurant, newDish) {
         })
         })
         .then(response => response.json())
+        .then(res => setAddedDishAndRestaurant(res))
 }
 //UPDATING COORDINATES OF RESTAURANT-----------------------------------------------------------------------------------------
 useEffect(() => {
@@ -116,9 +119,8 @@ useEffect(() => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    e.preventDefault();
-    addRestauranAndDish(newRestaurant, newDish)
-    console.log(newDish)
+    addRestauranAndDish(newRestaurant, newDish);
+    navigate(`/dishes/${addedDishAndRestaurant?.dish?.dish_id}`);
   }
 
   const fileUploader = useRef();
@@ -196,29 +198,35 @@ useEffect(() => {
     }
   }, [arrSearchInput])
 
-  useEffect(() => {
-    console.log(stateInput, "stateInput")
-  }, [searchInput])
+  //---------------------------------------------------------------------------------------------------------------------------
 
-  useEffect(() => {
-    console.log(arrSearchInput, "Search Input Array")
-  }, [arrSearchInput])
+  // useEffect(() => {
+  //   console.log(stateInput, "stateInput")
+  // }, [searchInput])
 
-  useEffect(() => {
-    console.log(stateInput, "State Input")
-  }, [stateInput]);
+  // useEffect(() => {
+  //   console.log(arrSearchInput, "Search Input Array")
+  // }, [arrSearchInput])
 
-  useEffect(() => {
-    console.log(phoneNumber, "Phone Number")
-  }, [phoneNumber]);
+  // useEffect(() => {
+  //   console.log(stateInput, "State Input")
+  // }, [stateInput]);
 
-  useEffect(() => {
-    console.log(restNameInput, "Restaurant Name")
-  }, [restNameInput]);
+  // useEffect(() => {
+  //   console.log(phoneNumber, "Phone Number")
+  // }, [phoneNumber]);
 
-  useEffect(() => {
-    console.log(newRestaurant, "New Restaurant")
-  }, [newRestaurant])
+  // useEffect(() => {
+  //   console.log(restNameInput, "Restaurant Name")
+  // }, [restNameInput]);
+
+  // useEffect(() => {
+  //   console.log(newRestaurant, "New Restaurant")
+  // }, [newRestaurant])
+
+  // useEffect(() => {
+  //   console.log(addedDishAndRestaurant, "Added Dish and Restaurant")
+  // }, [addedDishAndRestaurant]);
   
   return (
     <div style={{overflow:"hidden"}}>
