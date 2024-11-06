@@ -14,6 +14,10 @@
   .dish-details_restaurant-name {
     color: #009688;
     text-align: center;
+    margin-top: 0px;
+    font-family: "Nunito";
+    font-weight: 1000;
+    font-size: 25px;
   }
   
   .dish-details_dish-image{
@@ -34,31 +38,38 @@
 
   .dish-details_rating-length{
     transform: translate(0vw,-20vw);
+    width: fit-content;
     /* text-align: center; */
-    margin-left: 60%;
+    margin-left: 70%;
+    margin-top: 30px;
     color:#a9a9a9;
     font-size: 16px;
     font-weight: 550;
+    /* border: 1px solid black; */
   }
 
   .dish-details_restaurant-buttons_call{
-    margin: 2vw;
-    width: 25vw;
-    height: 8vw;
-    border-radius: 4vw;
-    border: none;
+    /* margin: 2vw; */
+    width: 20%;
+    height: 100%;
+    /* border-radius: 4vw; */
+    /* border: none; */
     /* background-color: #FF5252; */
     /* color: white; */
+    /* border: 1px solid white; */
   }
 
   .dish-details_restaurant-buttons_directions{
-    margin: 2vw;
-    width: 25vw;
-    height: 8vw;
-    border-radius: 4vw;
-    border: none;
+    /* margin: 2vw; */
+    /* position: relative; */
+    width: 20%;
+    height: 100%;
+    /* border-radius: 4vw; */
+    /* border: none; */
     /* background-color: #FF5252; */
     /* color: white; */
+    /* border: 1px solid white; */
+    margin-left: 35%;
   }
 
   .dish-details_restaurant-buttons_directions:hover{
@@ -67,17 +78,21 @@
 
   .dish-details_restaurant-info{
     width: 70%;
+    height: 100%;
     margin: 8vw;
-    margin-top: 8vw;
+    margin-top: 16vw;
+    margin-bottom: 20vw;
     margin-left: 15%;
     transform: translate(0vw, -15vw);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     /* border: solid 0.2vw gray; */
     text-align: center;
     justify-content: center;
-    padding: 1vw;
-    padding-bottom: 3vw;
+    /* padding: 1vw; */
+    /* padding-bottom: 3vw; */
     border-radius: 10px;
+    padding-top: 30px;
+    /* background-color: #009688; */
   }
 
   .dish-details_ingredients-title{
@@ -98,8 +113,13 @@
   .dish-details_rating-content{
     margin-left: 10vw;
     transform: translate(6vw, -10vw);
-    font-size: 10vw;
-    color: black;
+    font-size: 25vw;
+    color: #4DD0E1;
+    /* display: flex; */
+    /* gap: 3px; */
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: "Nunito"; 
   }
 
   /* make buttons side by side */
@@ -157,5 +177,18 @@
     margin-left: 10vw;
     margin-right: 7vw;
     transform: translate(0vw, -15vw);
+  }
+
+  .dish-rating-icon {
+    width: 42px;
+    height: 42px;
+    /* border: 1px solid black; */
+  }
+
+  .restaurant-address {
+    color: #009688;
+    font-family: "Nunito";
+    font-weight: 1000;
+    font-size: 18px;
   }
 }

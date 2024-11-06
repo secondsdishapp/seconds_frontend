@@ -12,7 +12,8 @@ export default function Dish({ item, index }) {
   // get dish ratings by dish Id and calculate average rating
   async function getDishRatings(dish_id) {
     try {
-      const dishRatings = await fetchAllDishRatingsByDishId(dish_id)
+      const dishRatings = await fetchAllDishRatingsByDishId(dish_id);
+      console.log(dishRatings, "Dish Ratings");
       setDishRatings(dishRatings)
       const averageRating = dishRatings.length > 0 ? dishRatings.reduce((a, b) => a + b.rating, 0) / dishRatings.length : +item.avg_rating
       setDishAverageRating(convertRating(averageRating))
@@ -125,10 +126,12 @@ const calculateDistance = () => {
             <div className="nearbyoptions_item_dish-rating-container">
               <img className="nearbyoptions_icon"  src="/cutlery.svg" />
               <h3  className="nearbyoptions_rating-content">{dishAverageRating}</h3>
-              <img className="nearbyoptions_icon_distance"  src="distance.svg" />
-              <h3  className="nearbyoptions_distance-content">{distance?distance.toString().slice(0,4):null}</h3>
+              <div style={{display: "flex", alignItems: "center", width: "100%", justifyContent: "right"}}>
+                <img className="nearbyoptions_icon_distance"  src="distance.svg" />
+                <h3  className="nearbyoptions_distance-content">{distance?distance.toString().slice(0,4):null}km</h3>
+              </div>
               <br />
-              <h3  className="nearbyoptions_distance-km">km</h3>
+              {/* <h3  className="nearbyoptions_distance-km">km</h3> */}
               {/* <h3 className='nearbyoptions_rating-content'>{dishAverageRating}</h3> */}
             </div>
           </div>

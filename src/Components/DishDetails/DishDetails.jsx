@@ -15,8 +15,8 @@ import {
 
 const API = import.meta.env.VITE_API_URL;
 const plateImages = [
-  "https://t3.ftcdn.net/jpg/03/06/75/66/360_F_306756617_moZMl2JAPW5rwxj8TBggViHvKtX1QDK2.jpg",
-  "https://www.shutterstock.com/image-vector/hands-holding-fork-spoon-empty-260nw-1292484178.jpg",
+  "/dish6.svg",
+  "/dish4.svg",
 ];
 const phoneNumber = import.meta.env.VITE_PHONE_NUMBER;
 
@@ -47,11 +47,15 @@ export default function DishDetails() {
   let { id } = useParams()
   
   function ratingDishes(number){
-    let string = ' '
+    let string = [];
     for(let i = 1; i <= number; i++) {
-      string += '🍽️ '
+      string.push(i)
     }
-    return string
+    return (
+      <div style={{display: 'flex', flexDirection: 'row', marginLeft: "13vw", gap: "1vw"}}>
+      {string.map((num, index) => <img src="/seconds-plate-orange-circle.png" className="dish-rating-icon"/>)}
+      </div>
+    )
   }
   
   // get dish details
@@ -216,7 +220,11 @@ export default function DishDetails() {
   }
 
   // create dish rating
+  
   async function handleCreateDishRating({dish_id, user_id, firebase_id, hoverRating, comment}) {
+    console.log("dish_id", dish_id);
+    console.log("Firebase ID", firebase_id);
+
     if (!currentUser) {
       alert('Login to rate this dish!')
       return
@@ -267,19 +275,29 @@ export default function DishDetails() {
     window.open(googleMapsUrl, '_blank');
   }
 
+  useEffect(() => {
+    console.log(dish, "dish")
+  }, [dish])
   return (
     <div className='dish-details-container'>
       <h3 className='dish-details_dish-name'>{dish.dish_name}</h3>
       <img className="dish-details_dish-image" src={dish.dish_image} alt="" />
       {/* <h1 className='dish-details_rating-title'>Rating: {`${dishAverageRating}`}</h1> */}
-      <h3 className='dish-details_rating-content'>{`${dishAverageRating} ${ratingDishes(dishAverageRating)}`}</h3>
+      <div style={{display: "flex", flexDirection: "row", height: "60px", alignItems: "center"}}>
+        <h3 className='dish-details_rating-content'>{dishAverageRating}</h3>
+        {/* {ratingDishes(dishAverageRating)} */}
+        <img src="/seconds-plate-orange-circle.png" style={{width: "60px"}}/>
+      </div>
       <h3 className='dish-details_rating-length'>{`Ratings (${dishRatings.length || 1})`}</h3>
       
       <div className='dish-details_restaurant-info'>
         <h3 className='dish-details_restaurant-name'>{dish.restaurant_name}</h3>
+        <p className="restaurant-address">{dish.address}, {dish.city}, {dish.country}</p>
         <div className='dish-details_restaurant-buttons'>
-          <a href={`tel:${phoneNumber}`} style={{color:"white", textDecoration: "none"}}><img className='dish-details_restaurant-buttons_call' src="/viber.svg"/></a>
-          <img className='dish-details_restaurant-buttons_directions' src="/direction.svg" onClick={getDirections}/>
+          <div style={{display: "grid", height: "100%", gridTemplateColumns: "50% 50%", backgroundColor: "#FF5252", borderBottomLeftRadius: "5px", borderBottomRightRadius: "5px", marginTop: "0px", alignContent: "center"}}> 
+          <a href={`tel:${phoneNumber}`} style={{color:"white", textDecoration: "none", height: "100%", borderRight: "3px solid white"}}><img className='dish-details_restaurant-buttons_call' src="/viber2.svg"/></a>
+          <img className='dish-details_restaurant-buttons_directions' src="/direction2.svg" onClick={getDirections}/>
+          </div>
         </div>
       </div>
     
@@ -288,7 +306,7 @@ export default function DishDetails() {
           {previousRating ?
             <p>"Thank you for rating this dish!"</p>
             :
-            <p style={{color: "#009688"}}>Had it? Please rate it from 1 to 5!</p>
+            <p style={{color: "#009688", marginLeft: "8%"}}>Had it? Please rate it from 1 to 5!</p>
           }
         </h3>
         <div className="dish-details_plate-rating">

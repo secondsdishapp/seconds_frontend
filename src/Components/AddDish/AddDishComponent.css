@@ -8,12 +8,14 @@
 
 .add-dish-form{
     display: flex;
+    /* width: 90%; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding-top: 30px;
     padding-bottom: 30px;
+    /* margin-left: 5%; */
 }
 
 .dish-name-container {
@@ -33,7 +35,7 @@
     width: 80%;
 }
 
-.dish-image {
+.dish-image2 {
     width: 100%;
     margin: 0;
     margin-top: 20px;
@@ -142,6 +144,7 @@
   border-bottom: 1px solid #009688;
   outline-color: #FF5252;
   margin-top: 10px;
+  
 }
 
 .states {
@@ -170,9 +173,9 @@
 
 .rating-title {
     margin-bottom: 0px;
-    margin-top: 30px;
+    margin-top: 60px;
     font-family: "Nunito";
-    font-weight: 350;
+    font-weight: 600;
 }
 
 .dish-rating-container {
@@ -203,5 +206,14 @@
 
 .label-css {
   font-family: "Nunito";
-  font-weight: 350;
+  font-weight: 600;
+}
+
+input:disabled {
+  background-color: rgb(225, 223, 223);
+  font-family: "Nunito";
+  font-weight: 600;
+  padding-left: 15px;
+  opacity: 0.8;
+  color: #FF5252;
 }

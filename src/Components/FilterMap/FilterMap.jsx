@@ -43,7 +43,7 @@ export default function FilterMap({ radius, setRadius, setFilterMap, filterMap, 
             <InputMUI radius={radius} setRadius={setRadius}/>
             <FilterStyle filterPreferences={filterPreferences} setFilterPreferences={setFilterPreferences} filterRatings={filterRatings} setFilterRatings={setFilterRatings} tabIndex={"-1"}/>  
             <p className="results-text">Results so far: {filteredDishSearch.length}</p>
-            <button className="filter-btn" type="button" tabIndex={"-1"}>Filter</button>
+            <button className="filter-btn" type="button" tabIndex={"-1"} onClick={() => setFilterMap(false)}>Filter</button>
         </div>    
     )
 }
