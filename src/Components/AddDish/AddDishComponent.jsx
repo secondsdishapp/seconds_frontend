@@ -95,6 +95,7 @@ const [newDish, setNewDish] = useState({
 //---------------------------------------------------------------------------------------------------------------------------
 
 async function addRestauranAndDish(newRestaurant, newDish) {
+    // setNewDish({...newDish, name: newDish.name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")})
     fetch(`${API}/restaurants`, {
         method: "POST",
         headers: {
@@ -106,7 +107,10 @@ async function addRestauranAndDish(newRestaurant, newDish) {
         })
         })
         .then(response => response.json())
-        .then(res => setAddedDishAndRestaurant(res))
+        .then(res => {
+          setAddedDishAndRestaurant(res.dish.dish_id);
+          navigate(`/dishes/${Number(res.dish.dish_id)}`);
+        })
 }
 //UPDATING COORDINATES OF RESTAURANT-----------------------------------------------------------------------------------------
 useEffect(() => {
@@ -120,8 +124,13 @@ useEffect(() => {
   function handleSubmit(e) {
     e.preventDefault();
     addRestauranAndDish(newRestaurant, newDish);
-    navigate(`/dishes/${addedDishAndRestaurant?.dish?.dish_id}`);
+    console.log(addedDishAndRestaurant, "addedDishAndRestaurant Line 124");
+    // navigate(`/dishes/${Number(addedDishAndRestaurant)}`);
+    // if (test?.dish?.dish_id) {
+    //   navigate(`/dishes/${test?.dish?.dish_id}`);
+    // }
   }
+
 
   const fileUploader = useRef();
 
@@ -197,7 +206,10 @@ useEffect(() => {
       })
     }
   }, [arrSearchInput])
-
+  //UPPERCASE THE FIRST LETTER OF THE NAME OF THE DISH-----------------------------------------------------------------------------------
+  useEffect(() => {
+    setNewDish({...newDish, name: newDish.name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")})
+  }, [newDish.name])
   //---------------------------------------------------------------------------------------------------------------------------
 
   // useEffect(() => {
