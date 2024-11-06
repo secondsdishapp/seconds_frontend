@@ -16,15 +16,21 @@
 .category-filter-button {
   width: fit-content;
   height: 40px;
-  border: 1px solid #000;
-  border-radius: 50px;
+  border: 1px solid #FF5252;
+  border-radius: 10px;
   background: #fff;
   padding: 0 20px;
+  color: #FF5252;
+}
+.category-filter-button:hover {
+  cursor: pointer;
 }
 
 .cfb-active {
-  background: lightcoral;
+  background: #FF5252;
+  color: white;
 }
+
 
 .active-dish-filter {
   width: 90%;

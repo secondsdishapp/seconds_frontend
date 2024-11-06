@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { fetchAllDishRatingsByDishId } from '../../Services/ratings.services.js';
 import { useNavigate } from 'react-router-dom';
+import "./SlidingCarousel.css"
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -8,6 +9,7 @@ export default function CarouselCard({
   dish
   ,index
   ,slide
+  ,length
 }) {
 
   const navigate = useNavigate();
@@ -54,10 +56,10 @@ export default function CarouselCard({
 
   return (
     <div key={index} className={slide === index ? "single-card" : "single-card hidden"} onClick={() => navigate(`/dishes/${dish.dish_id}`)}>
-          <div style={{display: "flex", marginLeft: "0%", alignItems: "center", width: "100%", gap: "2%"}}>
+          <div style={{display: "flex", marginLeft: "0%", alignItems: "center", width: "100%", gap: "0%"}}>
               {dishRating(dish.avg_rating).map((elem, index) => elem === "full" ?
-                <img className="rate-icon" src="/eat.png"/>
-                : <img className="rate-icon" src="/eat-half.png"/>)
+                <img className="rate-icon" src="/seconds-plate-orange-circle.png"/>
+                : <img className="rate-icon" src="/secondsIconHalf.png"/>)
               }
           </div>
           <img className="dish-image" src={dish.dish_image} onClick={(e) => e.preventDefault()}/>
@@ -75,6 +77,7 @@ export default function CarouselCard({
             <img className="rest-icon" src="/restaurant.svg" />
             <p className="title-restaurant">{dish.restaurant_name}</p>  
           </div>
+          <p style={{textAlign:"center", fontFamily:"Nunito", fontWeight:"600",color:"#FF5252"}}>{index+1}/{length}</p>
     </div>
   )
 }

@@ -31,6 +31,9 @@
         line-height: 1.6vw;
         margin-top: 7vw;
     }
+    .nearbyoptions_item:hover {
+        cursor: pointer;
+    }
     /* .highly-rated-nearby-options{
         margin-top: 10vw;
     } */
@@ -86,9 +89,7 @@
         display: flex;
         font-size: 3.5vw;
         align-items: center;
-        gap: 3%;
-        /* justify-content: space-evenly; */
-
+        gap: 3%;       
     }
     
     .nearbyoptions_icon{

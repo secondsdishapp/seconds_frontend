@@ -49,16 +49,9 @@ export default function SlidingCarousel({ filteredDishSearch, locationsInRadius 
   <div {...swipeHandlers} className="carousel-container" onClick={(e) => e.preventDefault()}>
     <BsArrowLeftCircleFill className="arrow arrow-left" onClick={prevSlide}/>
     {filteredDishSearch.map((dish, index) => (
-      <CarouselCard key={index} dish={dish} index={index} slide={slide} />
+        <CarouselCard key={index} dish={dish} index={index} slide={slide} length={filteredDishSearch.length}/>
     ))}
     <BsArrowRightCircleFill className="arrow arrow-right" onClick={nextSlide}/>
-    <span className="indicators">
-      {filteredDishSearch.map((_, index) => {
-        return (
-          <button key={index} className={slide === index ? "indicator" : "indicator inactive"} onClick={null}></button>
-        )
-      })}
-    </span>
   </div>
   );
 };
