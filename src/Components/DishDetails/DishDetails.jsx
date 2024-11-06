@@ -45,6 +45,7 @@ export default function DishDetails() {
   
   let navigate = useNavigate()
   let { id } = useParams()
+  console.log(typeof id);
   
   function ratingDishes(number){
     let string = [];
