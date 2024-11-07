@@ -1,5 +1,6 @@
 .category-filter-container {
   width: 100%;
+  display: none;
 }
 
 .category-filters {
