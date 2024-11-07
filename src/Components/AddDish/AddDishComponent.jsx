@@ -9,7 +9,6 @@ export default function AddDishComponent() {
 
   const { currentUser } = useContext(AuthContext);
   const firebase_id = currentUser?.uid || null;
-  console.log(firebase_id);
 
   const [ addedDishAndRestaurant, setAddedDishAndRestaurant ] = useState(null);
   const [ databaseDishes, setDatabaseDishes ] = useState([]);
@@ -128,6 +127,10 @@ useEffect(() => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if(!currentUser) {
+      alert("Login to add a dish!");
+      return;
+    }
     addRestauranAndDish(newRestaurant, newDish, firebase_id);
     console.log(addedDishAndRestaurant, "addedDishAndRestaurant Line 124");
     // navigate(`/dishes/${Number(addedDishAndRestaurant)}`);
@@ -265,7 +268,7 @@ useEffect(() => {
                 <img className="dish-image2" src={currImage} alt="dish"/>
                 <input ref={fileUploader} type="file" id="image" className="choose-file2" onChange={uploadedFile} />
                 <br/>
-                <button className="edit-image" onClick={editImage}>Upload Image</button>
+                <button type="button" className="edit-image" onClick={editImage}>Upload Image</button>
             </div>
             <br />
 
