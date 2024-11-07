@@ -105,26 +105,26 @@ const calculateDistance = () => {
           alt=""
         />
         <div style={{display: "grid", gridTemplateRows: "33% 33% 33%", width: "100%", alignContent: "center", paddingTop: "10px"}}>
-        
+        <div>
+            <div className="nearbyoptions_item_dish-name-container">
+              <img className="nearbyoptions_icon" src="/dinner.svg" />
+              <h5 className="nearbyoptions_item_dish-name">{item.dish_name.length>32?item.dish_name.slice(0,32)+'...':item.dish_name}</h5>
+            </div>
+          </div>
           <div className="nearbyoptions_item_infos">
             <div className="nearbyoptions_item_dish-restaurant-container">
-              <img className="nearbyoptions_icon"  src="/restaurant.svg" />
+              <img className="nearbyoptions_icon nearbyoptions_iconrestaurant"  src="/restaurant.svg" />
               <p className="nearbyoptions_item_restaurant-name">
                 {item.restaurant_name}
               </p>
             </div>
           </div>
 
-          <div>
-            <div className="nearbyoptions_item_dish-name-container">
-              <img className="nearbyoptions_icon" src="/dinner.svg" />
-              <h5 className="nearbyoptions_item_dish-name">{item.dish_name}</h5>
-            </div>
-          </div>
+         
 
           <div>
             <div className="nearbyoptions_item_dish-rating-container">
-              <img className="nearbyoptions_icon"  src="/cutlery.svg" />
+              <img className="nearbyoptions_iconrating"  src="/cutlery.svg" />
               <h3  className="nearbyoptions_rating-content">{dishAverageRating}</h3>
               <div style={{display: "flex", alignItems: "center", width: "100%", justifyContent: "right"}}>
                 <img className="nearbyoptions_icon_distance"  src="distance.svg" />
