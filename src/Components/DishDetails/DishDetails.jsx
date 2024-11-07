@@ -284,10 +284,10 @@ export default function DishDetails() {
       <h3 className='dish-details_dish-name'>{dish.dish_name}</h3>
       <img className="dish-details_dish-image" src={dish.dish_image || "/emptydish.png"} alt="" />
       {/* <h1 className='dish-details_rating-title'>Rating: {`${dishAverageRating}`}</h1> */}
-      <div style={{display: "flex", flexDirection: "row", height: "60px", alignItems: "center"}}>
+      <div className='dish-details_dish-rating-infos'>
         <h3 className='dish-details_rating-content'>{dishAverageRating}</h3>
         {/* {ratingDishes(dishAverageRating)} */}
-        <img src="/seconds-plate-orange-circle.png" style={{width: "60px"}}/>
+        <img className='dish-details_dish-rating-image' src="/seconds-plate-orange-circle.png" style={{width: "65px", height: "65px"}}/>
       </div>
       <h3 className='dish-details_rating-length'>{`Ratings (${dishRatings.length || 1})`}</h3>
       
@@ -296,7 +296,7 @@ export default function DishDetails() {
         <p className="restaurant-address">{dish.address}, {dish.city}, {dish.country}</p>
         <div className='dish-details_restaurant-buttons'>
           <div style={{display: "grid", height: "100%", gridTemplateColumns: "50% 50%", backgroundColor: "#FF5252", borderBottomLeftRadius: "5px", borderBottomRightRadius: "5px", marginTop: "0px", alignContent: "center"}}> 
-          <a href={`tel:${phoneNumber}`} style={{color:"white", textDecoration: "none", height: "100%", borderRight: "3px solid white"}}><img className='dish-details_restaurant-buttons_call' src="/viber2.svg"/></a>
+          <a  href={`tel:${phoneNumber}`} style={{color:"white", textDecoration: "none", height: "100%", borderRight: "3px solid white"}}><img className='dish-details_restaurant-buttons_call' src="/viber2.svg"/></a>
           <img className='dish-details_restaurant-buttons_directions' src="/direction2.svg" onClick={getDirections}/>
           </div>
         </div>
@@ -307,7 +307,7 @@ export default function DishDetails() {
           {previousRating ?
             <p>"Thank you for rating this dish!"</p>
             :
-            <p style={{color: "#009688", marginLeft: "8%"}}>Had it? Please rate it from 1 to 5!</p>
+            <p className='had-it-before' style={{color: "black", marginLeft: "8%"}}>Had it? Please rate it from 1 to 5!</p>
           }
         </h3>
         <div className="dish-details_plate-rating">
