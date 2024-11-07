@@ -12,8 +12,14 @@
   }
 
   .dish-details_restaurant-name {
-    color: #009688;
+    color: black;
     text-align: center;
+    font-family: "Nunito";
+    font-weight: 1000;
+    text-align: left;
+    margin-left: 3vw;
+    font-size: 6vw;
+    transform: translate(0vw, -10vw);
   }
   
   .dish-details_dish-image{
@@ -28,37 +34,49 @@
     border-radius: 1vw;
   }
 
-  .dish-details_restaurant-buttons{    
-    text-align: center;
+  .dish-details_restaurant-buttons{   
+    margin-left: 10vw; 
+    transform: translate(0vw, -8vw);
+    /* text-align: center; */
   }
 
   .dish-details_rating-length{
-    transform: translate(0vw,-20vw);
+    transform: translate(-10vw,-23vw);
+    width: fit-content;
     /* text-align: center; */
-    margin-left: 60%;
-    color:#a9a9a9;
-    font-size: 16px;
+    margin-left: 70%;
+    margin-top: 30px;
+    color:black;
+    font-size: 5vw;
     font-weight: 550;
+    /* border: 1px solid black; */
   }
 
   .dish-details_restaurant-buttons_call{
-    margin: 2vw;
-    width: 25vw;
-    height: 8vw;
-    border-radius: 4vw;
-    border: none;
+    /* margin: 2vw; */
+    width: 20%;
+    height: 10vw; 
+    padding: auto;
+    text-align: center;
+    
+    /* border-radius: 4vw; */
+    /* border: none; */
     /* background-color: #FF5252; */
     /* color: white; */
+    /* border: 1px solid white; */
   }
 
   .dish-details_restaurant-buttons_directions{
-    margin: 2vw;
-    width: 25vw;
-    height: 8vw;
-    border-radius: 4vw;
-    border: none;
+    /* margin: 2vw; */
+    /* position: relative; */
+    width: 20%;
+    height: 100%;
+    /* border-radius: 4vw; */
+    /* border: none; */
     /* background-color: #FF5252; */
     /* color: white; */
+    /* border: 1px solid white; */
+    margin-left: 35%;
   }
 
   .dish-details_restaurant-buttons_directions:hover{
@@ -67,17 +85,22 @@
 
   .dish-details_restaurant-info{
     width: 70%;
+    height: 100%;
+   
     margin: 8vw;
-    margin-top: 8vw;
-    margin-left: 15%;
-    transform: translate(0vw, -15vw);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    margin-top: 1vw;
+    margin-bottom: 20vw;
+    margin-left: 10vw;
+    transform: translate(0vw, -20vw);
+    /* box-shadow: rgba(50, 50, 93, 0.55) 0px 13px 27px -5px, rgba(0.5, 0.5, 0, 0.3) 0px 8px 16px -8px; */
     /* border: solid 0.2vw gray; */
     text-align: center;
     justify-content: center;
-    padding: 1vw;
-    padding-bottom: 3vw;
+    /* padding: 1vw; */
+    /* padding-bottom: 3vw; */
     border-radius: 10px;
+    padding-top: 30px;
+    /* background-color: #009688; */
   }
 
   .dish-details_ingredients-title{
@@ -97,9 +120,14 @@
 
   .dish-details_rating-content{
     margin-left: 10vw;
-    transform: translate(6vw, -10vw);
-    font-size: 10vw;
+    transform: translate(2vw, 0vw);
+    font-size: 15vw;
     color: black;
+    /* display: flex; */
+    /* gap: 3px; */
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: "Nunito"; 
   }
 
   /* make buttons side by side */
@@ -158,4 +186,41 @@
     margin-right: 7vw;
     transform: translate(0vw, -15vw);
   }
+
+  .dish-rating-icon {
+    width: 42px;
+    height: 42px;
+    /* border: 1px solid black; */
+  }
+
+  .restaurant-address {
+    color: black;
+    font-family: "Nunito";
+    font-weight: 1000;
+    font-size: 18px;
+    transform: translate(0vw, -12vw);
+  }
+  .had-it-before{
+    color: black;
+    /* transform: translate(-2vw, -8vw); */
+  }
+  .dish-details_dish-rating-infos{
+    display: flex;
+
+    
+  }
+  .dish-details_dish-rating-image{
+    transform: translate(5vw, 3vw);
+    height: 16vw;
+  }
+ 
+ .rating-container{
+  transform: translate(0vw, -22vw);
+  margin-top: 0vw;
+ }
+ .dish-details-rating-button{
+  transform: translate(0vw, -25vw);
+  margin-top: 0vw;
+ }
+ 
 }

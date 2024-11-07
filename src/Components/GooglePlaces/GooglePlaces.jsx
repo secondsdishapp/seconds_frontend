@@ -64,9 +64,9 @@ export default function GooglePlaces({ searchInput, setSearchInput, phoneNumber,
       })    
 
 
-    useEffect(() => {
-        console.log(isLoaded)
-    }, [isLoaded]);
+    // useEffect(() => {
+    //     console.log(isLoaded)
+    // }, [isLoaded]);
 
     function handleOnPlacesChanged() {
         let address = inputRef.current.getPlaces();
@@ -88,11 +88,11 @@ export default function GooglePlaces({ searchInput, setSearchInput, phoneNumber,
         setNewRestaurant({...newRestaurant, name: restNameInput})
     }, [restNameInput])
 
-    useEffect(() => {
-        if (searchInput) {
-            console.log(searchInput, "Search Input")
-        }
-    }, [searchInput]);
+    // useEffect(() => {
+    //     if (searchInput) {
+    //         console.log(searchInput, "Search Input")
+    //     }
+    // }, [searchInput]);
 
 
     //FUNCTION TO GET COORDINATES OF AN ADDRESS----------------------------------------------------------------------------
@@ -126,9 +126,9 @@ export default function GooglePlaces({ searchInput, setSearchInput, phoneNumber,
     } , [searchInput]);
 
 
-    useEffect(() => {
-        console.log(coordinates, "Coordinates")
-    }, [coordinates]);
+    // useEffect(() => {
+    //     console.log(coordinates, "Coordinates")
+    // }, [coordinates]);
 
 
     //CALCULATING DISTANCE BETWEEN TWO COORDINATES---------------------------------------------------------------------
@@ -147,16 +147,16 @@ export default function GooglePlaces({ searchInput, setSearchInput, phoneNumber,
     return earthRadiusMiles * c;
   }
 
-  useEffect(() => {
-    console.log(currentLocation, "Current Location")
-  }, [currentLocation]);
+//   useEffect(() => {
+//     console.log(currentLocation, "Current Location")
+//   }, [currentLocation]);
 
 
     return (
         <div style={{width:"80%", marginTop: "30px"}}>
             {isLoaded && currentLocation.lat !== null && currentLocation.lng !== null ? 
             <StandaloneSearchBox className="search-box-container" onLoad={(ref) => inputRef.current = ref} onPlacesChanged={handleOnPlacesChanged} options={options}>
-                <input className="places-search-input" type="text" placeholder="Search for a place" />
+                <input className="places-search-input" type="text" placeholder="Search for a restaurant" />
             </StandaloneSearchBox>
             : <p>Loading...</p>}
             {invalidAddress && <p style={{color:"#FF5252"}}>Invalid address. Please try again, enter a Restaurant Place.</p>}
@@ -173,15 +173,6 @@ export default function GooglePlaces({ searchInput, setSearchInput, phoneNumber,
                         {coordinates.lat !== null && coordinates.lng !== null &&
                         <AdvancedMarker position={{lat: coordinates.lat, lng: coordinates.lng}} onClick={() => setSelectedMarker({lat: coordinates.lat, lng: coordinates.lng, name: address.name})}/>
                         }
-                        {/* {selectedMarker && (
-                            <InfoWindow position={{lat: Number(selectedMarker.lat), lng: Number(selectedMarker.lng)}}>
-                                <div>
-                                    <h2>{selectedMarker.name}</h2>
-                                    <p>Latitude: {selectedMarker.lat}</p>
-                                    <p>Longitude: {selectedMarker.lng}</p>
-                                </div>
-                            </InfoWindow>
-                        )} */}
                 </Map>
                 : <p>Loading...</p>}
             </APIProvider>

@@ -39,9 +39,9 @@
     width: 70%;
     height: 40px;
     border: none;
-    border-bottom: 1px solid #ccc;
-    outline-color: #009688;
-    padding-left: 5px;
+    border-bottom: 1px solid #009688;
+    outline-color: #FF5252;
+    padding-left: 15px;
     /* position: fixed; */
 }
 

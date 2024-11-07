@@ -1,15 +1,21 @@
-import { Api, Category } from "@mui/icons-material";
 import "../../Components/AddDish/AddDishComponent.css";
-import { useState,useEffect } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { AuthContext } from "../../Context/AuthContext/AuthContext";
+import { Api, Category } from "@mui/icons-material";
 import GooglePlaces from "../GooglePlaces/GooglePlaces";
 
 export default function AddDishComponent() {
 
-  const [cuisines, setCuisines] = useState([]);
-  const [ currImage, setCurrImage ] = useState("");
-  const [selectedPlace, setSelectedPlace] = useState(null);
+  const { currentUser } = useContext(AuthContext);
+  const firebase_id = currentUser?.uid || null;
+
+  const [ addedDishAndRestaurant, setAddedDishAndRestaurant ] = useState(null);
+  const [ databaseDishes, setDatabaseDishes ] = useState([]);
+  const [ databaseRest, setDatabaseRest ] = useState([]);
+  const [ cuisines, setCuisines ] = useState([]);
+  const [ currImage, setCurrImage ] = useState("/seconds-logo.png");
+  const [ selectedPlace, setSelectedPlace ] = useState(null);
   const [ searchInput, setSearchInput ] = useState("");
   const [ arrSearchInput, setArrSearchInput ] = useState("");
   const [ restNameInput, setRestNameInput ] = useState("");
@@ -21,9 +27,7 @@ export default function AddDishComponent() {
     lng: 0,
 });
  
-
-
-let navigate = useNavigate();
+const navigate = useNavigate();
 const API = import.meta.env.VITE_API_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
 const [hoverRating, setHoverRating] = useState(0);
@@ -66,12 +70,12 @@ const [newDish, setNewDish] = useState({
     .then((response) => response.json())
     .then(res => setDatabaseDishes(res))
     .catch(err => console.log(err));
-  }, [])
+  }, [newDish.name])
 
 //----------------------------------------------------------------------------------------------------------------------
   const plateImages = [
-    "https://t3.ftcdn.net/jpg/03/06/75/66/360_F_306756617_moZMl2JAPW5rwxj8TBggViHvKtX1QDK2.jpg",
-    "https://www.shutterstock.com/image-vector/hands-holding-fork-spoon-empty-260nw-1292484178.jpg",
+    "/dish6.svg",
+    "/dish4.svg",
   ];
 
 
@@ -83,16 +87,18 @@ const [newDish, setNewDish] = useState({
     setNewRestaurant({ ...newRestaurant, [e.target.id]: e.target.value });
   }
 
-  useEffect(() => {
-    console.log(newDish, "newDish Line 88")
-  }, [newDish]);
+  // useEffect(() => {
+  //   console.log(newDish, "newDish Line 88")
+  // }, [newDish]);
 
-  useEffect(() => {
-    console.log(newRestaurant, "newRestaurant Line 97")
-  }, [newRestaurant]);
+  // useEffect(() => {
+  //   console.log(newRestaurant, "newRestaurant Line 97")
+  // }, [newRestaurant]);
 
 //---------------------------------------------------------------------------------------------------------------------------
-async function addRestauranAndDish(newRestaurant, newDish) {
+
+async function addRestauranAndDish(newRestaurant, newDish, firebase_id) {
+    // setNewDish({...newDish, name: newDish.name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")})
     fetch(`${API}/restaurants`, {
         method: "POST",
         headers: {
@@ -101,9 +107,14 @@ async function addRestauranAndDish(newRestaurant, newDish) {
         body: JSON.stringify({
             resData: newRestaurant,
             dishData: newDish,
+            firebase_id
         })
         })
         .then(response => response.json())
+        .then(res => {
+          setAddedDishAndRestaurant(res.dish.dish_id);
+          navigate(`/dishes/${Number(res.dish.dish_id)}`);
+        })
 }
 //UPDATING COORDINATES OF RESTAURANT-----------------------------------------------------------------------------------------
 useEffect(() => {
@@ -116,10 +127,18 @@ useEffect(() => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    e.preventDefault();
-    addRestauranAndDish(newRestaurant, newDish)
-    console.log(newDish)
+    if(!currentUser) {
+      alert("Login to add a dish!");
+      return;
+    }
+    addRestauranAndDish(newRestaurant, newDish, firebase_id);
+    console.log(addedDishAndRestaurant, "addedDishAndRestaurant Line 124");
+    // navigate(`/dishes/${Number(addedDishAndRestaurant)}`);
+    // if (test?.dish?.dish_id) {
+    //   navigate(`/dishes/${test?.dish?.dish_id}`);
+    // }
   }
+
 
   const fileUploader = useRef();
 
@@ -129,17 +148,13 @@ useEffect(() => {
 
   function uploadedFile () {
     const uploadedImage = fileUploader.current.files[0];
-    // const imageURL = URL.createObjectURL(uploadedImage);
     const reader = new FileReader();
-    // setCurrImage(imageURL);
     reader.onloadend = () => {
       const base64String = reader.result;
       setCurrImage(base64String);
       setNewDish((newDish) => ({...newDish, dish_image: base64String}))
     }
 
-    // setNewDish((newDish) => ({...newDish, dish_image: imageURL}))
-    // setNewDish((newDish) => ({...newDish, dish_image: imageURL}))
     reader.readAsDataURL(uploadedImage);
   }
 
@@ -199,45 +214,39 @@ useEffect(() => {
       })
     }
   }, [arrSearchInput])
+  //UPPERCASE THE FIRST LETTER OF THE NAME OF THE DISH-----------------------------------------------------------------------------------
+  useEffect(() => {
+    setNewDish({...newDish, name: newDish.name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")})
+  }, [newDish.name])
+  //---------------------------------------------------------------------------------------------------------------------------
 
   // useEffect(() => {
-  //   setNewRestaurant({...newRestaurant, state: stateInput});
+  //   console.log(stateInput, "stateInput")
+  // }, [searchInput])
+
+  // useEffect(() => {
+  //   console.log(arrSearchInput, "Search Input Array")
+  // }, [arrSearchInput])
+
+  // useEffect(() => {
+  //   console.log(stateInput, "State Input")
   // }, [stateInput]);
 
-  useEffect(() => {
-    console.log(stateInput, "stateInput")
-  }, [searchInput])
+  // useEffect(() => {
+  //   console.log(phoneNumber, "Phone Number")
+  // }, [phoneNumber]);
 
-  useEffect(() => {
-    console.log(arrSearchInput, "Search Input Array")
-  }, [arrSearchInput])
+  // useEffect(() => {
+  //   console.log(restNameInput, "Restaurant Name")
+  // }, [restNameInput]);
 
-  useEffect(() => {
-    console.log(stateInput, "State Input")
-  }, [stateInput]);
+  // useEffect(() => {
+  //   console.log(newRestaurant, "New Restaurant")
+  // }, [newRestaurant])
 
-  useEffect(() => {
-    console.log(phoneNumber, "Phone Number")
-  }, [phoneNumber]);
-
-  useEffect(() => {
-    console.log(restNameInput, "Restaurant Name")
-  }, [restNameInput]);
-
-  useEffect(() => {
-    console.log(newRestaurant, "New Restaurant")
-  }, [newRestaurant])
-
-  //----------------------------------------------------------------------------------------------------------------------
-  // const calculateDistance = () => {
-  //   const distanceResult = haversineDistance(
-  //       parseFloat(lat1),
-  //       parseFloat(lng1),
-  //       parseFloat(item.latitude),
-  //       parseFloat(item.longitude)
-  //   );
-  //   setDistance(distanceResult);
-  // };
+  // useEffect(() => {
+  //   console.log(addedDishAndRestaurant, "Added Dish and Restaurant")
+  // }, [addedDishAndRestaurant]);
   
   return (
     <div style={{overflow:"hidden"}}>
@@ -255,12 +264,11 @@ useEffect(() => {
                 <label className="label-css" htmlFor="">
                 Dish image
                     <br />
-                    {/* <input className="dish-image-input" placeholder="Please upload a picture of a dish " type="text" id="image" name="image"  value={currImage} onChange={handleTextChange} hidden/> */}
                 </label>
-                <img className="dish-image" src={currImage} alt="dish"/>
+                <img className="dish-image2" src={currImage} alt="dish"/>
                 <input ref={fileUploader} type="file" id="image" className="choose-file2" onChange={uploadedFile} />
                 <br/>
-                <button className="edit-image" onClick={editImage}>Upload Image</button>
+                <button type="button" className="edit-image" onClick={editImage}>Upload Image</button>
             </div>
             <br />
 
@@ -311,60 +319,6 @@ useEffect(() => {
             State
             <br/>
             <input className="restaurant-state-input" placeholder={stateInput || "Please enter state"}  type="text" id="state" name="state" value={stateInput} onChange={handleRestTextChange} disabled/>
-            {/* <br />
-    <select className="states" id="state" name="states" value={newRestaurant.state} onChange={handleRestTextChange}>
-        <option className="select" value=""></option>
-        <option value="AL">AL</option>
-        <option value="AK">AK</option>
-        <option value="AZ">AZ</option>
-        <option value="AR">AR</option>
-        <option value="CA">CA</option>
-        <option value="CO">CO</option>
-        <option value="CT">CT</option>
-        <option value="DE">DE</option>
-        <option value="FL">FL</option>
-        <option value="GA">GA</option>
-        <option value="HI">HI</option>
-        <option value="ID">ID</option>
-        <option value="IL">IL</option>
-        <option value="IN">IN</option>
-        <option value="IA">IA</option>
-        <option value="KS">KS</option>
-        <option value="KY">KY</option>
-        <option value="LA">LA</option>
-        <option value="ME">ME</option>
-        <option value="MD">MD</option>
-        <option value="MA">MA</option>
-        <option value="MI">MI</option>
-        <option value="MN">MN</option>
-        <option value="MS">MS</option>
-        <option value="MO">MO</option>
-        <option value="MT">MT</option>
-        <option value="NE">NE</option>
-        <option value="NV">NV</option>
-        <option value="NH">NH</option>
-        <option value="NJ">NJ</option>
-        <option value="NM">NM</option>
-        <option value="NY">NY</option>
-        <option value="NC">NC</option>
-        <option value="ND">ND</option>
-        <option value="OH">OH</option>
-        <option value="OK">OK</option>
-        <option value="OR">OR</option>
-        <option value="PA">PA</option>
-        <option value="RI">RI</option>
-        <option value="SC">SC</option>
-        <option value="SD">SD</option>
-        <option value="TN">TN</option>
-        <option value="TX">TX</option>
-        <option value="UT">UT</option>
-        <option value="VT">VT</option>
-        <option value="VA">VA</option>
-        <option value="WA">WA</option>
-        <option value="WV">WV</option>
-        <option value="WI">WI</option>
-        <option value="WY">WY</option>
-    </select> */}
     </label>
     </div>
           <br />
@@ -401,9 +355,7 @@ useEffect(() => {
           ))}
         </div>
         </div>
-       
 
-    
             <button className="add-new-dish_submit">Submit</button>
         </form>
     </div>

@@ -42,9 +42,9 @@ export default function MapComponent({ menuToggle, search, setSearch }) {
         })
     }, [filterPreferences, filterRatings, radius])
 
-    useEffect(() => {
-        console.log(filterResults, "Filter Results");
-    }, [filterResults]);
+    // useEffect(() => {
+    //     console.log(filterResults, "Filter Results");
+    // }, [filterResults]);
 
 
     //----------------------------------------------------------------------------------------------------------------------
@@ -57,9 +57,9 @@ export default function MapComponent({ menuToggle, search, setSearch }) {
 
     //SEARCH BAR
     const [ search2, setSearch2 ] = useState("");
-    useEffect(() => {
-        console.log(search, "Line 60");
-    }, [search])
+    // useEffect(() => {
+    //     console.log(search, "Line 60");
+    // }, [search])
 
     //SEARCH FILTER
     const [ searchFilter, setSearchFilter ] = useState([]);
@@ -117,9 +117,9 @@ export default function MapComponent({ menuToggle, search, setSearch }) {
             setSearchFilter( dishesLocations.filter((dish, index) => dish.dish_name.toLowerCase().includes(search2.toLowerCase()) || dish.restaurant_name.toLowerCase().includes(search2.toLowerCase()))); 
     },[search2, dishesLocations]);
 
-    useEffect(() => {
-        console.log(searchFilter, "Search Filter")
-    }, [searchFilter]);
+    // useEffect(() => {
+    //     console.log(searchFilter, "Search Filter")
+    // }, [searchFilter]);
 
     useEffect(() => {
         if (filterResults.rating === "Highest") {
@@ -131,9 +131,9 @@ export default function MapComponent({ menuToggle, search, setSearch }) {
         }
     }, [searchFilter, filterResults]);
 
-    useEffect(() => {
-        console.log(ratingFilter, "Rating Filter")
-    }, [ratingFilter])
+    // useEffect(() => {
+    //     console.log(ratingFilter, "Rating Filter")
+    // }, [ratingFilter])
 
     useEffect(() => {
         if (searchFilter.length > 0) {
@@ -210,41 +210,41 @@ export default function MapComponent({ menuToggle, search, setSearch }) {
 
     //-----------------------------------------------------------------------------------------------------------------------
     //JUST FOR TESTING PURPOSES - CAN DELETE AFTER EVERYTHING IS WORKING FINE
-    useEffect(() => {
-        console.log(restaurants, "Restaurants");
-    },[restaurants])
+    // useEffect(() => {
+    //     console.log(restaurants, "Restaurants");
+    // },[restaurants])
 
-    useEffect(() => {
-        console.log(dishesLocations, "Dishes Locations");
-    },[dishesLocations])
+    // useEffect(() => {
+    //     console.log(dishesLocations, "Dishes Locations");
+    // },[dishesLocations])
 
-    useEffect(() => {
-        console.log(search, "Search");
-    },[search]);
+    // useEffect(() => {
+    //     console.log(search, "Search");
+    // },[search]);
 
-    useEffect(() => {
-        console.log(filteredDishSearch, "Filtered Search")
-    },[filteredDishSearch])
+    // useEffect(() => {
+    //     console.log(filteredDishSearch, "Filtered Search")
+    // },[filteredDishSearch])
 
-    useEffect(() => {
-        console.log(filteredRestSearch, "Filtered Restaurants")
-    },[filteredRestSearch])
+    // useEffect(() => {
+    //     console.log(filteredRestSearch, "Filtered Restaurants")
+    // },[filteredRestSearch])
 
-    useEffect(() => {
-        console.log(locationsInRadius, "Locations Inside Radius");
-    },[locationsInRadius])
+    // useEffect(() => {
+    //     console.log(locationsInRadius, "Locations Inside Radius");
+    // },[locationsInRadius])
 
-    useEffect(() => {
-        console.log(radius, "Radius");
-    }, [radius]);
+    // useEffect(() => {
+    //     console.log(radius, "Radius");
+    // }, [radius]);
 
-    useEffect(() => {
-        console.log(filterPreferences, "Filter Preferences");
-    },[filterPreferences]);
+    // useEffect(() => {
+    //     console.log(filterPreferences, "Filter Preferences");
+    // },[filterPreferences]);
 
-    useEffect(() => {
-        console.log(filterRatings, "Filter Ratings");
-    }, [filterRatings]);
+    // useEffect(() => {
+    //     console.log(filterRatings, "Filter Ratings");
+    // }, [filterRatings]);
 
     return (
         <div className="map-container" onClick={() => filterMap ? setFilterMap(!filterMap) : null}>
