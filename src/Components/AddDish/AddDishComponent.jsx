@@ -1,16 +1,19 @@
-import { Api, Category } from "@mui/icons-material";
 import "../../Components/AddDish/AddDishComponent.css";
-import { useState,useEffect } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { AuthContext } from "../../Context/AuthContext/AuthContext";
+import { Api, Category } from "@mui/icons-material";
 import GooglePlaces from "../GooglePlaces/GooglePlaces";
 
 export default function AddDishComponent() {
 
+  const { currentUser } = useContext(AuthContext);
+  const firebase_id = currentUser?.uid || null;
+
   const [ addedDishAndRestaurant, setAddedDishAndRestaurant ] = useState(null);
   const [ databaseDishes, setDatabaseDishes ] = useState([]);
   const [ databaseRest, setDatabaseRest ] = useState([]);
-  const [cuisines, setCuisines] = useState([]);
+  const [ cuisines, setCuisines ] = useState([]);
   const [ currImage, setCurrImage ] = useState("/seconds-logo.png");
   const [ selectedPlace, setSelectedPlace ] = useState(null);
   const [ searchInput, setSearchInput ] = useState("");
@@ -94,7 +97,7 @@ const [newDish, setNewDish] = useState({
 
 //---------------------------------------------------------------------------------------------------------------------------
 
-async function addRestauranAndDish(newRestaurant, newDish) {
+async function addRestauranAndDish(newRestaurant, newDish, firebase_id) {
     // setNewDish({...newDish, name: newDish.name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")})
     fetch(`${API}/restaurants`, {
         method: "POST",
@@ -104,6 +107,7 @@ async function addRestauranAndDish(newRestaurant, newDish) {
         body: JSON.stringify({
             resData: newRestaurant,
             dishData: newDish,
+            firebase_id
         })
         })
         .then(response => response.json())
@@ -123,7 +127,11 @@ useEffect(() => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    addRestauranAndDish(newRestaurant, newDish);
+    if(!currentUser) {
+      alert("Login to add a dish!");
+      return;
+    }
+    addRestauranAndDish(newRestaurant, newDish, firebase_id);
     console.log(addedDishAndRestaurant, "addedDishAndRestaurant Line 124");
     // navigate(`/dishes/${Number(addedDishAndRestaurant)}`);
     // if (test?.dish?.dish_id) {
@@ -260,7 +268,7 @@ useEffect(() => {
                 <img className="dish-image2" src={currImage} alt="dish"/>
                 <input ref={fileUploader} type="file" id="image" className="choose-file2" onChange={uploadedFile} />
                 <br/>
-                <button className="edit-image" onClick={editImage}>Upload Image</button>
+                <button type="button" className="edit-image" onClick={editImage}>Upload Image</button>
             </div>
             <br />
 
