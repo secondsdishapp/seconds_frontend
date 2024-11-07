@@ -34,7 +34,7 @@ export default function FixedBottomNavigation({ setCuisine, setCount, count, men
         >
           <BottomNavigationAction style={{color: value === 0 ? "#009688" : "#FF5252"}} label="Add" icon={<AddIcon htmlColor='inherit' />} component={Link} to="/adddish" />
           <BottomNavigationAction style={{color: value === 1 ? "#009688" : "#FF5252"}} label="Home" icon={<RestaurantIcon htmlColor='inherit'/>} component={Link} to="/" />
-          <BottomNavigationAction style={{color: value === 2 ? "#009688" : "#FF5252"}} label="Dishes" icon={<FavoriteIcon htmlColor='inherit'/>} component ={Link} to="/dishes" />
+          <BottomNavigationAction style={{color: value === 2 ? "#009688" : "#FF5252"}} label="Rated Dishes" icon={<FavoriteIcon htmlColor='inherit'/>} component ={Link} to="/dishes" />
         </BottomNavigation>
       </Paper>
     </Box>

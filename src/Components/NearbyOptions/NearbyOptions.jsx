@@ -402,7 +402,7 @@ export default function NearByOptions({
             finalCuisineFilterList.map((item, index) => {
               return <Dish item={item} index={index} key={item.dish_id} />;
             }) :
-            finalEntireList.map((item, index) => {
+            [...finalEntireList].filter(el=>el.avg_rating>4).map((item, index) => {
               return <Dish item={item} index={index} key={item.dish_id} />;
             })
           }
