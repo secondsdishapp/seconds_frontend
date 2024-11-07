@@ -9,7 +9,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 export default function Dish({ item, index }) {
 
   const { currentUser } = useContext(AuthContext);
-  const { uid: firebase_id } = currentUser;
+  const  firebase_id = currentUser?.uid || null
   const [dishRatings, setDishRatings] = useState([]);
   const [dishAverageRating, setDishAverageRating] = useState(0);
   const [isRatedByUser, setIsRatedByUser] = useState(false);
@@ -41,7 +41,7 @@ export default function Dish({ item, index }) {
       const isRatedByUser = dishRatings.some(rating => rating.firebase_id === firebase_id)
       setIsRatedByUser(isRatedByUser)
     }
-  }, [firebase_id])
+  }, [dishRatings])
 
   // distance calculation
 
@@ -111,7 +111,7 @@ const calculateDistance = () => {
       className="nearbyoptions-container"
       key={index}
     >
-      <div className="nearbyoptions_item">
+      <div className={`nearbyoptions_item ${isRatedByUser ? "rated-by-user" : ""}`}>
         <img
           className="nearbyoptions_item_image"
           src={item.dish_image || "/emptydish.png"}
