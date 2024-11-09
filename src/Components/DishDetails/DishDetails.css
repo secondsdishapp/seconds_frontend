@@ -141,12 +141,17 @@
     align-items: center;
   }
 
+  .dish-details-button-group button {
+    height: fit-content;
+    padding: 5px;
+  }
+
   .dish-details-rating-button{
     text-align: center;
     /* margin-left: 33vw; */
     font-size: 4vw;
     width: 35vw;
-    height: 9vw;
+/*     height: 9vw; */
     margin-top: 3vw;
     margin-bottom: 3vw;
     border-radius: 5vw;
