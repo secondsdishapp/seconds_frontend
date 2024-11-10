@@ -1,12 +1,17 @@
-@media (max-width: 500px) {
+/* @media (max-width: 500px) { */
    
 
     .nearbyoptions-container{
         /* margin-left: 1.5vw; */
         display: grid;
         grid-template-columns: 1fr 1fr;
-        
     }
+
+    .rated-by-user {
+      border-left: 3px solid #FF5252;
+      margin-left: -3px;
+    }
+
     .nearbyoptions_item_image{
         grid-column: 1/2;
         height: 35vw;
@@ -43,10 +48,6 @@
     /* .highly-rated-nearby-options{
         margin-top: 10vw;
     } */
-   
-
-  
-   
     
     .nearbyoptions_item_dish-name-container{
         width: 100%;
@@ -160,4 +161,4 @@
         transform: translate(-1vw, -1vw);
 
     }
-  }
+  /* } */

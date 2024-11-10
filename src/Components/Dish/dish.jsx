@@ -1,3 +1,4 @@
+import './dish.css'
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import { fetchAllDishRatingsByDishId } from "../../Services/ratings.services.js"
