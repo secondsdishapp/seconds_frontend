@@ -20,6 +20,7 @@ br{height: 2vw;}
     margin-top: 8vw;
     margin-bottom: -8vw;
     gap: 3px; 
+    scrollbar-width: none;
 }
 
 .homepage_filterpercuisine_item_image{

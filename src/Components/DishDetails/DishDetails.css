@@ -16,10 +16,11 @@
     text-align: center;
     font-family: "Nunito";
     font-weight: 1000;
-    text-align: left;
     margin-left: 3vw;
     font-size: 6vw;
-    transform: translate(0vw, -10vw);
+    transform: translate(-2vw, -10vw);
+    text-align: left;
+
   }
   
   .dish-details_dish-image{
@@ -140,12 +141,17 @@
     align-items: center;
   }
 
+  .dish-details-button-group button {
+    height: fit-content;
+    padding: 5px;
+  }
+
   .dish-details-rating-button{
     text-align: center;
     /* margin-left: 33vw; */
     font-size: 4vw;
     width: 35vw;
-    height: 9vw;
+/*     height: 9vw; */
     margin-top: 3vw;
     margin-bottom: 3vw;
     border-radius: 5vw;
@@ -198,11 +204,11 @@
     font-family: "Nunito";
     font-weight: 1000;
     font-size: 18px;
-    transform: translate(0vw, -12vw);
+    transform: translate(-4vw, -12vw);
   }
   .had-it-before{
     color: black;
-    /* transform: translate(-2vw, -8vw); */
+    transform: translate(-4vw, 0vw);
   }
   .dish-details_dish-rating-infos{
     display: flex;
