@@ -6,7 +6,7 @@ import { AuthContext } from "../../Context/AuthContext/AuthContext.jsx";
 const API = import.meta.env.VITE_API_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-export default function Dish({ item, index }) {
+export default function Dish({ item, index, setSearch }) {
 
   const { currentUser } = useContext(AuthContext);
   const  firebase_id = currentUser?.uid || null
@@ -107,7 +107,10 @@ const calculateDistance = () => {
 
   return (
     <div
-      onClick={() => navigate(`/dishes/${item.dish_id}`)}
+      onClick={() => {
+        setSearch('')
+        navigate(`/dishes/${item.dish_id}`)
+      }}
       className="nearbyoptions-container"
       key={index}
     >

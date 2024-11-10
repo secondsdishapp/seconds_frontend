@@ -394,16 +394,16 @@ export default function NearByOptions({
       {search ?
         <div>
           {finalEntireList.map((item, index) => (
-            <Dish item={item} index={index} key={item.dish_id} />
+            <Dish item={item} index={index} key={item.dish_id} setSearch={setSearch} />
           ))} 
         </div> :
         <div>
           {cuisine ?
             finalCuisineFilterList.map((item, index) => {
-              return <Dish item={item} index={index} key={item.dish_id} />;
+              return <Dish item={item} index={index} key={item.dish_id} setSearch={setSearch} />;
             }) :
             [...finalEntireList].filter(el=>el.avg_rating>4).map((item, index) => {
-              return <Dish item={item} index={index} key={item.dish_id} />;
+              return <Dish item={item} index={index} key={item.dish_id} setSearch={setSearch} />;
             })
           }
         </div> 
