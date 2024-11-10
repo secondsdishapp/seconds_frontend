@@ -32,11 +32,8 @@
       height: 100%;
       background: #FF5252;
       position: absolute;
-    }
-
-    .rated-by-user {
-      border-left: 3px solid #FF5252;
-      margin-left: -3px;
+      border-top-left-radius: 1vw;
+      border-bottom-left-radius: 1vw;
     }
 
     .nearbyoptions_item_image{
@@ -49,6 +46,7 @@
         border-radius: 1vw;
         
     }
+
    .nearbyoptions_item_infos{
     margin-right: 0%;
     width: 100%;
@@ -98,21 +96,17 @@
         font-weight: 500;
         font-size: 3.7vw;
         font-family: "Nunito";
-        transform: translate(-2vw, 1vw);
-
-
+        transform: translate(-2vw, 1vw)
     }
+
     .nearbyoptions_item_dish-restaurant-container{
         display: flex;
         width: 40vw;
         /* justify-content: space-between; */
         line-height: 4vw;
         text-align: start;
-
-
-
-
     }
+
     .nearbyoptions_item_dish-rating-container{
         display: flex;
         font-size: 3.5vw;
@@ -121,12 +115,10 @@
     }
     
     .nearbyoptions_icon{
-      
         width: 6.5vw;
         height: 6.5vw;
-       
-
     }
+    
     .nearbyoptions_iconrestaurant{
       
       transform: translate(0vw, 1vw);

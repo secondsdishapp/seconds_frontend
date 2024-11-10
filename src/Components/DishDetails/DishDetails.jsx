@@ -296,8 +296,11 @@ export default function DishDetails() {
         <p className="restaurant-address">{dish.address}, {dish.city}, {dish.country}</p>
         <div className='dish-details_restaurant-buttons'>
           <div style={{display: "grid", height: "100%", gridTemplateColumns: "50% 50%", backgroundColor: "#FF5252", borderBottomLeftRadius: "5px", borderBottomRightRadius: "5px", marginTop: "0px", alignContent: "center"}}> 
+          
           <a  href={`tel:${phoneNumber}`} style={{color:"white", textDecoration: "none", height: "100%", borderRight: "3px solid white"}}><img className='dish-details_restaurant-buttons_call' src="/viber2.svg"/></a>
+          
           <img className='dish-details_restaurant-buttons_directions' src="/direction2.svg" onClick={getDirections}/>
+          
           </div>
         </div>
       </div>
