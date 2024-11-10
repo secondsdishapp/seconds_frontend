@@ -115,7 +115,10 @@ const calculateDistance = () => {
       className="nearbyoptions-container"
       key={index}
     >
-      <div className={`nearbyoptions_item ${isRatedByUser ? "rated-by-user" : ""}`}>
+      <div className={`nearbyoptions_item`}>
+        
+        <div className={`is-rated-indicator`} style={{display:isRatedByUser ? '' : 'none'}} >
+        </div>
         <img
           className="nearbyoptions_item_image"
           src={item.dish_image || "/emptydish.png"}
