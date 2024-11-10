@@ -4,7 +4,6 @@ const StateContext = createContext();
 
 function StateContextProvider({ children }) {
 
-  
   const [ entireList, setEntireList ] = useState([]);
   const [ finalEntireList, setFinalEntireList ] = useState([]);
   // dish category filtering

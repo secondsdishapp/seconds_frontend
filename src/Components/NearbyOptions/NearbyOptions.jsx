@@ -133,7 +133,7 @@ export default function NearByOptions({
   useEffect(() => {
     const filtered = dishesLocations.filter(
       (dish, index) =>
-        dish.dish_name.includes(search) || dish.restaurant_name.includes(search)
+        dish.dish_name.includes(search) // || dish.restaurant_name.includes(search)
     );
     if (filtered.length > 0) {
       setFilteredDishSearch(
@@ -394,16 +394,16 @@ export default function NearByOptions({
       {search ?
         <div>
           {finalEntireList.map((item, index) => (
-            <Dish item={item} index={index} key={item.dish_id} />
+            <Dish item={item} index={index} key={item.dish_id} setSearch={setSearch} />
           ))} 
         </div> :
         <div>
           {cuisine ?
             finalCuisineFilterList.map((item, index) => {
-              return <Dish item={item} index={index} key={item.dish_id} />;
+              return <Dish item={item} index={index} key={item.dish_id} setSearch={setSearch} />;
             }) :
-            [...finalEntireList].filter(el=>el.avg_rating>4).map((item, index) => {
-              return <Dish item={item} index={index} key={item.dish_id} />;
+            [...finalEntireList].filter(el=>el.avg_rating >= 3).map((item, index) => {
+              return <Dish item={item} index={index} key={item.dish_id} setSearch={setSearch} />;
             })
           }
         </div> 
