@@ -1,3 +1,4 @@
+import './DishDetails2.css'
 import { useState, useEffect, useContext } from 'react'
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import { AuthContext } from "../../Context/AuthContext/AuthContext.jsx";

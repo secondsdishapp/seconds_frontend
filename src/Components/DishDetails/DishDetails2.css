@@ -1,0 +1,59 @@
+.dish-details-container {
+  width: 80vw;
+  margin: auto;
+  text-align: center;
+}
+
+.dish-details_dish-name {
+  color: #FF5252;
+}
+
+.dish-details_dish-image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.dish-details_dish-rating-infos {
+
+}
+
+.dish-details_rating-content {
+
+}
+
+.dish-details_dish-rating-image {
+
+}
+
+.dish-details_restaurant-buttons {
+
+}
+
+.dish-details_call-restaurant-button {
+
+}
+
+.dish-details_route-restaurant-button {
+
+}
+
+.rating-container {
+
+}
+
+.dish-details_ask-for-rating {
+
+}
+
+.had-it-before {
+
+}
+
+.dish-details_plate-rating {
+
+}
+
+.dish-details-button-group {
+
+}
