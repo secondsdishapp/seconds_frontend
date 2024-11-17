@@ -1,0 +1,142 @@
+.dish-details-container {
+  width: 80vw;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+
+.dish-details-container * {
+  margin: 0;
+}
+
+.dish-details_dish-name {
+  color: #FF5252;
+}
+
+.dish-details_dish-image {
+  width: 100vw;
+  margin-left: -10vw;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.dish-details_dish-rating-info {
+  width: 100%;
+  height: 65px;
+  /* line-height: 65px; */
+  display: flex;
+  align-items: center;
+}
+
+.dish-details_rating-content {
+  margin: 0;
+  font-size: 3.5rem;
+}
+
+.dish-details_dish-rating-image {
+  height: 65px;
+}
+
+.dish-details_rating-length {
+  margin: 0;
+  margin-left: auto;
+  font-size: 1.5rem;
+  justify-content: flex-end;
+  align-self: end;
+  /* vertical-align: end; */
+}
+
+.dish-details_rating-length span {
+  font-size: 75%;
+  vertical-align: text-top;
+}
+
+.dish-details_restaurant-info {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.dish-details_restaurant-info * {
+  margin: 0;
+}
+
+.restaurant-address {
+}
+
+.dish-details_restaurant-buttons {
+  height: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center
+}
+
+.dish-details_restaurant-buttons * {
+  width: 45%;
+  height: 50px;
+  text-align: center;
+  color: white;
+  background-color: #FF5252;
+  border: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.dish-details_restaurant-buttons_call {
+
+}
+
+.dish-details_restaurant-buttons_directions {
+
+}
+
+.dish-details_restaurant-buttons button img {
+  height: 60%;
+}
+
+.rating-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dish-details_user-rating-header {
+  text-align: left;
+}
+
+.dish-details_plate-rating {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dish-details_plate-rating img {
+  width: 15vw;
+  cursor: pointer;
+}
+
+.dish-details-button-group {
+  display: flex;
+  justify-content: space-around;
+}
+
+.dish-details-rating-button{
+  width: 35vw;
+  height: fit-content;
+  background-color: #FF5252;
+  border: none;
+  border-radius: 50px;
+  font-size: 4vw;
+  font-weight: 700;
+  padding: 5px;
+  color: white;
+}
+
+.delete-rating-button {
+  color: #ff5252;
+  border: 1px solid #ff5252;
+  background-color: white;
+}

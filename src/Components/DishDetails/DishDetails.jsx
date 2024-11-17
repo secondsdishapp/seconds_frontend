@@ -1,3 +1,4 @@
+import './DishDetails2.css'
 import { useState, useEffect, useContext } from 'react'
 import { LocalAuthContext } from "../../Context/LocalAuth/LocalAuthContext.jsx";
 import { AuthContext } from "../../Context/AuthContext/AuthContext.jsx";
@@ -88,7 +89,7 @@ export default function DishDetails() {
   console.log(dish)
 
   function convertRating(rating) {
-    return Math.round((rating + Number.EPSILON) * 10) / 10
+    return (Math.round((rating + Number.EPSILON) * 10) / 10).toFixed(1)
   }
 
   useEffect(() => {
@@ -281,36 +282,40 @@ export default function DishDetails() {
   }, [dish])
   return (
     <div className='dish-details-container'>
-      <h3 className='dish-details_dish-name'>{dish.dish_name}</h3>
+      <h1 className='dish-details_dish-name'>{dish.dish_name}</h1>
       <img className="dish-details_dish-image" src={dish.dish_image || "/emptydish.png"} alt="" />
       {/* <h1 className='dish-details_rating-title'>Rating: {`${dishAverageRating}`}</h1> */}
-      <div className='dish-details_dish-rating-infos'>
-        <h3 className='dish-details_rating-content'>{dishAverageRating}</h3>
+      
+      <div className='dish-details_dish-rating-info'>
+        <h2 className='dish-details_rating-content'>{dishAverageRating}</h2>
         {/* {ratingDishes(dishAverageRating)} */}
-        <img className='dish-details_dish-rating-image' src="/seconds-plate-orange-circle.png" style={{width: "65px", height: "65px"}}/>
+        <img className='dish-details_dish-rating-image' src="/seconds-plate-orange-circle.png" />
+        <h3 className='dish-details_rating-length'>Ratings <span>(</span>{dishRatings.length || 1}<span>)</span></h3>
       </div>
-      <h3 className='dish-details_rating-length'>{`Ratings (${dishRatings.length || 1})`}</h3>
       
       <div className='dish-details_restaurant-info'>
-        <h3 className='dish-details_restaurant-name'>{dish.restaurant_name}</h3>
-        <p className="restaurant-address">{dish.address}, {dish.city}, {dish.country}</p>
+        <h2 className='dish-details_restaurant-name'>{dish.restaurant_name}</h2>
+        <h3 className="restaurant-address">{dish.address}, {dish.city}, {dish.country}</h3>
         <div className='dish-details_restaurant-buttons'>
-          <div style={{display: "grid", height: "100%", gridTemplateColumns: "50% 50%", backgroundColor: "#FF5252", borderBottomLeftRadius: "5px", borderBottomRightRadius: "5px", marginTop: "0px", alignContent: "center"}}> 
           
-          <a  href={`tel:${phoneNumber}`} style={{color:"white", textDecoration: "none", height: "100%", borderRight: "3px solid white"}}><img className='dish-details_restaurant-buttons_call' src="/viber2.svg"/></a>
+          <button type="button" className='dish-details_restaurant-buttons_call'
+          onClick={() => window.location.href =`tel:${phoneNumber}`} >
+            <img src="/viber2.svg"/>
+          </button>
           
-          <img className='dish-details_restaurant-buttons_directions' src="/direction2.svg" onClick={getDirections}/>
-          
-          </div>
+          <button type='button' className='dish-details_restaurant-buttons_directions'>
+            <img src="/direction2.svg" onClick={getDirections}/>
+          </button>
+
         </div>
       </div>
     
       <div className="rating-container">  
-        <h3 className='dish-details_ask-for-rating'>
+        <h3 className='dish-details_user-rating-header'>
           {previousRating ?
-            <p>"Thank you for rating this dish!"</p>
+            "Thank you for rating this dish!"
             :
-            <p className='had-it-before' style={{color: "black", marginLeft: "8%"}}>Had it? Please rate it from 1 to 5!</p>
+            "Had it? Please rate it from 1 to 5!"
           }
         </h3>
         <div className="dish-details_plate-rating">
@@ -329,23 +334,23 @@ export default function DishDetails() {
             />
           ))}
         </div>
-      </div>
-      {previousRating ?
-        <div className='dish-details-button-group'>
-          <button className='dish-details-rating-button delete-rating-button'
-            onClick={() => handleDeleteDishRating(updatedRating)}
-          > Remove Rating </button>
-          <button className='dish-details-rating-button'
-            onClick={() => handleUpdateDishRating(updatedRating)}
-          > Update Rating </button>
-        </div>
-        :
-        <div className='dish-details-button-group'>
-          <button className='dish-details-rating-button'
-            onClick={() => handleCreateDishRating({dish_id: id, user_id, firebase_id, hoverRating, comment: 'test comment'})}
-          > Rate Dish </button>
-        </div>
+        {previousRating ?
+          <div className='dish-details-button-group'>
+            <button className='dish-details-rating-button delete-rating-button'
+              onClick={() => handleDeleteDishRating(updatedRating)}
+              > Remove Rating </button>
+            <button className='dish-details-rating-button'
+              onClick={() => handleUpdateDishRating(updatedRating)}
+              > Update Rating </button>
+          </div>
+          :
+          <div className='dish-details-button-group'>
+            <button className='dish-details-rating-button'
+              onClick={() => handleCreateDishRating({dish_id: id, user_id, firebase_id, hoverRating, comment: 'test comment'})}
+              > Rate Dish </button>
+          </div>
         }
+      </div>
     </div>
   )
 }
