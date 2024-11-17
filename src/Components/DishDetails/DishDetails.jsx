@@ -282,20 +282,20 @@ export default function DishDetails() {
   }, [dish])
   return (
     <div className='dish-details-container'>
-      <h3 className='dish-details_dish-name'>{dish.dish_name}</h3>
+      <h1 className='dish-details_dish-name'>{dish.dish_name}</h1>
       <img className="dish-details_dish-image" src={dish.dish_image || "/emptydish.png"} alt="" />
       {/* <h1 className='dish-details_rating-title'>Rating: {`${dishAverageRating}`}</h1> */}
       
-      <div className='dish-details_dish-rating-infos'>
-        <h3 className='dish-details_rating-content'>{dishAverageRating}</h3>
+      <div className='dish-details_dish-rating-info'>
+        <h2 className='dish-details_rating-content'>{dishAverageRating}</h2>
         {/* {ratingDishes(dishAverageRating)} */}
         <img className='dish-details_dish-rating-image' src="/seconds-plate-orange-circle.png" style={{width: "65px", height: "65px"}}/>
         <h3 className='dish-details_rating-length'>Ratings <span>(</span>{dishRatings.length || 1}<span>)</span></h3>
       </div>
       
       <div className='dish-details_restaurant-info'>
-        <h3 className='dish-details_restaurant-name'>{dish.restaurant_name}</h3>
-        <p className="restaurant-address">{dish.address}, {dish.city}, {dish.country}</p>
+        <h2 className='dish-details_restaurant-name'>{dish.restaurant_name}</h2>
+        <h3 className="restaurant-address">{dish.address}, {dish.city}, {dish.country}</h3>
         <div className='dish-details_restaurant-buttons'>
           
           <button type="button" className='dish-details_restaurant-buttons_call'
@@ -311,11 +311,11 @@ export default function DishDetails() {
       </div>
     
       <div className="rating-container">  
-        <h3 className='dish-details_ask-for-rating'>
+        <h3 className='dish-details_user-rating-header'>
           {previousRating ?
-            <p>"Thank you for rating this dish!"</p>
+            "Thank you for rating this dish!"
             :
-            <p className='had-it-before' style={{color: "black", marginLeft: "8%"}}>Had it? Please rate it from 1 to 5!</p>
+            "Had it? Please rate it from 1 to 5!"
           }
         </h3>
         <div className="dish-details_plate-rating">
