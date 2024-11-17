@@ -46,7 +46,7 @@
 }
 
 .dish-details_restaurant-info {
-  
+  text-align: left;
 }
 
 .dish-details_restaurant-info * {
@@ -63,19 +63,24 @@
 .dish-details_restaurant-buttons * {
   width: 40%;
   height: 50px;
+  text-align: center;
   color: white;
-  text-decoration: none;
   background-color: #FF5252;
+  border: none;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
 .dish-details_restaurant-buttons_call {
- 
+
 }
 
 .dish-details_restaurant-buttons_directions {
 
+}
+
+.dish-details_restaurant-buttons button img {
+  height: 60%;
 }
 
 .rating-container {

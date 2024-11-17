@@ -298,11 +298,14 @@ export default function DishDetails() {
         <p className="restaurant-address">{dish.address}, {dish.city}, {dish.country}</p>
         <div className='dish-details_restaurant-buttons'>
           
-          <a  href={`tel:${phoneNumber}`} >
-            <img className='dish-details_restaurant-buttons_call' src="/viber2.svg"/>
-          </a>
+          <button type="button" className='dish-details_restaurant-buttons_call'
+          onClick={() => window.location.href =`tel:${phoneNumber}`} >
+            <img src="/viber2.svg"/>
+          </button>
           
-          <img className='dish-details_restaurant-buttons_directions' src="/direction2.svg" onClick={getDirections}/>
+          <button type='button' className='dish-details_restaurant-buttons_directions'>
+            <img src="/direction2.svg" onClick={getDirections}/>
+          </button>
 
         </div>
       </div>
