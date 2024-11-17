@@ -9,6 +9,7 @@
 
 .dish-details-container * {
   margin: 0;
+  color: black;
 }
 
 .dish-details_dish-name {

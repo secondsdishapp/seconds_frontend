@@ -271,7 +271,7 @@ export default function DishDetails() {
   }
 
   function getDirections () {
-    const restaurantAddress = `${dish.address}, ${dish.city}, ${dish.state} ${dish.zipcode || ""}`;
+    const restaurantAddress = `${dish.restaurant_name}, ${dish.address}, ${dish.city}, ${dish.state} ${dish.zipcode || ""}`;
     const encodedAddress = encodeURIComponent(restaurantAddress);
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
     window.open(googleMapsUrl, '_blank');
