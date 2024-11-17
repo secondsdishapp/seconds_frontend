@@ -1,3 +1,11 @@
 .pages.fixed {
     position: fixed;
 }
+
+* {
+  scrollbar-width: none;
+}
+
+main {
+  padding-bottom: 30px;
+}
