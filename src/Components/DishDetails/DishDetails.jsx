@@ -285,6 +285,7 @@ export default function DishDetails() {
       <h3 className='dish-details_dish-name'>{dish.dish_name}</h3>
       <img className="dish-details_dish-image" src={dish.dish_image || "/emptydish.png"} alt="" />
       {/* <h1 className='dish-details_rating-title'>Rating: {`${dishAverageRating}`}</h1> */}
+      
       <div className='dish-details_dish-rating-infos'>
         <h3 className='dish-details_rating-content'>{dishAverageRating}</h3>
         {/* {ratingDishes(dishAverageRating)} */}
@@ -296,13 +297,13 @@ export default function DishDetails() {
         <h3 className='dish-details_restaurant-name'>{dish.restaurant_name}</h3>
         <p className="restaurant-address">{dish.address}, {dish.city}, {dish.country}</p>
         <div className='dish-details_restaurant-buttons'>
-          <div style={{display: "grid", height: "100%", gridTemplateColumns: "50% 50%", backgroundColor: "#FF5252", borderBottomLeftRadius: "5px", borderBottomRightRadius: "5px", marginTop: "0px", alignContent: "center"}}> 
           
-          <a  href={`tel:${phoneNumber}`} style={{color:"white", textDecoration: "none", height: "100%", borderRight: "3px solid white"}}><img className='dish-details_restaurant-buttons_call' src="/viber2.svg"/></a>
+          <a  href={`tel:${phoneNumber}`} >
+            <img className='dish-details_restaurant-buttons_call' src="/viber2.svg"/>
+          </a>
           
           <img className='dish-details_restaurant-buttons_directions' src="/direction2.svg" onClick={getDirections}/>
-          
-          </div>
+
         </div>
       </div>
     

@@ -45,15 +45,36 @@
   vertical-align: text-top;
 }
 
+.dish-details_restaurant-info {
+  
+}
+
+.dish-details_restaurant-info * {
+  margin: 0;
+}
+
 .dish-details_restaurant-buttons {
-
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-content: center
 }
 
-.dish-details_call-restaurant-button {
-
+.dish-details_restaurant-buttons * {
+  width: 40%;
+  height: 50px;
+  color: white;
+  text-decoration: none;
+  background-color: #FF5252;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
-.dish-details_route-restaurant-button {
+.dish-details_restaurant-buttons_call {
+ 
+}
+
+.dish-details_restaurant-buttons_directions {
 
 }
 
