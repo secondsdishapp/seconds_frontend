@@ -89,7 +89,7 @@ export default function DishDetails() {
   console.log(dish)
 
   function convertRating(rating) {
-    return Math.round((rating + Number.EPSILON) * 10) / 10
+    return (Math.round((rating + Number.EPSILON) * 10) / 10).toFixed(1)
   }
 
   useEffect(() => {

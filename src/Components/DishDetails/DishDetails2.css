@@ -34,14 +34,14 @@
 .dish-details_rating-length {
   margin: 0;
   margin-left: auto;
-  font-size: 2rem;
+  font-size: 1.5rem;
   justify-content: flex-end;
   align-self: end;
   /* vertical-align: end; */
 }
 
 .dish-details_rating-length span {
-  font-size: 1.5rem;
+  font-size: 75%;
   vertical-align: text-top;
 }
 
