@@ -289,7 +289,7 @@ export default function DishDetails() {
       <div className='dish-details_dish-rating-info'>
         <h2 className='dish-details_rating-content'>{dishAverageRating}</h2>
         {/* {ratingDishes(dishAverageRating)} */}
-        <img className='dish-details_dish-rating-image' src="/seconds-plate-orange-circle.png" style={{width: "65px", height: "65px"}}/>
+        <img className='dish-details_dish-rating-image' src="/seconds-plate-orange-circle.png" />
         <h3 className='dish-details_rating-length'>Ratings <span>(</span>{dishRatings.length || 1}<span>)</span></h3>
       </div>
       
@@ -334,23 +334,23 @@ export default function DishDetails() {
             />
           ))}
         </div>
-      </div>
-      {previousRating ?
-        <div className='dish-details-button-group'>
-          <button className='dish-details-rating-button delete-rating-button'
-            onClick={() => handleDeleteDishRating(updatedRating)}
-          > Remove Rating </button>
-          <button className='dish-details-rating-button'
-            onClick={() => handleUpdateDishRating(updatedRating)}
-          > Update Rating </button>
-        </div>
-        :
-        <div className='dish-details-button-group'>
-          <button className='dish-details-rating-button'
-            onClick={() => handleCreateDishRating({dish_id: id, user_id, firebase_id, hoverRating, comment: 'test comment'})}
-          > Rate Dish </button>
-        </div>
+        {previousRating ?
+          <div className='dish-details-button-group'>
+            <button className='dish-details-rating-button delete-rating-button'
+              onClick={() => handleDeleteDishRating(updatedRating)}
+              > Remove Rating </button>
+            <button className='dish-details-rating-button'
+              onClick={() => handleUpdateDishRating(updatedRating)}
+              > Update Rating </button>
+          </div>
+          :
+          <div className='dish-details-button-group'>
+            <button className='dish-details-rating-button'
+              onClick={() => handleCreateDishRating({dish_id: id, user_id, firebase_id, hoverRating, comment: 'test comment'})}
+              > Rate Dish </button>
+          </div>
         }
+      </div>
     </div>
   )
 }
