@@ -289,8 +289,8 @@ export default function DishDetails() {
         <h3 className='dish-details_rating-content'>{dishAverageRating}</h3>
         {/* {ratingDishes(dishAverageRating)} */}
         <img className='dish-details_dish-rating-image' src="/seconds-plate-orange-circle.png" style={{width: "65px", height: "65px"}}/>
+        <h3 className='dish-details_rating-length'>Ratings <span>(</span>{dishRatings.length || 1}<span>)</span></h3>
       </div>
-      <h3 className='dish-details_rating-length'>{`Ratings (${dishRatings.length || 1})`}</h3>
       
       <div className='dish-details_restaurant-info'>
         <h3 className='dish-details_restaurant-name'>{dish.restaurant_name}</h3>

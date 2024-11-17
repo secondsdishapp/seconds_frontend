@@ -44,7 +44,7 @@
         margin-bottom: 1vw;
         width: 40vw;
         border-radius: 1vw;
-        
+        object-fit: cover;
     }
 
    .nearbyoptions_item_infos{
